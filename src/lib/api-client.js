@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_URL = 'https://03cb-103-175-180-105.ngrok-free.app/';
 
-const axiosHttp = axios.create({
+const apiClient = axios.create({
   baseURL: `${API_URL}`,
 });
 
@@ -22,7 +22,7 @@ const axiosHttp = axios.create({
 //   },
 // );
 
-axiosHttp.interceptors.response.use(
+apiClient.interceptors.response.use(
   (response) => {
     //const url = response.config.url;
 
@@ -40,4 +40,4 @@ axiosHttp.interceptors.response.use(
   },
 );
 
-export default axiosHttp;
+export default apiClient;
