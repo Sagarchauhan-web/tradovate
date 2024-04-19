@@ -9,7 +9,7 @@ function TradeDetails() {
 
   return (
     <div className='h-screen flex flex-col'>
-      <div className='h-[200px] bg-[#0086d1] '></div>
+      <div className='h-[500px] bg-[#0086d1] '></div>
       <div className='flex-1 bg-[#e7e8ec]'></div>
       <MaxWidthWrapper>
         <div className='bg-white rounded-sm h-5/6 w-3/4 top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 absolute'>
