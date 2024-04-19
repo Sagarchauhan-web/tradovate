@@ -1,11 +1,9 @@
 import MaxWidthWrapper from '@/components/MaxWithWrapper';
-import { Card, CardContent } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { getToken } from '@/services/auth/auth';
 import { useEffect } from 'react';
+import CreateTrade from '../CreateTrade/CreateTrade';
 import { DataTable } from '../TradeTable/TradeTable';
 
 function Dashboard() {
@@ -27,31 +25,10 @@ function Dashboard() {
                 <TabsTrigger value='create'>Create Trade</TabsTrigger>
               </TabsList>
               <TabsContent value='trades'>
-                {/* <div className='flex justify-between items-center'> */}
-                <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
-                  Trades
-                </h2>
-                {/* <div className='space-x-2'>
-                    <Button>Add New</Button>
-                    <Button>Save</Button>
-                  </div>
-                </div> */}
-
                 <DataTable />
               </TabsContent>
               <TabsContent value='create'>
-                <Card>
-                  <CardContent className='space-y-2'>
-                    <div className='space-y-1'>
-                      <Label htmlFor='current'>Current password</Label>
-                      <Input id='current' type='password' />
-                    </div>
-                    <div className='space-y-1'>
-                      <Label htmlFor='new'>New password</Label>
-                      <Input id='new' type='password' />
-                    </div>
-                  </CardContent>
-                </Card>
+                <CreateTrade />
               </TabsContent>
             </Tabs>
           </ScrollArea>

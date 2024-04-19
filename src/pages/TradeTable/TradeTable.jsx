@@ -220,6 +220,9 @@ export function DataTable() {
 
   return (
     <div className='w-full'>
+      <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
+        Trades
+      </h2>
       <div className='flex items-center py-4 justify-end'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

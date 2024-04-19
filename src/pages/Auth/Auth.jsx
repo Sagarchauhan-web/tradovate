@@ -1,3 +1,4 @@
+import MaxWidthWrapper from '@/components/MaxWithWrapper';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -12,21 +13,25 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { login, register, saveToken } from '@/services/auth/auth';
-import { useRef, useState } from 'react';
+import { getToken, login, register, saveToken } from '@/services/auth/auth';
+import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
 import { MdErrorOutline } from 'react-icons/md';
-import { FaCheckCircle } from 'react-icons/fa';
-import MaxWidthWrapper from '@/components/MaxWithWrapper';
 import { useNavigate } from 'react-router-dom';
 
 export function Auth() {
-  const [isRegisterPage, setIsRegisterPage] = useState(true);
+  const [isRegisterPage, setIsRegisterPage] = useState(false);
   const nameRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = getToken();
+
+    if (token) navigate('/dashboard');
+  }, []);
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -99,18 +104,8 @@ export function Auth() {
         action: <MdErrorOutline className='text-4xl text-red-500' />,
       });
     } else {
-      toast({
-        className: cn(
-          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
-        ),
-        duration: 3000,
-        position: 'top-center',
-        title: 'Succesfull',
-        description: response.data,
-        action: <FaCheckCircle className='text-4xl text-green-500' />,
-      });
       saveToken(response.data);
-      navigate('/session-timed-out');
+      navigate('/dashboard');
     }
   }
 
@@ -148,6 +143,7 @@ export function Auth() {
                       <Label htmlFor='framework'>Password*</Label>
                       <Input
                         ref={passwordRef}
+                        type='password'
                         className='rounded-full'
                         id='name'
                         placeholder='Enter Password'
@@ -158,6 +154,7 @@ export function Auth() {
                         <Label htmlFor='framework'>Confirm Password*</Label>
                         <Input
                           ref={confirmPasswordRef}
+                          type='password'
                           className='rounded-full'
                           id='name'
                           placeholder='Enter Password Again'
@@ -187,7 +184,12 @@ export function Auth() {
                       : 'Not registered yet?'}{' '}
                     <span
                       className='text-primary cursor-pointer'
-                      onClick={() => setIsRegisterPage(!isRegisterPage)}
+                      onClick={() => {
+                        setIsRegisterPage(!isRegisterPage);
+                        nameRef.current.value = '';
+                        passwordRef.current.value = '';
+                        confirmPasswordRef.current.value = '';
+                      }}
                     >
                       {isRegisterPage ? 'Sign in' : 'Create an Account?'}{' '}
                     </span>
