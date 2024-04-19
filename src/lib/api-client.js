@@ -4,15 +4,18 @@ const API_URL = 'https://03cb-103-175-180-105.ngrok-free.app/';
 
 const apiClient = axios.create({
   baseURL: `${API_URL}`,
+  headers: {
+    'ngrok-skip-browser-warning': 'true',
+  },
 });
 
-// axiosHttp.interceptors.request.use(
+// apiClient.interceptors.request.use(
 //   (config) => {
-//     const token = 'Your Token here';
+//     // const token = 'Your Token here';
 //     return {
 //       ...config,
 //       headers: {
-//         ...(token !== null && { Authorization: `${token}` }),
+//         // ...(token !== null && { Authorization: `${token}` }),
 //         ...config.headers,
 //       },
 //     };
@@ -22,22 +25,22 @@ const apiClient = axios.create({
 //   },
 // );
 
-apiClient.interceptors.response.use(
-  (response) => {
-    //const url = response.config.url;
+// apiClient.interceptors.response.use(
+//   (response) => {
+//     //const url = response.config.url;
 
-    //setLocalStorageToken(token);
-    return response;
-  },
-  (error) => {
-    if (error.response.status === 401) {
-      //(`unauthorized :)`);
-      //localStorage.removeItem("persist:root");
-      //removeLocalStorageToken
-      //window.location.href = "/login";
-    }
-    return Promise.reject(error);
-  },
-);
+//     //setLocalStorageToken(token);
+//     return response;
+//   },
+//   (error) => {
+//     if (error.response.status === 401) {
+//       //(`unauthorized :)`);
+//       //localStorage.removeItem("persist:root");
+//       //removeLocalStorageToken
+//       //window.location.href = "/login";
+//     }
+//     return Promise.reject(error);
+//   },
+// );
 
 export default apiClient;
