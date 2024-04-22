@@ -8,3 +8,12 @@ export const createTrade = async (requestData) => {
     return error;
   }
 };
+
+export const getTrades = async () => {
+  try {
+    const response = await apiClient.get('/GetSettingData');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

@@ -7,7 +7,6 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
-import * as React from 'react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -28,107 +27,29 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { useNavigate } from 'react-router-dom';
-
-const data = [
-  {
-    id: 'm5gr84i9',
-    symbol: 'COMMON',
-    orderType: 'success',
-    quantity: '1',
-    quantityType: 'shares',
-    account: 'A123',
-  },
-  {
-    id: 'k2hd71a2',
-    symbol: 'PREMIUM',
-    orderType: 'pending',
-    quantity: '3',
-    quantityType: 'shares',
-    account: 'A123',
-  },
-  {
-    id: 'u7js91k3',
-    symbol: 'STANDARD',
-    orderType: 'failed',
-    quantity: '5',
-    quantityType: 'bonds',
-    account: 'B456',
-  },
-  {
-    id: 'g5mt82j4',
-    symbol: 'ELITE',
-    orderType: 'success',
-    quantity: '2',
-    quantityType: 'futures',
-    account: 'C789',
-  },
-  {
-    id: 's8qh63l5',
-    symbol: 'BASIC',
-    orderType: 'cancelled',
-    quantity: '10',
-    quantityType: 'options',
-    account: 'D012',
-  },
-  {
-    id: 'w9er54m6',
-    symbol: 'GOLD',
-    orderType: 'success',
-    quantity: '8',
-    quantityType: 'shares',
-    account: 'E345',
-  },
-  {
-    id: 'v6tn45n7',
-    symbol: 'SILVER',
-    orderType: 'pending',
-    quantity: '6',
-    quantityType: 'bonds',
-    account: 'F678',
-  },
-  {
-    id: 'q3ol26p8',
-    symbol: 'BRONZE',
-    orderType: 'failed',
-    quantity: '4',
-    quantityType: 'futures',
-    account: 'G901',
-  },
-  {
-    id: 'z0xw97q9',
-    symbol: 'PLATINUM',
-    orderType: 'success',
-    quantity: '7',
-    quantityType: 'options',
-    account: 'H234',
-  },
-  {
-    id: 'x1cv68r1',
-    symbol: 'DIAMOND',
-    orderType: 'cancelled',
-    quantity: '9',
-    quantityType: 'shares',
-    account: 'I567',
-  },
-  {
-    id: 'c2bv59s2',
-    symbol: 'RUBY',
-    orderType: 'pending',
-    quantity: '11',
-    quantityType: 'bonds',
-    account: 'J890',
-  },
-];
+import { useEffect, useState } from 'react';
+import { getTrades } from '@/services/Trades/trade';
 
 export function DataTable() {
-  const [sorting, setSorting] = React.useState([]);
-  const [columnFilters, setColumnFilters] = React.useState([]);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
+  const [data, setData] = useState([]);
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({});
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const getAllTrades = async () => {
+      const response = await getTrades();
+      if (!response.error) {
+        setData(response.data);
+      }
+    };
+    getAllTrades();
+  }, []);
 
   const columns = [
     {
-      accessorKey: 'symbol',
+      accessorKey: 'Symbol',
       header: ({ column }) => {
         return (
           <Button
@@ -141,41 +62,41 @@ export function DataTable() {
         );
       },
       cell: ({ row }) => (
-        <div className='uppercase'>{row.getValue('symbol')}</div>
+        <div className='uppercase'>{row.getValue('Symbol')}</div>
       ),
     },
     {
-      accessorKey: 'orderType',
+      accessorKey: 'OrderType',
       header: 'Order Type',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('orderType')}</div>
+        <div className='capitalize'>{row.getValue('OrderType')}</div>
       ),
     },
     {
-      accessorKey: 'quantity',
+      accessorKey: 'Quantity',
       header: 'Quantity',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('quantity')}</div>
+        <div className='capitalize'>{row.getValue('Quantity')}</div>
       ),
     },
     {
-      accessorKey: 'quantityType',
+      accessorKey: 'QuantityType',
       header: 'Quantity Type',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('quantityType')}</div>
+        <div className='capitalize'>{row.getValue('QuantityType')}</div>
       ),
     },
     {
-      accessorKey: 'account',
-      header: 'Account',
+      accessorKey: 'SecurityType',
+      header: 'Security Type',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('account')}</div>
+        <div className='capitalize'>{row.getValue('SecurityType')}</div>
       ),
     },
     {
       id: 'actions',
       enableHiding: false,
-      cell: () => {
+      cell: (values) => {
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -188,12 +109,13 @@ export function DataTable() {
               <DropdownMenuLabel>Actions</DropdownMenuLabel>
               <DropdownMenuItem
                 onClick={() => {
-                  navigate('/dashboard/tradedetails', { state: {} });
+                  navigate('/dashboard/tradedetails', {
+                    state: data[values.row.index],
+                  });
                 }}
               >
                 View Details
               </DropdownMenuItem>
-              {/* <DropdownMenuSeparator /> */}
             </DropdownMenuContent>
           </DropdownMenu>
         );
@@ -252,9 +174,9 @@ export function DataTable() {
         </DropdownMenu>
         <Input
           placeholder='Filter symbol...'
-          value={table.getColumn('symbol')?.getFilterValue() ?? ''}
+          value={table.getColumn('Symbol')?.getFilterValue() ?? ''}
           onChange={(event) =>
-            table.getColumn('symbol')?.setFilterValue(event.target.value)
+            table.getColumn('Symbol')?.setFilterValue(event.target.value)
           }
           className='max-w-sm mx-2'
         />

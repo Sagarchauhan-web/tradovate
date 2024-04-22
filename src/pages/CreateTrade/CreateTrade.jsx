@@ -83,12 +83,23 @@ function CreateTrade() {
         ),
         duration: 3000,
         position: 'top-center',
-        title: 'Something went wrong',
+        title: 'Success',
         description: response.data,
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
     }
-    console.log(response);
+
+    // reset form
+    symbolRef.current.value = '';
+    quantityRef.current.value = '';
+    tradovateSymbolRef.current.value = '';
+    stopLossRef.current.value = '';
+    takeProfitRef.current.value = '';
+    entryOffsetRef.current.value = '';
+
+    setStopLossInPercentage(false);
+    setTakeProfitInPercentage(false);
+    setEntryOffsetInPercentage(false);
   };
 
   return (
