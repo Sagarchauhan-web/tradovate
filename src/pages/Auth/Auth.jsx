@@ -13,7 +13,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { getToken, login, register, saveToken } from '@/services/auth/auth';
+import { getToken, login, register, saveToken } from '@/services/Auth/auth';
 import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
 import { MdErrorOutline } from 'react-icons/md';
@@ -105,7 +105,7 @@ export function Auth() {
       });
     } else {
       saveToken(response.data);
-      navigate('/dashboard');
+      navigate('/dashboard/home');
     }
   }
 

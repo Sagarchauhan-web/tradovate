@@ -10,9 +10,21 @@ export const login = async (requestData) => {
 };
 
 export const register = async (requestData) => {
-  console.log(requestData);
   try {
     const response = await apiClient.post('/SignUp', requestData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const logout = async () => {
+  try {
+    const response = await apiClient.get('/LogOut');
+    localStorage.removeItem('token');
+    // window.location.href = '/';
+    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
