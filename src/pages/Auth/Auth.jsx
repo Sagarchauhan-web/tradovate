@@ -30,7 +30,7 @@ export function Auth() {
   useEffect(() => {
     const token = getToken();
 
-    if (token) navigate('/dashboard');
+    if (token) navigate('/dashboard/home');
   }, []);
 
   async function onSubmit(e) {

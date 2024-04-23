@@ -8,7 +8,6 @@ function ConnectionNotifier() {
       size='sm'
       className='flex flex-row justify-center items-center gap-2'
     >
-      {connect ? 'Connected' : 'Connect'}
       {connect && (
         <div
           className={`flex justify-center items-center w-2 h-2
@@ -19,6 +18,7 @@ function ConnectionNotifier() {
           }`}
         />
       )}
+      {connect ? 'Connected' : 'Connect'}
     </Button>
   );
 }

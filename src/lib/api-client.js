@@ -1,7 +1,7 @@
 import { getToken } from '@/services/Auth/auth';
 import axios from 'axios';
 
-const API_URL = 'https://d36f-103-159-45-167.ngrok-free.app';
+const API_URL = 'https://6965-103-175-180-89.ngrok-free.app';
 
 const apiClient = axios.create({
   baseURL: `${API_URL}`,
