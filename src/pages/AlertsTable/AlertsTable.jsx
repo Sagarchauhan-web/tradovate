@@ -6,18 +6,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
-  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Input } from '@/components/ui/input';
 import {
   Table,
   TableBody,
@@ -26,11 +24,11 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { useNavigate } from 'react-router-dom';
+import { getAlerts } from '@/services/Alerts/alerts';
 import { useEffect, useState } from 'react';
-import { getTrades } from '@/services/Trades/trade';
+import { useNavigate } from 'react-router-dom';
 
-export function DataTable() {
+export function AlertsTable() {
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -38,13 +36,14 @@ export function DataTable() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const getAllTrades = async () => {
-      const response = await getTrades();
+    const getAllAlerts = async () => {
+      const response = await getAlerts();
+
       if (!response.error) {
         setData(response.data);
       }
     };
-    getAllTrades();
+    getAllAlerts();
   }, []);
 
   const columns = [
@@ -112,9 +111,9 @@ export function DataTable() {
                   navigate('/dashboard/tradedetails', {
                     state: {
                       data: data[values.row.index],
-                      isAlert: false,
+                      isAlert: true,
                       isOrder: false,
-                      isSetting: true,
+                      isSetting: false,
                     },
                   });
                 }}
@@ -148,44 +147,9 @@ export function DataTable() {
   return (
     <div className='w-full'>
       <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
-        Trades
+        Alerts
       </h2>
-      <div className='flex items-center py-4 justify-end'>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='outline' className='ml-auto'>
-              Columns <ChevronDown className='ml-2 h-4 w-4' />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className='capitalize'
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                );
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
-        <Input
-          placeholder='Filter symbol...'
-          value={table.getColumn('Symbol')?.getFilterValue() ?? ''}
-          onChange={(event) =>
-            table.getColumn('Symbol')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm mx-2'
-        />
-      </div>
+
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

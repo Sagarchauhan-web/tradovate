@@ -4,6 +4,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import CreateTrade from '../CreateTrade/CreateTrade';
 import { DataTable } from '../TradeTable/TradeTable';
 import Navbar from '@/components/Navbar/Navbar';
+import { OrderTable } from '../OrdersTable/OrdersTable';
+import { AlertsTable } from '../AlertsTable/AlertsTable';
 
 function Dashboard() {
   return (
@@ -23,6 +25,12 @@ function Dashboard() {
             </TabsContent>
             <TabsContent value='create'>
               <CreateTrade />
+            </TabsContent>
+            <TabsContent value='orders'>
+              <OrderTable />
+            </TabsContent>
+            <TabsContent value='alerts'>
+              <AlertsTable />
             </TabsContent>
           </Tabs>
         </ScrollArea>

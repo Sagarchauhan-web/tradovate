@@ -5,29 +5,32 @@ import { IoArrowBackOutline } from 'react-icons/io5';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 function TradeDetails() {
-  const { state: data } = useLocation();
+  const { state } = useLocation();
   const navigate = useNavigate();
-  console.log(data);
+  const data = state.data;
+  // const isAlert = state.isAlert;
+  const isOrder = state.isOrder;
+  const isSetting = state.isSetting;
+
+  console.log(state);
 
   return (
     <div className='h-screen flex flex-col'>
-      <div className='h-[500px] bg-[#0086d1] '></div>
-      <div className='flex-1 bg-[#e7e8ec]'></div>
       <MaxWidthWrapper>
-        <div className='bg-white rounded-sm h-5/6 w-3/4 top-[50%] left-[50%] transform -translate-x-1/2 -translate-y-1/2 absolute'>
-          <ScrollArea className='h-full px-10 py-8'>
-            <div className='flex flex-row items-center space-x-5'>
-              <Button
-                variant='outline'
-                className='mt-1.5'
-                onClick={() => navigate(-1)}
-              >
-                <IoArrowBackOutline />
-              </Button>
-              <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
-                Trade Details
-              </h2>
-            </div>
+        <ScrollArea className='h-full px-10 py-8'>
+          <div className='flex flex-row items-center space-x-5'>
+            <Button
+              variant='outline'
+              className='mt-1.5'
+              onClick={() => navigate(-1)}
+            >
+              <IoArrowBackOutline />
+            </Button>
+            <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
+              Details
+            </h2>
+          </div>
+          {isSetting && (
             <div className='mt-6 grid grid-cols-4 gap-x-8 gap-y-4 text-sm'>
               <div>
                 <p className='font-semibold text-gray-600'>SYMBOL</p>
@@ -91,8 +94,63 @@ function TradeDetails() {
                 <p className='mt-1 text-gray-800'>{data?.OrderType}</p>
               </div>
             </div>
-          </ScrollArea>
-        </div>
+          )}
+          {isOrder && (
+            <div className='mt-6 grid grid-cols-4 gap-x-8 gap-y-4 text-sm'>
+              <div>
+                <p className='font-semibold text-gray-600'>Account ID</p>
+                <p className='mt-1 text-gray-800'>{data?.account_id}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Action</p>
+                <p className='mt-1 text-gray-800'>{data?.action}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Admin</p>
+                <p className='mt-1 text-gray-800'>
+                  {data?.admin ? 'Yes' : 'No'}
+                </p>
+              </div>
+
+              <div>
+                <p className='font-semibold text-gray-600'>Archived</p>
+                <p className='mt-1 text-gray-800'>
+                  {data?.archived ? 'Yes' : 'No'}
+                </p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Contract id</p>
+                <p className='mt-1 text-gray-800'>{data?.contract_id}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>External</p>
+                <p className='mt-1 text-gray-800'>
+                  {data?.external ? 'Yes' : 'No'}
+                </p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>
+                  Execution Provider Id
+                </p>
+                <p className='mt-1 text-gray-800'>
+                  {data?.execution_provider_id}
+                </p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>oco_id</p>
+                <p className='mt-1 text-gray-800'>{data?.oco_id}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Order Status</p>
+                <p className='mt-1 text-gray-800'>{data?.ordStatus}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Order Date</p>
+                <p className='mt-1 text-gray-800'>{data?.order_date}</p>
+              </div>
+            </div>
+          )}
+        </ScrollArea>
       </MaxWidthWrapper>
     </div>
   );

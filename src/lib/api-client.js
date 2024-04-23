@@ -28,9 +28,6 @@ apiClient.interceptors.request.use(
 
 apiClient.interceptors.response.use(
   (response) => {
-    //const url = response.config.url;
-
-    //setLocalStorageToken(token);
     return response;
   },
   (error) => {
