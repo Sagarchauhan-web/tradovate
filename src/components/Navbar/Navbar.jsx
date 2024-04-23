@@ -2,9 +2,32 @@ import { useNavigate } from 'react-router-dom';
 import ConnectionNotifier from '../ConnectionNotifier/ConnectionNotifier';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
+import { SetAccountType, me } from '@/services/Auth/auth';
+import { useEffect, useState } from 'react';
 
 function Navbar() {
+  const [userData, setUserData] = useState();
   const navigate = useNavigate();
+  const getUser = async () => {
+    const response = await me();
+    console.log(response.data);
+    setUserData(response.data);
+  };
+
+  const changeAccountType = async (liveOrDemo) => {
+    const body = {
+      live: liveOrDemo,
+    };
+    const response = await SetAccountType(body);
+    console.log(response);
+    // if (!response.error) {
+    //   getUser();
+    // }
+  };
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
     <ul className='flex justify-between items-center  px-10 py-[8px] border-b'>
@@ -25,10 +48,14 @@ function Navbar() {
 
       <div className='flex gap-2'>
         <li>
-          <LiveOrDemo />
+          <LiveOrDemo
+            isDemo={userData?.demo}
+            changeAccountType={changeAccountType}
+            isPaid={userData?.paid}
+          />
         </li>
         <li>
-          <ConnectionNotifier />
+          <ConnectionNotifier isConnected={userData?.is_tradovate_connected} />
         </li>
         <li>
           <LogoutButton />

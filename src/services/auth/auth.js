@@ -1,8 +1,8 @@
 import apiClient from '@/lib/api-client';
 
-export const me = async (requestData) => {
+export const me = async () => {
   try {
-    const response = await apiClient.post('/LogIn', requestData);
+    const response = await apiClient.get('/Me');
     return response.data;
   } catch (error) {
     return error;
@@ -12,6 +12,15 @@ export const me = async (requestData) => {
 export const login = async (requestData) => {
   try {
     const response = await apiClient.post('/LogIn', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const SetAccountType = async (requestData) => {
+  try {
+    const response = await apiClient.post('/SetAccountType', requestData);
     return response.data;
   } catch (error) {
     return error;

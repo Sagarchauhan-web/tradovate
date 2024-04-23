@@ -5,9 +5,44 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-function LiveOrDemo() {
+import { cn } from '@/lib/utils';
+import { useEffect, useState } from 'react';
+import { MdErrorOutline } from 'react-icons/md';
+import { toast } from '../ui/use-toast';
+function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
+  const [demo, setDemo] = useState(isDemo);
+
+  useEffect(() => {
+    if (isDemo) {
+      setDemo('demo');
+    } else {
+      setDemo('live');
+    }
+  }, [isDemo]);
+
+  const onValueChange = (value) => {
+    if (value === 'live') {
+      if (!isPaid) {
+        return toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 3000,
+          title: 'Error',
+          description: 'Please upgrade your account to update to live',
+          action: (
+            <MdErrorOutline className='text-4xl font-bold text-red-500' />
+          ),
+        });
+      }
+      changeAccountType(false);
+    }
+    if (value === 'demo') {
+      changeAccountType(false);
+    }
+  };
   return (
-    <Select>
+    <Select value={demo} onValueChange={onValueChange}>
       <SelectTrigger className='h-full w-[150px]'>
         <SelectValue placeholder='Environment' />
       </SelectTrigger>

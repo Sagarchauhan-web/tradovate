@@ -28,7 +28,7 @@ import {
 } from '@/components/ui/table';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getTrades } from '@/services/Trades/trade';
+import { deleteTrade, getTrades } from '@/services/Trades/trade';
 
 export function DataTable() {
   const [data, setData] = useState([]);
@@ -37,13 +37,13 @@ export function DataTable() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const navigate = useNavigate();
 
+  const getAllTrades = async () => {
+    const response = await getTrades();
+    if (!response.error) {
+      setData(response.data);
+    }
+  };
   useEffect(() => {
-    const getAllTrades = async () => {
-      const response = await getTrades();
-      if (!response.error) {
-        setData(response.data);
-      }
-    };
     getAllTrades();
   }, []);
 
@@ -120,6 +120,14 @@ export function DataTable() {
                 }}
               >
                 View Details
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={async () => {
+                  await deleteTrade({ symbol: values.row.getValue('Symbol') });
+                  getAllTrades();
+                }}
+              >
+                Delete
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
