@@ -6,16 +6,9 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { ArrowUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import {
   Table,
   TableBody,
@@ -26,19 +19,17 @@ import {
 } from '@/components/ui/table';
 import { getAlerts } from '@/services/Alerts/alerts';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export function AlertsTable() {
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllAlerts = async () => {
       const response = await getAlerts();
-
+      console.log(response.data);
       if (!response.error) {
         setData(response.data);
       }
@@ -48,82 +39,56 @@ export function AlertsTable() {
 
   const columns = [
     {
-      accessorKey: 'Symbol',
+      accessorKey: 'alert_data',
       header: ({ column }) => {
         return (
           <Button
             variant='ghost'
             onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
           >
-            Symbol
+            Alert Data
             <ArrowUpDown className='ml-2 h-4 w-4' />
           </Button>
         );
       },
       cell: ({ row }) => (
-        <div className='uppercase'>{row.getValue('Symbol')}</div>
+        <div className='uppercase'>{row.getValue('alert_data')}</div>
       ),
     },
     {
-      accessorKey: 'OrderType',
+      accessorKey: 'buy_sell',
+      header: 'Buy/Sell',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('buy_sell')}</div>
+      ),
+    },
+    {
+      accessorKey: 'local_symbol',
+      header: 'Local Symbol',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('local_symbol')}</div>
+      ),
+    },
+    {
+      accessorKey: 'order_type',
       header: 'Order Type',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('OrderType')}</div>
+        <div className='capitalize'>{row.getValue('order_type')}</div>
       ),
     },
     {
-      accessorKey: 'Quantity',
-      header: 'Quantity',
+      accessorKey: 'trade_time',
+      header: 'Trade Time',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('Quantity')}</div>
+        <div className='capitalize'>{row.getValue('trade_time')}</div>
       ),
     },
     {
-      accessorKey: 'QuantityType',
-      header: 'Quantity Type',
+      accessorKey: 'symbol',
+      header: 'Symbol',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('QuantityType')}</div>
+        <div className='capitalize'>{row.getValue('symbol')}</div>
       ),
-    },
-    {
-      accessorKey: 'SecurityType',
-      header: 'Security Type',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('SecurityType')}</div>
-      ),
-    },
-    {
-      id: 'actions',
-      enableHiding: false,
-      cell: (values) => {
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Open menu</span>
-                <MoreHorizontal className='h-4 w-4' />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
-                  navigate('/dashboard/tradedetails', {
-                    state: {
-                      data: data[values.row.index],
-                      isAlert: true,
-                      isOrder: false,
-                      isSetting: false,
-                    },
-                  });
-                }}
-              >
-                View Details
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
     },
   ];
 
@@ -149,6 +114,7 @@ export function AlertsTable() {
       <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
         Alerts
       </h2>
+      <div className='flex items-center py-4 justify-end'></div>
 
       <div className='rounded-md border'>
         <Table>

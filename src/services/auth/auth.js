@@ -1,5 +1,14 @@
 import apiClient from '@/lib/api-client';
 
+export const me = async (requestData) => {
+  try {
+    const response = await apiClient.post('/LogIn', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const login = async (requestData) => {
   try {
     const response = await apiClient.post('/LogIn', requestData);
@@ -23,8 +32,6 @@ export const logout = async () => {
   try {
     const response = await apiClient.get('/LogOut');
     localStorage.removeItem('token');
-    // window.location.href = '/';
-    console.log(response);
     return response.data;
   } catch (error) {
     console.log(error);
