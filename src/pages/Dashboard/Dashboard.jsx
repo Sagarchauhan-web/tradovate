@@ -15,16 +15,16 @@ function Dashboard() {
         <ScrollArea className='h-full px-10 py-4 pb-12'>
           <Tabs defaultValue='trades' className='w-full'>
             <TabsList className='grid grid-cols-4'>
-              <TabsTrigger value='trades'>Settings</TabsTrigger>
               <TabsTrigger value='create'>Create Settings</TabsTrigger>
+              <TabsTrigger value='trades'>Settings</TabsTrigger>
               <TabsTrigger value='orders'>Orders</TabsTrigger>
               <TabsTrigger value='alerts'>Alerts</TabsTrigger>
             </TabsList>
-            <TabsContent value='trades'>
-              <DataTable />
-            </TabsContent>
             <TabsContent value='create'>
               <CreateTrade />
+            </TabsContent>
+            <TabsContent value='trades'>
+              <DataTable />
             </TabsContent>
             <TabsContent value='orders'>
               <OrderTable />

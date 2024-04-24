@@ -9,6 +9,15 @@ export const me = async () => {
   }
 };
 
+export const getTokenUrl = async () => {
+  try {
+    const response = await apiClient.get('/GetTokenUrl');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const login = async (requestData) => {
   try {
     const response = await apiClient.post('/LogIn', requestData);

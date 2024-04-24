@@ -2,8 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import ConnectionNotifier from '../ConnectionNotifier/ConnectionNotifier';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
-import { SetAccountType, me } from '@/services/Auth/auth';
+import { SetAccountType, getTokenUrl, me } from '@/services/Auth/auth';
 import { useEffect, useState } from 'react';
+import { Button } from '../ui/button';
 
 function Navbar() {
   const [userData, setUserData] = useState();
@@ -20,13 +21,33 @@ function Navbar() {
     };
     const response = await SetAccountType(body);
     console.log(response);
-    // if (!response.error) {
-    //   getUser();
-    // }
+    if (!response.error) {
+      getUser();
+    }
   };
 
   useEffect(() => {
-    getUser();
+    const getRedirectToken = async () => {
+      if (!userData?.is_tradovate_connected) {
+        const tokenUrl = await getTokenUrl();
+
+        if (!tokenUrl.error) {
+          // window.location.href = tokenUrl.data;
+        }
+      }
+    };
+
+    getRedirectToken();
+  }, [userData]);
+
+  useEffect(() => {
+    let interval;
+
+    interval = setInterval(() => {
+      getUser();
+    }, 20000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (
@@ -47,6 +68,15 @@ function Navbar() {
       </div>
 
       <div className='flex gap-2'>
+        <li>
+          <Button
+            variant='outline'
+            size='sm'
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Token: {userData?.user_key}
+          </Button>
+        </li>
         <li>
           <LiveOrDemo
             isDemo={userData?.demo}
