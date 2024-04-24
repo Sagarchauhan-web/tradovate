@@ -16,6 +16,7 @@ import { cn } from '@/lib/utils';
 import { getToken, login, register, saveToken } from '@/services/Auth/auth';
 import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdErrorOutline } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 
@@ -92,7 +93,7 @@ export function Auth() {
       });
     }
 
-    if (response.error) {
+    if (response.error && response.data) {
       toast({
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
@@ -104,8 +105,25 @@ export function Auth() {
         action: <MdErrorOutline className='text-4xl text-red-500' />,
       });
     } else {
-      saveToken(response.data);
-      navigate('/dashboard/home');
+      if (isRegisterPage) {
+        setIsRegisterPage(!isRegisterPage);
+        nameRef.current.value = '';
+        passwordRef.current.value = '';
+        confirmPasswordRef.current.value = '';
+      } else {
+        saveToken(response.data);
+        navigate('/dashboard/home');
+      }
+
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 3000,
+        position: 'top-center',
+        title: 'Success',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
     }
   }
 

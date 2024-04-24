@@ -8,7 +8,7 @@ function Footer() {
   const [dialogBox, setDialogBox] = useState(false);
   const [policy, setPolicy] = useState('');
   return (
-    <>
+    <div>
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
           <DialogHeader>
@@ -18,15 +18,15 @@ function Footer() {
           </DialogHeader>
         </DialogContent>
       </Dialog>
-      <ul className='flex justify-between items-center h-[50px] p-5 border-t mt-12'>
+      <ul className='flex flex-wrap justify-between bg-primary items-center h-[50px] px-10 border-t'>
         <div className='flex gap-6 text-white'>
-          <li className='text-primary'>
+          <li className='text-white'>
             Copyright © 2024 Tradovate. All Rights Reserved.
           </li>
         </div>
-        <div className='flex gap-2 justify-center items-center'>
+        <div className='flex gap-2 justify-center items-center '>
           <li
-            className='text-primary cursor-pointer hover:underline'
+            className='text-primary cursor-pointer hover:underline text-white'
             onClick={() => {
               setDialogBox(true);
               setPolicy('terms');
@@ -36,7 +36,7 @@ function Footer() {
           </li>
           <div className='w-[1px] h-4 bg-primary ' />
           <li
-            className='text-primary cursor-pointer hover:underline'
+            className='text-primary cursor-pointer hover:underline text-white'
             onClick={() => {
               setDialogBox(true);
               setPolicy('privacy');
@@ -46,7 +46,7 @@ function Footer() {
           </li>
           <div className='w-[1px] h-4 bg-primary' />
           <li
-            className='text-primary cursor-pointer hover:underline'
+            className='text-primary cursor-pointer hover:underline text-white'
             onClick={() => {
               setDialogBox(true);
               setPolicy('refund');
@@ -56,7 +56,7 @@ function Footer() {
           </li>
         </div>
       </ul>
-    </>
+    </div>
   );
 }
 

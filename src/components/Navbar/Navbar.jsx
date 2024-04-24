@@ -51,7 +51,7 @@ function Navbar() {
   }, []);
 
   return (
-    <ul className='flex justify-between items-center  px-10 py-[8px] border-b'>
+    <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
       <div className='flex gap-6 text-white'>
         <li
           onClick={() => navigate('/dashboard/home')}
@@ -67,7 +67,7 @@ function Navbar() {
         </li> */}
       </div>
 
-      <div className='flex gap-2'>
+      <div className='flex gap-2 flex-wrap'>
         <li>
           <Button
             variant='outline'

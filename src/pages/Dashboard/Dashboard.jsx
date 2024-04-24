@@ -1,26 +1,23 @@
-import MaxWidthWrapper from '@/components/MaxWithWrapper';
-import { ScrollArea } from '@/components/ui/scroll-area';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import CreateTrade from '../CreateTrade/CreateTrade';
-import { DataTable } from '../TradeTable/TradeTable';
-import Navbar from '@/components/Navbar/Navbar';
-import { OrderTable } from '../OrdersTable/OrdersTable';
-import { AlertsTable } from '../AlertsTable/AlertsTable';
-import { useState } from 'react';
 import Footer from '@/components/Footer/Footer';
+import Navbar from '@/components/Navbar/Navbar';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useState } from 'react';
+import { AlertsTable } from '../AlertsTable/AlertsTable';
+import CreateTrade from '../CreateTrade/CreateTrade';
+import { OrderTable } from '../OrdersTable/OrdersTable';
+import { DataTable } from '../TradeTable/TradeTable';
 
 function Dashboard() {
   const [tabsValue, setTabsValue] = useState('create');
   const [initialDataForSettings, setInitialDataForSettings] = useState([]);
 
   return (
-    <div className='h-screen flex flex-col'>
-      <MaxWidthWrapper>
+    <div className='h-full min-h-[100vh] flex flex-col'>
+      <div className='flex-1'>
         <Navbar />
-        <ScrollArea className='h-full px-10 py-4'>
+        <div className='h-full px-10 py-4 '>
           <Tabs
             value={tabsValue}
-            className='w-full'
             onValueChange={(value) => setTabsValue(value)}
           >
             <TabsList className='grid grid-cols-4'>
@@ -51,8 +48,8 @@ function Dashboard() {
               <AlertsTable />
             </TabsContent>
           </Tabs>
-        </ScrollArea>
-      </MaxWidthWrapper>
+        </div>
+      </div>
       <Footer />
     </div>
   );

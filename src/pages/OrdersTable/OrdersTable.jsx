@@ -29,6 +29,7 @@ import { getOrders } from '@/services/Orders/orders';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export function OrderTable() {
   const [date, setDate] = useState({
@@ -44,14 +45,15 @@ export function OrderTable() {
   useEffect(() => {
     const getAllOrders = async () => {
       const response = await getOrders({
-        from_date: format(date.from, 'yyyy-MM-dd'),
-        to_date: format(date.to, 'yyyy-MM-dd'),
+        from_date: format(date?.from, 'yyyy-MM-dd'),
+        to_date: format(date?.to, 'yyyy-MM-dd'),
       });
 
       setData(response.data);
     };
     getAllOrders();
   }, [date]);
+  console.log(data);
 
   const columns = [
     {
@@ -76,6 +78,61 @@ export function OrderTable() {
       header: 'Action',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('action')}</div>
+      ),
+    },
+    {
+      accessorKey: 'admin',
+      header: 'Admin',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('admin') ? 'Yes' : 'No'}</div>
+      ),
+    },
+    {
+      accessorKey: 'archived',
+      header: 'Archived',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('archived') ? 'Yes' : 'No'}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'demo',
+      header: 'Demo',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('demo') ? 'Yes' : 'No'}</div>
+      ),
+    },
+    {
+      accessorKey: 'external',
+      header: 'External',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('external') ? 'Yes' : 'No'}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'execution_provider_id',
+      header: 'Execution Provider Id',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('execution_provider_id')}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'oco_id',
+      header: 'OCO Id',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('oco_id')}</div>
+      ),
+    },
+    {
+      accessorKey: 'order_date',
+      header: 'Order Date',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('order_date')}</div>
       ),
     },
     {
@@ -145,16 +202,15 @@ export function OrderTable() {
   });
 
   return (
-    <div className='w-full'>
-      <div className='flex items-center justify-between pt-4'>
+    <>
+      <div className='flex items-center justify-between pt-4 mb-4'>
         <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
           Orders
         </h2>
         <DatePickerWithRange date={date} setDate={setDate} />
       </div>
-      <div className='flex items-center py-4 justify-end'></div>
-      <div className='rounded-md border'>
-        <Table>
+      <ScrollArea className={`w-full whitespace-nowrap rounded-md border`}>
+        <Table className='display-none'>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
@@ -202,7 +258,8 @@ export function OrderTable() {
             )}
           </TableBody>
         </Table>
-      </div>
+        <ScrollBar orientation='horizontal' />
+      </ScrollArea>
       <div className='flex items-center justify-end space-x-2 py-4'>
         <div className='space-x-2'>
           <Button
@@ -223,6 +280,6 @@ export function OrderTable() {
           </Button>
         </div>
       </div>
-    </div>
+    </>
   );
 }
