@@ -19,8 +19,14 @@ import {
 } from '@/components/ui/table';
 import { getAlerts } from '@/services/Alerts/alerts';
 import { useEffect, useState } from 'react';
+import { format, subDays } from 'date-fns';
+import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 
 export function AlertsTable() {
+  const [date, setDate] = useState({
+    from: subDays(new Date(), 7),
+    to: format(new Date(), 'yyyy-MM-dd'),
+  });
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -28,14 +34,15 @@ export function AlertsTable() {
 
   useEffect(() => {
     const getAllAlerts = async () => {
-      const response = await getAlerts();
-      console.log(response.data);
-      if (!response.error) {
-        setData(response.data);
-      }
+      const response = await getAlerts({
+        from_date: format(date.from, 'yyyy-MM-dd'),
+        to_date: format(date.to, 'yyyy-MM-dd'),
+      });
+
+      setData(response.data);
     };
     getAllAlerts();
-  }, []);
+  }, [date]);
 
   const columns = [
     {
@@ -111,11 +118,14 @@ export function AlertsTable() {
 
   return (
     <div className='w-full'>
-      <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
-        Alerts
-      </h2>
+      Alerts
+      <div className='flex items-center justify-between pt-4'>
+        <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
+          Alerts
+        </h2>
+        <DatePickerWithRange date={date} setDate={setDate} />
+      </div>
       <div className='flex items-center py-4 justify-end'></div>
-
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

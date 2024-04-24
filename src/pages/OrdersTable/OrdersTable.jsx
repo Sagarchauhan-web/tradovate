@@ -7,6 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
+import { format, subDays } from 'date-fns';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -27,8 +28,13 @@ import {
 import { getOrders } from '@/services/Orders/orders';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 
 export function OrderTable() {
+  const [date, setDate] = useState({
+    from: subDays(new Date(), 7),
+    to: format(new Date(), 'yyyy-MM-dd'),
+  });
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -37,14 +43,15 @@ export function OrderTable() {
 
   useEffect(() => {
     const getAllOrders = async () => {
-      const response = await getOrders();
+      const response = await getOrders({
+        from_date: format(date.from, 'yyyy-MM-dd'),
+        to_date: format(date.to, 'yyyy-MM-dd'),
+      });
 
-      if (!response.error) {
-        setData(response.data);
-      }
+      setData(response.data);
     };
     getAllOrders();
-  }, []);
+  }, [date]);
 
   const columns = [
     {
@@ -139,9 +146,12 @@ export function OrderTable() {
 
   return (
     <div className='w-full'>
-      <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
-        Orders
-      </h2>
+      <div className='flex items-center justify-between pt-4'>
+        <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
+          Orders
+        </h2>
+        <DatePickerWithRange date={date} setDate={setDate} />
+      </div>
       <div className='flex items-center py-4 justify-end'></div>
       <div className='rounded-md border'>
         <Table>
