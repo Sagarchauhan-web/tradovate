@@ -11,7 +11,7 @@ function Navbar() {
   const navigate = useNavigate();
   const getUser = async () => {
     const response = await me();
-    console.log(response.data);
+
     setUserData(response.data);
   };
 
@@ -20,7 +20,7 @@ function Navbar() {
       live: liveOrDemo,
     };
     const response = await SetAccountType(body);
-    console.log(response);
+
     if (!response.error) {
       getUser();
     }
@@ -59,12 +59,12 @@ function Navbar() {
         >
           Home
         </li>
-        <li
+        {/* <li
           onClick={() => navigate('/dashboard/payments')}
           className='text-black px-4 py-1 rounded-sm cursor-pointer'
         >
           Payments
-        </li>
+        </li> */}
       </div>
 
       <div className='flex gap-2'>

@@ -30,7 +30,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { deleteTrade, getTrades } from '@/services/Trades/trade';
 
-export function DataTable() {
+export function DataTable({ changeToEditMode }) {
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -43,6 +43,7 @@ export function DataTable() {
       setData(response.data);
     }
   };
+
   useEffect(() => {
     getAllTrades();
   }, []);
@@ -128,6 +129,13 @@ export function DataTable() {
                 }}
               >
                 Delete
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={async () => {
+                  changeToEditMode(data[values.row.index]);
+                }}
+              >
+                Edit
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>

@@ -8,9 +8,9 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 
-export function SelectComponent({ label, placeholder, data, onChange }) {
+export function SelectComponent({ label, placeholder, data, onChange, value }) {
   return (
-    <Select onValueChange={onChange}>
+    <Select onValueChange={onChange} value={value}>
       <SelectTrigger className='w-full'>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>

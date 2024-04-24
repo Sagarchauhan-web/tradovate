@@ -6,7 +6,7 @@ import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 import { createTrade } from '@/services/Trades/trade';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 
@@ -26,7 +26,11 @@ const QUANTITYTYPE = {
   DOLARVALUE: 'dollarvalue',
 };
 
-function CreateTrade() {
+function CreateTrade({
+  initialDataForSettings,
+  goToSettings,
+  setInitialDataForSettings,
+}) {
   const symbolRef = useRef();
   const [orderType, setOrderType] = useState('');
   const [securityType, setSecurityType] = useState('');
@@ -64,6 +68,8 @@ function CreateTrade() {
       EntryOffsetInPercentage: entryOffsetInPercentage,
     };
 
+    console.log(body, 'body');
+
     const response = await createTrade(body);
     if (response.error) {
       toast({
@@ -87,20 +93,61 @@ function CreateTrade() {
         description: response.data,
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
+      // reset form
+      symbolRef.current.value = '';
+      quantityRef.current.value = '';
+      tradovateSymbolRef.current.value = '';
+      stopLossRef.current.value = '';
+      takeProfitRef.current.value = '';
+      entryOffsetRef.current.value = '';
+
+      setStopLossInPercentage(false);
+      setTakeProfitInPercentage(false);
+      setEntryOffsetInPercentage(false);
+      setOrderType('');
+      setQuantityType('');
+      setSecurityType('');
+
+      setInitialDataForSettings([]);
+
+      goToSettings();
     }
-
-    // reset form
-    symbolRef.current.value = '';
-    quantityRef.current.value = '';
-    tradovateSymbolRef.current.value = '';
-    stopLossRef.current.value = '';
-    takeProfitRef.current.value = '';
-    entryOffsetRef.current.value = '';
-
-    setStopLossInPercentage(false);
-    setTakeProfitInPercentage(false);
-    setEntryOffsetInPercentage(false);
   };
+
+  useEffect(() => {
+    if (Object.values(initialDataForSettings).length > 0) {
+      symbolRef.current.value = initialDataForSettings.Symbol;
+      quantityRef.current.value = initialDataForSettings.Quantity;
+      tradovateSymbolRef.current.value = initialDataForSettings.LocalSymbol;
+      stopLossRef.current.value = initialDataForSettings.StopLoss;
+      takeProfitRef.current.value = initialDataForSettings.TakeProfit;
+      entryOffsetRef.current.value = initialDataForSettings.EntryOffset;
+
+      setOrderType(initialDataForSettings.OrderType);
+      setQuantityType(initialDataForSettings.QuantityType);
+      setSecurityType(initialDataForSettings.SecurityType);
+      setStopLossInPercentage(initialDataForSettings.StopLossPercentage);
+      setTakeProfitInPercentage(initialDataForSettings.TakeProfitPercentage);
+      setEntryOffsetInPercentage(
+        initialDataForSettings.EntryOffsetInPercentage,
+      );
+    } else {
+      // reset form
+      symbolRef.current.value = '';
+      quantityRef.current.value = '';
+      tradovateSymbolRef.current.value = '';
+      stopLossRef.current.value = '';
+      takeProfitRef.current.value = '';
+      entryOffsetRef.current.value = '';
+
+      setStopLossInPercentage(false);
+      setTakeProfitInPercentage(false);
+      setEntryOffsetInPercentage(false);
+      setOrderType('');
+      setQuantityType('');
+      setSecurityType('');
+    }
+  }, [initialDataForSettings]);
 
   return (
     <div className='px-1'>
@@ -124,7 +171,10 @@ function CreateTrade() {
               value={orderType}
               Label='Order Type'
               placeholder={`Enter Order Type`}
-              onChange={(value) => setOrderType(value)}
+              onChange={(value) => {
+                setOrderType(value);
+                console.log(value);
+              }}
               data={Object.entries(ORDERTYPE).map(([key, value]) => ({
                 value,
                 title: key,
