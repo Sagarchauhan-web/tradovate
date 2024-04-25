@@ -26,19 +26,15 @@ function Navbar() {
     }
   };
 
-  useEffect(() => {
-    const getRedirectToken = async () => {
-      if (!userData?.is_tradovate_connected) {
-        const tokenUrl = await getTokenUrl();
+  const onTradovateDisconnectedClick = async (is_tradovate_connected) => {
+    if (!is_tradovate_connected) {
+      const tokenUrl = await getTokenUrl();
 
-        if (!tokenUrl.error) {
-          // window.location.href = tokenUrl.data;
-        }
+      if (!tokenUrl.error) {
+        window.location.href = tokenUrl.data;
       }
-    };
-
-    getRedirectToken();
-  }, [userData]);
+    }
+  };
 
   useEffect(() => {
     let interval;
@@ -85,7 +81,10 @@ function Navbar() {
           />
         </li>
         <li>
-          <ConnectionNotifier isConnected={userData?.is_tradovate_connected} />
+          <ConnectionNotifier
+            isConnected={userData?.is_tradovate_connected}
+            onTradovateDisconnectedClick={onTradovateDisconnectedClick}
+          />
         </li>
         <li>
           <LogoutButton />

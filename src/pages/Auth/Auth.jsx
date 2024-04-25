@@ -1,4 +1,4 @@
-import MaxWidthWrapper from '@/components/MaxWithWrapper';
+import Footer from '@/components/Footer/Footer';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -128,97 +128,95 @@ export function Auth() {
   }
 
   return (
-    <MaxWidthWrapper>
-      <div className='min-h-screen flex justify-center items-center'>
-        <div className='w-full h-[730px] flex flex-row py-[40px] md:mx-10'>
-          <Card className='flex-1 space-between rounded-none mx-10 md:m-0'>
-            <div className='w-full md:w-3/4 m-auto'>
-              <CardHeader className='mb-6'>
-                <CardTitle className='text-3xl mt-14'>
-                  {isRegisterPage ? 'Register' : 'Login'}
-                </CardTitle>
-                <CardDescription>
-                  Unlock the power of markets and start your trading adventure!
-                </CardDescription>
-              </CardHeader>
-              <form onSubmit={onSubmit}>
-                <CardContent className='pb-0'>
-                  <div className='grid w-full items-center gap-4'>
+    <div className='flex min-h-screen w-full flex-col justify-center items-center'>
+      <div className='flex-1 flex justify-center items-center'>
+        <Card className=' space-between rounded-none mx-10 md:m-0'>
+          <div className='w-full md:w-3/4 m-auto'>
+            <CardHeader className='mb-6'>
+              <CardTitle className='text-3xl mt-14'>
+                {isRegisterPage ? 'Register' : 'Login'}
+              </CardTitle>
+              <CardDescription>
+                Unlock the power of markets and start your trading adventure!
+              </CardDescription>
+            </CardHeader>
+            <form onSubmit={onSubmit}>
+              <CardContent className='pb-0'>
+                <div className='grid w-full items-center gap-4'>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='name'>
+                      {isRegisterPage ? 'Email*' : 'Username*'}
+                    </Label>
+                    <Input
+                      ref={nameRef}
+                      className='rounded-full'
+                      id='name'
+                      placeholder={`Enter${
+                        isRegisterPage ? ' Email' : ' username'
+                      }`}
+                    />
+                  </div>
+                  <div className='flex flex-col space-y-1.5'>
+                    <Label htmlFor='framework'>Password*</Label>
+                    <Input
+                      ref={passwordRef}
+                      type='password'
+                      className='rounded-full'
+                      id='name'
+                      placeholder='Enter Password'
+                    />
+                  </div>
+                  {isRegisterPage && (
                     <div className='flex flex-col space-y-1.5'>
-                      <Label htmlFor='name'>
-                        {isRegisterPage ? 'Email*' : 'Username*'}
-                      </Label>
+                      <Label htmlFor='framework'>Confirm Password*</Label>
                       <Input
-                        ref={nameRef}
-                        className='rounded-full'
-                        id='name'
-                        placeholder={`Enter${
-                          isRegisterPage ? ' Email' : ' username'
-                        }`}
-                      />
-                    </div>
-                    <div className='flex flex-col space-y-1.5'>
-                      <Label htmlFor='framework'>Password*</Label>
-                      <Input
-                        ref={passwordRef}
+                        ref={confirmPasswordRef}
                         type='password'
                         className='rounded-full'
                         id='name'
-                        placeholder='Enter Password'
+                        placeholder='Enter Password Again'
                       />
                     </div>
-                    {isRegisterPage && (
-                      <div className='flex flex-col space-y-1.5'>
-                        <Label htmlFor='framework'>Confirm Password*</Label>
-                        <Input
-                          ref={confirmPasswordRef}
-                          type='password'
-                          className='rounded-full'
-                          id='name'
-                          placeholder='Enter Password Again'
-                        />
-                      </div>
-                    )}
-                  </div>
-                </CardContent>
-                <CardFooter className='w-full mt-5 flex flex-col space-between'>
-                  <div className='mb-12 w-full'>
-                    <div className='flex w-full space-x-2'>
-                      <Checkbox id='terms' />
-                      <label
-                        htmlFor='terms'
-                        className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-                      >
-                        Remember me
-                      </label>
-                    </div>
-                  </div>
-                  <Button type='submit' className='w-full rounded-full'>
-                    {isRegisterPage ? 'Register' : 'Login'}
-                  </Button>
-                  <p className='text-sm w-full mt-5'>
-                    {isRegisterPage
-                      ? 'Already registered?'
-                      : 'Not registered yet?'}{' '}
-                    <span
-                      className='text-primary cursor-pointer'
-                      onClick={() => {
-                        setIsRegisterPage(!isRegisterPage);
-                        nameRef.current.value = '';
-                        passwordRef.current.value = '';
-                        confirmPasswordRef.current.value = '';
-                      }}
+                  )}
+                </div>
+              </CardContent>
+              <CardFooter className='w-full mt-5 flex flex-col space-between'>
+                <div className='mb-12 w-full'>
+                  <div className='flex w-full space-x-2'>
+                    <Checkbox id='terms' />
+                    <label
+                      htmlFor='terms'
+                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
                     >
-                      {isRegisterPage ? 'Sign in' : 'Create an Account?'}{' '}
-                    </span>
-                  </p>
-                </CardFooter>
-              </form>
-            </div>
-          </Card>
-          <div className='flex-1 hidden flex-row space-between md:block bg-primary'></div>
-        </div>
+                      Remember me
+                    </label>
+                  </div>
+                </div>
+                <Button type='submit' className='w-full rounded-full'>
+                  {isRegisterPage ? 'Register' : 'Login'}
+                </Button>
+                <p className='text-sm w-full mt-5'>
+                  {isRegisterPage
+                    ? 'Already registered?'
+                    : 'Not registered yet?'}{' '}
+                  <span
+                    className='text-primary cursor-pointer'
+                    onClick={() => {
+                      setIsRegisterPage(!isRegisterPage);
+                      nameRef.current.value = '';
+                      passwordRef.current.value = '';
+                      confirmPasswordRef.current.value = '';
+                    }}
+                  >
+                    {isRegisterPage ? 'Sign in' : 'Create an Account?'}{' '}
+                  </span>
+                </p>
+              </CardFooter>
+            </form>
+          </div>
+        </Card>
       </div>
-    </MaxWidthWrapper>
+      <Footer />
+    </div>
   );
 }

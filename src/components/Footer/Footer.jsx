@@ -8,7 +8,7 @@ function Footer() {
   const [dialogBox, setDialogBox] = useState(false);
   const [policy, setPolicy] = useState('');
   return (
-    <div>
+    <div className='w-full'>
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
           <DialogHeader>
