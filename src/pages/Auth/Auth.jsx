@@ -14,6 +14,7 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
 import { getToken, login, register, saveToken } from '@/services/Auth/auth';
+import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
@@ -93,7 +94,9 @@ export function Auth() {
       });
     }
 
-    if (response.error && response.data) {
+    console.log(response);
+
+    if (response.error || response instanceof AxiosError) {
       toast({
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',

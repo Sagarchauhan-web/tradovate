@@ -1,7 +1,7 @@
 import { getToken } from '@/services/Auth/auth';
 import axios from 'axios';
 
-const API_URL = 'https://17db-103-175-180-68.ngrok-free.app';
+const API_URL = 'https://pickmytrade.trade/api';
 
 const apiClient = axios.create({
   baseURL: `${API_URL}`,
@@ -31,7 +31,7 @@ apiClient.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    if (error?.response?.status === 401) {
       localStorage.removeItem('token');
       window.location.href = '/';
     }
