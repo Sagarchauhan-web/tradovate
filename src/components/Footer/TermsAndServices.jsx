@@ -143,6 +143,7 @@ function TermsAndServices() {
         <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
           Safe Harbor exception clause
         </h4>
+
         <p>
           Because we run a Bug Bounty Program, we don’t want researchers to be
           in fear of consequences because of their good faith attempts to comply
@@ -171,6 +172,38 @@ function TermsAndServices() {
           whether a violation of this policy is accidental or in good faith, and
           proactive contact to us before engaging in any action is a significant
           factor in that decision. If in doubt, ask us first!
+        </p>
+        <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
+          Payment, refunds, and plan changes
+        </h4>
+        <ul className='my-6 ml-6 list-disc [&>li]:mt-2'>
+          <li>
+            If you are using a free version of the Services, it is really free:
+            we do not ask you for your credit card and — just like for users who
+            pay for our Services — we do not sell your data.
+          </li>
+          <li>
+            For paid Services that offer a free trial, we explain the length of
+            trial when you sign up. After the trial period, you need to pay in
+            advance to keep using the Service. If you do not pay, we downgrade
+            your account to a free account.
+          </li>
+          <li>
+            If you are upgrading from a free plan to a paid plan, we will charge
+            your card immediately and your billing cycle starts on the day of
+            upgrade.
+          </li>
+          <li>
+            All fees are inclusive of all taxes, levies, or duties imposed by
+            taxing authorities. Where required, we will collect those taxes on
+            behalf of the taxing authority and remit those taxes to taxing
+            authorities.
+          </li>
+        </ul>
+        <p>
+          We process refunds on a case-by-case basis in 15 days. If you’re ever
+          unhappy with our Services for any reason, just contact our support
+          team and we’ll take care of you.
         </p>
         <h4 className='mt-8 scroll-m-20 text-2xl font-semibold tracking-tight'>
           Cancellation and deletion
