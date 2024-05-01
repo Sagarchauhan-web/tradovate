@@ -31,16 +31,16 @@ function Navbar() {
   const onTradovateDisconnectedClick = async (is_tradovate_connected) => {
     if (!is_tradovate_connected) {
       const tokenUrl = await getTokenUrl();
-      console.log(tokenUrl, 'tokenUrl');
 
-      // if (!tokenUrl.error) {
-      //   window.location.href = tokenUrl.data;
-      // }
+      if (!tokenUrl.error) {
+        window.location.href = tokenUrl.data;
+      }
     }
   };
 
   useEffect(() => {
     let interval;
+    getUser();
 
     interval = setInterval(() => {
       getUser();

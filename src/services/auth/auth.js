@@ -57,6 +57,18 @@ export const logout = async () => {
   }
 };
 
+export const refreshOauthUrl = async (code) => {
+  try {
+    const response = await apiClient.get(
+      `/oauth/tradovate/callback?code=${code}`,
+    );
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
 export const saveToken = (token) => {
   localStorage.setItem('token', token);
 };
