@@ -5,7 +5,9 @@ import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
 import { SetAccountType, getTokenUrl, me } from '@/services/Auth/auth';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
-
+import { toast } from '../ui/use-toast';
+import { cn } from '@/lib/utils';
+import { FaClipboard } from 'react-icons/fa';
 function Navbar() {
   const [userData, setUserData] = useState();
   const navigate = useNavigate();
@@ -29,10 +31,11 @@ function Navbar() {
   const onTradovateDisconnectedClick = async (is_tradovate_connected) => {
     if (!is_tradovate_connected) {
       const tokenUrl = await getTokenUrl();
+      console.log(tokenUrl, 'tokenUrl');
 
-      if (!tokenUrl.error) {
-        window.location.href = tokenUrl.data;
-      }
+      // if (!tokenUrl.error) {
+      //   window.location.href = tokenUrl.data;
+      // }
     }
   };
 
@@ -46,6 +49,25 @@ function Navbar() {
     return () => clearInterval(interval);
   }, []);
 
+  const copyTextToClipboard = async (textToCopy) => {
+    if (!textToCopy) return;
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
+        ),
+
+        duration: 1000,
+        position: 'top-center',
+        title: 'Copied!',
+        action: <FaClipboard className='text-2xl' />,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
       <div className='flex gap-6 text-white'>
@@ -55,12 +77,6 @@ function Navbar() {
         >
           Home
         </li>
-        {/* <li
-          onClick={() => navigate('/dashboard/payments')}
-          className='text-black px-4 py-1 rounded-sm cursor-pointer'
-        >
-          Payments
-        </li> */}
       </div>
 
       <div className='flex gap-2 flex-wrap'>
@@ -68,6 +84,7 @@ function Navbar() {
           <Button
             variant='outline'
             size='sm'
+            onClick={() => copyTextToClipboard(userData?.user_key)}
             className='flex flex-row justify-center items-center gap-2 text-gray-600'
           >
             Token: {userData?.user_key}

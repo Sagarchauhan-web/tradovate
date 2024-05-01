@@ -10,7 +10,7 @@ import { useEffect, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import { toast } from '../ui/use-toast';
 function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
-  const [demo, setDemo] = useState(isDemo);
+  const [demo, setDemo] = useState('demo');
 
   useEffect(() => {
     if (isDemo) {
@@ -19,6 +19,7 @@ function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
       setDemo('live');
     }
   }, [isDemo]);
+  console.log(demo);
 
   const onValueChange = (value) => {
     if (value === 'live') {
@@ -42,7 +43,7 @@ function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
     }
   };
   return (
-    <Select value={demo} onValueChange={onValueChange}>
+    <Select value={demo} defaultValue='demo' onValueChange={onValueChange}>
       <SelectTrigger className='h-full w-[150px]'>
         <SelectValue placeholder='Environment' />
       </SelectTrigger>
@@ -51,7 +52,7 @@ function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
           <div className='flex justify-center items-center'>
             <div
               className={`mr-2 w-2 h-2
-            rounded-full shadow-md bg-green-500 shadow-green-500`}
+                  rounded-full shadow-md bg-green-500 shadow-green-500`}
             />
             Live
           </div>
@@ -60,7 +61,7 @@ function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
           <div className='flex justify-center items-center'>
             <div
               className={`mr-2 w-2 h-2
-            rounded-full shadow-md bg-red-500 shadow-red-500`}
+              rounded-full shadow-md bg-red-500 shadow-red-500`}
             />
             Demo
           </div>
