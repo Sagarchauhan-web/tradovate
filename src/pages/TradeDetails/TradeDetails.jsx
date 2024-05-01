@@ -12,8 +12,6 @@ function TradeDetails() {
   const isOrder = state.isOrder;
   const isSetting = state.isSetting;
 
-  console.log(state);
-
   return (
     <div className='h-screen flex flex-col'>
       <MaxWidthWrapper>
@@ -36,15 +34,14 @@ function TradeDetails() {
                 <p className='font-semibold text-gray-600'>SYMBOL</p>
                 <p className='mt-1 text-gray-800'>{data?.Symbol}</p>
               </div>
-              <div>
+              {/* <div>
                 <p className='font-semibold text-gray-600'>Quantity</p>
                 <p className='mt-1 text-gray-800'>{data?.Quantity}</p>
               </div>
               <div>
                 <p className='font-semibold text-gray-600'>Security Type</p>
                 <p className='mt-1 text-gray-800'>{data?.SecurityType}</p>
-              </div>
-
+              </div> */}
               <div>
                 <p className='font-semibold text-gray-600'>Take Profit</p>
                 <p className='mt-1 text-gray-800'>{data?.TakeProfit}</p>

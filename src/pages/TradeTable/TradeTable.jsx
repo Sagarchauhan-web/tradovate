@@ -49,6 +49,8 @@ export function DataTable({ changeToEditMode }) {
     getAllTrades();
   }, []);
 
+  console.log(data, 'data');
+
   const columns = [
     {
       accessorKey: 'Symbol',
@@ -82,17 +84,17 @@ export function DataTable({ changeToEditMode }) {
       ),
     },
     {
-      accessorKey: 'QuantityType',
-      header: 'Quantity Type',
+      accessorKey: 'StopLoss',
+      header: 'Stop Loss',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('QuantityType')}</div>
+        <div className='capitalize'>{row.getValue('StopLoss')}</div>
       ),
     },
     {
-      accessorKey: 'SecurityType',
-      header: 'Security Type',
+      accessorKey: 'TakeProfit',
+      header: 'Take Profit',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('SecurityType')}</div>
+        <div className='capitalize'>{row.getValue('TakeProfit')}</div>
       ),
     },
     {

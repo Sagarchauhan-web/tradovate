@@ -53,7 +53,6 @@ export function OrderTable() {
     };
     getAllOrders();
   }, [date]);
-  console.log(data);
 
   const columns = [
     {

@@ -33,9 +33,9 @@ function CreateTrade({
 }) {
   const symbolRef = useRef();
   const [orderType, setOrderType] = useState('');
-  const [securityType, setSecurityType] = useState('');
+  // const [securityType, setSecurityType] = useState('');
   const quantityRef = useRef();
-  const [quantityType, setQuantityType] = useState('');
+  // const [quantityType, setQuantityType] = useState('');
   const tradovateSymbolRef = useRef();
   const stopLossRef = useRef();
   const [stopLossInPercentage, setStopLossInPercentage] = useState(false);
@@ -57,9 +57,9 @@ function CreateTrade({
       Symbol: symbol,
       OrderType: orderType,
       Quantity: Number(quantity),
-      QuantityType: quantityType,
+      QuantityType: QUANTITYTYPE['QUANTITY'],
       LocalSymbol: tradovateSymbol,
-      SecurityType: securityType,
+      SecurityType: SECURITYTYPE['FUT'],
       StopLoss: Number(stopLoss),
       TakeProfit: Number(takeProfit),
       EntryOffset: Number(entryOffset),
@@ -68,7 +68,8 @@ function CreateTrade({
       EntryOffsetInPercentage: entryOffsetInPercentage,
     };
 
-    console.log(body, 'body');
+    // console.log(body, 'body');
+    // return;
 
     const response = await createTrade(body);
     if (response.error) {
@@ -105,8 +106,8 @@ function CreateTrade({
       setTakeProfitInPercentage(false);
       setEntryOffsetInPercentage(false);
       setOrderType('');
-      setQuantityType('');
-      setSecurityType('');
+      // setQuantityType('');
+      // setSecurityType('');
 
       setInitialDataForSettings([]);
 
@@ -124,8 +125,8 @@ function CreateTrade({
       entryOffsetRef.current.value = initialDataForSettings.EntryOffset;
 
       setOrderType(initialDataForSettings.OrderType);
-      setQuantityType(initialDataForSettings.QuantityType);
-      setSecurityType(initialDataForSettings.SecurityType);
+      // setQuantityType(initialDataForSettings.QuantityType);
+      // setSecurityType(initialDataForSettings.SecurityType);
       setStopLossInPercentage(initialDataForSettings.StopLossPercentage);
       setTakeProfitInPercentage(initialDataForSettings.TakeProfitPercentage);
       setEntryOffsetInPercentage(
@@ -144,8 +145,8 @@ function CreateTrade({
       setTakeProfitInPercentage(false);
       setEntryOffsetInPercentage(false);
       setOrderType('');
-      setQuantityType('');
-      setSecurityType('');
+      // setQuantityType('');
+      // setSecurityType('');
     }
   }, [initialDataForSettings]);
 
@@ -185,7 +186,7 @@ function CreateTrade({
             <Label htmlFor='name'>Quantity</Label>
             <Input ref={quantityRef} id='name' placeholder={`Enter Quantity`} />
           </div>
-          <div className='flex flex-col space-y-1.5'>
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Quantity Type</Label>
             <SelectComponent
               value={quantityType}
@@ -197,8 +198,8 @@ function CreateTrade({
                 title: key,
               }))}
             />
-          </div>
-          <div className='flex flex-col space-y-1.5'>
+          </div> */}
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Security Type</Label>
             <SelectComponent
               value={securityType}
@@ -210,7 +211,7 @@ function CreateTrade({
                 title: key,
               }))}
             />
-          </div>
+          </div> */}
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Tradovate Symbol</Label>
             <Input ref={tradovateSymbolRef} id='name' placeholder={`NQH2`} />
