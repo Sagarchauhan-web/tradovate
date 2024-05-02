@@ -119,11 +119,35 @@ function Navbar() {
     }
   };
 
+  const copyTextToClipboardWebhook = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        'https://pickmytrade.trade/api/add-trade-data',
+      );
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
+        ),
+
+        duration: 1000,
+        position: 'top-center',
+        title: 'Copied!',
+        action: <FaClipboard className='text-2xl' />,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
   return (
     <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
       <div className='flex gap-6 text-white'>
-        <li onClick={() => navigate('/dashboard/home')}>
+        <li
+          className='flex justify-center items-center'
+          onClick={() => navigate('/dashboard/home')}
+        >
           <img src='/logo.png' alt='logo' className='w-10 h-8' />
+          <p className='text-gray-800 font-bold'>Pick My Trade</p>
         </li>
         <li
           onClick={() => navigate('/dashboard/home')}
@@ -148,6 +172,18 @@ function Navbar() {
       </div>
 
       <div className='flex gap-2 flex-wrap'>
+        <li>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboardWebhook('buy', userData?.user_key)
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Webhook
+          </Button>
+        </li>
         <li>
           <Button
             variant='outline'

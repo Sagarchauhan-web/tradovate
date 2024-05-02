@@ -18,7 +18,7 @@ const SECURITYTYPE = {
 const ORDERTYPE = {
   MKT: 'MKT',
   LMT: 'LMT',
-  STP: 'STP',
+  // STP: 'STP',
 };
 
 const QUANTITYTYPE = {
@@ -104,9 +104,9 @@ function CreateTrade({
       symbolRef.current.value = '';
       quantityRef.current.value = '';
       tradovateSymbolRef.current.value = '';
-      stopLossRef.current.value = '';
-      takeProfitRef.current.value = '';
-      entryOffsetRef.current.value = '';
+      stopLossRef.current.value = 0;
+      takeProfitRef.current.value = 0;
+      entryOffsetRef.current.value = 0;
       LotRef.current.value = '';
       MinTickRef.current.value = '';
 
@@ -145,9 +145,9 @@ function CreateTrade({
       symbolRef.current.value = '';
       quantityRef.current.value = '';
       tradovateSymbolRef.current.value = '';
-      stopLossRef.current.value = '';
-      takeProfitRef.current.value = '';
-      entryOffsetRef.current.value = '';
+      stopLossRef.current.value = 0;
+      takeProfitRef.current.value = 0;
+      entryOffsetRef.current.value = 0;
       LotRef.current.value = '';
       MinTickRef.current.value = '';
 
@@ -246,8 +246,8 @@ function CreateTrade({
             <Input ref={MinTickRef} id='name' placeholder={`Min Tick`} />
           </div>
           <div className='flex flex-col space-y-1.5'>
-            <Label htmlFor='name'>Lot</Label>
-            <Input ref={LotRef} id='name' placeholder={`Lot`} />
+            <Label htmlFor='name'>Lot Size</Label>
+            <Input ref={LotRef} id='name' placeholder={`Lot Size`} />
           </div>
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Tradovate Symbol</Label>

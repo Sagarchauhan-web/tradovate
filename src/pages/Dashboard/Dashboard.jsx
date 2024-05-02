@@ -1,5 +1,3 @@
-import Footer from '@/components/Footer/Footer';
-import Navbar from '@/components/Navbar/Navbar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useState } from 'react';
 import { AlertsTable } from '../AlertsTable/AlertsTable';
