@@ -19,9 +19,17 @@ export const getTrades = async () => {
 };
 
 export const deleteTrade = async (requestData) => {
-  console.log('deleteTrade', requestData);
   try {
     const response = await apiClient.post('/DeleteSettingData', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+export const getMinTickAndLot = async (requestData) => {
+  // console.log('deleteTrade', requestData);
+  try {
+    const response = await apiClient.post('/GetMinTickAndLot', requestData);
     return response.data;
   } catch (error) {
     return error;

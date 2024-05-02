@@ -8,9 +8,12 @@ import { Button } from '../ui/button';
 import { toast } from '../ui/use-toast';
 import { cn } from '@/lib/utils';
 import { FaClipboard } from 'react-icons/fa';
+import { useLocation } from 'react-router-dom';
 function Navbar() {
   const [userData, setUserData] = useState();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const getUser = async () => {
     const response = await me();
 
@@ -51,8 +54,56 @@ function Navbar() {
 
   const copyTextToClipboard = async (textToCopy) => {
     if (!textToCopy) return;
+    const body = {
+      symbol: 'ESM2024',
+      date: '2024-01-23T00:04:17Z',
+      data: 'BUY',
+      quantity: 3,
+      price: 5000,
+      tp: 5170,
+      sl: 4065,
+      trail: 0,
+      update_tp: false,
+      update_sl: false,
+      risk_percentage: 0,
+      token: textToCopy,
+    };
+
     try {
-      await navigator.clipboard.writeText(textToCopy);
+      await navigator.clipboard.writeText(JSON.stringify(body));
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
+        ),
+
+        duration: 1000,
+        position: 'top-center',
+        title: 'Copied!',
+        action: <FaClipboard className='text-2xl' />,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+  const copyTextToClipboardForBuyAndSell = async (textToCopy, token) => {
+    if (!textToCopy) return;
+    const body = {
+      symbol: '{{ticker}}',
+      date: '{{timenow}}',
+      data: textToCopy,
+      quantity: 3,
+      risk_percentage: 0,
+      price: '{{close}}',
+      tp: 5170,
+      sl: 4065,
+      trail: 0,
+      update_tp: false,
+      update_sl: false,
+      token: token,
+    };
+
+    try {
+      await navigator.clipboard.writeText(JSON.stringify(body));
       toast({
         className: cn(
           'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
@@ -71,15 +122,56 @@ function Navbar() {
   return (
     <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
       <div className='flex gap-6 text-white'>
+        <li onClick={() => navigate('/dashboard/home')}>
+          <img src='/logo.png' alt='logo' className='w-10 h-8' />
+        </li>
         <li
           onClick={() => navigate('/dashboard/home')}
-          className='bg-primary text-white px-4 py-1 rounded-sm cursor-pointere'
+          className={`${
+            location.pathname === '/dashboard/home'
+              ? 'bg-primary text-white'
+              : 'text-black'
+          } px-4 py-1 rounded-sm cursor-pointer`}
         >
           Home
+        </li>
+        <li
+          onClick={() => navigate('/dashboard/documentation')}
+          className={`${
+            location.pathname === '/dashboard/documentation'
+              ? 'bg-primary text-white'
+              : 'text-black'
+          } px-4 py-1 rounded-sm cursor-pointer`}
+        >
+          Documentation
         </li>
       </div>
 
       <div className='flex gap-2 flex-wrap'>
+        <li>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboardForBuyAndSell('buy', userData?.user_key)
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Buy Alert
+          </Button>
+        </li>
+        <li>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboardForBuyAndSell('sell', userData?.user_key)
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Sell Alert
+          </Button>
+        </li>
         <li>
           <Button
             variant='outline'

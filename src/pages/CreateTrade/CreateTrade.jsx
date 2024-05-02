@@ -5,7 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { createTrade } from '@/services/Trades/trade';
+import { createTrade, getMinTickAndLot } from '@/services/Trades/trade';
 import { useEffect, useRef, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
@@ -37,6 +37,8 @@ function CreateTrade({
   const quantityRef = useRef();
   // const [quantityType, setQuantityType] = useState('');
   const tradovateSymbolRef = useRef();
+  const MinTickRef = useRef();
+  const LotRef = useRef();
   const stopLossRef = useRef();
   const [stopLossInPercentage, setStopLossInPercentage] = useState(false);
   const takeProfitRef = useRef();
@@ -52,6 +54,8 @@ function CreateTrade({
     const stopLoss = stopLossRef.current.value;
     const takeProfit = takeProfitRef.current.value;
     const entryOffset = entryOffsetRef.current.value;
+    const minTick = MinTickRef.current.value;
+    const lot = LotRef.current.value;
 
     const body = {
       Symbol: symbol,
@@ -66,6 +70,8 @@ function CreateTrade({
       TakeProfitPercentage: takeProfitInPercentage,
       StopLossPercentage: stopLossInPercentage,
       EntryOffsetInPercentage: entryOffsetInPercentage,
+      LotSize: lot,
+      MinTick: minTick,
     };
 
     // console.log(body, 'body');
@@ -101,6 +107,8 @@ function CreateTrade({
       stopLossRef.current.value = '';
       takeProfitRef.current.value = '';
       entryOffsetRef.current.value = '';
+      LotRef.current.value = '';
+      MinTickRef.current.value = '';
 
       setStopLossInPercentage(false);
       setTakeProfitInPercentage(false);
@@ -140,6 +148,8 @@ function CreateTrade({
       stopLossRef.current.value = '';
       takeProfitRef.current.value = '';
       entryOffsetRef.current.value = '';
+      LotRef.current.value = '';
+      MinTickRef.current.value = '';
 
       setStopLossInPercentage(false);
       setTakeProfitInPercentage(false);
@@ -149,6 +159,21 @@ function CreateTrade({
       // setSecurityType('');
     }
   }, [initialDataForSettings]);
+
+  const symbolOnBlur = async () => {
+    const body = {
+      symbol: symbolRef.current.value,
+    };
+
+    if (!body.symbol) return null;
+
+    const response = await getMinTickAndLot(body);
+
+    if (!response.error) {
+      LotRef.current.value = response.data.lot;
+      MinTickRef.current.value = response.data.ticks;
+    }
+  };
 
   return (
     <div className='px-1'>
@@ -164,7 +189,12 @@ function CreateTrade({
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4 text-sm'>
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Symbol</Label>
-            <Input ref={symbolRef} id='name' placeholder={`Enter Symbol`} />
+            <Input
+              onBlur={symbolOnBlur}
+              ref={symbolRef}
+              id='name'
+              placeholder={`Enter Symbol`}
+            />
           </div>
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Order Type</Label>
@@ -174,7 +204,6 @@ function CreateTrade({
               placeholder={`Enter Order Type`}
               onChange={(value) => {
                 setOrderType(value);
-                console.log(value);
               }}
               data={Object.entries(ORDERTYPE).map(([key, value]) => ({
                 value,
@@ -212,6 +241,14 @@ function CreateTrade({
               }))}
             />
           </div> */}
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='name'>Min Tick</Label>
+            <Input ref={MinTickRef} id='name' placeholder={`Min Tick`} />
+          </div>
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='name'>Lot</Label>
+            <Input ref={LotRef} id='name' placeholder={`Lot`} />
+          </div>
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='name'>Tradovate Symbol</Label>
             <Input ref={tradovateSymbolRef} id='name' placeholder={`NQH2`} />
