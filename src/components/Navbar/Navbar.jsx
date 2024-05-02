@@ -147,7 +147,7 @@ function Navbar() {
           onClick={() => navigate('/dashboard/home')}
         >
           <img src='/logo.png' alt='logo' className='w-10 h-8' />
-          <p className='text-gray-800 font-bold'>Pick My Trade</p>
+          <p className='text-gray-800 font-bold'>PickMyTrade</p>
         </li>
         <li
           onClick={() => navigate('/dashboard/home')}

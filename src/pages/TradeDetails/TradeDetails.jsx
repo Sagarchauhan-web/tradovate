@@ -12,6 +12,8 @@ function TradeDetails() {
   const isOrder = state.isOrder;
   const isSetting = state.isSetting;
 
+  console.log(data, 'data');
+
   return (
     <div className='h-screen flex flex-col'>
       <MaxWidthWrapper>
@@ -73,6 +75,14 @@ function TradeDetails() {
                 <p className='mt-1 text-gray-800'>
                   {data?.EntryOffsetInPercentage ? 'Yes' : 'No'}
                 </p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Min Tick</p>
+                <p className='mt-1 text-gray-800'>{data?.MinTick}</p>
+              </div>
+              <div>
+                <p className='font-semibold text-gray-600'>Lot Size</p>
+                <p className='mt-1 text-gray-800'>{data?.LotSize}</p>
               </div>
               <div>
                 <p className='font-semibold text-gray-600'>Entry Offset</p>

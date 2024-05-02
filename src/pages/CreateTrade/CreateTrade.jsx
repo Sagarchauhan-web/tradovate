@@ -131,6 +131,8 @@ function CreateTrade({
       stopLossRef.current.value = initialDataForSettings.StopLoss;
       takeProfitRef.current.value = initialDataForSettings.TakeProfit;
       entryOffsetRef.current.value = initialDataForSettings.EntryOffset;
+      MinTickRef.current.value = initialDataForSettings.MinTick;
+      LotRef.current.value = initialDataForSettings.LotSize;
 
       setOrderType(initialDataForSettings.OrderType);
       // setQuantityType(initialDataForSettings.QuantityType);
