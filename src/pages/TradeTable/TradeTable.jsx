@@ -89,6 +89,15 @@ export function DataTable({ changeToEditMode }) {
       ),
     },
     {
+      accessorKey: 'StopLossPercentage',
+      header: 'Stop Loss In %',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('StopLossPercentage') ? 'Yes' : 'No'}
+        </div>
+      ),
+    },
+    {
       accessorKey: 'TakeProfit',
       header: 'Take Profit',
       cell: ({ row }) => (
@@ -96,10 +105,28 @@ export function DataTable({ changeToEditMode }) {
       ),
     },
     {
+      accessorKey: 'TakeProfitPercentage',
+      header: 'Take Profit In %',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('TakeProfitPercentage') ? 'Yes' : 'No'}
+        </div>
+      ),
+    },
+    {
       accessorKey: 'EntryOffset',
       header: 'Entry Offset',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('EntryOffset')}</div>
+      ),
+    },
+    {
+      accessorKey: 'EntryOffsetInPercentage',
+      header: 'Entry Offset In %',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('EntryOffsetInPercentage') ? 'Yes' : 'No'}
+        </div>
       ),
     },
     {
@@ -117,10 +144,17 @@ export function DataTable({ changeToEditMode }) {
       ),
     },
     {
-      accessorKey: 'LocalSymbol',
-      header: 'Local Symbol',
+      accessorKey: 'MinTick',
+      header: 'Min Tick',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('EntryOffset')}</div>
+        <div className='capitalize'>{row.getValue('MinTick')}</div>
+      ),
+    },
+    {
+      accessorKey: 'MinTick',
+      header: 'Min Tick',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('MinTick')}</div>
       ),
     },
     {
