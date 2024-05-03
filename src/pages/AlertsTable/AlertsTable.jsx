@@ -6,7 +6,6 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -47,27 +46,10 @@ export function AlertsTable() {
 
   const columns = [
     {
-      accessorKey: 'alert_data',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Alert Data
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        );
-      },
+      accessorKey: 'symbol',
+      header: 'Symbol',
       cell: ({ row }) => (
-        <div className='uppercase'>{row.getValue('alert_data')}</div>
-      ),
-    },
-    {
-      accessorKey: 'buy_sell',
-      header: 'Buy/Sell',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('buy_sell')}</div>
+        <div className='capitalize'>{row.getValue('symbol')}</div>
       ),
     },
     {
@@ -75,6 +57,13 @@ export function AlertsTable() {
       header: 'Local Symbol',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('local_symbol')}</div>
+      ),
+    },
+    {
+      accessorKey: 'buy_sell',
+      header: 'Buy/Sell',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('buy_sell')}</div>
       ),
     },
     {
@@ -92,10 +81,10 @@ export function AlertsTable() {
       ),
     },
     {
-      accessorKey: 'symbol',
-      header: 'Symbol',
+      accessorKey: 'alert_data',
+      header: 'Alert Data',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('symbol')}</div>
+        <div className='uppercase'>{row.getValue('alert_data')}</div>
       ),
     },
   ];
@@ -119,7 +108,6 @@ export function AlertsTable() {
 
   return (
     <div className='w-full'>
-      Alerts
       <div className='flex items-center justify-between pt-4'>
         <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
           Alerts

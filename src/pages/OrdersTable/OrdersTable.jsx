@@ -6,17 +6,11 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { ArrowUpDown, MoreHorizontal } from 'lucide-react';
 import { format, subDays } from 'date-fns';
 
+import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import {
   Table,
   TableBody,
@@ -27,9 +21,6 @@ import {
 } from '@/components/ui/table';
 import { getOrders } from '@/services/Orders/orders';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
-import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
 export function OrderTable() {
   const [date, setDate] = useState({
@@ -40,7 +31,6 @@ export function OrderTable() {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getAllOrders = async () => {
@@ -56,18 +46,20 @@ export function OrderTable() {
 
   const columns = [
     {
+      accessorKey: 'symbol',
+      header: 'Symbol',
+      cell: ({ row }) => (
+        <div className='uppercase'>{row.getValue('symbol')}</div>
+      ),
+    },
+    {
+      accessorKey: 'id',
+      header: 'Id',
+      cell: ({ row }) => <div className='capitalize'>{row.getValue('id')}</div>,
+    },
+    {
       accessorKey: 'account_id',
-      header: ({ column }) => {
-        return (
-          <Button
-            variant='ghost'
-            onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}
-          >
-            Account Id
-            <ArrowUpDown className='ml-2 h-4 w-4' />
-          </Button>
-        );
-      },
+      header: 'Account Id',
       cell: ({ row }) => (
         <div className='uppercase'>{row.getValue('account_id')}</div>
       ),
@@ -77,47 +69,6 @@ export function OrderTable() {
       header: 'Action',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('action')}</div>
-      ),
-    },
-    {
-      accessorKey: 'admin',
-      header: 'Admin',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('admin') ? 'Yes' : 'No'}</div>
-      ),
-    },
-    {
-      accessorKey: 'archived',
-      header: 'Archived',
-      cell: ({ row }) => (
-        <div className='capitalize'>
-          {row.getValue('archived') ? 'Yes' : 'No'}
-        </div>
-      ),
-    },
-    {
-      accessorKey: 'demo',
-      header: 'Demo',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('demo') ? 'Yes' : 'No'}</div>
-      ),
-    },
-    {
-      accessorKey: 'external',
-      header: 'External',
-      cell: ({ row }) => (
-        <div className='capitalize'>
-          {row.getValue('external') ? 'Yes' : 'No'}
-        </div>
-      ),
-    },
-    {
-      accessorKey: 'execution_provider_id',
-      header: 'Execution Provider Id',
-      cell: ({ row }) => (
-        <div className='capitalize'>
-          {row.getValue('execution_provider_id')}
-        </div>
       ),
     },
     {
@@ -142,6 +93,20 @@ export function OrderTable() {
       ),
     },
     {
+      accessorKey: 'order_type',
+      header: 'Order Type',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('order_type')}</div>
+      ),
+    },
+    {
+      accessorKey: 'order_date',
+      header: 'Order Date',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('order_date')}</div>
+      ),
+    },
+    {
       accessorKey: 'ordStatus',
       header: 'Order Status',
       cell: ({ row }) => (
@@ -149,38 +114,45 @@ export function OrderTable() {
       ),
     },
     {
-      id: 'actions',
-      enableHiding: false,
-      cell: (values) => {
-        return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Open menu</span>
-                <MoreHorizontal className='h-4 w-4' />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuLabel>Actions</DropdownMenuLabel>
-              <DropdownMenuItem
-                onClick={() => {
-                  navigate('/dashboard/tradedetails', {
-                    state: {
-                      data: data[values.row.index],
-                      isAlert: false,
-                      isOrder: true,
-                      isSetting: false,
-                    },
-                  });
-                }}
-              >
-                View Details
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
-        );
-      },
+      accessorKey: 'timestamp',
+      header: 'Timestamp',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('timestamp')}</div>
+      ),
     },
+    // {
+    //   id: 'actions',
+    //   enableHiding: false,
+    //   cell: (values) => {
+    //     return (
+    //       <DropdownMenu>
+    //         <DropdownMenuTrigger asChild>
+    //           <Button variant='ghost' className='h-8 w-8 p-0'>
+    //             <span className='sr-only'>Open menu</span>
+    //             <MoreHorizontal className='h-4 w-4' />
+    //           </Button>
+    //         </DropdownMenuTrigger>
+    //         <DropdownMenuContent align='end'>
+    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
+    //           <DropdownMenuItem
+    //             onClick={() => {
+    //               navigate('/dashboard/tradedetails', {
+    //                 state: {
+    //                   data: data[values.row.index],
+    //                   isAlert: false,
+    //                   isOrder: true,
+    //                   isSetting: false,
+    //                 },
+    //               });
+    //             }}
+    //           >
+    //             View Details
+    //           </DropdownMenuItem>
+    //         </DropdownMenuContent>
+    //       </DropdownMenu>
+    //     );
+    //   },
+    // },
   ];
 
   const table = useReactTable({
