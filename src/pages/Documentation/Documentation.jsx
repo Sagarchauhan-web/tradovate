@@ -21,7 +21,7 @@ function Documentation() {
   return (
     <div>
       <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>
-        Following is the alert format we would explain Alert format:{' '}
+      Alert format Explanation :{' '}
       </h1>
       <h2 className='leading-7 [&:not(:first-child)]:mt-6'>
         {JSON.stringify({
@@ -37,9 +37,9 @@ function Documentation() {
 
           price: '{{close}}',
 
-          tp: 5170,
+          tp: 0,
 
-          sl: 4065,
+          sl: 0,
 
           trail: 0,
 
@@ -47,7 +47,12 @@ function Documentation() {
 
           update_sl: false,
 
-          token: 'Ct8tPtDtZt1tEtYtCtVtVtUtL',
+          token: 'Ct8tPtDt32EtYtCtVtVtUtL',
+
+          duplicate_position_allow:false,
+          
+          reverse_order_close:true
+
         })}
       </h2>
       <h4 className='leading-7 [&:not(:first-child)]:mt-6'>
@@ -121,6 +126,14 @@ function Documentation() {
         {`12 "token": you need to pass your account token here which 
         you can get for there . Don’t share this with anyone. 
         Since this is unique to you for trade. `}
+      </h4>
+      <h4 className='leading-7 [&:not(:first-child)]:mt-6'>
+        {`13 duplicate_position_allow : it can have value as true or false if it’s false it would not allow same position to be created again. Let’s say if you have buy position and you again get alert for buy then it would ignore new alerts and if you set it true then it would allow to create that `}
+      </h4>
+      <h4 className='leading-7 [&:not(:first-child)]:mt-6'>
+        {`14 reverse_order_close : it can have value as true or false. 
+you have buy position and sell open order and you get alert for sell it would close open orders and close position as well. In case it’s value is set as True and if it’s false then it would not change existing open orders and positions.
+ `}
       </h4>
       <Card className='m-10 flex justify-center items-center'>
         <img src={image3} alt='Description' />
