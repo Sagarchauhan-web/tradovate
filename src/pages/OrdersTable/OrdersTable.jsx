@@ -46,6 +46,11 @@ export function OrderTable() {
 
   const columns = [
     {
+      accessorKey: 'id',
+      header: 'Order Id',
+      cell: ({ row }) => <div className='capitalize'>{row.getValue('id')}</div>,
+    },
+    {
       accessorKey: 'timestamp',
       header: 'Date Time',
       cell: ({ row }) => (
@@ -88,13 +93,30 @@ export function OrderTable() {
       ),
     },
     {
-      accessorKey: 'parent_id',
-      header: 'Parent Id',
+      accessorKey: 'oco_id',
+      header: 'OCO Id',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('parent_id')}</div>
+        <div className='capitalize'>{row.getValue('oco_id')}</div>
       ),
     },
-
+    {
+      accessorKey: 'avgprice',
+      header: 'Average Price',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('avgprice') ? row.getValue('avgprice') : '-'}
+        </div>
+      ),
+    },
+    {
+      accessorKey: 'price',
+      header: 'Price',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('avgprice') ? row.getValue('price') : '-'}
+        </div>
+      ),
+    },
     // {
     //   id: 'actions',
     //   enableHiding: false,

@@ -133,7 +133,7 @@ export function DataTable({ changeToEditMode }) {
       accessorKey: 'LocalSymbol',
       header: 'Local Symbol',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('EntryOffset')}</div>
+        <div className='capitalize'>{row.getValue('LocalSymbol')}</div>
       ),
     },
     {
@@ -141,13 +141,6 @@ export function DataTable({ changeToEditMode }) {
       header: 'Lot Size',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('LotSize')}</div>
-      ),
-    },
-    {
-      accessorKey: 'MinTick',
-      header: 'Min Tick',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('MinTick')}</div>
       ),
     },
     {

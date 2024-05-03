@@ -18,8 +18,6 @@ function TokenRefresh() {
   const [error, setError] = useState(false);
   const [code] = useState(searchParams.get('code'));
 
-  console.log(searchParams.get('code'), 'State');
-
   useEffect(() => {
     if (!code) return;
     const callRefreshUrl = async () => {
@@ -29,7 +27,7 @@ function TokenRefresh() {
         setError(response.error);
 
         if (response.error || response instanceof AxiosError) {
-          toast({
+          return toast({
             className: cn(
               'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
             ),
@@ -40,6 +38,10 @@ function TokenRefresh() {
             action: <MdErrorOutline className='text-4xl text-red-500' />,
           });
         }
+
+        setTimeout(function () {
+          navigate('/dashboard/home');
+        }, 5000);
       } catch (error) {
         console.log(error);
       }

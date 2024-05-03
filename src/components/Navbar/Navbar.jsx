@@ -54,23 +54,9 @@ function Navbar() {
 
   const copyTextToClipboard = async (textToCopy) => {
     if (!textToCopy) return;
-    const body = {
-      symbol: 'ESM2024',
-      date: '2024-01-23T00:04:17Z',
-      data: 'BUY',
-      quantity: 3,
-      price: 5000,
-      tp: 5170,
-      sl: 4065,
-      trail: 0,
-      update_tp: false,
-      update_sl: false,
-      risk_percentage: 0,
-      token: textToCopy,
-    };
 
     try {
-      await navigator.clipboard.writeText(JSON.stringify(body));
+      await navigator.clipboard.writeText(textToCopy);
       toast({
         className: cn(
           'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
@@ -86,7 +72,6 @@ function Navbar() {
     }
   };
   const copyTextToClipboardForBuyAndSell = async (textToCopy, token) => {
-    if (!textToCopy) return;
     const body = {
       symbol: '{{ticker}}',
       date: '{{timenow}}',
@@ -94,11 +79,13 @@ function Navbar() {
       quantity: 3,
       risk_percentage: 0,
       price: '{{close}}',
-      tp: 5170,
-      sl: 4065,
+      tp: 0,
+      sl: 0,
       trail: 0,
       update_tp: false,
       update_sl: false,
+      duplicate_position_allow: false,
+      reverse_order_close: true,
       token: token,
     };
 
@@ -176,9 +163,7 @@ function Navbar() {
           <Button
             variant='outline'
             size='sm'
-            onClick={() =>
-              copyTextToClipboardWebhook('buy', userData?.user_key)
-            }
+            onClick={() => copyTextToClipboardWebhook()}
             className='flex flex-row justify-center items-center gap-2 text-gray-600'
           >
             Webhook
@@ -186,6 +171,7 @@ function Navbar() {
         </li>
         <li>
           <Button
+            disabled={!userData?.user_key}
             variant='outline'
             size='sm'
             onClick={() =>
@@ -198,6 +184,7 @@ function Navbar() {
         </li>
         <li>
           <Button
+            disabled={!userData?.user_key}
             variant='outline'
             size='sm'
             onClick={() =>
@@ -210,6 +197,7 @@ function Navbar() {
         </li>
         <li>
           <Button
+            disabled={!userData?.user_key}
             variant='outline'
             size='sm'
             onClick={() => copyTextToClipboard(userData?.user_key)}
