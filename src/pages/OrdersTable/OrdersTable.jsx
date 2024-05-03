@@ -46,22 +46,17 @@ export function OrderTable() {
 
   const columns = [
     {
+      accessorKey: 'timestamp',
+      header: 'Date Time',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('timestamp')}</div>
+      ),
+    },
+    {
       accessorKey: 'symbol',
       header: 'Symbol',
       cell: ({ row }) => (
         <div className='uppercase'>{row.getValue('symbol')}</div>
-      ),
-    },
-    {
-      accessorKey: 'id',
-      header: 'Id',
-      cell: ({ row }) => <div className='capitalize'>{row.getValue('id')}</div>,
-    },
-    {
-      accessorKey: 'account_id',
-      header: 'Account Id',
-      cell: ({ row }) => (
-        <div className='uppercase'>{row.getValue('account_id')}</div>
       ),
     },
     {
@@ -72,27 +67,6 @@ export function OrderTable() {
       ),
     },
     {
-      accessorKey: 'oco_id',
-      header: 'OCO Id',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('oco_id')}</div>
-      ),
-    },
-    {
-      accessorKey: 'order_date',
-      header: 'Order Date',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('order_date')}</div>
-      ),
-    },
-    {
-      accessorKey: 'contract_id',
-      header: 'Contract Id',
-      cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('contract_id')}</div>
-      ),
-    },
-    {
       accessorKey: 'order_type',
       header: 'Order Type',
       cell: ({ row }) => (
@@ -100,10 +74,10 @@ export function OrderTable() {
       ),
     },
     {
-      accessorKey: 'order_date',
-      header: 'Order Date',
+      accessorKey: 'quantity',
+      header: 'Quantity',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('order_date')}</div>
+        <div className='capitalize'>{row.getValue('quantity')}</div>
       ),
     },
     {
@@ -114,12 +88,13 @@ export function OrderTable() {
       ),
     },
     {
-      accessorKey: 'timestamp',
-      header: 'Timestamp',
+      accessorKey: 'parent_id',
+      header: 'Parent Id',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('timestamp')}</div>
+        <div className='capitalize'>{row.getValue('parent_id')}</div>
       ),
     },
+
     // {
     //   id: 'actions',
     //   enableHiding: false,

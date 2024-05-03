@@ -5,8 +5,19 @@ import image3 from '../../assets/3.png';
 import image4 from '../../assets/4.png';
 import image5 from '../../assets/5.png';
 import image6 from '../../assets/6.png';
+import { useNavigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
 function Documentation() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+    }
+  }, []);
+
   return (
     <div>
       <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>

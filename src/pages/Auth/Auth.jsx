@@ -48,7 +48,7 @@ export function Auth() {
           className: cn(
             'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
           ),
-          duration: 3000,
+          duration: 1000,
           title: 'Warning',
           description: 'Passwords do not match',
           action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
@@ -61,7 +61,7 @@ export function Auth() {
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
         ),
-        duration: 3000,
+        duration: 1000,
         title: 'Warning',
         description: 'Enter username',
         action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
@@ -73,7 +73,7 @@ export function Auth() {
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
         ),
-        duration: 3000,
+        duration: 1000,
         title: 'Warning',
         description: 'Enter password',
         action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
@@ -94,14 +94,12 @@ export function Auth() {
       });
     }
 
-    console.log(response);
-
     if (response.error || response instanceof AxiosError) {
       toast({
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
         ),
-        duration: 3000,
+        duration: 1000,
         position: 'top-center',
         title: 'Something went wrong',
         description: response.data,
@@ -122,7 +120,7 @@ export function Auth() {
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
         ),
-        duration: 3000,
+        duration: 1000,
         position: 'top-center',
         title: 'Success',
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,

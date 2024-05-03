@@ -1,13 +1,22 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AlertsTable } from '../AlertsTable/AlertsTable';
 import CreateTrade from '../CreateTrade/CreateTrade';
 import { OrderTable } from '../OrdersTable/OrdersTable';
 import { DataTable } from '../TradeTable/TradeTable';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
   const [tabsValue, setTabsValue] = useState('create');
   const [initialDataForSettings, setInitialDataForSettings] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      navigate('/');
+    }
+  }, []);
 
   return (
     <Tabs value={tabsValue} onValueChange={(value) => setTabsValue(value)}>

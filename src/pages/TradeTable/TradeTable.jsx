@@ -49,8 +49,6 @@ export function DataTable({ changeToEditMode }) {
     getAllTrades();
   }, []);
 
-  console.log(data, 'data');
-
   const columns = [
     {
       accessorKey: 'Symbol',
@@ -95,6 +93,34 @@ export function DataTable({ changeToEditMode }) {
       header: 'Take Profit',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('TakeProfit')}</div>
+      ),
+    },
+    {
+      accessorKey: 'EntryOffset',
+      header: 'Entry Offset',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('EntryOffset')}</div>
+      ),
+    },
+    {
+      accessorKey: 'LocalSymbol',
+      header: 'Local Symbol',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('EntryOffset')}</div>
+      ),
+    },
+    {
+      accessorKey: 'LotSize',
+      header: 'Lot Size',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('LotSize')}</div>
+      ),
+    },
+    {
+      accessorKey: 'LocalSymbol',
+      header: 'Local Symbol',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('EntryOffset')}</div>
       ),
     },
     {
@@ -167,7 +193,7 @@ export function DataTable({ changeToEditMode }) {
   return (
     <div className='w-full'>
       <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
-        Trades
+        Settings
       </h2>
       <div className='flex items-center py-4 justify-end'>
         <DropdownMenu>

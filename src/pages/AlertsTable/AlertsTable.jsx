@@ -46,6 +46,13 @@ export function AlertsTable() {
 
   const columns = [
     {
+      accessorKey: 'trade_time',
+      header: 'Alert Time',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('trade_time')}</div>
+      ),
+    },
+    {
       accessorKey: 'symbol',
       header: 'Symbol',
       cell: ({ row }) => (
@@ -74,10 +81,31 @@ export function AlertsTable() {
       ),
     },
     {
-      accessorKey: 'trade_time',
-      header: 'Trade Time',
+      accessorKey: 'alert_status',
+      header: 'Alert Status',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('trade_time')}</div>
+        <div className='capitalize'>{row.getValue('alert_status')}</div>
+      ),
+    },
+    {
+      accessorKey: 'entry_id',
+      header: 'Entry Id',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('entry_id')}</div>
+      ),
+    },
+    {
+      accessorKey: 'lmt_id',
+      header: 'LMT Id',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('lmt_id')}</div>
+      ),
+    },
+    {
+      accessorKey: 'stp_id',
+      header: 'STP Id',
+      cell: ({ row }) => (
+        <div className='capitalize'>{row.getValue('stp_id')}</div>
       ),
     },
     {
