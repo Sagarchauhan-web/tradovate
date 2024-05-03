@@ -31,7 +31,7 @@ function TermConditions() {
               BASIS TO RESOLVE DISPUTES, RATHER THAN JURY TRIALS OR CLASS
               ACTIONS, AND ALSO LIMITS THE REMEDIES AVAILABLE TO USERS IN THE
               EVENT OF A DISPUTE. USERS CAN OPT-OUT OF THE AGREEMENT TO
-              ARBITRATE BY CONTACTING US AT legal@traderspost.io WITHIN 30 DAYS
+              ARBITRATE BY CONTACTING US AT legal@PickMyTrade.io WITHIN 30 DAYS
               OF FIRST ACCEPTING THESE TERMS AND STATING THAT YOU DECLINE THE
               ARBITRATION AGREEMENT. PLEASE INCLUDE YOUR FULL NAME IN YOUR
               EMAIL.
@@ -39,15 +39,15 @@ function TermConditions() {
           </p>
           <br />
           <p>
-            This Agreement for use of the Platform is between TradersPost, Inc.
-            (“<strong>TradersPost</strong>”), and the party (“
+            This Agreement for use of the Platform is between PickMyTrade, Inc.
+            (“<strong>PickMyTrade</strong>”), and the party (“
             <strong>User</strong>”) indicated during the account registration
             process (such process and the information provided during such
             process, as amended from time to time through User’s login to its
             account in the Platform, the “<strong>Registration</strong>”). This
             Agreement is effective upon User’s acceptance of it in the course of
             the Registration (the “<strong>Effective Date</strong>”). The
-            Registration information and the terms of TradersPost’s Privacy
+            Registration information and the terms of PickMyTrade’s Privacy
             Policy are incorporated herein and made a part of this Agreement.
           </p>
           <br />
@@ -72,10 +72,10 @@ function TermConditions() {
                 <li>
                   “<strong>Documentation</strong>” means all documentation
                   (whether printed or in an electronic format) supplied or made
-                  available to User by TradersPost for use with or in support of
+                  available to User by PickMyTrade for use with or in support of
                   the Platform or its implementation, including without
                   limitation any and all revisions, modifications, and updates
-                  thereof as may be supplied or made available by TradersPost to
+                  thereof as may be supplied or made available by PickMyTrade to
                   User and all copies thereof made by or on behalf of User.
                 </li>
                 <br />
@@ -89,17 +89,17 @@ function TermConditions() {
                 <br />
                 <li>
                   “<strong>Platform</strong>” means the online application,
-                  site, and services offered by TradersPost, together with any
+                  site, and services offered by PickMyTrade, together with any
                   associated software applications, database structures and
                   queries, interfaces, tools, and the like, together with any
                   and all revisions, modifications, and updates thereof, as made
-                  available by TradersPost to User pursuant to this Agreement.
+                  available by PickMyTrade to User pursuant to this Agreement.
                 </li>
                 <br />
                 <li>
                   “<strong>User Data</strong>” means all data provided to
-                  TradersPost by or on behalf of User as such data is maintained
-                  by TradersPost from time to time.
+                  PickMyTrade by or on behalf of User as such data is maintained
+                  by PickMyTrade from time to time.
                 </li>
                 <br />
               </ol>
@@ -119,7 +119,7 @@ function TermConditions() {
                   substantial risk of loss and is not suitable for every trader
                   or investor. The valuation of futures, stocks and options can
                   fluctuate, and, as a result, User may lose more than their
-                  original investment. TradersPost is not a registered
+                  original investment. PickMyTrade is not a registered
                   investment adviser or broker-dealer and does not provide
                   securities advice. Users are responsible for making their own
                   trading decisions.
@@ -129,10 +129,10 @@ function TermConditions() {
                   <u>No Guarantee of Results of Services</u>. Neither the
                   Platform nor any content included in the Platform is intended
                   to be the sole or primary means of making decisions for
-                  trading or investing purposes. TradersPost is not responsible
+                  trading or investing purposes. PickMyTrade is not responsible
                   or liable for the accuracy, usefulness or availability of any
                   information transmitted or made available via the Platform,
-                  and TradersPost shall not be responsible or liable for any
+                  and PickMyTrade shall not be responsible or liable for any
                   trading or investment decisions made based on such
                   information.
                 </li>
@@ -150,20 +150,20 @@ function TermConditions() {
                 <li>
                   <u>Governing Terms</u>. These Terms of Service, along with any
                   additional terms or documents that are referenced herein or
-                  that are presented elsewhere on our website, TradersPost.io,
+                  that are presented elsewhere on our website, PickMyTrade.io,
                   in relation to a specific service or feature (collectively,
                   the “<strong>Agreement</strong>”) govern User’s use of our
-                  Platform, and the services provided by TradersPost.
+                  Platform, and the services provided by PickMyTrade.
                 </li>
                 <br />
                 <li>
-                  <u>Description of Service</u>. TradersPost allows Users to
+                  <u>Description of Service</u>. PickMyTrade allows Users to
                   create and/or subscribe to automated trading strategies that
-                  emit signals to buy and sell. In addition to this, TradersPost
+                  emit signals to buy and sell. In addition to this, PickMyTrade
                   allows strategy managers to build and deploy automated trading
                   strategies for other users to subscribe to. User understands
                   and agrees that the Platform is provided “AS-IS” and that
-                  TradersPost assumes no responsibility for the timeliness,
+                  PickMyTrade assumes no responsibility for the timeliness,
                   efficiency, effectiveness, deletion, mis-delivery or failure
                   of any communication or services provided.
                 </li>
@@ -196,7 +196,7 @@ function TermConditions() {
               <ol>
                 <li>
                   <u>License</u>. Subject to the terms and conditions of this
-                  Agreement, TradersPost grants to User a limited, nonexclusive,
+                  Agreement, PickMyTrade grants to User a limited, nonexclusive,
                   non-transferable, non-sublicensable (except as otherwise
                   provided herein) license during the Term to access and use the
                   Platform and the Documentation for use solely by User for
@@ -204,7 +204,7 @@ function TermConditions() {
                   distribution, assignment, sublicense, sale, preparation of
                   derivative works or other use. All rights with respect to the
                   Platform not explicitly granted herein are reserved to
-                  TradersPost.
+                  PickMyTrade.
                 </li>
                 <br />
                 <li>
@@ -226,24 +226,24 @@ function TermConditions() {
                   to or otherwise use any part of the Platform or Documentation
                   as part of any effort to develop a product or service having
                   any functional attributes, visual expressions, or other
-                  features or purposes similar to those provided by TradersPost;
+                  features or purposes similar to those provided by PickMyTrade;
                   (7) remove, erase, or tamper with any copyright, logo, or
                   other proprietary or trademark notice printed or stamped on,
                   affixed to, or encoded or recorded in the Platform or
                   Documentation, or use a proxy, reverse proxy, or any other
                   such mechanism that is intended to, or has the effect of,
                   obscuring any of the foregoing or confusing an individual as
-                  to TradersPost’s rights in the foregoing, (8) fail to preserve
+                  to PickMyTrade’s rights in the foregoing, (8) fail to preserve
                   all copyright and other proprietary notices in any copy of any
                   portion of the Platform or Documentation; (9) sell, market,
                   license, sublicense, distribute, rent, loan, or otherwise
                   grant to any third party any right to possess or utilize any
                   portion of the Platform, Documentation or other associated
-                  data without the express prior written consent of TradersPost
-                  (which may be withheld by TradersPost for any reason or
+                  data without the express prior written consent of PickMyTrade
+                  (which may be withheld by PickMyTrade for any reason or
                   conditioned upon execution by such party of a confidentiality
                   and non-use agreement and/or other such other covenants and
-                  warranties as TradersPost in its sole discretion deems
+                  warranties as PickMyTrade in its sole discretion deems
                   desirable); (10) use the Platform or Documentation to gain or
                   attempt to gain access to any software applications, computer
                   systems, accounts, or data not expressly authorized under this
@@ -274,7 +274,7 @@ function TermConditions() {
                   Documentation or the servers or networks connected to the
                   Platform by trespass or burdening network capacity; (20)
                   harvest or collect information about other users or customers
-                  of TradersPost; (21) restrict or inhibit any other person from
+                  of PickMyTrade; (21) restrict or inhibit any other person from
                   using the Platform or Documentation, including without
                   limitation by means of “hacking” or defacing any portion
                   thereof; (22) “frame” or “mirror” any portion of the Platform
@@ -293,7 +293,7 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  <u>Content Utilization</u>. TradersPost reserves the right, in
+                  <u>Content Utilization</u>. PickMyTrade reserves the right, in
                   its sole discretion, to edit or delete any documents,
                   information or other content appearing on the Platform. The
                   contents of the Platform, whether partial or otherwise
@@ -311,7 +311,7 @@ function TermConditions() {
                 <li>
                   <u>No Solicitation of Strategies or Strategy Managers</u>.
                   Users are prohibited from soliciting strategies or strategy
-                  managers away from TradersPost. Users are also prohibited from
+                  managers away from PickMyTrade. Users are also prohibited from
                   soliciting other users to alternative or competing services.
                   This includes, but is not limited to, soliciting strategy
                   managers to make their strategies available outside of the
@@ -339,26 +339,26 @@ function TermConditions() {
               <br />
               <ol>
                 <li>
-                  <u>Pricing</u>. TradersPost may offer free access to the
-                  Platform, subject to the terms of TradersPost’s then-current{' '}
-                  <a href='/pricing'>Pricing Plans</a>. TradersPost may change
+                  <u>Pricing</u>. PickMyTrade may offer free access to the
+                  Platform, subject to the terms of PickMyTrade’s then-current{' '}
+                  <a href='/pricing'>Pricing Plans</a>. PickMyTrade may change
                   listed prices at any time, including changing from a free
                   service to a paid service and charging for access to or use of
                   the Platform that was previously offered free of charge;
-                  provided, however, that TradersPost will provide User with
+                  provided, however, that PickMyTrade will provide User with
                   prior notice and an opportunity to terminate this Agreement if
-                  TradersPost changes the price of a service to which User is
+                  PickMyTrade changes the price of a service to which User is
                   subscribed and will not charge User for a previously free
                   service unless User has been notified of the applicable fees
                   and agreed to pay such fees.
                 </li>
                 <br />
                 <li>
-                  <u>Taxes</u>. User shall pay when due (and TradersPost at its
+                  <u>Taxes</u>. User shall pay when due (and PickMyTrade at its
                   discretion may collect and pay on User’s behalf) all taxes,
                   levies, or assessments based on or in any way measured by this
                   Agreement, the Platform, and the services provided hereunder,
-                  excluding taxes based on TradersPost’s net income, but
+                  excluding taxes based on PickMyTrade’s net income, but
                   including sales and use taxes and personal property taxes, if
                   any.
                 </li>
@@ -367,21 +367,21 @@ function TermConditions() {
                   <u>Payment</u>. Amounts due hereunder shall be paid in the
                   manner established during Registration or as subsequently
                   established by access to User’s Registration through the
-                  Platform. If applicable, User authorizes TradersPost to charge
+                  Platform. If applicable, User authorizes PickMyTrade to charge
                   or debit automatically, using User’s selected payment method,
                   all such amounts. User is responsible for providing to
-                  TradersPost and maintaining through the Registration complete
-                  and accurate billing and contact information. All TradersPost
+                  PickMyTrade and maintaining through the Registration complete
+                  and accurate billing and contact information. All PickMyTrade
                   subscriptions are billed on a recurring monthly or annual
                   basis. User will be automatically billed each month or year
-                  until User manually cancel the subscription. TradersPost does
+                  until User manually cancel the subscription. PickMyTrade does
                   not offer refunds, returns, or other credits for any payments,
                   including for partial or unused months of a subscription. If
-                  purchasing a subscription from TradersPost for the first time,
+                  purchasing a subscription from PickMyTrade for the first time,
                   please make sure that the subscription is correct before
                   proceeding. If User changes to a different plan, remaining
                   days are converted into an equivalent value of days on the new
-                  subscription. TradersPost does not offer refunds for any
+                  subscription. PickMyTrade does not offer refunds for any
                   automatic recurring payments. If User has been billed for
                   automatic renewal of the subscription, User may cancel the
                   subscription to avoid billing for the next renewal date.
@@ -390,8 +390,8 @@ function TermConditions() {
                 <li>
                   <u>Cancellations</u>. User is responsible for canceling his or
                   her own subscription. However, cancellations may only be
-                  submitted to TradersPost via methods designed by TradersPost;
-                  contacting TradersPost support via email or phone asking for a
+                  submitted to PickMyTrade via methods designed by PickMyTrade;
+                  contacting PickMyTrade support via email or phone asking for a
                   subscription to be cancelled is not considered cancellation.
                   User may cancel the subscription at any time by logging into
                   User’s account and accessing the Billing section of the
@@ -399,7 +399,7 @@ function TermConditions() {
                   date, User’s service will remain active until the renewal date
                   passes. If no payment is received after the renewal date,
                   User’s paid subscription will be stopped and moved to a free
-                  plan, subject to the terms of TradersPost’s then-current
+                  plan, subject to the terms of PickMyTrade’s then-current
                   Pricing Plans.
                 </li>
               </ol>
@@ -415,12 +415,12 @@ function TermConditions() {
               <ol>
                 <li>
                   <u>Registration</u>. When registering with the Platform, User
-                  will be asked to create an account and provide TradersPost
+                  will be asked to create an account and provide PickMyTrade
                   with specific information including, but not limited to, a
                   valid email address. User agrees to update the Registration
                   upon any changes to such information. The Registration is
                   incorporated herein and made a part of this Agreement. User
-                  acknowledges that TradersPost has no responsibility for
+                  acknowledges that PickMyTrade has no responsibility for
                   verifying the identity of users and determining whether a
                   particular user is authorized to use the Platform.
                 </li>
@@ -434,13 +434,13 @@ function TermConditions() {
                   with any other party, either on a temporary or permanent
                   basis. User shall be responsible for all action conducted
                   during a login to their account, whether or not authorized by
-                  User. User agree to immediately notify TradersPost of any
+                  User. User agree to immediately notify PickMyTrade of any
                   unauthorized use of User’s account. If User is no longer
                   authorized to have access to the Platform, User may not use
                   the user ID and password. Except as otherwise required by
-                  applicable law, TradersPost shall have no obligation to
+                  applicable law, PickMyTrade shall have no obligation to
                   monitor for or report any use or attempted use of the user IDs
-                  of User. TradersPost reserves the right to refuse registration
+                  of User. PickMyTrade reserves the right to refuse registration
                   of or cancel passwords it deems inappropriate.
                 </li>
                 <br />
@@ -453,27 +453,27 @@ function TermConditions() {
                 <li>
                   <u>Cooperation</u>. User agrees to comply with any
                   instructions provided by and to respond to any requests made
-                  by TradersPost with respect to or otherwise associated with
+                  by PickMyTrade with respect to or otherwise associated with
                   access to the Platform.
                 </li>
                 <br />
                 <li>
                   <u>Deletion of Account Information</u>. The Registration does
-                  not give rise to any ownership rights in TradersPost or the
+                  not give rise to any ownership rights in PickMyTrade or the
                   Platform. If User cancels its account or it is cancelled by
-                  TradersPost, all of User’s account information will be deleted
+                  PickMyTrade, all of User’s account information will be deleted
                   from the Platform, the databases, and any public area of the
-                  Platform. The timeliness of the deletion is at TradersPost’s
+                  Platform. The timeliness of the deletion is at PickMyTrade’s
                   sole discretion. Information may continue to be available for
                   some period of time due to delays in propagating such deletion
-                  through the servers and other reasons beyond TradersPost’s
+                  through the servers and other reasons beyond PickMyTrade’s
                   immediate control. User hereby acknowledges that while an
                   account has been deleted and associated information has been
-                  deleted from TradersPost servers, trace information may remain
-                  with third parties not under TradersPost’s control.
-                  TradersPost assumes no responsibility for the use of such
+                  deleted from PickMyTrade servers, trace information may remain
+                  with third parties not under PickMyTrade’s control.
+                  PickMyTrade assumes no responsibility for the use of such
                   cached information and User hereby agrees to indemnify and
-                  hold TradersPost harmless for the use or misuse of said cached
+                  hold PickMyTrade harmless for the use or misuse of said cached
                   information.
                 </li>
               </ol>
@@ -516,31 +516,31 @@ function TermConditions() {
                 <li>
                   User agrees to evaluate and bear all risk associated with the
                   use of User Content. User may not rely on User Content and
-                  under no circumstances will User hold TradersPost liable for
+                  under no circumstances will User hold PickMyTrade liable for
                   such User Content. User acknowledges that the Platform may act
                   as a passive conduit for the online distribution and
                   publication of User Content. User further acknowledges that
-                  TradersPost has no affirmative obligation to screen, review,
+                  PickMyTrade has no affirmative obligation to screen, review,
                   or pre-approve User Content in advance of said content,
                   communications, or information prior to posting by users.
                 </li>
                 <br />
                 <li>
-                  Notwithstanding the provisions of Paragraph 7.3, TradersPost
-                  may review and remove any User Content that, in TradersPost’s
+                  Notwithstanding the provisions of Paragraph 7.3, PickMyTrade
+                  may review and remove any User Content that, in PickMyTrade’s
                   sole judgment, violates this Agreement, violates applicable
                   laws, rules or regulations, is abusive, disruptive, offensive
                   or illegal, or violates the rights of, or harms or threatens
                   the safety of users of any of the Platform. User acknowledges
-                  that TradersPost does not pre-screen or pre-approve User
-                  Content, but that TradersPost reserves the right to refuse,
+                  that PickMyTrade does not pre-screen or pre-approve User
+                  Content, but that PickMyTrade reserves the right to refuse,
                   delete, rearrange, edit, modify, or otherwise manipulate User
                   Content at its sole discretion without advance notification.
                 </li>
                 <br />
                 <li>
                   In posting User Content to the Platform, User automatically
-                  grants TradersPost and its Affiliates an irrevocable,
+                  grants PickMyTrade and its Affiliates an irrevocable,
                   royalty-free, perpetual, fully paid non-exclusive right
                   (including moral rights) and worldwide license to use, copy,
                   reproduce, modify, adapt, publish, translate, communicate to
@@ -554,25 +554,25 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  If TradersPost is notified that User Content does not conform
-                  to this Agreement, TradersPost may, in its sole discretion,
+                  If PickMyTrade is notified that User Content does not conform
+                  to this Agreement, PickMyTrade may, in its sole discretion,
                   investigate the allegation and determine whether to take any
                   other actions to remove or request the removal of the User
-                  Content. TradersPost has no liability or responsibility to
+                  Content. PickMyTrade has no liability or responsibility to
                   users for performance or non-performance of such activities.
                 </li>
                 <br />
                 <li>
                   Any User Content, regardless of format shall be delivered to
-                  TradersPost with the User’s warranty that such content is
-                  rightfully owned by or licensed to the User. TradersPost will
+                  PickMyTrade with the User’s warranty that such content is
+                  rightfully owned by or licensed to the User. PickMyTrade will
                   not verify that User Content is validly owned by or licensed
                   to the User and, as such, the User bears all risk associated
                   with the transmission of said content to us.
                 </li>
                 <br />
                 <li>
-                  TradersPost does not represent or guarantee the truthfulness,
+                  PickMyTrade does not represent or guarantee the truthfulness,
                   accuracy, or reliability of User Content or any other
                   communications posted by users or endorse any opinions
                   expressed by users.
@@ -581,8 +581,8 @@ function TermConditions() {
                 <li>
                   If User believes that any User Content or other postings on
                   the Platform violates this Agreement, please contact us at{' '}
-                  <a href='mailto:legal@traderspost.io' target='_blank'>
-                    legal@traderspost.io
+                  <a href='mailto:legal@PickMyTrade.io' target='_blank'>
+                    legal@PickMyTrade.io
                   </a>
                   .
                 </li>
@@ -590,12 +590,12 @@ function TermConditions() {
               </ol>
             </li>
             <li>
-              <strong>Third Party Services and Products</strong>. TradersPost
+              <strong>Third Party Services and Products</strong>. PickMyTrade
               reserves the right to offer third party services and products to
               User based on the preferences identified in User’s Registration
-              and at any time thereafter; such offers may be made by TradersPost
+              and at any time thereafter; such offers may be made by PickMyTrade
               or by third parties. Without limiting any of the other disclaimers
-              of warranty set forth in these Terms, TradersPost does not provide
+              of warranty set forth in these Terms, PickMyTrade does not provide
               or make any representation, warranty or guarantee as to the
               quality, nature, accuracy or fitness for any purpose of any
               third-party products or services. Any such undertaking,
@@ -604,8 +604,8 @@ function TermConditions() {
               to that provider’s Terms of Service. The Platform may contain
               links and pointers to websites operated by third parties. These
               links are provided solely as a convenience to User and not as an
-              endorsement by TradersPost of the contents of such third-party
-              websites. TradersPost is not responsible for the content of linked
+              endorsement by PickMyTrade of the contents of such third-party
+              websites. PickMyTrade is not responsible for the content of linked
               third-party websites and does not make any representations
               regarding the content or accuracy of materials on such third-party
               websites. If User decides to access linked third-party websites,
@@ -621,28 +621,28 @@ function TermConditions() {
               <br />
               <ol>
                 <li>
-                  <u>User Content</u>. As between TradersPost and User, User has
+                  <u>User Content</u>. As between PickMyTrade and User, User has
                   and retains exclusive ownership of all User Content and all
                   intellectual property and proprietary rights therein.
                 </li>
                 <br />
                 <li>
-                  <u>Platform &amp; Documentation</u>. As between TradersPost
-                  and User, TradersPost has and retains exclusive ownership of
+                  <u>Platform &amp; Documentation</u>. As between PickMyTrade
+                  and User, PickMyTrade has and retains exclusive ownership of
                   the Platform and Documentation, all improvements, enhancements
                   or modifications thereto, and all intellectual property and
-                  proprietary rights therein. TradersPost also owns and has the
+                  proprietary rights therein. PickMyTrade also owns and has the
                   unrestricted right to use any data collected via the Platform
                   that is not User Content. User acknowledges and agrees that
-                  TradersPost has and retains exclusive and valid ownership of
+                  PickMyTrade has and retains exclusive and valid ownership of
                   all anonymized statistical information regarding use of the
                   Platform. User acknowledges that the foregoing constitute
                   valuable assets and may constitute trade secrets of
-                  TradersPost or its licensors.
+                  PickMyTrade or its licensors.
                 </li>
                 <br />
                 <li>
-                  <u>Trademark</u>. TradersPost’s brand names and design logos
+                  <u>Trademark</u>. PickMyTrade’s brand names and design logos
                   and certain other names or logos displayed on the Platform are
                   protected service marks and/or trademarks, and all related
                   products and service names, design marks and slogans are our
@@ -659,29 +659,29 @@ function TermConditions() {
                   <u>Suggestions and Joint Efforts</u>. User may suggest, and
                   the parties may discover or create jointly, findings,
                   inventions, improvements, discoveries, or ideas that
-                  TradersPost, at its sole option, may incorporate in the
+                  PickMyTrade, at its sole option, may incorporate in the
                   Platform or in other products or services that may or may not
                   be made available to User. Any such finding, invention,
                   improvement, discovery, or idea, whether or not patentable,
                   that is conceived or reduced to practice, whether by a party
                   alone or by the parties jointly, arising from or related to
                   this Agreement or the Platform shall be and remain solely
-                  property of TradersPost and may be used, sold, licensed, or
-                  otherwise provided by TradersPost to third parties, or
-                  published or otherwise publicly disclosed, in TradersPost’s
+                  property of PickMyTrade and may be used, sold, licensed, or
+                  otherwise provided by PickMyTrade to third parties, or
+                  published or otherwise publicly disclosed, in PickMyTrade’s
                   sole discretion without notice, attribution, payment of
                   royalties, or liability to User. User hereby assigns to
-                  TradersPost any and all right, title, and interest in and to
+                  PickMyTrade any and all right, title, and interest in and to
                   any such findings, inventions, improvements, discoveries,
                   ideas, and statistical information. Unless otherwise expressly
                   agreed in writing, User shall not obtain any right, title, or
                   interest (other than the license expressly set forth herein)
-                  in or to anything created or developed by TradersPost in
+                  in or to anything created or developed by PickMyTrade in
                   connection with or incident to this Agreement.
                 </li>
                 <br />
                 <li>
-                  <u>License to Use User Content</u>. User grants to TradersPost
+                  <u>License to Use User Content</u>. User grants to PickMyTrade
                   a non-exclusive, transferrable, sublicensable, worldwide,
                   royalty-free license to use, disclose, and process User
                   Content and Registration information to: (a) perform its
@@ -699,9 +699,9 @@ function TermConditions() {
                   to grant sublicenses for the foregoing. User represents and
                   warrants that it owns or has the legal right and authority,
                   and will continue to own or maintain the legal right and
-                  authority, to grant to TradersPost the license set forth
+                  authority, to grant to PickMyTrade the license set forth
                   herein. User shall indemnify, defend, and hold harmless
-                  TradersPost, its Affiliates, and their respective directors,
+                  PickMyTrade, its Affiliates, and their respective directors,
                   officers, employees, and agents from and against any Loss
                   arising from or related to a claim of a third party with
                   respect to a breach of the foregoing representations and
@@ -723,8 +723,8 @@ function TermConditions() {
                   believe that your work has been posted on the Platform without
                   express and verifiable permission that violates your rights,
                   including intellectual property rights, please notify us at{' '}
-                  <a href='mailto:legal@traderspost.io' target='_blank'>
-                    legal@traderspost.io
+                  <a href='mailto:legal@PickMyTrade.io' target='_blank'>
+                    legal@PickMyTrade.io
                   </a>
                   . We will investigate claims of copyright or intellectual
                   property infringement. To assist us with such investigations,
@@ -791,7 +791,7 @@ function TermConditions() {
                   of the kind described above in this paragraph, then the cure
                   period will be 30 days after the notice of the breach by the
                   non-breaching party. Notwithstanding anything to the contrary,
-                  TradersPost may immediately terminate this Agreement, or limit
+                  PickMyTrade may immediately terminate this Agreement, or limit
                   access to or suspend User’s account and access to the
                   Platform, without permitting a cure period upon (1) breach or
                   violation of this Agreement or other incorporated agreements
@@ -809,22 +809,22 @@ function TermConditions() {
                   period, if any (or upon such breach if no cure period is
                   permitted), then the non-breaching party thereupon may
                   terminate this Agreement by notice to the other party.
-                  Termination of this Agreement by TradersPost shall terminate
+                  Termination of this Agreement by PickMyTrade shall terminate
                   all licenses granted to User herein. Any termination of this
                   Agreement shall be in addition to, and not in lieu of, any
                   other rights or remedies available at law or in equity.
                 </li>
                 <br />
                 <li>
-                  <u>Violation of Terms of Service</u>. TradersPost reserves the
+                  <u>Violation of Terms of Service</u>. PickMyTrade reserves the
                   right to expel User and prevent their further access to the
                   Platform and/or use of our services for violating this
                   Agreement or applicable laws, rules or regulations.
-                  TradersPost may take any action with respect to User Content
-                  that TradersPost deems necessary or appropriate in its sole
-                  discretion if TradersPost believe that such User Content could
-                  create any liability for TradersPost, damage TradersPost’s
-                  brand, reputation, or public image, or cause TradersPost to
+                  PickMyTrade may take any action with respect to User Content
+                  that PickMyTrade deems necessary or appropriate in its sole
+                  discretion if PickMyTrade believe that such User Content could
+                  create any liability for PickMyTrade, damage PickMyTrade’s
+                  brand, reputation, or public image, or cause PickMyTrade to
                   lose (in whole or in part) the services of its suppliers.
                 </li>
               </ol>
@@ -832,18 +832,18 @@ function TermConditions() {
             </li>
             <li>
               <strong>Privacy Policy</strong>. User acknowledges and agrees that
-              User has read and understood TradersPost’s Privacy Policy, which
+              User has read and understood PickMyTrade’s Privacy Policy, which
               is available at{' '}
-              <a href='https://traderspost.io/privacy'>
-                https://traderspost.io/privacy
+              <a href='https://PickMyTrade.io/privacy'>
+                https://PickMyTrade.io/privacy
               </a>
               , and User consents to and authorizes the processing, use, and
               disclosure of personal information as set forth therein.
               Notwithstanding anything to the contrary herein, User consents and
-              TradersPost shall have the right to collect and analyze data and
+              PickMyTrade shall have the right to collect and analyze data and
               other information relating to the provision, use and performance
               of the Platform and related systems and technologies, and
-              TradersPost will be free (during and after the term hereof) to (i)
+              PickMyTrade will be free (during and after the term hereof) to (i)
               use such information and data to improve and enhance the Platform
               and for other development, diagnostic and corrective purposes in
               connection with the Platform and other service offerings, and (ii)
@@ -862,7 +862,7 @@ function TermConditions() {
                 <li>
                   THE PLATFORM AND ITS CONTENTS ARE PROVIDED ON AN “AS IS” AND
                   “AS AVAILABLE” BASIS WITHOUT ANY WARRANTIES OF ANY KIND,
-                  EXPRESS OR IMPLIED. TRADERSPOST AND ITS AFFILIATES, PARENTS
+                  EXPRESS OR IMPLIED. PickMyTrade AND ITS AFFILIATES, PARENTS
                   AND SUBSIDIARIES, TO THE FULLEST EXTENT PERMITTED BY LAW,
                   DISCLAIM ALL WARRANTIES, CONDITIONS, OR REPRESENTATIONS,
                   WHETHER EXPRESS OR IMPLIED OR STATUTORY OR ORAL OR WRITTEN,
@@ -870,28 +870,28 @@ function TermConditions() {
                   PART OF THE FOREGOING, INCLUDING THE WARRANTIES OF
                   MERCHANTABILITY, TITLE, NON-INFRINGEMENT OF THIRD PARTIES’
                   RIGHTS, FITNESS FOR A PARTICULAR PURPOSE (WHETHER OR NOT
-                  TRADERSPOST KNOWS, HAS REASON TO KNOW, HAS BEEN ADVISED, OR
+                  PickMyTrade KNOWS, HAS REASON TO KNOW, HAS BEEN ADVISED, OR
                   OTHERWISE IS IN FACT AWARE OF ANY SUCH PURPOSE), QUALITY
                   (INCLUDING, WITHOUT LIMITATION, AS TO THE SEQUENCE,
                   COMPLETENESS, TIMELINESS, ADEQUACY, ACCURACY, QUALITY, TRUTH,
                   AND/OR RELIABILITY OF THE INFORMATION), ACCURACY, QUIET
                   ENJOYMENT OR AVAILABILITY, WHETHER ALLEGED TO ARISE BY LAW, BY
                   REASON OF CUSTOM OR USAGE IN THE TRADE, BY COURSE OF DEALING,
-                  OR OTHERWISE. TRADERSPOST EXPRESSLY DISCLAIMS ANY WARRANTY OR
+                  OR OTHERWISE. PickMyTrade EXPRESSLY DISCLAIMS ANY WARRANTY OR
                   REPRESENTATION TO ANY PERSON OTHER THAN USER.
                 </li>
                 <br />
                 <li>
-                  TRADERSPOST MAKES NO WARRANTY THAT (i) THE PLATFORM AND
+                  PickMyTrade MAKES NO WARRANTY THAT (i) THE PLATFORM AND
                   MATERIALS AVAILABLE ON THE PLATFORM WILL MEET USER’S
                   REQUIREMENTS, (ii) THE PLATFORM AND MATERIALS WILL BE
                   UNINTERRUPTED, TIMELY, SECURE, OR ERROR-FREE, OR (iii) THE
                   RESULTS THAT MAY BE OBTAINED FROM THE USE OR THE PLATFORM OR
                   MATERIALS WILL BE EFFECTIVE, ACCURATE OR RELIABLE. USER WILL
                   BE EXCLUSIVELY RESPONSIBLE AS BETWEEN THE PARTIES FOR, AND
-                  TRADERSPOST MAKES NO REPRESENTATION OR WARRANTY WITH RESPECT
+                  PickMyTrade MAKES NO REPRESENTATION OR WARRANTY WITH RESPECT
                   TO, (A) DETERMINING WHETHER THE PLATFORM WILL ACHIEVE THE
-                  RESULTS DESIRED BY USER OR PROMISED BY TRADERSPOST; (B)
+                  RESULTS DESIRED BY USER OR PROMISED BY PickMyTrade; (B)
                   ENSURING THE ACCURACY OF ANY USER CONTENT; (C) SELECTING,
                   PROCURING, INSTALLING, OPERATING, AND MAINTAINING THE
                   TECHNICAL INFRASTRUCTURE (OTHER THAN WITH RESPECT TO THE
@@ -901,40 +901,40 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  ALL CONTENT PROVIDED BY OR THROUGH TRADERSPOST AND OUR
+                  ALL CONTENT PROVIDED BY OR THROUGH PickMyTrade AND OUR
                   AFFILIATES AND THE PLATFORM MUST BE VIEWED AND EVALUATED BY
-                  USER TO ENSURE IT IS SUITABLE FOR USER’S PURPOSE. TRADERSPOST
+                  USER TO ENSURE IT IS SUITABLE FOR USER’S PURPOSE. PickMyTrade
                   ENDEAVORS TO KEEP ALL CONTENT COMPLETE AND ACCURATE, BUT
-                  TRADERSPOST DOES NOT WARRANT ALL CONTENT TO BE FREE OF ERRORS
+                  PickMyTrade DOES NOT WARRANT ALL CONTENT TO BE FREE OF ERRORS
                   OR THE MOST CURRENT VERSION OF APPLICABLE MATERIAL. CONTENT
                   MAY CONTAIN INACCURACIES OR TYPOGRAPHICAL ERRORS.
                 </li>
                 <br />
                 <li>
-                  IN THE EVENT OF LINKS TO THIRD PARTY CONTENT, TRADERSPOST DOES
+                  IN THE EVENT OF LINKS TO THIRD PARTY CONTENT, PickMyTrade DOES
                   NOT GUARANTEE THAT THE INFORMATION PROVIDED IN EXTERNAL
-                  WEBSITES IS ACCURATE OR COMPLETE. TRADERSPOST DOES NOT HAVE
+                  WEBSITES IS ACCURATE OR COMPLETE. PickMyTrade DOES NOT HAVE
                   CONTROL OVER THE CONTENT, ACTIVITIES, SECURITY OR PRIVACY
-                  POLICIES OF THIRD-PARTY WEBSITES AND TRADERSPOST ACCEPTS NO
+                  POLICIES OF THIRD-PARTY WEBSITES AND PickMyTrade ACCEPTS NO
                   RESPONSIBILITY FOR THE SAME. IT IS THE USER’S RESPONSIBILITY
                   TO EVALUATE ALL EXTERNAL LINKS FOR SUITABILITY OF USE.
                 </li>
                 <br />
                 <li>
-                  TRADERSPOST DOES NOT WARRANT THAT THE PLATFORM AND ITS SERVERS
+                  PickMyTrade DOES NOT WARRANT THAT THE PLATFORM AND ITS SERVERS
                   ARE FREE OF COMPUTER VIRUSES, WORMS, TROJAN HORSES OR OTHER
                   HARMFUL MECHANISMS. IF USE OF THE PLATFORM RESULTS IN THE NEED
-                  FOR SERVICING OR REPLACING EQUIPMENT OR DATA, TRADERSPOST IS
+                  FOR SERVICING OR REPLACING EQUIPMENT OR DATA, PickMyTrade IS
                   NOT RESPONSIBLE FOR THOSE COSTS. USER ASSUMES ALL
                   RESPONSIBILITY AND RISK FOR USE OF THE PLATFORM AND THE
                   INTERNET GENERALLY.
                 </li>
                 <br />
                 <li>
-                  TRADERSPOST DOES NOT WARRANT THE OPERATION OR AVAILABILITY OF
+                  PickMyTrade DOES NOT WARRANT THE OPERATION OR AVAILABILITY OF
                   THE PLATFORM. HARDWARE OR SOFTWARE ISSUES MAY AT TIMES CAUSE
                   THE PLATFORM TO SLOW DOWN OR FAIL TO FUNCTION PROPERLY.
-                  TRADERSPOST IS NOT LIABLE FOR ANY CONSEQUENCES OF THE PLATFORM
+                  PickMyTrade IS NOT LIABLE FOR ANY CONSEQUENCES OF THE PLATFORM
                   NOT BEING FULLY OPERATIONAL OR AVAILABLE AND SHALL BE HELD
                   HARMLESS FROM ANY CLAIMS OR DISPUTES ARISING FROM SUCH
                   INOPERABILITY OR UNAVAILABILITY. USER ACKNOWLEDGE THAT ANY
@@ -952,22 +952,22 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  TradersPost is not involved in any individual user to user
-                  transactions. TradersPost is not responsible for and does not
+                  PickMyTrade is not involved in any individual user to user
+                  transactions. PickMyTrade is not responsible for and does not
                   control the conduct of users of the Platform. User is solely
                   responsible for its interactions with other users.
                 </li>
                 <br />
                 <li>
-                  TradersPost uses external databases for specific
-                  functionalities related to the Platform. TradersPost makes
+                  PickMyTrade uses external databases for specific
+                  functionalities related to the Platform. PickMyTrade makes
                   commercially reasonable efforts to ensure that information
                   gleaned from external databases are accurate, but assumes no
                   responsibility for the accuracy of such information. Although
-                  TradersPost makes commercially reasonable efforts to ensure
+                  PickMyTrade makes commercially reasonable efforts to ensure
                   the information received from an external database is free
                   from viruses, malware, or any destructive instrumentality,
-                  TradersPost assumes no responsibility for the presence of any
+                  PickMyTrade assumes no responsibility for the presence of any
                   viruses, malware, or any other destructive instrumentality
                   transmitted to us from an external database.
                 </li>
@@ -976,7 +976,7 @@ function TermConditions() {
             </li>
             <li>
               <strong>Indemnification</strong>. User shall defend, indemnify,
-              and hold harmless TradersPost, and our Affiliates, and each of
+              and hold harmless PickMyTrade, and our Affiliates, and each of
               their respective managers, members, officers, employees, officers,
               directors and agents for all Losses arising from any third party
               claims, actions or demands, arising out of or relating to (a) any
@@ -986,13 +986,13 @@ function TermConditions() {
               users, actions or demands alleging User’s breach of the terms of
               this Agreement, actions involving User Content or other material
               provide by User, and the use of User’s access credentials.
-              TradersPost shall provide notice to User promptly of any claim,
+              PickMyTrade shall provide notice to User promptly of any claim,
               suit, or proceeding. User shall cooperate as fully as reasonably
-              required in the defense of any claim. TradersPost reserves the
+              required in the defense of any claim. PickMyTrade reserves the
               right, at its own expense, to assume the exclusive defense and
               control of any matter otherwise subject to indemnification by User
               and User shall not in any event settle any matter without
-              TradersPost written consent.
+              PickMyTrade written consent.
             </li>
             <br />
             <li>
@@ -1036,7 +1036,7 @@ function TermConditions() {
                   PARTY), WITH RESPECT TO ANY AND ALL CLAIMS AT ANY AND ALL
                   TIMES ARISING FROM OR RELATED TO THE SUBJECT MATTER OF THIS
                   AGREEMENT, IN CONTRACT, WARRANTY, TORT (INCLUDING NEGLIGENCE),
-                  OR OTHERWISE, EXCEED THE FEES PAID TO TRADERSPOST IN THREE
+                  OR OTHERWISE, EXCEED THE FEES PAID TO PickMyTrade IN THREE
                   MONTHS’ IMMEDIATELY PRECEDING EVENT GIVING RISE TO THE
                   LIABILITY. THE PROVISIONS OF THIS PARAGRAPH ARE INDEPENDENT
                   OF, SEVERABLE FROM, AND TO BE ENFORCED INDEPENDENTLY OF ANY
@@ -1045,15 +1045,15 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, TRADERSPOST
+                  NOTWITHSTANDING ANYTHING TO THE CONTRARY HEREIN, PickMyTrade
                   SHALL NOT BE LIABLE FOR ANY LOSS ARISING OUT OF OR RELATING TO
                   (A) A FAILURE OF USER TO COMPLY WITH THE OBLIGATIONS SET FORTH
                   IN SECTION 4; (B) USER’S USE OF THE PLATFORM; (C) USER’S
                   RELIANCE ON THE PLATFORM OR USER CONTENT; (D) ANY ASPECT OF
                   THE PLATFORM THAT IS MODIFIED BY ANY PERSON OTHER THAN
-                  TRADERSPOST OR ITS CONTRACTORS; (E) MALFUNCTIONS OR OTHER
+                  PickMyTrade OR ITS CONTRACTORS; (E) MALFUNCTIONS OR OTHER
                   EFFECTS OF PROBLEMS, DEFECTS, OR FAILURES OF SOFTWARE OR
-                  HARDWARE NOT PROVIDED BY TRADERSPOST; OR (F) ACTS OR OMISSIONS
+                  HARDWARE NOT PROVIDED BY PickMyTrade; OR (F) ACTS OR OMISSIONS
                   OF USER OR ANY THIRD PARTY.
                 </li>
                 <br />
@@ -1213,7 +1213,7 @@ function TermConditions() {
                 <li>
                   <br />
                   <p>
-                    If you and TradersPost are unable to resolve a dispute (a
+                    If you and PickMyTrade are unable to resolve a dispute (a
                     “Dispute”) through informal negotiations, the Dispute
                     (except where explicitly prohibited by applicable law) will
                     be finally and exclusively resolved by binding arbitration.
@@ -1222,7 +1222,7 @@ function TermConditions() {
                     Association ("AAA") and, where appropriate, the AAA’s
                     Supplementary Procedures for Consumer Related Disputes ("AAA
                     Consumer Rules"), both of which are available at the AAA
-                    website www.adr.org. You and TradersPost shall equally share
+                    website www.adr.org. You and PickMyTrade shall equally share
                     the cost of the arbitration, but each party shall be
                     responsible for its own attorney’s fees. The arbitration may
                     be conducted in person at mutually agreed upon location, or
@@ -1245,7 +1245,7 @@ function TermConditions() {
                     falling within that portion of this provision found to be
                     illegal or unenforceable and such Dispute shall be decided
                     by a court of competent jurisdiction within the courts of
-                    TradersPost’s home state, and the parties agree to submit to
+                    PickMyTrade’s home state, and the parties agree to submit to
                     the personal jurisdiction of that court.
                   </p>
                   <br />
@@ -1335,7 +1335,7 @@ function TermConditions() {
                   agreements, representations, warranties, inducements,
                   promises, and understandings with respect to the Platform, the
                   content, products or services provided by or through
-                  TradersPost, and the subject matter of this Agreement. Each
+                  PickMyTrade, and the subject matter of this Agreement. Each
                   party represents and warrants that, in entering into and
                   performing its obligations under this Agreement, it does not
                   and will not rely on any promise, inducement, or
@@ -1347,7 +1347,7 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  <u>Assignment</u>. TradersPost may transfer, assign,
+                  <u>Assignment</u>. PickMyTrade may transfer, assign,
                   sub-contract or otherwise deal with our rights and/or
                   obligations under this Agreement. User may not transfer or
                   assign this Agreement or User’s rights or obligations
@@ -1396,11 +1396,11 @@ function TermConditions() {
                   properly addressed and pre-paid, with next business day
                   instruction (in which case such notices shall be deemed given
                   on the next business day after deposit), or (iv) for
-                  TradersPost, by e-mail (in which case such notice shall be
+                  PickMyTrade, by e-mail (in which case such notice shall be
                   deemed given upon transmission unless the party giving notice
                   receives a non-delivery email message within a reasonable time
-                  thereafter). Such notices shall be sent to TradersPost at{' '}
-                  <a href='legal@traderspost.io'>legal@traderspost.io</a>, and
+                  thereafter). Such notices shall be sent to PickMyTrade at{' '}
+                  <a href='legal@PickMyTrade.io'>legal@PickMyTrade.io</a>, and
                   to User at the address for notices or email address designated
                   in the Registration. Either party may change its address for
                   purposes of notice by written notice thereof to the other
@@ -1408,9 +1408,9 @@ function TermConditions() {
                 </li>
                 <br />
                 <li>
-                  <u>Nature of Relationship</u>. TradersPost shall provide all
+                  <u>Nature of Relationship</u>. PickMyTrade shall provide all
                   services hereunder as an independent contractor to User.
-                  Subject to the provisions of this Agreement, TradersPost may
+                  Subject to the provisions of this Agreement, PickMyTrade may
                   perform its obligations hereunder through its employees and
                   through subcontractors. Nothing contained herein shall be
                   deemed to create any agency, partnership, joint venture, or
