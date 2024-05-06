@@ -16,6 +16,7 @@ function Navbar() {
 
   const getUser = async () => {
     const response = await me();
+    localStorage.setItem('user', JSON.stringify(response.data));
 
     setUserData(response.data);
   };
@@ -128,7 +129,7 @@ function Navbar() {
 
   return (
     <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
-      <div className='flex gap-6 text-white'>
+      <div className='flex gap-6 text-white mb-2 xl:mb-0'>
         <li
           className='flex justify-center items-center'
           onClick={() => navigate('/dashboard/home')}
@@ -155,6 +156,16 @@ function Navbar() {
           } px-4 py-1 rounded-sm cursor-pointer`}
         >
           Documentation
+        </li>
+        <li
+          onClick={() => navigate('/dashboard/payment')}
+          className={`${
+            location.pathname === '/dashboard/payment'
+              ? 'bg-primary text-white'
+              : 'text-black'
+          } px-4 py-1 rounded-sm cursor-pointer`}
+        >
+          Payment
         </li>
       </div>
 
