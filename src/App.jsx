@@ -6,6 +6,7 @@ import TokenRefresh from './pages/TokenRefresh/TokenRefresh';
 import Documentation from './pages/Documentation/Documentation';
 import { DashboardLayout } from './layout/DashboardLayout/DashboardLayout';
 import Payment from './pages/Payment/Payment';
+import ResetPassword from './pages/Auth/ResetPassword';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path='/dashboard/payment' element={<Payment />} />
         </Route>
         <Route path='/oauth/tradovate/callback' element={<TokenRefresh />} />
+        <Route path='/reset/password' element={<ResetPassword />} />
       </Routes>
     </HashRouter>
   );

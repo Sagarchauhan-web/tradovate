@@ -76,3 +76,25 @@ export const saveToken = (token) => {
 export const getToken = () => {
   return localStorage.getItem('token');
 };
+
+export const resetPasswordRequest = async (email) => {
+  try {
+    const response = await apiClient.post('/SendResetLink', {
+      email: email,
+    });
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+
+export const resetPassword = async (requestData) => {
+  try {
+    const response = await apiClient.post('/ResetPassword', requestData);
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

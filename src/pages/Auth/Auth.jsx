@@ -9,11 +9,18 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Checkbox } from '@/components/ui/checkbox';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { getToken, login, register, saveToken } from '@/services/Auth/auth';
+import {
+  getToken,
+  login,
+  register,
+  resetPasswordRequest,
+  saveToken,
+} from '@/services/Auth/auth';
 import { AxiosError } from 'axios';
 import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
@@ -26,14 +33,60 @@ export function Auth() {
   const nameRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
+  const resetEmailRef = useRef();
   const { toast } = useToast();
   const navigate = useNavigate();
+
+  const [dialogBox, setDialogBox] = useState(false);
 
   useEffect(() => {
     const token = getToken();
 
     if (token) navigate('/dashboard/home');
   }, []);
+
+  const resetPasswordRequestAction = async () => {
+    const resetEmail = resetEmailRef.current.value;
+
+    if (!resetEmail) {
+      return toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        title: 'Warning',
+        description: 'Please Enter Email',
+        action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
+      });
+    }
+    const response = await resetPasswordRequest(resetEmail);
+
+    if (!response.error) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Success',
+        description: 'Email Sent',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+      setDialogBox(false);
+    } else {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Something went wrong',
+        description: response.data,
+        action: <MdErrorOutline className='text-4xl text-red-500' />,
+      });
+    }
+    console.log(response, resetEmail);
+  };
 
   async function onSubmit(e) {
     e.preventDefault();
@@ -130,6 +183,33 @@ export function Auth() {
 
   return (
     <div className='flex min-h-screen w-full flex-col justify-center items-center'>
+      <Dialog open={dialogBox} onOpenChange={setDialogBox}>
+        <DialogContent className='sm:max-w-[425px]'>
+          <DialogHeader>
+            <CardTitle className='text-3xl'>Reset Password</CardTitle>
+            <CardDescription className='pb-8'>
+              Enter your email and we will send you a link to reset your
+              password
+            </CardDescription>
+
+            <div className='flex flex-col space-y-1.5 gap-1 pb-8'>
+              <Label htmlFor='name'>Email*</Label>
+              <Input
+                ref={resetEmailRef}
+                className='rounded-full'
+                id='name'
+                placeholder={`Enter${isRegisterPage ? ' Email' : ' username'}`}
+              />
+            </div>
+            <Button
+              onClick={resetPasswordRequestAction}
+              className='w-full rounded-full'
+            >
+              Reset Password
+            </Button>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
       <div className='flex-1 flex justify-center items-center'>
         <Card className=' space-between rounded-none mx-10 md:m-0'>
           <div className='w-full md:w-3/4 m-auto'>
@@ -182,7 +262,7 @@ export function Auth() {
                 </div>
               </CardContent>
               <CardFooter className='w-full mt-5 flex flex-col space-between'>
-                <div className='mb-12 w-full'>
+                <div className='mb-12 w-full flex justify-center items-center'>
                   <div className='flex w-full space-x-2'>
                     <Checkbox id='terms' />
                     <label
@@ -191,6 +271,14 @@ export function Auth() {
                     >
                       Remember me
                     </label>
+                  </div>
+                  <div>
+                    <p
+                      onClick={() => setDialogBox(true)}
+                      className='text-sm w-max text-primary cursor-pointer'
+                    >
+                      Forgot Password?
+                    </p>
                   </div>
                 </div>
                 <Button type='submit' className='w-full rounded-full'>

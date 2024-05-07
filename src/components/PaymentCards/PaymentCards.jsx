@@ -18,26 +18,24 @@ export default function PaymentCards({ subscriptions }) {
 
     const payload = { email: user.username, subscription_id: key };
     const response = await getOrderInit(payload);
-    console.log(response, 'order response', payload);
 
+    // return;
     if (!response.error) {
-      setTimeout(() => {
-        callRazorpay(response, key, user.username);
-      }, 5000);
+      callRazorpay(response, key, user.username);
     }
   };
 
   const callRazorpay = (response, key, email) => {
     var options = {
       key: response.razorpay_key, // Enter the Key ID generated from the Dashboard
-      subscription_id: key, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+      subscription_id: response.payload.id,
       name: email,
       description: 'Test Transaction',
       image: 'https://example.com/your_logo',
       handler: function (response) {
-        alert(response.razorpay_payment_id);
-        alert(response.razorpay_order_id);
-        alert(response.razorpay_signature);
+        // alert(response.razorpay_payment_id);
+        // alert(response.razorpay_order_id);
+        // alert(response.razorpay_signature);
       },
       prefill: {
         name: 'PickMyTrade',
@@ -51,18 +49,19 @@ export default function PaymentCards({ subscriptions }) {
         color: '#3399cc',
       },
     };
+
     // eslint-disable-next-line no-undef
     var rzp1 = new Razorpay(options);
     rzp1.open();
-    // rzp1.on('payment.failed', function (response) {
-    //   alert(response.error.code);
-    //   alert(response.error.description);
-    //   alert(response.error.source);
-    //   alert(response.error.step);
-    //   alert(response.error.reason);
-    //   alert(response.error.metadata.order_id);
-    //   alert(response.error.metadata.payment_id);
-    // });
+    rzp1.on('payment.failed', function (response) {
+      alert(response.error.code);
+      alert(response.error.description);
+      alert(response.error.source);
+      alert(response.error.step);
+      alert(response.error.reason);
+      alert(response.error.metadata.order_id);
+      alert(response.error.metadata.payment_id);
+    });
   };
 
   return (
