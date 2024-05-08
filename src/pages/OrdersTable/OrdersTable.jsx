@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/table';
 import { getOrders } from '@/services/Orders/orders';
 import { useEffect, useState } from 'react';
+import OverlapLoader from '@/components/Loader/OverlapLoader';
 
 export function OrderTable() {
   const [date, setDate] = useState({
@@ -32,14 +33,18 @@ export function OrderTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const getAllOrders = async () => {
+      setIsLoading(true);
       const response = await getOrders({
         from_date: format(date?.from, 'yyyy-MM-dd'),
         to_date: format(date?.to, 'yyyy-MM-dd'),
       });
 
       setData(response.data);
+      setIsLoading(false);
     };
     getAllOrders();
   }, [date]);
@@ -177,57 +182,59 @@ export function OrderTable() {
         </h2>
         <DatePickerWithRange date={date} setDate={setDate} />
       </div>
-      <ScrollArea className={`w-full whitespace-nowrap rounded-md border`}>
-        <Table className='display-none'>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext(),
-                          )}
-                    </TableHead>
-                  );
-                })}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && 'selected'}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
+      <OverlapLoader loader={isLoading}>
+        <ScrollArea className={`w-full whitespace-nowrap rounded-md border`}>
+          <Table className='display-none'>
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext(),
+                            )}
+                      </TableHead>
+                    );
+                  })}
                 </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className='h-24 text-center'
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-        <ScrollBar orientation='horizontal' />
-      </ScrollArea>
+              ))}
+            </TableHeader>
+            <TableBody>
+              {table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && 'selected'}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell
+                    colSpan={columns.length}
+                    className='h-24 text-center'
+                  >
+                    No results.
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          <ScrollBar orientation='horizontal' />
+        </ScrollArea>
+      </OverlapLoader>
       <div className='flex items-center justify-end space-x-2 py-4'>
         <div className='space-x-2'>
           <Button

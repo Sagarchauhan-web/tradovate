@@ -21,6 +21,7 @@ import { useEffect, useState } from 'react';
 import { format, subDays } from 'date-fns';
 import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import OverlapLoader from '@/components/Loader/OverlapLoader';
 
 export function AlertsTable() {
   const [date, setDate] = useState({
@@ -32,14 +33,18 @@ export function AlertsTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
 
+  const [isLoading, setIsLoading] = useState(false);
+
   useEffect(() => {
     const getAllAlerts = async () => {
+      setIsLoading(true);
       const response = await getAlerts({
         from_date: format(date.from, 'yyyy-MM-dd'),
         to_date: format(date.to, 'yyyy-MM-dd'),
       });
 
       setData(response.data);
+      setIsLoading(false);
     };
     getAllAlerts();
   }, [date]);
@@ -144,58 +149,60 @@ export function AlertsTable() {
       </div>
       <div className='flex items-center py-4 justify-end'></div>
       <div className='rounded-md border'>
-        <ScrollArea className={`w-full whitespace-nowrap rounded-md border`}>
-          <Table>
-            <TableHeader>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <TableRow key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => {
-                    return (
-                      <TableHead key={header.id}>
-                        {header.isPlaceholder
-                          ? null
-                          : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                            )}
-                      </TableHead>
-                    );
-                  })}
-                </TableRow>
-              ))}
-            </TableHeader>
-
-            <TableBody>
-              {table.getRowModel().rows?.length ? (
-                table.getRowModel().rows.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    data-state={row.getIsSelected() && 'selected'}
-                  >
-                    {row.getVisibleCells().map((cell) => (
-                      <TableCell key={cell.id}>
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
-                      </TableCell>
-                    ))}
+        <OverlapLoader loader={isLoading}>
+          <ScrollArea className={`w-full whitespace-nowrap rounded-md border`}>
+            <Table>
+              <TableHeader>
+                {table.getHeaderGroups().map((headerGroup) => (
+                  <TableRow key={headerGroup.id}>
+                    {headerGroup.headers.map((header) => {
+                      return (
+                        <TableHead key={header.id}>
+                          {header.isPlaceholder
+                            ? null
+                            : flexRender(
+                                header.column.columnDef.header,
+                                header.getContext(),
+                              )}
+                        </TableHead>
+                      );
+                    })}
                   </TableRow>
-                ))
-              ) : (
-                <TableRow>
-                  <TableCell
-                    colSpan={columns.length}
-                    className='h-24 text-center'
-                  >
-                    No results.
-                  </TableCell>
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
-          <ScrollBar orientation='horizontal' />
-        </ScrollArea>
+                ))}
+              </TableHeader>
+
+              <TableBody>
+                {table.getRowModel().rows?.length ? (
+                  table.getRowModel().rows.map((row) => (
+                    <TableRow
+                      key={row.id}
+                      data-state={row.getIsSelected() && 'selected'}
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext(),
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell
+                      colSpan={columns.length}
+                      className='h-24 text-center'
+                    >
+                      No results.
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <ScrollBar orientation='horizontal' />
+          </ScrollArea>
+        </OverlapLoader>
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
         <div className='space-x-2'>

@@ -29,7 +29,7 @@ function Footer() {
       <ul className='flex flex-wrap justify-between bg-primary items-center h-[50px] px-10 border-t'>
         <div className='flex gap-6 text-white'>
           <li className='text-white'>
-            Copyright © 2024 Pick My Trade. All Rights Reserved.
+            Copyright © 2024 PickMyTrade. All Rights Reserved.
           </li>
         </div>
         <div className='flex gap-2 justify-center items-center '>
