@@ -27,9 +27,7 @@ function ConnectionNotifier({ isConnected, onTradovateDisconnectedClick }) {
         confirmation={confirmation}
         setConfirmation={setConfirmation}
         setPolicy={setPolicy}
-        onTradovateDisconnectedClick={() =>
-          onTradovateDisconnectedClick(isConnected)
-        }
+        onTradovateDisconnectedClick={() => onTradovateDisconnectedClick()}
       />
       <Button
         onClick={() => {

@@ -198,7 +198,7 @@ export function Auth() {
                 ref={resetEmailRef}
                 className='rounded-full'
                 id='name'
-                placeholder={`Enter${isRegisterPage ? ' Email' : ' username'}`}
+                placeholder={`Enter Email`}
               />
             </div>
             <Button
@@ -225,15 +225,13 @@ export function Auth() {
               <CardContent className='pb-0'>
                 <div className='grid w-full items-center gap-4'>
                   <div className='flex flex-col space-y-1.5'>
-                    <Label htmlFor='name'>
-                      {isRegisterPage ? 'Email*' : 'Username*'}
-                    </Label>
+                    <Label htmlFor='name'>Email*</Label>
                     <Input
                       ref={nameRef}
                       className='rounded-full'
                       id='name'
                       placeholder={`Enter${
-                        isRegisterPage ? ' Email' : ' username'
+                        isRegisterPage ? ' Email' : ' Email'
                       }`}
                     />
                   </div>

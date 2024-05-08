@@ -261,9 +261,6 @@ function Policy() {
           rights with respect to your information? Send us an email to
           contact@Tradovate.com
         </p>
-        <h4 className='mt-8 mb-4 text-center scroll-m-20 text-2xl font-semibold tracking-tight'>
-          This website is managed by M/s Shalini Garg
-        </h4>
       </DialogDescription>
     </>
   );

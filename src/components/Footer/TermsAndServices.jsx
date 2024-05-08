@@ -378,10 +378,6 @@ function TermsAndServices() {
           any other theory of liability. If you have a question about any of the
           Terms of Service, please contact our support team.
         </p>
-
-        <h4 className='mt-8 mb-4 text-center scroll-m-20 text-2xl font-semibold tracking-tight'>
-          This website is managed by M/s Shalini Garg
-        </h4>
       </DialogDescription>
     </>
   );

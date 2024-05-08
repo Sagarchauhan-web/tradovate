@@ -32,13 +32,11 @@ function Navbar() {
     }
   };
 
-  const onTradovateDisconnectedClick = async (is_tradovate_connected) => {
-    if (!is_tradovate_connected) {
-      const tokenUrl = await getTokenUrl();
+  const onTradovateDisconnectedClick = async () => {
+    const tokenUrl = await getTokenUrl();
 
-      if (!tokenUrl.error) {
-        window.location.href = tokenUrl.data;
-      }
+    if (!tokenUrl.error) {
+      window.location.href = tokenUrl.data;
     }
   };
 
