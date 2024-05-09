@@ -1,4 +1,5 @@
 import { Card } from '@/components/ui/card';
+import { LiaAddressCardSolid } from 'react-icons/lia';
 
 export default function ContactUs() {
   return (
@@ -29,6 +30,15 @@ export default function ContactUs() {
                   Email
                 </div>
                 support@pickmytrade.com
+              </div>
+            </div>
+            <div className='flex items-center gap-4'>
+              <LiaAddressCardSolid className='h-6 w-6 text-gray-500 dark:text-gray-400' />
+              <div>
+                <div className='text-gray-900 dark:text-gray-100 font-medium'>
+                  Address
+                </div>
+                184, Rajendra Nagar Bharatpur, Rajasthan India 321001
               </div>
             </div>
           </div>

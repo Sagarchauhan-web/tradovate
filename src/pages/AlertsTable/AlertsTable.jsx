@@ -18,7 +18,7 @@ import {
 } from '@/components/ui/table';
 import { getAlerts } from '@/services/Alerts/alerts';
 import { useEffect, useState } from 'react';
-import { format, subDays } from 'date-fns';
+import { addDays, format, subDays } from 'date-fns';
 import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import OverlapLoader from '@/components/Loader/OverlapLoader';
@@ -26,7 +26,7 @@ import OverlapLoader from '@/components/Loader/OverlapLoader';
 export function AlertsTable() {
   const [date, setDate] = useState({
     from: subDays(new Date(), 7),
-    to: format(new Date(), 'yyyy-MM-dd'),
+    to: format(addDays(new Date(), 2), 'yyyy-MM-dd'),
   });
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);

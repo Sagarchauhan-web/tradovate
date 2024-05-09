@@ -6,11 +6,9 @@ function LogoutButton() {
   const navigate = useNavigate();
 
   const logOut = async () => {
-    const response = await logout();
+    await logout();
 
-    if (!response.error) {
-      navigate('/');
-    }
+    navigate('/');
   };
   return (
     <Button variant='outline' size='sm' onClick={logOut}>

@@ -8,25 +8,25 @@ function TermsAndServices() {
       </DialogTitle>
       <DialogDescription>
         <p>
-          From everyone at Tradovate, thank you for using our product. When we
-          say “Tradovate”, “we”, “our”, or “us” in this document, we are
-          referring to Tradovate LLC, a company registered in the State of
-          Delaware (USA). When we say “Service”, or “Services”, we mean any
-          product created and maintained by Tradovate, whether delivered within
-          a web browser, desktop application, mobile application, or another
-          format. We may update these Terms of Service in the future. Typically,
-          these changes have been to clarify some of these terms by linking to
-          an expanded related policy. When you use our Services, now or in the
-          future, you are agreeing to the latest Terms of Service. That’s true
-          for any of our existing and future products and all features that we
-          add to our Services over time. There may be times where we do not
-          exercise or enforce any right or provision of the Terms of Service; in
-          doing so, we are not waiving that right or provision. These terms do
-          contain a limitation of our liability. If you violate any of the
-          terms, we may terminate your account. That’s a broad statement and it
-          means you need to place a lot of trust in us. We do our best to
-          deserve that trust by being open about who we are, how we work, and
-          keeping an open door to your feedback.
+          From everyone at PickMyTrade, thank you for using our product. When we
+          say “PickMyTrade”, “we”, “our”, or “us” in this document, we are
+          referring to PickMyTrade, a company registered in the State of
+          Rajasthan (India). When we say “Service”, or “Services”, we mean any
+          product created and maintained by PickMyTrade, whether delivered
+          within a web browser, desktop application, mobile application, or
+          another format. We may update these Terms of Service in the future.
+          Typically, these changes have been to clarify some of these terms by
+          linking to an expanded related policy. When you use our Services, now
+          or in the future, you are agreeing to the latest Terms of Service.
+          That’s true for any of our existing and future products and all
+          features that we add to our Services over time. There may be times
+          where we do not exercise or enforce any right or provision of the
+          Terms of Service; in doing so, we are not waiving that right or
+          provision. These terms do contain a limitation of our liability. If
+          you violate any of the terms, we may terminate your account. That’s a
+          broad statement and it means you need to place a lot of trust in us.
+          We do our best to deserve that trust by being open about who we are,
+          how we work, and keeping an open door to your feedback.
         </p>
         <h4 className='mt-8 scroll-m-20 text-2xl font-semibold tracking-tight'>
           Account terms
@@ -34,7 +34,7 @@ function TermsAndServices() {
         <ul className='my-6 ml-6 list-disc [&>li]:mt-2'>
           <li>
             You are responsible for maintaining the security of your account and
-            password, or social login. Tradovate or its officers, directors,
+            password, or social login. PickMyTrade or its officers, directors,
             employees, consultants, or contractors cannot and will not be liable
             for any loss or damage from your failure to comply with this
             security obligation.
@@ -238,7 +238,7 @@ function TermsAndServices() {
           </li>
           <li>
             Verbal, physical, written or other abuse (including threats of abuse
-            or retribution) of an Tradovate employee, officer, or agent may
+            or retribution) of an PickMyTrade employee, officer, or agent may
             result in immediate account termination.
           </li>
         </ul>
@@ -278,16 +278,16 @@ function TermsAndServices() {
           </li>
           <li>
             When you use our Services, you entrust us with your data. We take
-            that trust to heart. You agree that Tradovate may process your data
-            as described in our Privacy Policy and for no other purpose. We as
-            humans can access your data for the following reasons:
+            that trust to heart. You agree that PickMyTrade may process your
+            data as described in our Privacy Policy and for no other purpose. We
+            as humans can access your data for the following reasons:
           </li>
           <li>
             To help you with support requests you make: we’ll ask for express
             consent before accessing your account.
           </li>
           <li>
-            To safeguard Tradovate: we’ll look at logs and metadata as part of
+            To safeguard PickMyTrade: we’ll look at logs and metadata as part of
             our work to ensure the security of your data and the Services as a
             whole.
           </li>
@@ -303,9 +303,9 @@ function TermsAndServices() {
             commercial purposes unless we have your explicit permission.
           </li>
           <li>
-            These Service Terms incorporate the Tradovate Data Processing
+            These Service Terms incorporate the PickMyTrade Data Processing
             Addendum (“DPA”), when the General Data Protection regulation
-            (“GDPR”) applies to your use of Tradovate Services to process
+            (“GDPR”) applies to your use of PickMyTrade Services to process
             Customer Data as defined in the DPA.
           </li>
         </ul>
@@ -320,22 +320,23 @@ function TermsAndServices() {
           </li>
           <li>
             The names, look, and feel of the Services are copyright© to
-            Tradovate. All rights reserved. You may not duplicate, copy, or
+            PickMyTrade. All rights reserved. You may not duplicate, copy, or
             reuse any portion of the HTML, CSS, JavaScript, or visual design
-            elements without express written permission from Tradovate. You must
-            request permission to use Tradovate logo or any Service logos for
-            promotional purposes. Please email us to request to use logos. We
-            reserve the right to rescind this permission if you violate these
+            elements without express written permission from PickMyTrade. You
+            must request permission to use PickMyTrade logo or any Service logos
+            for promotional purposes. Please email us to request to use logos.
+            We reserve the right to rescind this permission if you violate these
             Terms of Service.
           </li>
           <li>
             You agree not to reproduce, duplicate, copy, sell, resell, or
             exploit any portion of the Services, use of the Services, or access
-            to the Services without the express written permission by Tradovate.
+            to the Services without the express written permission by
+            PickMyTrade.
           </li>
           <li>
             You must not modify another website so as to falsely imply that it
-            is associated with the Services or Tradovate.
+            is associated with the Services or PickMyTrade.
           </li>
         </ul>
         <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
@@ -358,13 +359,13 @@ function TermsAndServices() {
         </h4>
         <p>
           We mention liability throughout these Terms but to put it all in one
-          section: You expressly understand and agree that Tradovate or its
+          section: You expressly understand and agree that PickMyTrade or its
           officers, directors, employees, consultants or contractors shall not
           be liable, in law or in equity, to you or to any third party for any
           direct, indirect, incidental, lost profits, special, consequential,
           punitive or exemplary damages, including, but not limited to, damages
           for loss of profits, goodwill, use, data or other intangible losses
-          (even if Tradovate or or its officers, directors, employees,
+          (even if PickMyTrade or or its officers, directors, employees,
           consultants, or contractors have been advised of the possibility of
           such damages), resulting from: (i) the use or the inability to use the
           Services; (ii) the cost of procurement of substitute goods and
@@ -378,6 +379,10 @@ function TermsAndServices() {
           any other theory of liability. If you have a question about any of the
           Terms of Service, please contact our support team.
         </p>
+
+        <h4 className='mt-8 mb-4 text-center scroll-m-20 text-2xl font-semibold tracking-tight'>
+          This website is managed by M/S HFTSolution
+        </h4>
       </DialogDescription>
     </>
   );

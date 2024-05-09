@@ -7,11 +7,13 @@ import Documentation from './pages/Documentation/Documentation';
 import { DashboardLayout } from './layout/DashboardLayout/DashboardLayout';
 import Payment from './pages/Payment/Payment';
 import ResetPassword from './pages/Auth/ResetPassword';
+import Landing from './pages/Landing/Landing';
 
 function App() {
   return (
     <HashRouter>
       <Routes>
+        <Route path='/Home' element={<Landing />} />
         <Route path='/' element={<Auth />} />
         <Route path='/' element={<DashboardLayout />}>
           <Route path='/dashboard/home' element={<Dashboard />} />

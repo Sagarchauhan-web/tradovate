@@ -29,7 +29,7 @@ function Payment() {
   }, []);
 
   return (
-    <div className='flex h-full flex-col bg-[#f5f5f5]'>
+    <div className='flex h-full flex-col'>
       <MaxWidthWrapper>
         <div className='h-full px-10 py-8'>
           <div className='flex flex-row h-full items-center space-x-5'>
@@ -46,8 +46,10 @@ function Payment() {
           </div>
 
           <div className='h-full my-20'>
-            {Object.values(subscriptions).length && (
+            {Object.values(subscriptions).length ? (
               <PaymentCards subscriptions={subscriptions} />
+            ) : (
+              ''
             )}
           </div>
         </div>

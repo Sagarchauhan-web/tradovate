@@ -65,7 +65,7 @@ export default function PaymentCards({ subscriptions }) {
   };
 
   return (
-    <div className='flex items-center justify-center bg-[#f5f5f5] p-4'>
+    <div className='flex items-center justify-center p-4'>
       <div className='grid w-full max-w-2xl grid-cols-1 gap-6 md:grid-cols-2'>
         {/* <Card className='col-span-2'>
           <CardHeader>Current Plan</CardHeader>

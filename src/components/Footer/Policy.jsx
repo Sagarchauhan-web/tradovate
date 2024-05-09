@@ -12,9 +12,9 @@ function Policy() {
           deal to us. In this policy, we lay out: what data we collect and why;
           how your data is handled; and your rights to your data. We promise we
           never sell your data: never have, never will. This policy applies to
-          all products built and maintained by Tradovate. Whenever you want, you
-          can download, export or delete everything you have uploaded on
-          Tradovate. As we said, they are your data – not ours.
+          all products built and maintained by PickMyTrade. Whenever you want,
+          you can download, export or delete everything you have uploaded on
+          PickMyTrade. As we said, they are your data – not ours.
         </p>
 
         <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
@@ -28,7 +28,7 @@ function Policy() {
           Identity & access
         </h4>
         <p>
-          When you sign up for a Tradovate product, we typically ask for
+          When you sign up for a PickMyTrade product, we typically ask for
           identifying information such as your name and email address. That’s
           just so you can personalize your new account, and we can send you
           updates, or other essential information. That does not mean you have
@@ -84,7 +84,7 @@ function Policy() {
           Voluntary correspondence
         </h4>
         <p>
-          When you write Tradovate with a question or to ask for help, we keep
+          When you write PickMyTrade with a question or to ask for help, we keep
           that correspondence, including the email address, so that we have a
           history of past correspondences to reference if you reach out in the
           future. We also store any information you volunteer like surveys.
@@ -117,22 +117,22 @@ function Policy() {
           our applications and only to the extent necessary process some or all
           of your personal information via these third parties. Having
           sub-processors means we are using technology to access your data. No
-          Tradovate human looks at your data for these purposes. To help you
+          PickMyTrade human looks at your data for these purposes. To help you
           troubleshoot or squash a software bug, with your permission. If at any
           point we need to access your account to help you with a Support case,
           we will ask for your consent before proceeding. When required under
-          applicable law. If Tradovate is acquired — we don’t plan on that, but
-          if it happens — we’ll notify you well before any info about you is
+          applicable law. If PickMyTrade is acquired — we don’t plan on that,
+          but if it happens — we’ll notify you well before any info about you is
           transferred and becomes subject to a different privacy policy.
         </p>
         <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
           Your rights with respect to your information
         </h4>
         <p>
-          At Tradovate, we apply the same data rights to all users, regardless
+          At PickMyTrade, we apply the same data rights to all users, regardless
           of their location. Currently, the most privacy-forward regulations in
           place are the European Union’s General Data Protection Regulation
-          (“GDPR”). Tradovate recognizes all of the rights granted in these
+          (“GDPR”). PickMyTrade recognizes all of the rights granted in these
           regulations, except as limited by applicable law. These rights
           include:
         </p>
@@ -158,7 +158,7 @@ function Policy() {
             subject to certain limitations under applicable law, that your
             personal information be erased from our possession and, by
             extension, all of our service providers. Fulfillment of some data
-            deletion requests may prevent you from using Tradovate services
+            deletion requests may prevent you from using PickMyTrade services
             because our applications may then no longer work. In such cases, a
             data deletion request may result in closing your account.
           </li>
@@ -245,11 +245,11 @@ function Policy() {
           this transfer. Transfer of personal data from the EU. The GDPR
           requires that any data transferred out of the EU must be treated with
           the same level of protection that the EU privacy laws grant. That is
-          why since GDPR went into effect, Tradovate has offered a data
+          why since GDPR went into effect, PickMyTrade has offered a data
           processing addendum. We have incorporated a Data Processing Addendum
           to our Terms of Service that is in effect when the GDPR applies to
-          your use of Tradovate Services to process User Data as defined in the
-          DPA.
+          your use of PickMyTrade Services to process User Data as defined in
+          the DPA.
         </p>
         <h4 className='mt-8 mb-4 scroll-m-20 text-2xl font-semibold tracking-tight'>
           Changes & questions
@@ -259,8 +259,11 @@ function Policy() {
           regulations and reflect any new practices. Have any questions,
           comments, or concerns about this privacy policy, your data, or your
           rights with respect to your information? Send us an email to
-          contact@Tradovate.com
+          contact@PickMyTrade.com
         </p>
+        <h4 className='mt-8 mb-4 text-center scroll-m-20 text-2xl font-semibold tracking-tight'>
+          This website is managed by M/S HFTSolution
+        </h4>
       </DialogDescription>
     </>
   );

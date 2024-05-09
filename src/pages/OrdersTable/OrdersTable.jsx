@@ -6,7 +6,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { format, subDays } from 'date-fns';
+import { format, subDays, addDays } from 'date-fns';
 
 import { DatePickerWithRange } from '@/components/DatePicker/DatePicker';
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ import OverlapLoader from '@/components/Loader/OverlapLoader';
 export function OrderTable() {
   const [date, setDate] = useState({
     from: subDays(new Date(), 7),
-    to: format(new Date(), 'yyyy-MM-dd'),
+    to: format(addDays(new Date(), 2), 'yyyy-MM-dd'),
   });
   const [data, setData] = useState([]);
   const [sorting, setSorting] = useState([]);
