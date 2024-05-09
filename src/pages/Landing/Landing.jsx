@@ -80,7 +80,7 @@ export default function Landing() {
                 </p>
                 <div className='space-x-4 mt-6'>
                   <div
-                    onClick={() => navigate('/')}
+                    onClick={() => navigate('/auth')}
                     className='inline-flex h-9 items-center justify-center rounded-md bg-primary px-4 py-2 text-sm 
                     font-medium text-gray-50 shadow transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-1
                      focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50 dark:bg-gray-50 dark:text-primary

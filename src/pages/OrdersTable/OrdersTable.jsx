@@ -43,6 +43,8 @@ export function OrderTable() {
         to_date: format(date?.to, 'yyyy-MM-dd'),
       });
 
+      console.log('response here', response.data);
+
       setData(response.data);
       setIsLoading(false);
     };
@@ -95,6 +97,15 @@ export function OrderTable() {
       header: 'Order Status',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('ordStatus')}</div>
+      ),
+    },
+    {
+      accessorKey: 'order_msg',
+      header: 'Reject Reason',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('order_msg') ? row.getValue('order_msg') : '-'}
+        </div>
       ),
     },
     {

@@ -13,8 +13,8 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route path='/Home' element={<Landing />} />
-        <Route path='/' element={<Auth />} />
+        <Route index path='/' element={<Landing />} />
+        <Route path='/auth' element={<Auth />} />
         <Route path='/' element={<DashboardLayout />}>
           <Route path='/dashboard/home' element={<Dashboard />} />
           <Route path='/dashboard/documentation' element={<Documentation />} />

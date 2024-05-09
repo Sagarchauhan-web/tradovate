@@ -14,14 +14,14 @@ function Documentation() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     if (!token) {
-      navigate('/');
+      navigate('/auth');
     }
   }, []);
 
   return (
     <div>
       <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>
-      Alert format Explanation :{' '}
+        Alert format Explanation :{' '}
       </h1>
       <h2 className='leading-7 [&:not(:first-child)]:mt-6'>
         {JSON.stringify({
@@ -49,10 +49,9 @@ function Documentation() {
 
           token: 'Ct8tPtDt32EtYtCtVtVtUtL',
 
-          duplicate_position_allow:false,
-          
-          reverse_order_close:true
+          duplicate_position_allow: false,
 
+          reverse_order_close: true,
         })}
       </h2>
       <h4 className='leading-7 [&:not(:first-child)]:mt-6'>
