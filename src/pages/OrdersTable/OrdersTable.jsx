@@ -53,6 +53,15 @@ export function OrderTable() {
 
   const columns = [
     {
+      accessorKey: 'account',
+      header: 'Account',
+      cell: ({ row }) => (
+        <div className='capitalize'>
+          {row.getValue('account') ? row.getValue('account') : '-'}
+        </div>
+      ),
+    },
+    {
       accessorKey: 'id',
       header: 'Order Id',
       cell: ({ row }) => <div className='capitalize'>{row.getValue('id')}</div>,
@@ -129,7 +138,7 @@ export function OrderTable() {
       header: 'Price',
       cell: ({ row }) => (
         <div className='capitalize'>
-          {row.getValue('avgprice') ? row.getValue('price') : '-'}
+          {row.getValue('price') ? row.getValue('price') : '-'}
         </div>
       ),
     },

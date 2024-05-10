@@ -14,8 +14,8 @@ function App() {
     <HashRouter>
       <Routes>
         <Route index path='/' element={<Landing />} />
-        <Route path='/auth' element={<Auth />} />
-        <Route path='/' element={<DashboardLayout />}>
+        <Route index path='/auth' element={<Auth />} />
+        <Route path='/dashboard' element={<DashboardLayout />}>
           <Route path='/dashboard/home' element={<Dashboard />} />
           <Route path='/dashboard/documentation' element={<Documentation />} />
           <Route path='/dashboard/tradedetails' element={<TradeDetails />} />

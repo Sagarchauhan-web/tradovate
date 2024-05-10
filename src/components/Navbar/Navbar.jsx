@@ -86,6 +86,7 @@ function Navbar() {
       duplicate_position_allow: false,
       reverse_order_close: true,
       token: token,
+      account_id: '',
     };
 
     try {
