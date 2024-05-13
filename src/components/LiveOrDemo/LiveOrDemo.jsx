@@ -5,11 +5,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
-import { MdErrorOutline } from 'react-icons/md';
-import { toast } from '../ui/use-toast';
-function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
+function LiveOrDemo({ isDemo, changeAccountType }) {
   const [demo, setDemo] = useState('demo');
 
   useEffect(() => {
@@ -19,24 +16,23 @@ function LiveOrDemo({ isDemo, changeAccountType, isPaid }) {
       setDemo('live');
     }
   }, [isDemo]);
-  console.log(demo);
 
   const onValueChange = (value) => {
     if (value === 'live') {
-      if (!isPaid) {
-        return toast({
-          className: cn(
-            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
-          ),
-          duration: 3000,
-          title: 'Error',
-          description: 'Please upgrade your account to update to live',
-          action: (
-            <MdErrorOutline className='text-4xl font-bold text-red-500' />
-          ),
-        });
-      }
-      changeAccountType(false);
+      // if (!isPaid) {
+      //   return toast({
+      //     className: cn(
+      //       'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+      //     ),
+      //     duration: 3000,
+      //     title: 'Error',
+      //     description: 'Please upgrade your account to update to live',
+      //     action: (
+      //       <MdErrorOutline className='text-4xl font-bold text-red-500' />
+      //     ),
+      //   });
+      // }
+      changeAccountType(true);
     }
     if (value === 'demo') {
       changeAccountType(false);

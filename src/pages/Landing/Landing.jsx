@@ -14,7 +14,7 @@ import { useRef } from 'react';
 export default function Landing() {
   const featuresRef = useRef(null);
   const contactRef = useRef(null);
-  const aboutRef = useRef(null);
+  // const aboutRef = useRef(null);
   const navigate = useNavigate();
 
   // useEffect(() => {
@@ -418,7 +418,7 @@ export default function Landing() {
                         </p>
                       </div>
                     </div>
-                    <div className='w-full xl:space-y-6 space-y-4'>
+                    <div className='w-full xl:space-y-6 space-y-4 shadow-xl'>
                       <img src={Home} className='rounded-md' />
                     </div>
                   </div>
