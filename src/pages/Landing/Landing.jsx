@@ -9,20 +9,38 @@ import IFTTT from '../../assets/IFTTT.webp';
 import Tradovate from '../../assets/Tradovate.png';
 import Home from '../../assets/homepage.png';
 import Homepagebanner from '../../assets/homepagebanner.jpeg';
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import TermsAndServices from '@/components/Footer/TermsAndServices';
+import Policy from '@/components/Footer/Policy';
+import ContactUs from '@/components/Footer/ContactUs';
 
 export default function Landing() {
   const featuresRef = useRef(null);
   const contactRef = useRef(null);
-  // const aboutRef = useRef(null);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   navigate('/auth');
-  // }, []);
+  const [dialogBox, setDialogBox] = useState(false);
+  const [policy, setPolicy] = useState('');
 
   return (
     <div className='flex flex-col min-h-[100dvh]'>
+      <Dialog open={dialogBox} onOpenChange={setDialogBox}>
+        {(policy === 'terms' || policy === 'privacy') && (
+          <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
+            <DialogHeader>
+              {policy === 'terms' && <TermsAndServices />}
+              {policy === 'privacy' && <Policy />}
+            </DialogHeader>
+          </DialogContent>
+        )}
+        {policy === 'contactus' && (
+          <DialogContent className='sm:max-w-[525px] p-5'>
+            <DialogHeader>
+              <ContactUs />
+            </DialogHeader>
+          </DialogContent>
+        )}
+      </Dialog>
       <header className='px-6 py-10 lg:px-8 h-14 flex items-center border-b-2'>
         <div className='flex items-center justify-between w-full' href='#'>
           <div className='flex items-center justify-center gap-5'>
@@ -83,7 +101,7 @@ export default function Landing() {
         </div>
       </header>
       <main className='flex-1'>
-        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18 bg-gradient-to-r from-violet-600 to-indigo-600'>
+        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18 bg-gradient-to-r from-blue-600 to-violet-800'>
           <div className='container'>
             <div className='grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16'>
               <div className=' flex justify-center flex-col'>
@@ -94,10 +112,10 @@ export default function Landing() {
                   Automated Trading
                 </h1>
                 <p className='mx-auto max-w-[700px] text-white md:text-xl'>
-                  PickMyTrade can automate trading bots with stocks, crypto,
-                  options and futures trading strategies from TradingView or
-                  TrendSpider in popular brokers like TDAmeritrade,
-                  TradeStation, Coinbase, Interactive Brokers and Alpaca.
+                  PickMyTrade specializes in automating trading bots, enabling
+                  seamless strategy execution for stocks, cryptocurrencies,
+                  options, and futures from platforms like TradingView, across
+                  well-known brokers such as Tradovate.
                 </p>
                 <div className='mt-6'>
                   <div className='mx-auto w-full space-y-2'>
@@ -119,8 +137,26 @@ export default function Landing() {
                     <p className='text-xs text-white max-w-sm'>
                       Start your free paper account. By providing your email,
                       you agree to our{' '}
-                      <span className='underline'>terms of service</span> and{' '}
-                      <span className='underline'>privacy policy</span>.
+                      <span
+                        className='underline cursor-pointer'
+                        onClick={() => {
+                          setDialogBox(true);
+                          setPolicy('terms');
+                        }}
+                      >
+                        terms of service
+                      </span>{' '}
+                      and{' '}
+                      <span
+                        className='underline cursor-pointer'
+                        onClick={() => {
+                          setDialogBox(true);
+                          setPolicy('privacy');
+                        }}
+                      >
+                        privacy policy
+                      </span>
+                      .
                       <div className='underline underline-offset-2' href='#' />
                     </p>
                   </div>
@@ -173,50 +209,32 @@ export default function Landing() {
           className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'
         >
           <div className='container grid items-center justify-center gap-4 px-4 md:px-6'>
-            <div className='space-y-3'>
-              <h2 className='text-3xl font-bold tracking-tighter md:text-4xl/tight text-primary'>
+            <div className='space-y-4 text-center'>
+              <h2 className='text-4xl font-bold tracking-tighter md:text-6xl/tight'>
                 How It Works
               </h2>
-              <p className='max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
-                PickMyTrade is simple and easy to use. You focus on building
-                your strategy and we take care of executing it directly in your
-                broker.
-              </p>
+              <div className='flex justify-center  text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
+                <div className='max-w-xl'>
+                  PickMyTrade Streamline your trading journey. Craft your
+                  strategy, and let us seamlessly integrate it with your broker
+                  for effortless execution.
+                </div>
+              </div>
             </div>
             <div className='relative'>
-              {/* <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
-                <svg
-                  className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  strokeWidth='2'
-                  stroke='currentColor'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <path d='M12 5l0 14'></path>
-                  <path d='M16 15l-4 4'></path>
-                  <path d='M8 15l4 4'></path>
-                </svg>
-              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border 2xl:mt-16 sm:mt-14 mt-10 rounded-xl'>
-                <p className='sm:text-[300px] text-[250px] absolute left-0 xl:top-auto xl:-bottom-14 -top-10 mb-0 leading-none -ml-6 text-primary/15 font-bold'>
-                  01
-                </p>
                 <div className='p-5 sm:px-8 sm:py-7 lg:px-16 lg:py-20 relative'>
                   <div className='flex xl:flex-row flex-col items-center xl:justify-between xl:gap-20 sm:gap-12 gap-8'>
                     <div className='xl:max-w-lg shrink-0 w-full'>
                       <div>
                         <h2 className='text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
-                          Build Your Strategy
+                          <span className='text-green-500 text-5xl'>01.</span>{' '}
+                          Develop your action plan
                         </h2>
-                        <p className='sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
-                          Build and backtest your trading strategy using your
-                          preferred charting software like TradingView or
-                          TrendSpider.
+                        <p className='max-w-xl sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
+                          Craft and evaluate your market tactics with the
+                          charting tools you trust the most, such as TradingView
+                          or TrendSpider.
                         </p>
                       </div>
                     </div>
@@ -290,38 +308,19 @@ export default function Landing() {
               </div>
             </div>
             <div className='relative'>
-              {/* <div className='absolute left-0 sm:-bottom-24 -bottom-16'>
-                <svg
-                  className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  strokeWidth='2'
-                  stroke='currentColor'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <path d='M12 5l0 14'></path>
-                  <path d='M16 15l-4 4'></path>
-                  <path d='M8 15l4 4'></path>
-                </svg>
-              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border sm:mt-20 mt-12 rounded-xl'>
-                <p className='sm:text-[300px] text-[250px] absolute right-0 xl:top-auto xl:-bottom-14 -top-10 leading-none -mr-6 text-primary/15 font-bold'>
-                  02
-                </p>
                 <div className='p-5 sm:px-8 sm:py-7 lg:px-16 lg:py-20 relative'>
                   <div className='flex xl:flex-row-reverse flex-col items-center justify-between xl:gap-20 sm:gap-12 gap-8 w-full h-full'>
                     <div className='xl:max-w-xl xl:shrink-0 w-full '>
                       <div>
                         <h2 className='text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
-                          Send Alerts to PickMyTrade
+                          <span className='text-green-500 text-5xl'>02.</span>{' '}
+                          Channel trade alerts
                         </h2>
-                        <p className='sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
-                          Setup your strategy to send alert webhooks to
-                          PickMyTrade when you want to execute a trade.
+                        <p className=' max-w-xl sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
+                          Organize your trading tactics to send timely alert
+                          webhooks to PickMyTrade, aligning with your decision
+                          to execute a trade.
                         </p>
                       </div>
                     </div>
@@ -330,13 +329,33 @@ export default function Landing() {
                         <code>
                           {'{'}
                           <br />
-                          &nbsp;&nbsp; &quot;ticker&quot;: &quot;Apple&quot;,
+                          &nbsp;&nbsp; &quot;symbol&quot;: &quot;6BM4&quot;,
                           <br />
-                          &nbsp;&nbsp; &quot;action&quot;: &quot;buy&quot;,
+                          &nbsp;&nbsp; &quot;date&quot;: &quot;12/6&quot;,
                           <br />
-                          &nbsp;&nbsp; &quot;price&quot;: &quot;9999&quot;
+                          &nbsp;&nbsp; &quot;data&quot;: &quot;buy&quot;
                           <br />
-                          {'{'}
+                          &nbsp;&nbsp; &quot;quantity&quot;: &quot;3&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;risk_percentage&quot;:
+                          &quot;0&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;price&quot;: &quot;5&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;tp&quot;: &quot;0&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;sl&quot;: &quot;0&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;trail&quot;: &quot;0&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;update_tp&quot;: &quot;false&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;update_sl&quot;: &quot;false&quot;
+                          <br />
+                          &nbsp;&nbsp; &quot;reverse_order_close&quot;:
+                          &quot;true&quot;
+                          <br />
+                          {'}'}
                         </code>
                       </div>
                     </div>
@@ -345,39 +364,19 @@ export default function Landing() {
               </div>
             </div>
             <div className='relative'>
-              {/* <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
-                <svg
-                  className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
-                  xmlns='http://www.w3.org/2000/svg'
-                  width='24'
-                  height='24'
-                  viewBox='0 0 24 24'
-                  strokeWidth='2'
-                  stroke='currentColor'
-                  fill='none'
-                  strokeLinecap='round'
-                  strokeLinejoin='round'
-                >
-                  <path d='M12 5l0 14'></path>
-                  <path d='M16 15l-4 4'></path>
-                  <path d='M8 15l4 4'></path>
-                </svg>
-              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border sm:mt-20 mt-12 rounded-xl'>
-                <div className='sm:text-[300px] text-[250px] absolute left-0 xl:top-auto xl:-bottom-14 -top-10 leading-none -ml-6 text-primary/15 font-bold'>
-                  03
-                </div>
                 <div className='p-5 sm:px-8 sm:py-7 lg:px-16 lg:py-20 relative'>
                   <div className='flex xl:flex-row flex-col items-center justify-between xl:gap-20 sm:gap-12 gap-8'>
                     <div className='xl:max-w-lg xl:shrink-0 w-full'>
                       <div>
                         <h2 className='text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
-                          Connect Your Broker
+                          <span className='text-green-500 text-5xl'>03.</span>{' '}
+                          Establish a connection to your brokerage
                         </h2>
-                        <p className='sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
-                          Securely connect your broker to PickMyTrade with one
-                          click and execute trades automatically in your account
-                          when your strategy sends an alert.
+                        <p className='max-w-xl sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
+                          Safely establish a one-click connection between your
+                          broker and PickMyTrade, enabling automatic trade
+                          execution in your account when alerts are triggered.
                         </p>
                       </div>
                     </div>
@@ -401,20 +400,18 @@ export default function Landing() {
             </div>
             <div className='relative'>
               <div className='relative isolate overflow-hidden bg-gray-50 border sm:mt-20 mt-12 rounded-xl'>
-                <p className='sm:text-[300px] text-[250px] absolute right-0 xl:top-auto xl:-bottom-14 -top-10 leading-none -mr-6 text-primary/15 font-bold'>
-                  04
-                </p>
                 <div className='p-5 sm:px-8 sm:py-7 lg:px-16 lg:py-20 relative'>
                   <div className='flex flex-col items-start justify-between xl:gap-20 sm:gap-12 gap-8 w-full h-full'>
                     <div className='xl:max-w-lg shrink-0 w-full'>
                       <div>
                         <h2 className='text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
-                          Monitor Your Trades
+                          <span className='text-green-500 text-5xl'>04.</span>{' '}
+                          Track your trade movements with precision
                         </h2>
-                        <p className='sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
-                          Easily monitor your trades and manage all your
-                          positions and orders across multiple accounts from one
-                          easy to use user interface.
+                        <p className='max-w-xl sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
+                          Conveniently track your market dealings while
+                          coordinating your positions and commands across
+                          numerous accounts through one intuitive interface.
                         </p>
                       </div>
                     </div>
@@ -427,42 +424,38 @@ export default function Landing() {
             </div>
           </div>
         </section>
-
-        <section
-          ref={contactRef}
-          className='w-full  bg-gray-100 dark:bg-gray-800'
-        >
-          <div className='bg-gray-100 border-t border-b'>
+        <section ref={contactRef} className='w-full bg-primary'>
+          <div className='bg-primary border-t border-b'>
             <div className='lg:pt-20 lg:pb-20 sm:pt-16 sm:pb-8 pt-14 pb-4'>
               <div className='container'>
                 <div className='mx-auto max-w-3xl lg:max-w-none'>
                   <div className='text-center'>
-                    <h2 className='text-3xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
+                    <h2 className='text-3xl font-bold tracking-tight text-white sm:text-4xl'>
                       Trusted by traders from all over the world
                     </h2>
                   </div>
                   <dl className='mt-16 grid lg:divide-x lg:divide-y-0 divide-y divide-gray-300 overflow-hidden gap-0.5 rounded-2xl text-center grid-cols-1 lg:grid-cols-3 lg:max-w-full max-w-sm mx-auto'>
                     <div className='flex flex-col gap-1 p-8'>
-                      <dt className='text-base font-semibold leading-6 text-gray-600'>
+                      <dt className='text-base font-semibold leading-6 text-white'>
                         Under Management
                       </dt>
-                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-indigo-600'>
+                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-white'>
                         $1M+
                       </dd>
                     </div>
                     <div className='flex flex-col gap-1 p-8'>
-                      <dt className='text-base font-semibold leading-6 text-gray-600'>
+                      <dt className='text-base font-semibold leading-6 text-white'>
                         Traders
                       </dt>
-                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-indigo-600'>
+                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-white'>
                         1000+
                       </dd>
                     </div>
                     <div className='flex flex-col gap-1 p-8'>
-                      <dt className='text-base font-semibold leading-6 text-gray-600'>
+                      <dt className='text-base font-semibold leading-6 text-white'>
                         Trades Executed{' '}
                       </dt>
-                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-indigo-600'>
+                      <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-white'>
                         1M+
                       </dd>
                     </div>
@@ -474,7 +467,7 @@ export default function Landing() {
         </section>
         <section
           ref={contactRef}
-          className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'
+          className='w-full py-12 md:py-14 lg:py-18 bg-gray-100 dark:bg-gray-800'
         >
           <div className='container py-16 sm:py-24 lg:py-20 relative'>
             <div className='xl:grid xl:grid-cols-3 xl:gap-8'>
@@ -484,10 +477,11 @@ export default function Landing() {
                   <p className='text-gray-800 font-bold'>PickMyTrade</p>
                 </div>
                 <p className='text-sm leading-6 text-gray-600 max-w-sm text-center'>
-                  PickMyTrade can automate stocks, crypto, options and futures
-                  trading strategies from TradingView or TrendSpider in popular
-                  brokers like TDAmeritrade, TradeStation, Coinbase, Interactive
-                  Brokers and Alpaca.
+                  Empower your trading endeavors with PickMyTrade, automating
+                  strategies for stocks, crypto, options, and futures from
+                  analytical tools such as TradingView or TrendSpider, in
+                  collaboration with prominent brokers like TDAmeritrade,
+                  TradeStation, Coinbase, Interactive Brokers, and Alpaca.
                 </p>
               </div>
               <div className='mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0'>
@@ -564,8 +558,11 @@ export default function Landing() {
                       </li>
                       <li>
                         <a
-                          href='/contact'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                          onClick={() => {
+                            setDialogBox(true);
+                            setPolicy('contactus');
+                          }}
+                          className='text-sm leading-6 cursor-pointer text-gray-600 hover:text-gray-800'
                         >
                           Contact Us
                         </a>
@@ -579,16 +576,22 @@ export default function Landing() {
                     <ul role='list' className='mt-6 space-y-4'>
                       <li>
                         <a
-                          href='/privacy'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                          onClick={() => {
+                            setDialogBox(true);
+                            setPolicy('privacy');
+                          }}
+                          className='text-sm cursor-pointer leading-6 text-gray-600 hover:text-gray-800'
                         >
                           Privacy{' '}
                         </a>
                       </li>
                       <li>
                         <a
-                          href='/terms'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                          onClick={() => {
+                            setDialogBox(true);
+                            setPolicy('terms');
+                          }}
+                          className='text-sm cursor-pointer leading-6 text-gray-600 hover:text-gray-800'
                         >
                           Terms &amp; Conditions
                         </a>
@@ -600,83 +603,51 @@ export default function Landing() {
             </div>
             <div className='text-sm text-gray-600 pt-12 uppercase'>
               <p className='mb-4'>
-                PickMyTrade operates as a non-custodial automated trading
-                platform, enabling users to connect alerts from their preferred
-                trading platforms to their selected brokerage or exchange
-                accounts. It abstains from the transmission, custody, or
-                management of customer funds, covering both traditional and
-                cryptocurrency assets. Typically, registration requirements set
-                by regulatory entities such as the SEC, FINRA, or FinCEN apply
-                to entities that hold or transmit customer funds. To ensure
-                ongoing compliance, PickMyTrade regularly engages with
-                regulatory authorities to confirm its adherence to all relevant
-                local and federal laws.
+                PickMyTrade stands as an autonomous trading facilitator that
+                doesn’t take custody of user assets. It empowers traders to link
+                alert mechanisms from charting platforms they prefer, directly
+                to their chosen brokers or exchanges. By steering clear of
+                handling, holding, or managing client capital, it encompasses a
+                broad spectrum of assets, from conventional markets to the
+                crypto realm. Entities like the SEC, FINRA, or FinCEN usually
+                mandate registration for those dealing with client funds. To
+                maintain compliance, PickMyTrade proactively liaises with
+                regulatory bodies, ensuring its operations are in lockstep with
+                pertinent regulations at both the local and national levels.
               </p>
               <p className='mb-4'>
-                PickMyTrade does not provide alerts, signals, research,
-                analysis, or trading advice of any kind. It is designed to
-                assist traders and investors in making their own trading
-                decisions based on their alerts. The platform does not offer
-                recommendations regarding securities to buy or sell, nor does it
-                provide trading or investing advice. The platform and its
-                features, capabilities, and tools are provided 'as-is' without
-                any warranty.
+                PickMyTrade stands as a facilitator for self-directed traders
+                and investors, offering a platform that supports independent
+                decision-making based on user-generated alerts. It refrains from
+                issuing any form of alerts, signals, research, analysis, or
+                trading recommendations. The service does not engage in advising
+                on the purchase or sale of securities, nor does it partake in
+                providing investment guidance. All features, capabilities, and
+                tools of the platform are made available ‘as-is’, devoid of any
+                guarantees.
               </p>
               <p className='mb-4'>
-                Risk Disclosure: The use of automated trading systems involves
-                inherent risks, including the potential for significant
-                financial loss. These systems operate based on predetermined
-                algorithms that may not fully adapt to changing market
-                conditions, possibly making them unsuitable for some investors.
-                Individuals are advised to thoroughly assess their financial
-                situation and risk tolerance before using this platform.
+                Engaging with automated trading platforms comes with intrinsic
+                uncertainties, encompassing the possibility of substantial
+                monetary setbacks. Such systems function on fixed algorithms
+                which might not be agile enough to accommodate evolving market
+                dynamics, rendering them potentially inappropriate for certain
+                investors. It’s prudent for individuals to conduct a
+                comprehensive evaluation of their fiscal standing and appetite
+                for risk prior to utilizing this technology.
               </p>
             </div>
           </div>
         </section>
-        <div className='sm:py-5 py-2 bg-gray-200 relative'>
+        <div className='sm:py-5 py-2 bg-primary relative'>
           <div className='container'>
             <div className='flex items-center justify-center text-center gap-5'>
-              <p className='text-sm leading-5 text-gray-600'>
+              <p className='text-sm leading-5 text-white'>
                 © 2024 PickMyTrade, Inc. All rights reserved.
               </p>
             </div>
           </div>
         </div>
-        {/* <section
-          ref={contactRef}
-          className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'
-        >
-          <div className='container grid items-center gap-6 px-4 md:px-6 lg:grid-cols-2 lg:gap-10'>
-            <div className='space-y-2'>
-              <h2 className='text-3xl font-bold tracking-tighter md:text-4xl/tight text-primary'>
-                Join Our Trading Community
-              </h2>
-              <p className='max-w-[600px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
-                Sign up today and start your journey to financial success.
-              </p>
-            </div>
-            <div className='mx-auto w-full max-w-sm space-y-2'>
-              <form className='flex space-x-2'>
-                <Input
-                  className='max-w-lg flex-1'
-                  placeholder='Enter your email'
-                  type='email'
-                />
-                <Button
-                  className='bg-primary hover:bg-primary/90 text-gray-50'
-                  type='submit'
-                >
-                  Sign Up
-                </Button>
-              </form>
-              <p className='text-xs text-gray-500 dark:text-gray-400'>
-                Sign up to our newsletter.
-                <div className='underline underline-offset-2' href='#' />
-              </p>
-            </div>
-          </div>
-        </section> */}
       </main>
     </div>
   );
