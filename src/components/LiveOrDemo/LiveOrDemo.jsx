@@ -57,7 +57,7 @@ function LiveOrDemo({ isDemo, changeAccountType }) {
           <div className='flex justify-center items-center'>
             <div
               className={`mr-2 w-2 h-2
-              rounded-full shadow-md bg-red-500 shadow-red-500`}
+                  rounded-full shadow-md bg-green-500 shadow-green-500`}
             />
             Demo
           </div>

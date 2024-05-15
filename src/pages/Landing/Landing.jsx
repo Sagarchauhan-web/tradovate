@@ -184,7 +184,7 @@ export default function Landing() {
               </p>
             </div>
             <div className='relative'>
-              <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
+              {/* <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
                 <svg
                   className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
                   xmlns='http://www.w3.org/2000/svg'
@@ -201,7 +201,7 @@ export default function Landing() {
                   <path d='M16 15l-4 4'></path>
                   <path d='M8 15l4 4'></path>
                 </svg>
-              </div>
+              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border 2xl:mt-16 sm:mt-14 mt-10 rounded-xl'>
                 <p className='sm:text-[300px] text-[250px] absolute left-0 xl:top-auto xl:-bottom-14 -top-10 mb-0 leading-none -ml-6 text-primary/15 font-bold'>
                   01
@@ -290,7 +290,7 @@ export default function Landing() {
               </div>
             </div>
             <div className='relative'>
-              <div className='absolute left-0 sm:-bottom-24 -bottom-16'>
+              {/* <div className='absolute left-0 sm:-bottom-24 -bottom-16'>
                 <svg
                   className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
                   xmlns='http://www.w3.org/2000/svg'
@@ -307,7 +307,7 @@ export default function Landing() {
                   <path d='M16 15l-4 4'></path>
                   <path d='M8 15l4 4'></path>
                 </svg>
-              </div>
+              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border sm:mt-20 mt-12 rounded-xl'>
                 <p className='sm:text-[300px] text-[250px] absolute right-0 xl:top-auto xl:-bottom-14 -top-10 leading-none -mr-6 text-primary/15 font-bold'>
                   02
@@ -345,7 +345,7 @@ export default function Landing() {
               </div>
             </div>
             <div className='relative'>
-              <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
+              {/* <div className='absolute right-0 sm:-bottom-24 -bottom-16'>
                 <svg
                   className='sm:h-28 sm:w-28 w-20 h-20 text-[#0084d1] stroke-[0.8]'
                   xmlns='http://www.w3.org/2000/svg'
@@ -362,7 +362,7 @@ export default function Landing() {
                   <path d='M16 15l-4 4'></path>
                   <path d='M8 15l4 4'></path>
                 </svg>
-              </div>
+              </div> */}
               <div className='relative isolate overflow-hidden bg-gray-50 border sm:mt-20 mt-12 rounded-xl'>
                 <div className='sm:text-[300px] text-[250px] absolute left-0 xl:top-auto xl:-bottom-14 -top-10 leading-none -ml-6 text-primary/15 font-bold'>
                   03
@@ -472,6 +472,177 @@ export default function Landing() {
             </div>
           </div>
         </section>
+        <section
+          ref={contactRef}
+          className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'
+        >
+          <div className='container py-16 sm:py-24 lg:py-20 relative'>
+            <div className='xl:grid xl:grid-cols-3 xl:gap-8'>
+              <div className='space-y-8 w-full flex flex-col items-center'>
+                <div className='flex justify-center items-center'>
+                  <img src='/logo.png' alt='logo' className='h-9' />
+                  <p className='text-gray-800 font-bold'>PickMyTrade</p>
+                </div>
+                <p className='text-sm leading-6 text-gray-600 max-w-sm text-center'>
+                  PickMyTrade can automate stocks, crypto, options and futures
+                  trading strategies from TradingView or TrendSpider in popular
+                  brokers like TDAmeritrade, TradeStation, Coinbase, Interactive
+                  Brokers and Alpaca.
+                </p>
+              </div>
+              <div className='mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0'>
+                <div className='md:grid md:grid-cols-2 md:gap-8'>
+                  <div>
+                    <h3 className='text-lg font-semibold leading-6 text-gray-800'>
+                      Brokers
+                    </h3>
+                    <ul role='list' className='mt-6 space-y-4'>
+                      <li>
+                        <a
+                          href='/broker/tradovate'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Tradovate
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className='mt-10 md:mt-0'>
+                    <h3 className='text-lg font-semibold leading-6 text-gray-800'>
+                      Support
+                    </h3>
+                    <ul role='list' className='mt-6 space-y-4'>
+                      <li>
+                        <a
+                          href='/pricing'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Pricing
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href='/docs'
+                          target='_blank'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Documentation
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href='/faq'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          FAQ
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div className='md:grid md:grid-cols-2 md:gap-8'>
+                  <div>
+                    <h3 className='text-lg font-semibold leading-6 text-gray-800'>
+                      Company
+                    </h3>
+                    <ul role='list' className='mt-6 space-y-4'>
+                      <li>
+                        <a
+                          href='/about'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          About Us
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href='/community'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Community
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href='/contact'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Contact Us
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className='mt-10 md:mt-0'>
+                    <h3 className='text-lg font-semibold leading-6 text-gray-800'>
+                      Legal
+                    </h3>
+                    <ul role='list' className='mt-6 space-y-4'>
+                      <li>
+                        <a
+                          href='/privacy'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Privacy{' '}
+                        </a>
+                      </li>
+                      <li>
+                        <a
+                          href='/terms'
+                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
+                        >
+                          Terms &amp; Conditions
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className='text-sm text-gray-600 pt-12 uppercase'>
+              <p className='mb-4'>
+                PickMyTrade operates as a non-custodial automated trading
+                platform, enabling users to connect alerts from their preferred
+                trading platforms to their selected brokerage or exchange
+                accounts. It abstains from the transmission, custody, or
+                management of customer funds, covering both traditional and
+                cryptocurrency assets. Typically, registration requirements set
+                by regulatory entities such as the SEC, FINRA, or FinCEN apply
+                to entities that hold or transmit customer funds. To ensure
+                ongoing compliance, PickMyTrade regularly engages with
+                regulatory authorities to confirm its adherence to all relevant
+                local and federal laws.
+              </p>
+              <p className='mb-4'>
+                PickMyTrade does not provide alerts, signals, research,
+                analysis, or trading advice of any kind. It is designed to
+                assist traders and investors in making their own trading
+                decisions based on their alerts. The platform does not offer
+                recommendations regarding securities to buy or sell, nor does it
+                provide trading or investing advice. The platform and its
+                features, capabilities, and tools are provided 'as-is' without
+                any warranty.
+              </p>
+              <p className='mb-4'>
+                Risk Disclosure: The use of automated trading systems involves
+                inherent risks, including the potential for significant
+                financial loss. These systems operate based on predetermined
+                algorithms that may not fully adapt to changing market
+                conditions, possibly making them unsuitable for some investors.
+                Individuals are advised to thoroughly assess their financial
+                situation and risk tolerance before using this platform.
+              </p>
+            </div>
+          </div>
+        </section>
+        <div className='sm:py-5 py-2 bg-gray-200 relative'>
+          <div className='container'>
+            <div className='flex items-center justify-center text-center gap-5'>
+              <p className='text-sm leading-5 text-gray-600'>
+                © 2024 PickMyTrade, Inc. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
         {/* <section
           ref={contactRef}
           className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'

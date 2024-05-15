@@ -25,11 +25,11 @@ function Navbar() {
     const body = {
       live: liveOrDemo,
     };
-    const response = await SetAccountType(body);
+    await SetAccountType(body);
 
-    if (!response.error) {
-      getUser();
-    }
+    // if (!response.error) {
+    getUser();
+    // }
   };
 
   const onTradovateDisconnectedClick = async () => {
