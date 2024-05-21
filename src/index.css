@@ -6,6 +6,11 @@ html {
   scroll-behavior: smooth;
 }
 
+.hljs-copy-button {
+  background-color: rgb(129, 129, 129) !important;
+  padding: 0 0.5rem;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

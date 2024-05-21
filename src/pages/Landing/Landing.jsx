@@ -9,18 +9,35 @@ import IFTTT from '../../assets/IFTTT.webp';
 import Tradovate from '../../assets/Tradovate.png';
 import Home from '../../assets/homepage.png';
 import Homepagebanner from '../../assets/homepagebanner.jpeg';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import TermsAndServices from '@/components/Footer/TermsAndServices';
 import Policy from '@/components/Footer/Policy';
 import ContactUs from '@/components/Footer/ContactUs';
+import PaymentCards from '@/components/PaymentCards/PaymentCards';
+import { getSubscriptions } from '@/services/Payments/payments';
 
 export default function Landing() {
   const featuresRef = useRef(null);
   const contactRef = useRef(null);
+  const pricingRef = useRef(null);
   const navigate = useNavigate();
   const [dialogBox, setDialogBox] = useState(false);
   const [policy, setPolicy] = useState('');
+
+  const [subscriptions, setSubscriptions] = useState({});
+
+  useEffect(() => {
+    const getSubscriptionsData = async () => {
+      const response = await getSubscriptions();
+
+      console.log(response, 'response');
+      if (!response.error) {
+        setSubscriptions(response.data);
+      }
+    };
+    getSubscriptionsData();
+  }, []);
 
   return (
     <div className='flex flex-col min-h-[100dvh]'>
@@ -60,22 +77,22 @@ export default function Landing() {
               >
                 How it works
               </div>
-              {/* <div
-              className='text-sm font-medium hover:underline underline-offset-4 text-primary'
-              href='#'
-            >
-              Pricing
-            </div> */}
               <div
                 className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
                 onClick={() =>
                   window.scrollTo({
-                    top: contactRef.current.offsetTop,
+                    top: pricingRef.current.offsetTop,
                     behavior: 'smooth',
                   })
                 }
               >
-                Community
+                Pricing
+              </div>
+              <div
+                className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
+                onClick={() => navigate('/documentation')}
+              >
+                Documentation
               </div>
             </nav>
           </div>
@@ -101,17 +118,17 @@ export default function Landing() {
         </div>
       </header>
       <main className='flex-1'>
-        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18 bg-gradient-to-r from-blue-600 to-violet-800'>
+        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18'>
           <div className='container'>
             <div className='grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16'>
               <div className=' flex justify-center flex-col'>
                 <h1
                   className='lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl 
-                xl:text-[3.4rem] 2xl:text-[3.75rem] text-primary pb-4 text-white'
+                xl:text-[3.4rem] 2xl:text-[3.75rem] text-primary pb-4 '
                 >
                   Automated Trading
                 </h1>
-                <p className='mx-auto max-w-[700px] text-white md:text-xl'>
+                <p className='mx-auto max-w-[700px]  md:text-xl'>
                   PickMyTrade specializes in automating trading bots, enabling
                   seamless strategy execution for stocks, cryptocurrencies,
                   options, and futures from platforms like TradingView, across
@@ -128,13 +145,13 @@ export default function Landing() {
 
                       <button
                         className='w-32 inline-flex items-center justify-center rounded-md border border-primary cursor-pointer
-                     bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-gray-200/90'
+                      px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-200/90'
                         href='#'
                       >
                         Register
                       </button>
                     </form>
-                    <p className='text-xs text-white max-w-sm'>
+                    <p className='text-xs  max-w-sm'>
                       Start your free paper account. By providing your email,
                       you agree to our{' '}
                       <span
@@ -329,7 +346,7 @@ export default function Landing() {
                         <code>
                           {'{'}
                           <br />
-                          &nbsp;&nbsp; &quot;symbol&quot;: &quot;6BM4&quot;,
+                          &nbsp;&nbsp; &quot;symbol&quot;: &quot;6BM2024&quot;,
                           <br />
                           &nbsp;&nbsp; &quot;date&quot;: &quot;12/6&quot;,
                           <br />
@@ -423,6 +440,28 @@ export default function Landing() {
               </div>
             </div>
           </div>
+        </section>
+        <section
+          ref={pricingRef}
+          className='w-full py-12 md:py-24 lg:py-28 bg-gray-100 dark:bg-gray-800'
+        >
+          <div className='space-y-4 text-center mb-16'>
+            <h2 className='text-4xl mb-8 font-bold tracking-tighter md:text-6xl/tight'>
+              Pricing
+            </h2>
+            <div className='flex justify-center  text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400'>
+              <div className='max-w-xl'>
+                Choose the plan that’s right for your business. Our transparent
+                pricing ensures there are no hidden fees ever. Explore our
+                options and find the perfect fit for your needs.
+              </div>
+            </div>
+          </div>
+          {Object.values(subscriptions).length ? (
+            <PaymentCards subscriptions={subscriptions} />
+          ) : (
+            ''
+          )}
         </section>
         <section ref={contactRef} className='w-full bg-primary'>
           <div className='bg-primary border-t border-b'>
@@ -546,14 +585,6 @@ export default function Landing() {
                           className='text-sm leading-6 text-gray-600 hover:text-gray-800'
                         >
                           About Us
-                        </a>
-                      </li>
-                      <li>
-                        <a
-                          href='/community'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
-                        >
-                          Community
                         </a>
                       </li>
                       <li>

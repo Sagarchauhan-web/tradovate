@@ -9,15 +9,19 @@ import { toast } from '../ui/use-toast';
 import { cn } from '@/lib/utils';
 import { FaClipboard } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
+import { differenceInDays } from 'date-fns';
+
 function Navbar() {
   const [userData, setUserData] = useState();
   const navigate = useNavigate();
   const location = useLocation();
+  const [trialDays, setTrialDays] = useState();
 
   const getUser = async () => {
     const response = await me();
     localStorage.setItem('user', JSON.stringify(response.data));
 
+    setTrialDays(differenceInDays(response.data.demo_Expiry, new Date()));
     setUserData(response.data);
   };
 
@@ -127,113 +131,121 @@ function Navbar() {
   };
 
   return (
-    <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
-      <div className='flex gap-6 text-white mb-2 xl:mb-0'>
-        <li
-          className='flex justify-center items-center'
-          onClick={() => navigate('/dashboard/home')}
-        >
-          <img src='/logo.png' alt='logo' className='w-10 h-8' />
-          <p className='text-gray-800 font-bold'>PickMyTrade</p>
-        </li>
-        <li
-          onClick={() => navigate('/dashboard/home')}
-          className={`${
-            location.pathname === '/dashboard/home'
-              ? 'bg-primary text-white'
-              : 'text-black'
-          } px-4 py-1 rounded-sm cursor-pointer`}
-        >
-          Home
-        </li>
-        <li
-          onClick={() => navigate('/dashboard/documentation')}
-          className={`${
-            location.pathname === '/dashboard/documentation'
-              ? 'bg-primary text-white'
-              : 'text-black'
-          } px-4 py-1 rounded-sm cursor-pointer`}
-        >
-          Documentation
-        </li>
-        <li
-          onClick={() => navigate('/dashboard/payment')}
-          className={`${
-            location.pathname === '/dashboard/payment'
-              ? 'bg-primary text-white'
-              : 'text-black'
-          } px-4 py-1 rounded-sm cursor-pointer`}
-        >
-          Payment
-        </li>
-      </div>
-
-      <div className='flex gap-2 flex-wrap'>
-        <li>
-          <Button
-            variant='outline'
-            size='sm'
-            onClick={() => copyTextToClipboardWebhook()}
-            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+    <>
+      <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
+        <div className='flex gap-6 text-white mb-2 xl:mb-0'>
+          <li
+            className='flex justify-center items-center'
+            onClick={() => navigate('/dashboard/home')}
           >
-            Webhook
-          </Button>
-        </li>
-        <li>
-          <Button
-            disabled={!userData?.user_key}
-            variant='outline'
-            size='sm'
-            onClick={() =>
-              copyTextToClipboardForBuyAndSell('buy', userData?.user_key)
-            }
-            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            <img src='/logo.png' alt='logo' className='w-10 h-8' />
+            <p className='text-gray-800 font-bold'>PickMyTrade</p>
+          </li>
+          <li
+            onClick={() => navigate('/dashboard/home')}
+            className={`${
+              location.pathname === '/dashboard/home'
+                ? 'bg-primary text-white'
+                : 'text-black'
+            } px-4 py-1 rounded-sm cursor-pointer`}
           >
-            Buy Alert
-          </Button>
-        </li>
-        <li>
-          <Button
-            disabled={!userData?.user_key}
-            variant='outline'
-            size='sm'
-            onClick={() =>
-              copyTextToClipboardForBuyAndSell('sell', userData?.user_key)
-            }
-            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            Home
+          </li>
+          {/* <li
+            onClick={() => navigate('/dashboard/documentation')}
+            className={`${
+              location.pathname === '/dashboard/documentation'
+                ? 'bg-primary text-white'
+                : 'text-black'
+            } px-4 py-1 rounded-sm cursor-pointer`}
           >
-            Sell Alert
-          </Button>
-        </li>
-        <li>
-          <Button
-            disabled={!userData?.user_key}
-            variant='outline'
-            size='sm'
-            onClick={() => copyTextToClipboard(userData?.user_key)}
-            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            Documentation
+          </li> */}
+          <li
+            onClick={() => navigate('/dashboard/payment')}
+            className={`${
+              location.pathname === '/dashboard/payment'
+                ? 'bg-primary text-white'
+                : 'text-black'
+            } px-4 py-1 rounded-sm cursor-pointer`}
           >
-            Token: {userData?.user_key}
-          </Button>
-        </li>
-        <li>
-          <LiveOrDemo
-            isDemo={userData?.demo}
-            changeAccountType={changeAccountType}
-            isPaid={userData?.paid}
-          />
-        </li>
-        <li>
-          <ConnectionNotifier
-            isConnected={userData?.is_tradovate_connected}
-            onTradovateDisconnectedClick={onTradovateDisconnectedClick}
-          />
-        </li>
-        <li>
-          <LogoutButton />
-        </li>
-      </div>
-    </ul>
+            Payment
+          </li>
+        </div>
+        <div className='flex gap-2 flex-wrap'>
+          <li>
+            <Button
+              variant='outline'
+              size='sm'
+              onClick={() => copyTextToClipboardWebhook()}
+              className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            >
+              Webhook
+            </Button>
+          </li>
+          <li>
+            <Button
+              disabled={!userData?.user_key}
+              variant='outline'
+              size='sm'
+              onClick={() =>
+                copyTextToClipboardForBuyAndSell('buy', userData?.user_key)
+              }
+              className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            >
+              Buy Alert
+            </Button>
+          </li>
+          <li>
+            <Button
+              disabled={!userData?.user_key}
+              variant='outline'
+              size='sm'
+              onClick={() =>
+                copyTextToClipboardForBuyAndSell('sell', userData?.user_key)
+              }
+              className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            >
+              Sell Alert
+            </Button>
+          </li>
+          <li>
+            <Button
+              disabled={!userData?.user_key}
+              variant='outline'
+              size='sm'
+              onClick={() => copyTextToClipboard(userData?.user_key)}
+              className='flex flex-row justify-center items-center gap-2 text-gray-600'
+            >
+              Token: {userData?.user_key}
+            </Button>
+          </li>
+          <li>
+            <LiveOrDemo
+              isDemo={userData?.demo}
+              changeAccountType={changeAccountType}
+              isPaid={userData?.paid}
+            />
+          </li>
+          <li>
+            <ConnectionNotifier
+              isConnected={userData?.is_tradovate_connected}
+              onTradovateDisconnectedClick={onTradovateDisconnectedClick}
+            />
+          </li>
+          <li>
+            <LogoutButton />
+          </li>
+        </div>
+      </ul>
+      {trialDays < 10 && (
+        <div className='flex justify-end items-center'>
+          <div className='max-w-[300px] w-full bg-red-500 py-3 shadow-lg text-center text-white font-medium'>
+            <p>Account Expires in {trialDays} Days</p>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 
