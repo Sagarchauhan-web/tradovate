@@ -98,3 +98,12 @@ export const resetPassword = async (requestData) => {
     return error;
   }
 };
+
+export const SetAccountSettings = async (requestData) => {
+  try {
+    const response = await apiClient.post('/OrderSetting', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

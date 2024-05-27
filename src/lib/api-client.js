@@ -1,7 +1,8 @@
 import { getToken } from '@/services/Auth/auth';
 import axios from 'axios';
 
-const API_URL = 'https://pickmytrade.trade/api';
+// const API_URL = 'https://pickmytrade.trade/api';
+const API_URL = 'https://opttrade.pickmytrade.com';
 
 const apiClient = axios.create({
   baseURL: `${API_URL}`,

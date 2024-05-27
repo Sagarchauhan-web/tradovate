@@ -2,7 +2,12 @@ import { useNavigate } from 'react-router-dom';
 import ConnectionNotifier from '../ConnectionNotifier/ConnectionNotifier';
 import LogoutButton from '../LogoutButton/LogoutButton';
 import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
-import { SetAccountType, getTokenUrl, me } from '@/services/Auth/auth';
+import {
+  SetAccountSettings,
+  SetAccountType,
+  getTokenUrl,
+  me,
+} from '@/services/Auth/auth';
 import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { toast } from '../ui/use-toast';
@@ -10,6 +15,8 @@ import { cn } from '@/lib/utils';
 import { FaClipboard } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { differenceInDays } from 'date-fns';
+import PauseAndResume from '../PauseAndResume/PauseAndResume';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
 
 function Navbar() {
   const [userData, setUserData] = useState();
@@ -23,6 +30,27 @@ function Navbar() {
 
     setTrialDays(differenceInDays(response.data.demo_Expiry, new Date()));
     setUserData(response.data);
+  };
+  const changeAccountSettings = async () => {
+    const body = {
+      pause: userData?.pause ? false : true,
+      profit_amount: 0,
+      loss_amount: 0,
+    };
+    const response = await SetAccountSettings(body);
+
+    if (!response.error) {
+      getUser();
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Success',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+    }
   };
 
   const changeAccountType = async (liveOrDemo) => {
@@ -130,6 +158,8 @@ function Navbar() {
     }
   };
 
+  console.log(userData, 'userData');
+
   return (
     <>
       <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
@@ -231,6 +261,12 @@ function Navbar() {
             <ConnectionNotifier
               isConnected={userData?.is_tradovate_connected}
               onTradovateDisconnectedClick={onTradovateDisconnectedClick}
+            />
+          </li>
+          <li>
+            <PauseAndResume
+              isPaused={userData?.pause}
+              onChange={changeAccountSettings}
             />
           </li>
           <li>
