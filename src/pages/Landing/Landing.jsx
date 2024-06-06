@@ -8,7 +8,7 @@ import Zapier from '../../assets/Zapier.webp';
 import IFTTT from '../../assets/IFTTT.webp';
 import Tradovate from '../../assets/Tradovate.png';
 import Home from '../../assets/homepage.png';
-import Homepagebanner from '../../assets/homepagebanner.jpeg';
+// import Homepagebanner from '../../assets/homepagebanner.jpeg';
 import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import TermsAndServices from '@/components/Footer/TermsAndServices';
@@ -98,7 +98,7 @@ export default function Landing() {
           </div>
           <div className='flex gap-5'>
             <div
-              onClick={() => navigate('/auth')}
+              onClick={() => navigate('/auth', { state: { toRegister: true } })}
               className='w-32 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-sm 
                     font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
                      focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
@@ -107,6 +107,9 @@ export default function Landing() {
               Register
             </div>
             <div
+              onClick={() =>
+                navigate('/auth', { state: { toRegister: false } })
+              }
               className='w-32 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
                      bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-1
                       focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50'
@@ -144,6 +147,9 @@ export default function Landing() {
                       />
 
                       <button
+                        onClick={() =>
+                          navigate('/auth', { state: { toRegister: true } })
+                        }
                         className='w-32 inline-flex items-center justify-center rounded-md border border-primary cursor-pointer
                       px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-200/90'
                         href='#'
@@ -180,7 +186,7 @@ export default function Landing() {
                 </div>
               </div>
               <div className='flex flex-col items-start space-y-4'>
-                <div className='relative mx-auto w-full rounded-lg lg:max-w-md'>
+                {/* <div className='relative mx-auto w-full rounded-lg lg:max-w-md'>
                   <a
                     href='https://www.youtube.com/watch?v=BBroNGGERBU'
                     target='_blank'
@@ -216,7 +222,7 @@ export default function Landing() {
                       </svg>
                     </div>
                   </a>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
@@ -388,12 +394,13 @@ export default function Landing() {
                       <div>
                         <h2 className='text-2xl font-bold tracking-tight text-gray-800 sm:text-4xl'>
                           <span className='text-green-500 text-5xl'>03.</span>{' '}
-                          Establish a connection to your brokerage
+                          Establish a connection to your Tradovate Account
                         </h2>
                         <p className='max-w-xl sm:mt-5 mt-3 sm:text-lg leading-8 text-gray-600'>
                           Safely establish a one-click connection between your
-                          broker and PickMyTrade, enabling automatic trade
-                          execution in your account when alerts are triggered.
+                          Tradovate account and PickMyTrade, enabling automatic
+                          trade execution in your account when alerts are
+                          triggered.
                         </p>
                       </div>
                     </div>
@@ -487,7 +494,7 @@ export default function Landing() {
                         Traders
                       </dt>
                       <dd className='order-first sm:text-6xl text-5xl font-bold tracking-tight text-white'>
-                        1000+
+                        100+
                       </dd>
                     </div>
                     <div className='flex flex-col gap-1 p-8'>

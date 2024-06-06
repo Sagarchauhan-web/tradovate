@@ -26,9 +26,10 @@ import { useEffect, useRef, useState } from 'react';
 import { CiWarning } from 'react-icons/ci';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdErrorOutline } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 export function Auth() {
+  const location = useLocation();
   const [isRegisterPage, setIsRegisterPage] = useState(false);
   const nameRef = useRef();
   const passwordRef = useRef();
@@ -36,8 +37,18 @@ export function Auth() {
   const resetEmailRef = useRef();
   const { toast } = useToast();
   const navigate = useNavigate();
+  console.log(location, 'location');
 
   const [dialogBox, setDialogBox] = useState(false);
+
+  useEffect(() => {
+    if (location?.state?.toRegister) {
+      setIsRegisterPage(true);
+    }
+    if (!location?.state?.toRegister) {
+      setIsRegisterPage(false);
+    }
+  }, [location?.state?.toLogin]);
 
   useEffect(() => {
     const token = getToken();

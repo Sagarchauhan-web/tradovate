@@ -274,10 +274,24 @@ function Navbar() {
           </li>
         </div>
       </ul>
-      {trialDays < 10 && (
+      {trialDays > 10 && (
+        <div className='flex justify-end items-center'>
+          <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
+            <p>Account Validity {trialDays} Days</p>
+          </div>
+        </div>
+      )}
+      {trialDays < 10 && trialDays > 0 && (
         <div className='flex justify-end items-center'>
           <div className='max-w-[300px] w-full bg-red-500 py-3 shadow-lg text-center text-white font-medium'>
             <p>Account Expires in {trialDays} Days</p>
+          </div>
+        </div>
+      )}
+      {trialDays <= 0 && (
+        <div className='flex justify-end items-center'>
+          <div className='max-w-[300px] w-full bg-red-500 py-3 shadow-lg text-center text-white font-medium'>
+            <p>Account Expired</p>
           </div>
         </div>
       )}
