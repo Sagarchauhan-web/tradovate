@@ -107,3 +107,12 @@ export const SetAccountSettings = async (requestData) => {
     return error;
   }
 };
+
+export const setAccountUserCoupon = async (requestData) => {
+  try {
+    const response = await apiClient.post('/AddUserDiscountCode', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

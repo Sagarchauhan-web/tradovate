@@ -8,6 +8,8 @@ import { DashboardLayout } from './layout/DashboardLayout/DashboardLayout';
 import Payment from './pages/Payment/Payment';
 import ResetPassword from './pages/Auth/ResetPassword';
 import Landing from './pages/Landing/Landing';
+import PaymentSuccess from './pages/Payment/PaymentSuccess';
+import PaymentFailed from './pages/Payment/PaymentFailed';
 
 function App() {
   return (
@@ -20,6 +22,11 @@ function App() {
           <Route path='/dashboard/home' element={<Dashboard />} />
           <Route path='/dashboard/tradedetails' element={<TradeDetails />} />
           <Route path='/dashboard/payment' element={<Payment />} />
+          <Route
+            path='/dashboard/paymentsuccess'
+            element={<PaymentSuccess />}
+          />
+          <Route path='/dashboard/paymentfailed' element={<PaymentFailed />} />
         </Route>
         <Route path='/oauth/tradovate/callback' element={<TokenRefresh />} />
         <Route path='/reset/password' element={<ResetPassword />} />

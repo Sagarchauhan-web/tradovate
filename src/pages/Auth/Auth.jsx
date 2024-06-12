@@ -50,10 +50,26 @@ export function Auth() {
     }
   }, [location?.state?.toLogin]);
 
+  const checkForNotification = () => {
+    return toast({
+      className: cn(
+        'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+      ),
+      duration: 2000,
+      title: 'Warning',
+      description: 'Logging in is required to make payment!',
+      action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
+    });
+  };
+
   useEffect(() => {
     const token = getToken();
 
     if (token) navigate('/dashboard/home');
+
+    if (location?.state?.paymentNotification) {
+      checkForNotification();
+    }
   }, []);
 
   const resetPasswordRequestAction = async () => {

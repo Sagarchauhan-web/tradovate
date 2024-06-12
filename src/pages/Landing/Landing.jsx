@@ -8,7 +8,7 @@ import Zapier from '../../assets/Zapier.webp';
 import IFTTT from '../../assets/IFTTT.webp';
 import Tradovate from '../../assets/Tradovate.png';
 import Home from '../../assets/homepage.png';
-// import Homepagebanner from '../../assets/homepagebanner.jpeg';
+import HomePageBanner from '../../assets/HomePageBanner.png';
 import { useEffect, useRef, useState } from 'react';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import TermsAndServices from '@/components/Footer/TermsAndServices';
@@ -186,9 +186,9 @@ export default function Landing() {
                 </div>
               </div>
               <div className='flex flex-col items-start space-y-4'>
-                {/* <div className='relative mx-auto w-full rounded-lg lg:max-w-md'>
+                <div className='relative mx-auto w-full rounded-lg lg:max-w-md shadow-md'>
                   <a
-                    href='https://www.youtube.com/watch?v=BBroNGGERBU'
+                    href='https://youtu.be/JyNaiafnBkw?si=V-3J9mfFqQ3rOkl5'
                     target='_blank'
                     className='relative block w-full bg-white rounded-lg overflow-hidden'
                   >
@@ -197,9 +197,9 @@ export default function Landing() {
                     </span>
                     <img
                       alt='Hero'
-                      className='mx-auto object-cover h-72'
+                      className='mx-auto object-cover h-72 '
                       height='200'
-                      src={Homepagebanner}
+                      src={HomePageBanner}
                       width='1270'
                     />
                     <div
@@ -222,7 +222,7 @@ export default function Landing() {
                       </svg>
                     </div>
                   </a>
-                </div> */}
+                </div>
               </div>
             </div>
           </div>
@@ -465,7 +465,15 @@ export default function Landing() {
             </div>
           </div>
           {Object.values(subscriptions).length ? (
-            <PaymentCards subscriptions={subscriptions} />
+            <PaymentCards
+              subscriptions={subscriptions}
+              isFromHomePage={true}
+              transferToLogin={() =>
+                navigate('/auth', {
+                  state: { toRegister: false, paymentNotification: true },
+                })
+              }
+            />
           ) : (
             ''
           )}
