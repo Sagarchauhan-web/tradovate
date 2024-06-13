@@ -1,4 +1,15 @@
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 export default function PaymentSuccess() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigate('/dashboard/home');
+    }, 5000);
+  }, []);
+
   return (
     <div className='h-[60vh] flex justify-center items-center'>
       <div className='flex flex-col items-center justify-center h-full dark:bg-gray-900 p-4'>

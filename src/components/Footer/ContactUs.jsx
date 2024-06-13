@@ -3,7 +3,10 @@ import { LiaAddressCardSolid } from 'react-icons/lia';
 
 export default function ContactUs() {
   return (
-    <main className='flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 px-4 md:px-6'>
+    <main
+      className='flex flex-col items-center justify-center p-10
+     bg-gray-100 dark:bg-gray-900 px-4 md:px-6'
+    >
       <div className='max-w-md w-full space-y-6'>
         <div className='text-center'>
           <h1 className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
@@ -14,7 +17,7 @@ export default function ContactUs() {
           <div className='grid gap-4'>
             <div className='flex items-center gap-4'>
               <PhoneIcon className='h-6 w-6 text-gray-500 dark:text-gray-400' />
-              <div>
+              <div className='flex flex-col items-start'>
                 <div className='text-gray-900 dark:text-gray-100 font-medium'>
                   Phone
                 </div>
@@ -25,7 +28,7 @@ export default function ContactUs() {
             </div>
             <div className='flex items-center gap-4'>
               <MailIcon className='h-6 w-6 text-gray-500 dark:text-gray-400' />
-              <div>
+              <div className='flex flex-col items-start'>
                 <div className='text-gray-900 dark:text-gray-100 font-medium'>
                   Email
                 </div>
@@ -34,11 +37,13 @@ export default function ContactUs() {
             </div>
             <div className='flex items-center gap-4'>
               <LiaAddressCardSolid className='h-6 w-6 text-gray-500 dark:text-gray-400' />
-              <div>
+              <div className='flex flex-col items-start'>
                 <div className='text-gray-900 dark:text-gray-100 font-medium'>
                   Address
                 </div>
-                184, Rajendra Nagar Bharatpur, Rajasthan India 321001
+                <p className='text-start'>
+                  184, Rajendra Nagar Bharatpur, Rajasthan India 321001
+                </p>
               </div>
             </div>
           </div>

@@ -7,7 +7,7 @@ export function DashboardLayout() {
     <div className='h-full min-h-[100vh] flex flex-col'>
       <div className='flex-1'>
         <Navbar />
-        <div className='h-full px-10 py-4 '>
+        <div className='h-full px-4 py-8 md:px-10 md:py-4'>
           <Outlet />
         </div>
       </div>

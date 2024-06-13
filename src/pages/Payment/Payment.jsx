@@ -9,8 +9,6 @@ import {
   getSubscriptions,
 } from '@/services/Payments/payments';
 import { useEffect, useState } from 'react';
-import { IoArrowBackOutline } from 'react-icons/io5';
-import { useNavigate } from 'react-router-dom';
 import { ImCancelCircle } from 'react-icons/im';
 import { me, setAccountUserCoupon } from '@/services/Auth/auth';
 import { toast } from '@/components/ui/use-toast';
@@ -19,16 +17,9 @@ import { MdErrorOutline } from 'react-icons/md';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { format } from 'date-fns';
-
-const options = {
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-  hour: '2-digit',
-  minute: '2-digit',
-  second: '2-digit',
-  timeZone: 'UTC',
-};
+import { Card } from '@/components/ui/card';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
+import OverlapLoader from '@/components/Loader/OverlapLoader';
 
 function Payment() {
   const [subscriptions, setSubscriptions] = useState({});
@@ -36,6 +27,8 @@ function Payment() {
   const [tokenInput, setTokenInput] = useState('');
   const [token, setToken] = useState('');
   const [tabsValue, setTabsValue] = useState('active');
+  const [dialogBox, setDialogBox] = useState(false);
+  const [activePlanLoader, setActivePlanLoader] = useState(false);
 
   const getSubscriptionsData = async () => {
     const response = await getSubscriptions();
@@ -46,14 +39,19 @@ function Payment() {
   };
 
   const getActiveSubscriptionAction = async () => {
+    setActivePlanLoader(true);
+
     const response = await getActiveSubscription();
 
     if (!response.error) {
       setActiveSubscription(response.data);
+      setActivePlanLoader(false);
     }
+    setActivePlanLoader(false);
   };
 
   const getActiveSubscriptionCancelledAction = async () => {
+    setActivePlanLoader(true);
     const response = await getActiveSubscriptionCancelled();
 
     if (!response.error) {
@@ -66,8 +64,10 @@ function Payment() {
         title: 'Success',
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
-      getSubscriptionsData();
+      getActiveSubscriptionAction();
+      setActivePlanLoader(false);
     }
+    setActivePlanLoader(false);
   };
 
   useEffect(() => {
@@ -124,6 +124,43 @@ function Payment() {
 
   return (
     <div className='flex h-full flex-col'>
+      <Dialog open={dialogBox} onOpenChange={setDialogBox}>
+        <DialogContent className='sm:max-w-[525px] p-5'>
+          <DialogHeader>
+            <main className='flex flex-col items-center justify-center p-10 bg-gray-100 dark:bg-gray-900 px-4 md:px-6'>
+              <div className='max-w-md w-full space-y-6'>
+                <div className='text-center'>
+                  <h1 className='text-3xl font-bold text-gray-900 dark:text-gray-100'>
+                    Payment
+                  </h1>
+                </div>
+                <Card className='bg-white dark:bg-gray-800 shadow-md rounded-lg p-6'>
+                  <p>
+                    If your facing any issue with payment.Please Make a payment
+                    of at Paypal address{' '}
+                    <a
+                      href='https://paypal.me/bhavishyagoyal'
+                      className={'text-blue-500 cursor-pointer'}
+                    >
+                      @bhavisyagoyal
+                    </a>
+                  </p>{' '}
+                  <br />
+                  <p>
+                    Once payment done please send message on whatsapp{' '}
+                    <a
+                      href='https://wa.me/+917838873492'
+                      className={'text-blue-500 cursor-pointer'}
+                    >
+                      +91 7838873492
+                    </a>
+                  </p>
+                </Card>
+              </div>
+            </main>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
       <Tabs value={tabsValue} onValueChange={(value) => setTabsValue(value)}>
         <TabsList className='grid grid-cols-2'>
           <TabsTrigger value='active'>Active</TabsTrigger>
@@ -131,167 +168,158 @@ function Payment() {
         </TabsList>
 
         <TabsContent value='active'>
-          <MaxWidthWrapper>
-            <div className='h-full px-10 py-8'>
-              <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
-                <div className='flex flex-row h-full w-full items-center space-x-5'>
-                  <h2 className='text-center w-full text-2xl font-semibold tracking-tight first:mt-0'>
-                    Active Plan
-                  </h2>
+          <OverlapLoader loader={activePlanLoader}>
+            <MaxWidthWrapper>
+              <div className='h-full px-10 py-8'>
+                <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
+                  <div className='flex flex-row h-full w-full items-center space-x-5'>
+                    <h2 className='text-center w-full text-2xl font-semibold tracking-tight first:mt-0'>
+                      Active Plan
+                    </h2>
+                  </div>
                 </div>
+                {activeSubscription.length ? (
+                  <div className='grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto p-6 md:p-10'>
+                    <div className='bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-50 p-6 space-y-8'>
+                      <div className='flex items-center justify-between'>
+                        <h2 className='text-xl font-semibold'>
+                          Billing Information
+                        </h2>
+                        {/* <Button variant='outline' size='sm'>
+                      Update
+                    </Button> */}
+                      </div>
+                      <div className='grid grid-cols-2 gap-4'>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Last Payment
+                          </p>
+                          <p className='text-2xl font-semibold'>
+                            {
+                              activeSubscription[0].billing_info.last_payment
+                                .amount.currency_code
+                            }{' '}
+                            {
+                              activeSubscription[0].billing_info.last_payment
+                                .amount.value
+                            }
+                          </p>
+                        </div>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Last Payment Date
+                          </p>
+                          <p className='text-2xl font-semibold'>
+                            {format(
+                              new Date(
+                                activeSubscription[0].billing_info.last_payment.time,
+                              ),
+                              'MMMM d, yyyy',
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <div className='grid grid-cols-2 gap-4'>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Next Billing Date
+                          </p>
+                          <p className='text-2xl font-semibold'>
+                            {format(
+                              new Date(
+                                activeSubscription[0]?.billing_info?.next_billing_time,
+                              ),
+                              'MMMM d, yyyy',
+                            )}
+                          </p>
+                        </div>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Start Time
+                          </p>
+                          <p className='text-2xl font-semibold'>
+                            {format(
+                              new Date(activeSubscription[0].start_time),
+                              'MMMM d, yyyy',
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                      <div className='grid grid-cols-2 gap-4'>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Subscriber
+                          </p>
+                          <p className='text-lg font-medium'>
+                            {activeSubscription[0].subscriber.name.given_name}{' '}
+                            {activeSubscription[0].subscriber.name.surname}
+                          </p>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            {activeSubscription[0].subscriber.email_address}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-50 p-6 space-y-8'>
+                      <div className='flex items-center justify-between'>
+                        <h2 className='text-xl font-semibold'>
+                          Subscription Plan
+                        </h2>
+                        <Button
+                          variant='outline'
+                          size='sm'
+                          onClick={() => getActiveSubscriptionCancelledAction()}
+                        >
+                          Cancel Subscription
+                        </Button>
+                      </div>
+                      <div className='grid'>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Plan ID
+                          </p>
+                          <p className='text-lg font-medium w-full'>
+                            {activeSubscription[0].plan_id}
+                          </p>
+                        </div>
+                      </div>
+                      <div className='grid grid-cols-2 gap-4'>
+                        <div>
+                          <p className='text-gray-500 dark:text-gray-400'>
+                            Status
+                          </p>
+                          <p className='text-lg font-medium'>
+                            {activeSubscription[0].status}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <div className='mx-auto w-full mt-5 max-w-md rounded-lg border border-gray-200 bg-white p-8 shadow-md dark:border-gray-800 dark:bg-gray-900'>
+                    <div className='space-y-4'>
+                      <div className='text-center'>
+                        <h1 className='text-3xl font-bold text-gray-900 dark:text-gray-50'>
+                          No Active Plan
+                        </h1>
+                        <p className='mt-2 text-gray-500 dark:text-gray-400'>
+                          You currently don't have an active subscription plan.
+                        </p>
+                      </div>
+                      <div className='text-center'>
+                        <Button
+                          className='w-full'
+                          onClick={() => setTabsValue('all')}
+                        >
+                          Subscribe to a Plan
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
-
-              {activeSubscription.length ? (
-                <div className='grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto p-6 md:p-10'>
-                  <div className='bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-50 p-6 space-y-8'>
-                    <div className='flex items-center justify-between'>
-                      <h2 className='text-xl font-semibold'>
-                        Billing Information
-                      </h2>
-                      {/* <Button variant='outline' size='sm'>
-                    Update
-                  </Button> */}
-                    </div>
-                    <div className='grid grid-cols-2 gap-4'>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Last Payment
-                        </p>
-                        <p className='text-2xl font-semibold'>
-                          {
-                            activeSubscription[0].billing_info.last_payment
-                              .amount.currency_code
-                          }{' '}
-                          {
-                            activeSubscription[0].billing_info.last_payment
-                              .amount.value
-                          }
-                        </p>
-                      </div>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Last Payment Date
-                        </p>
-                        <p className='text-2xl font-semibold'>
-                          {format(
-                            new Date(
-                              activeSubscription[0].billing_info.last_payment.time,
-                            ),
-                            'MMMM d, yyyy',
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                    <div className='grid grid-cols-2 gap-4'>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Next Billing Date
-                        </p>
-                        <p className='text-2xl font-semibold'>
-                          {format(
-                            new Date(
-                              activeSubscription[0].billing_info.next_billing_time,
-                            ),
-                            'MMMM d, yyyy',
-                          )}
-                        </p>
-                      </div>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Start Time
-                        </p>
-                        <p className='text-2xl font-semibold'>
-                          {format(
-                            new Date(activeSubscription[0].start_time),
-                            'MMMM d, yyyy',
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                    <div className='grid grid-cols-2 gap-4'>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Subscriber
-                        </p>
-                        <p className='text-lg font-medium'>
-                          {activeSubscription[0].subscriber.name.given_name}{' '}
-                          {activeSubscription[0].subscriber.name.surname}
-                        </p>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          {activeSubscription[0].subscriber.email_address}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='bg-white rounded-lg shadow-md dark:bg-gray-800 dark:text-gray-50 p-6 space-y-8'>
-                    <div className='flex items-center justify-between'>
-                      <h2 className='text-xl font-semibold'>
-                        Subscription Plan
-                      </h2>
-                      <Button
-                        variant='outline'
-                        size='sm'
-                        onClick={() => getActiveSubscriptionCancelledAction()}
-                      >
-                        Cancel Subscription
-                      </Button>
-                    </div>
-                    <div className='grid'>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Plan ID
-                        </p>
-                        <p className='text-lg font-medium w-full'>
-                          {activeSubscription[0].plan_id}
-                        </p>
-                      </div>
-                    </div>
-                    <div className='grid grid-cols-2 gap-4'>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Shipping
-                        </p>
-                        <p className='text-lg font-medium'>
-                          {activeSubscription[0].shipping_amount.currency_code}{' '}
-                          {activeSubscription[0].shipping_amount.value}
-                        </p>
-                      </div>
-                      <div>
-                        <p className='text-gray-500 dark:text-gray-400'>
-                          Status
-                        </p>
-                        <p className='text-lg font-medium'>
-                          {activeSubscription[0].status}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className='mx-auto w-full mt-5 max-w-md rounded-lg border border-gray-200 bg-white p-8 shadow-md dark:border-gray-800 dark:bg-gray-900'>
-                  <div className='space-y-4'>
-                    <div className='text-center'>
-                      <h1 className='text-3xl font-bold text-gray-900 dark:text-gray-50'>
-                        No Active Plan
-                      </h1>
-                      <p className='mt-2 text-gray-500 dark:text-gray-400'>
-                        You currently don't have an active subscription plan.
-                      </p>
-                    </div>
-
-                    <div className='text-center'>
-                      <Button
-                        className='w-full'
-                        onClick={() => setTabsValue('all')}
-                      >
-                        Subscribe to a Plan
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              )}
-            </div>
-          </MaxWidthWrapper>
+            </MaxWidthWrapper>
+          </OverlapLoader>
         </TabsContent>
         <TabsContent value='all'>
           <MaxWidthWrapper>
@@ -310,6 +338,14 @@ function Payment() {
                   </h2>
                 </div>
                 <div className='flex flex-row h-full items-center space-x-5'>
+                  <div className='border border-gray-200 p-2'>
+                    <p
+                      className='min-w-48 cursor-pointer text-primary'
+                      onClick={() => setDialogBox(true)}
+                    >
+                      Payment issue? click here
+                    </p>
+                  </div>
                   {!token ? (
                     <>
                       <Input

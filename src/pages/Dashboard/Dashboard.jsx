@@ -21,8 +21,10 @@ function Dashboard() {
 
   return (
     <Tabs value={tabsValue} onValueChange={(value) => setTabsValue(value)}>
-      <TabsList className='grid grid-cols-5'>
-        <TabsTrigger value='create'>Create Settings</TabsTrigger>
+      <TabsList className='grid grid-cols-5 min-h-[64px] sm:min-h-[40px]'>
+        <TabsTrigger value='create'>
+          Create <br className='block sm:hidden' /> Settings
+        </TabsTrigger>
         <TabsTrigger value='trades'>Settings</TabsTrigger>
         <TabsTrigger value='orders'>Orders</TabsTrigger>
         <TabsTrigger value='alerts'>Alerts</TabsTrigger>

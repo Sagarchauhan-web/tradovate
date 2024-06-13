@@ -58,8 +58,12 @@ export default function Landing() {
           </DialogContent>
         )}
       </Dialog>
-      <header className='px-6 py-10 lg:px-8 h-14 flex items-center border-b-2'>
-        <div className='flex items-center justify-between w-full' href='#'>
+      <header className='px-6 py-10 lg:px-8 h-28 md:h-14 flex items-center border-b-2'>
+        <div
+          className='flex items-start justify-between w-full
+           flex-col space-y-3 sm:flex-row sm:items-center'
+          href='#'
+        >
           <div className='flex items-center justify-center gap-5'>
             <div className='flex justify-center items-center'>
               <img src='/logo.png' alt='logo' className='w-10 h-8' />
@@ -67,7 +71,8 @@ export default function Landing() {
             </div>
             <nav className='ml-auto flex gap-4 sm:gap-6'>
               <div
-                className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
+                className='text-sm font-bold hover:underline underline-offset-4 
+                text-primary cursor-pointer hidden lg:block'
                 onClick={() =>
                   window.scrollTo({
                     top: featuresRef.current.offsetTop,
@@ -78,7 +83,8 @@ export default function Landing() {
                 How it works
               </div>
               <div
-                className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
+                className='text-sm font-bold hover:underline underline-offset-4 
+                text-primary cursor-pointer hidden lg:block'
                 onClick={() =>
                   window.scrollTo({
                     top: pricingRef.current.offsetTop,
@@ -133,9 +139,8 @@ export default function Landing() {
                 </h1>
                 <p className='mx-auto max-w-[700px]  md:text-xl'>
                   PickMyTrade specializes in automating trading bots, enabling
-                  seamless strategy execution for stocks, cryptocurrencies,
-                  options, and futures from platforms like TradingView, across
-                  well-known brokers such as Tradovate.
+                  seamless strategy execution for futures from platforms like
+                  TradingView, across well-known brokers such as Tradovate.
                 </p>
                 <div className='mt-6'>
                   <div className='mx-auto w-full space-y-2'>

@@ -37,7 +37,6 @@ export function Auth() {
   const resetEmailRef = useRef();
   const { toast } = useToast();
   const navigate = useNavigate();
-  console.log(location, 'location');
 
   const [dialogBox, setDialogBox] = useState(false);
 

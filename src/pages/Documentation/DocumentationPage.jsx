@@ -10,6 +10,9 @@ import image3 from '../../assets/3.png';
 import image4 from '../../assets/4.png';
 import image5 from '../../assets/5.png';
 import image6 from '../../assets/6.png';
+import AlertBanner from '../../assets/alertbanner.png';
+import Configure from '../../assets/configure.png';
+import Settings from '../../assets/settings.png';
 
 import { ListCollapse, Menu, Package2 } from 'lucide-react';
 
@@ -142,6 +145,47 @@ export function DoumentationPage() {
                 <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>
                   Alert format Explanation :{' '}
                 </h1>
+                <div className='flex flex-col items-start space-y-4 pb-4'>
+                  <div className='relative mx-auto w-full rounded-lg shadow-md'>
+                    <a
+                      href='https://youtu.be/FAWSkWodkLs'
+                      target='_blank'
+                      className='relative block w-full bg-white 
+                      rounded-lg overflow-hidden'
+                    >
+                      <span className='sr-only'>
+                        Watch our video to learn more
+                      </span>
+                      <img
+                        alt='Hero'
+                        className='mx-auto object-cover h-72 object-fit'
+                        height='200'
+                        src={AlertBanner}
+                        width='1270'
+                      />
+                      <div
+                        className='absolute inset-0 w-full h-full flex items-center justify-center'
+                        aria-hidden='true'
+                      >
+                        <svg
+                          className='h-20 w-20 text-primary'
+                          fill='currentColor'
+                          viewBox='0 0 84 84'
+                        >
+                          <circle
+                            opacity='0.9'
+                            cx='42'
+                            cy='42'
+                            r='42'
+                            fill='white'
+                          ></circle>
+                          <path d='M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z'></path>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
+
                 <pre>
                   <code className='javascript' ref={codeRef}>
                     {`
@@ -289,6 +333,45 @@ export function DoumentationPage() {
                 <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>
                   How to configure alerts{' '}
                 </h1>
+                <div className='flex flex-col items-start space-y-4 pb-4'>
+                  <div className='relative mx-auto w-full rounded-lg shadow-md'>
+                    <a
+                      href='https://youtu.be/Gqd64Gu7oJw'
+                      target='_blank'
+                      className='relative block w-full bg-white rounded-lg overflow-hidden'
+                    >
+                      <span className='sr-only'>
+                        Watch our video to learn more
+                      </span>
+                      <img
+                        alt='Hero'
+                        className='mx-auto object-cover h-72 '
+                        height='200'
+                        src={Configure}
+                        width='1270'
+                      />
+                      <div
+                        className='absolute inset-0 w-full h-full flex items-center justify-center'
+                        aria-hidden='true'
+                      >
+                        <svg
+                          className='h-20 w-20 text-primary'
+                          fill='currentColor'
+                          viewBox='0 0 84 84'
+                        >
+                          <circle
+                            opacity='0.9'
+                            cx='42'
+                            cy='42'
+                            r='42'
+                            fill='white'
+                          ></circle>
+                          <path d='M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z'></path>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
                 <h4 className='leading-7 [&:not(:first-child)]:mt-6 underline'></h4>
                 <ul className='my-6 ml-6 list-disc [&>li]:mt-2'>
                   <li>Open alert window </li>
@@ -317,6 +400,45 @@ export function DoumentationPage() {
                 <h1 className='mt-5 mb-10 scroll-m-20 text-1xl font-bold tracking-tight lg:text-3xl'>
                   Setting windows:{' '}
                 </h1>
+                <div className='flex flex-col items-start space-y-4 pb-4'>
+                  <div className='relative mx-auto w-full rounded-lg shadow-md'>
+                    <a
+                      href='https://youtu.be/rY5x3sCvgyA'
+                      target='_blank'
+                      className='relative block w-full bg-white rounded-lg overflow-hidden'
+                    >
+                      <span className='sr-only'>
+                        Watch our video to learn more
+                      </span>
+                      <img
+                        alt='Hero'
+                        className='mx-auto object-cover h-72 '
+                        height='200'
+                        src={Settings}
+                        width='1270'
+                      />
+                      <div
+                        className='absolute inset-0 w-full h-full flex items-center justify-center'
+                        aria-hidden='true'
+                      >
+                        <svg
+                          className='h-20 w-20 text-primary'
+                          fill='currentColor'
+                          viewBox='0 0 84 84'
+                        >
+                          <circle
+                            opacity='0.9'
+                            cx='42'
+                            cy='42'
+                            r='42'
+                            fill='white'
+                          ></circle>
+                          <path d='M55.5039 40.3359L37.1094 28.0729C35.7803 27.1869 34 28.1396 34 29.737V54.263C34 55.8604 35.7803 56.8131 37.1094 55.9271L55.5038 43.6641C56.6913 42.8725 56.6913 41.1275 55.5039 40.3359Z'></path>
+                        </svg>
+                      </div>
+                    </a>
+                  </div>
+                </div>
                 <h4 className='leading-7 [&:not(:first-child)]:mt-0'></h4>
                 <Card className='m-10 flex justify-center items-center'>
                   <img src={image6} alt='Description' />
