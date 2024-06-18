@@ -6,6 +6,7 @@ import { Input } from '@/components/ui/input';
 import {
   getActiveSubscription,
   getActiveSubscriptionCancelled,
+  getPaymentRefereshed,
   getSubscriptions,
 } from '@/services/Payments/payments';
 import { useEffect, useState } from 'react';
@@ -20,7 +21,8 @@ import { format } from 'date-fns';
 import { Card } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import OverlapLoader from '@/components/Loader/OverlapLoader';
-
+import { FaInfoCircle } from 'react-icons/fa';
+import { TooltipComp } from '@/components/ToolTip/ToolTip';
 function Payment() {
   const [subscriptions, setSubscriptions] = useState({});
   const [activeSubscription, setActiveSubscription] = useState([]);
@@ -29,6 +31,8 @@ function Payment() {
   const [tabsValue, setTabsValue] = useState('active');
   const [dialogBox, setDialogBox] = useState(false);
   const [activePlanLoader, setActivePlanLoader] = useState(false);
+  const [paymentDataRefreshLoader, setPaymentDataRefreshLoader] =
+    useState(false);
 
   const getSubscriptionsData = async () => {
     const response = await getSubscriptions();
@@ -36,6 +40,18 @@ function Payment() {
     if (!response.error) {
       setSubscriptions(response.data);
     }
+  };
+
+  const getRefreshPaymentData = async () => {
+    setPaymentDataRefreshLoader(true);
+    const response = await getPaymentRefereshed();
+
+    console.log(response, 'getPaymentRefereshed');
+
+    if (!response.error) {
+      console.log('here');
+    }
+    setPaymentDataRefreshLoader(false);
   };
 
   const getActiveSubscriptionAction = async () => {
@@ -96,7 +112,6 @@ function Payment() {
     const response = await setAccountUserCoupon(body);
 
     if (!response.error) {
-      console.log(response);
       toast({
         className: cn(
           'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
@@ -173,9 +188,34 @@ function Payment() {
               <div className='h-full px-10 py-8'>
                 <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
                   <div className='flex flex-row h-full w-full items-center space-x-5'>
-                    <h2 className='text-center w-full text-2xl font-semibold tracking-tight first:mt-0'>
-                      Active Plan
-                    </h2>
+                    <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
+                      <div className='flex flex-row h-full  items-center  space-x-5'>
+                        <h2 className='text-center w-full text-2xl font-semibold tracking-tight first:mt-0'>
+                          Active Plan
+                        </h2>
+                      </div>
+                      <div className='flex flex-row h-full items-center space-x-2'>
+                        <TooltipComp
+                          button={
+                            <FaInfoCircle
+                              fontSize={24}
+                              className='font-bold text-yellow-500'
+                            />
+                          }
+                          tooltip={
+                            'Refreshing Payment Details Might take up to 15 minutes to Refresh Details'
+                          }
+                        />
+                        <OverlapLoader loader={paymentDataRefreshLoader}>
+                          <Button
+                            className='w-full'
+                            onClick={() => getRefreshPaymentData()}
+                          >
+                            Refresh Payment Details
+                          </Button>
+                        </OverlapLoader>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 {activeSubscription.length ? (
@@ -303,7 +343,8 @@ function Payment() {
                           No Active Plan
                         </h1>
                         <p className='mt-2 text-gray-500 dark:text-gray-400'>
-                          You currently don't have an active subscription plan.
+                          You currently don&apos;t have an active subscription
+                          plan.
                         </p>
                       </div>
                       <div className='text-center'>

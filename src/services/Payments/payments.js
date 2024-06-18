@@ -9,6 +9,15 @@ export const getSubscriptions = async () => {
   }
 };
 
+export const getPaymentRefereshed = async () => {
+  try {
+    const response = await apiClient.post('/paypalpayment/RefreshPaypal', {});
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getPaypalOrderInit = async (requestData) => {
   try {
     const response = await apiClient.post(

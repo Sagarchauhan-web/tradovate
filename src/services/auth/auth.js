@@ -116,3 +116,12 @@ export const setAccountUserCoupon = async (requestData) => {
     return error;
   }
 };
+
+export const getAcountEmailVerified = async (requestData) => {
+  try {
+    const response = await apiClient.post('/MailVerified', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};

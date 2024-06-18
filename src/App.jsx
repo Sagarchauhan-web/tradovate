@@ -3,7 +3,6 @@ import {
   HashRouter,
   Routes,
   Route,
-  Link,
   useNavigate,
   useLocation,
 } from 'react-router-dom';
@@ -18,6 +17,7 @@ import Landing from './pages/Landing/Landing';
 import PaymentSuccess from './pages/Payment/PaymentSuccess';
 import PaymentFailed from './pages/Payment/PaymentFailed';
 import { useEffect } from 'react';
+import MailVerification from './pages/Auth/MailVerification';
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -33,7 +33,6 @@ function NotFoundPage() {
     }
   }, []);
 
-  console.log(path);
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
       <div className='space-y-4 text-center'>
@@ -65,6 +64,7 @@ function App() {
           element={<TokenRefresh />}
         />
         <Route exact path='/reset/password' element={<ResetPassword />} />
+        <Route exact path='/mail_verified' element={<MailVerification />} />
         <Route exact path='/dashboard' element={<DashboardLayout />}>
           <Route exact path='/dashboard/home' element={<Dashboard />} />
           <Route
