@@ -48,7 +48,13 @@ export function OrderTable() {
       setData(response.data);
       setIsLoading(false);
     };
+
     getAllOrders();
+    const timeout = setTimeout(() => {
+      getAllOrders();
+    }, 10000);
+
+    return () => clearTimeout(timeout);
   }, [date]);
 
   const columns = [

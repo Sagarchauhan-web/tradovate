@@ -46,7 +46,13 @@ export function AlertsTable() {
       setData(response.data);
       setIsLoading(false);
     };
+
     getAllAlerts();
+    const timeout = setTimeout(() => {
+      getAllAlerts();
+    }, 10000);
+
+    return () => clearTimeout(timeout);
   }, [date]);
 
   const columns = [

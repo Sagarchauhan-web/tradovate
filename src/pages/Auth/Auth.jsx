@@ -190,20 +190,29 @@ export function Auth() {
         nameRef.current.value = '';
         passwordRef.current.value = '';
         confirmPasswordRef.current.value = '';
+
+        toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 2000,
+          position: 'top-center',
+          title: 'Email Sent For Verification',
+          action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+        });
       } else {
         saveToken(response.data);
         navigate('/dashboard/home');
+        toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 1000,
+          position: 'top-center',
+          title: 'Success',
+          action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+        });
       }
-
-      toast({
-        className: cn(
-          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
-        ),
-        duration: 1000,
-        position: 'top-center',
-        title: 'Success',
-        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
-      });
     }
   }
 

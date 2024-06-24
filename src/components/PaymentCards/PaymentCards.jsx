@@ -26,7 +26,6 @@ export default function PaymentCards({
       return;
     }
     const payload = { subscription_id: key };
-    console.log(payload, 'payload');
     setLoader(true);
     const response = await getPaypalOrderInit(payload);
     setLoader(false);
@@ -57,6 +56,12 @@ export default function PaymentCards({
                   <CheckIcon className='h-5 w-5 text-primary ' />
                 </div>{' '}
                 <span>Unlimited Settings</span>
+              </div>
+              <div className='flex items-center gap-3'>
+                <div className='bg-[#f8f8fc] p-1.5 rounded-full'>
+                  <CheckIcon className='h-5 w-5 text-primary ' />
+                </div>{' '}
+                <span>Unlimited Trades</span>
               </div>
               <div className='flex items-center gap-3'>
                 <div className='bg-[#f8f8fc] p-1.5 rounded-full'>

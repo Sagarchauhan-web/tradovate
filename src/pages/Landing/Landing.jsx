@@ -1,21 +1,23 @@
-import { Input } from '@/components/ui/input';
-import { useNavigate } from 'react-router-dom';
-import TradovateSymbol from '../../assets/TradingView.webp';
-import TrendSpider from '../../assets/TrendSpider.webp';
-import MetaSpider from '../../assets/MetaTrader5.webp';
-import CustomCode from '../../assets/CustomCode.webp';
-import Zapier from '../../assets/Zapier.webp';
-import IFTTT from '../../assets/IFTTT.webp';
-import Tradovate from '../../assets/Tradovate.png';
-import Home from '../../assets/homepage.png';
-import HomePageBanner from '../../assets/HomePageBanner.png';
-import { useEffect, useRef, useState } from 'react';
-import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
-import TermsAndServices from '@/components/Footer/TermsAndServices';
-import Policy from '@/components/Footer/Policy';
 import ContactUs from '@/components/Footer/ContactUs';
+import Policy from '@/components/Footer/Policy';
+import TermsAndServices from '@/components/Footer/TermsAndServices';
 import PaymentCards from '@/components/PaymentCards/PaymentCards';
+import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import { getSubscriptions } from '@/services/Payments/payments';
+import { useEffect, useRef, useState } from 'react';
+import { BiSolidOffer, BiSupport } from 'react-icons/bi';
+import { FaCreditCard } from 'react-icons/fa';
+import { IoMdInfinite } from 'react-icons/io';
+import { useNavigate } from 'react-router-dom';
+import CustomCode from '../../assets/CustomCode.webp';
+import HomePageBanner from '../../assets/HomePageBanner.png';
+import IFTTT from '../../assets/IFTTT.webp';
+import MetaSpider from '../../assets/MetaTrader5.webp';
+import TradovateSymbol from '../../assets/TradingView.webp';
+import Tradovate from '../../assets/Tradovate.png';
+import TrendSpider from '../../assets/TrendSpider.webp';
+import Zapier from '../../assets/Zapier.webp';
+import Home from '../../assets/homepage.png';
 
 export default function Landing() {
   const featuresRef = useRef(null);
@@ -105,18 +107,18 @@ export default function Landing() {
           <div className='flex gap-5'>
             <div
               onClick={() => navigate('/auth', { state: { toRegister: true } })}
-              className='w-32 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-sm 
+              className='w-48 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-sm 
                     font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
                      focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
               href='#'
             >
-              Register
+              Sign Up for Free
             </div>
             <div
               onClick={() =>
                 navigate('/auth', { state: { toRegister: false } })
               }
-              className='w-32 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
+              className='w-48 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
                      bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-1
                       focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50'
               href='#'
@@ -142,27 +144,68 @@ export default function Landing() {
                   seamless strategy execution for futures from platforms like
                   TradingView, across well-known brokers such as Tradovate.
                 </p>
-                <div className='mt-6'>
-                  <div className='mx-auto w-full space-y-2'>
+                <div className='mt-8'>
+                  <div className='mx-auto w-full space-y-4'>
                     <form className='flex space-x-2'>
-                      <Input
+                      {/* <Input
                         className='max-w-lg flex-1'
                         placeholder='Enter your email'
                         type='email'
-                      />
+                      /> */}
 
-                      <button
-                        onClick={() =>
-                          navigate('/auth', { state: { toRegister: true } })
-                        }
-                        className='w-32 inline-flex items-center justify-center rounded-md border border-primary cursor-pointer
-                      px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-200/90'
-                        href='#'
-                      >
-                        Register
-                      </button>
+                      <div className='flex space-x-8 items-center justify-center'>
+                        <div
+                          onClick={() =>
+                            navigate('/auth', { state: { toRegister: true } })
+                          }
+                          className='w-48 inline-flex h-18 items-center justify-center rounded-md bg-blue-700 px-4 py-4 text-sm 
+                                            font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
+                                             focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
+                          href='#'
+                        >
+                          Sign Up for Free
+                        </div>
+                        <div className='flex space-x-6'>
+                          <div className='space-y-2'>
+                            <div className='flex items-center space-x-2'>
+                              <div className='h-6 w-6 bg-primary rounded-full flex items-center justify-center'>
+                                <BiSolidOffer className='text-white h-4 w-4' />
+                              </div>
+                              <div className='text-gray-400 text-sm font-semibold'>
+                                5-day free trial
+                              </div>
+                            </div>
+                            <div className='flex items-center space-x-2'>
+                              <div className='h-6 w-6 bg-primary rounded-full flex items-center justify-center'>
+                                <FaCreditCard className='text-white h-3 w-3' />
+                              </div>
+                              <div className='text-gray-400 text-sm font-semibold'>
+                                No Card Required
+                              </div>
+                            </div>
+                          </div>
+                          <div className='space-y-2'>
+                            <div className='flex items-center space-x-2'>
+                              <div className='h-6 w-6 bg-primary rounded-full flex items-center justify-center'>
+                                <IoMdInfinite className='text-white h-4 w-4' />
+                              </div>
+                              <div className='text-gray-400 text-sm font-semibold'>
+                                Unlimited Trade
+                              </div>
+                            </div>
+                            <div className='flex items-center space-x-2'>
+                              <div className='h-6 w-6 bg-primary rounded-full flex items-center justify-center'>
+                                <BiSupport className='text-white h-4 w-4' />
+                              </div>
+                              <div className='text-gray-400 text-sm font-semibold'>
+                                Free Support
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </form>
-                    <p className='text-xs  max-w-sm'>
+                    <p className='text-xs max-w-sm'>
                       Start your free paper account. By providing your email,
                       you agree to our{' '}
                       <span
@@ -537,10 +580,9 @@ export default function Landing() {
                 </div>
                 <p className='text-sm leading-6 text-gray-600 max-w-sm text-center'>
                   Empower your trading endeavors with PickMyTrade, automating
-                  strategies for stocks, crypto, options, and futures from
-                  analytical tools such as TradingView or TrendSpider, in
-                  collaboration with prominent brokers like TDAmeritrade,
-                  TradeStation, Coinbase, Interactive Brokers, and Alpaca.
+                  strategies for futures from analytical tools such as
+                  TradingView or TrendSpider, in collaboration with prominent
+                  brokers like Tradovate.
                 </p>
               </div>
               <div className='mt-16 grid grid-cols-2 gap-8 xl:col-span-2 xl:mt-0'>
