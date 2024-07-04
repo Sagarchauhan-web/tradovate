@@ -311,67 +311,49 @@ export default function Landing() {
                     </div>
                     <div className='w-full'>
                       <div className='grid 2xl:grid-cols-3 xl:grid-cols-2 sm:grid-cols-3 grid-cols-1 gap-3 w-full'>
-                        <a
-                          href='/signals/tradingview'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='TradingView'
                             className='object-contain h-10'
                             src={TradovateSymbol}
                           />
-                        </a>
-                        <a
-                          href='/signals/trendspider'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        </div>
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='TrendSpider'
                             className='object-contain h-10'
                             src={TrendSpider}
                           />
-                        </a>
-                        <a
-                          href='/signals/metatrader5'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        </div>
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='Meta Trader 5'
                             className='object-contain h-10'
                             src={MetaSpider}
                           />
-                        </a>
-                        <a
-                          href='/signals/customcode'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        </div>
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='Custom Code'
                             className='object-contain h-10'
                             src={CustomCode}
                           />
-                        </a>
-                        <a
-                          href='/signals/zapier'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        </div>
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='Zapier'
                             className='object-contain h-10'
                             src={Zapier}
                           />
-                        </a>
+                        </div>
 
-                        <a
-                          href='/signals/ifttt'
-                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
-                        >
+                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='IFTTT'
                             className='object-contain h-10'
                             src={IFTTT}
                           />
-                        </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -454,16 +436,13 @@ export default function Landing() {
                     </div>
                     <div className='w-full xl:max-w-lg'>
                       <div className='flex flex-wrap lg:gap-5 sm:gap-3 gap-5 xl:justify-center lg:justify-between justify-center'>
-                        <a
-                          href='/broker/alpaca'
-                          className='hover:scale-110 transition-all ease-in-out duration-300  rounded-full lg:w-24 lg:h-24 w-20 h-20 shrink-0 flex justify-center items-center'
-                        >
+                        <div className='hover:scale-110 transition-all ease-in-out duration-300  rounded-full lg:w-24 lg:h-24 w-20 h-20 shrink-0 flex justify-center items-center'>
                           <img
                             alt='Alpaca'
                             className=' rounded-full object-contain w-full h-full'
                             src={Tradovate}
                           />
-                        </a>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -593,12 +572,9 @@ export default function Landing() {
                     </h3>
                     <ul role='list' className='mt-6 space-y-4'>
                       <li>
-                        <a
-                          href='/broker/tradovate'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
-                        >
+                        <div className='text-sm leading-6 text-gray-600 hover:text-gray-800'>
                           Tradovate
-                        </a>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -608,29 +584,22 @@ export default function Landing() {
                     </h3>
                     <ul role='list' className='mt-6 space-y-4'>
                       <li>
-                        <a
-                          href='/pricing'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
-                        >
+                        <div className='text-sm leading-6 text-gray-600 hover:text-gray-800'>
                           Pricing
-                        </a>
+                        </div>
                       </li>
                       <li>
-                        <a
-                          href='/docs'
+                        <div
                           target='_blank'
                           className='text-sm leading-6 text-gray-600 hover:text-gray-800'
                         >
                           Documentation
-                        </a>
+                        </div>
                       </li>
                       <li>
-                        <a
-                          href='/faq'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
-                        >
+                        <div className='text-sm leading-6 text-gray-600 hover:text-gray-800'>
                           FAQ
-                        </a>
+                        </div>
                       </li>
                     </ul>
                   </div>
@@ -642,12 +611,9 @@ export default function Landing() {
                     </h3>
                     <ul role='list' className='mt-6 space-y-4'>
                       <li>
-                        <a
-                          href='/about'
-                          className='text-sm leading-6 text-gray-600 hover:text-gray-800'
-                        >
+                        <div className='text-sm leading-6 text-gray-600 hover:text-gray-800'>
                           About Us
-                        </a>
+                        </div>
                       </li>
                       <li>
                         <a

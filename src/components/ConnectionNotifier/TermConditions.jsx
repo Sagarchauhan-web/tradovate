@@ -341,16 +341,16 @@ function TermConditions() {
                 <li>
                   <u>Pricing</u>. PickMyTrade may offer free access to the
                   Platform, subject to the terms of PickMyTrade’s then-current{' '}
-                  <a href='/pricing'>Pricing Plans</a>. PickMyTrade may change
-                  listed prices at any time, including changing from a free
-                  service to a paid service and charging for access to or use of
-                  the Platform that was previously offered free of charge;
-                  provided, however, that PickMyTrade will provide User with
-                  prior notice and an opportunity to terminate this Agreement if
-                  PickMyTrade changes the price of a service to which User is
-                  subscribed and will not charge User for a previously free
-                  service unless User has been notified of the applicable fees
-                  and agreed to pay such fees.
+                  <div>Pricing Plans</div>. PickMyTrade may change listed prices
+                  at any time, including changing from a free service to a paid
+                  service and charging for access to or use of the Platform that
+                  was previously offered free of charge; provided, however, that
+                  PickMyTrade will provide User with prior notice and an
+                  opportunity to terminate this Agreement if PickMyTrade changes
+                  the price of a service to which User is subscribed and will
+                  not charge User for a previously free service unless User has
+                  been notified of the applicable fees and agreed to pay such
+                  fees.
                 </li>
                 <br />
                 <li>

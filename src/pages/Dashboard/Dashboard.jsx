@@ -6,6 +6,7 @@ import { OrderTable } from '../OrdersTable/OrdersTable';
 import { DataTable } from '../TradeTable/TradeTable';
 import { useNavigate } from 'react-router-dom';
 import Liquidity from '../Liquidity/Liquidity';
+// import TradeCopier from '../TradeCopier/TradeCopier';
 
 function Dashboard() {
   const [tabsValue, setTabsValue] = useState('create');
@@ -21,7 +22,7 @@ function Dashboard() {
 
   return (
     <Tabs value={tabsValue} onValueChange={(value) => setTabsValue(value)}>
-      <TabsList className='grid grid-cols-5 min-h-[64px] sm:min-h-[40px]'>
+      <TabsList className='grid grid-cols-6 min-h-[64px] sm:min-h-[40px]'>
         <TabsTrigger value='create'>
           Create <br className='block sm:hidden' /> Settings
         </TabsTrigger>
@@ -29,6 +30,7 @@ function Dashboard() {
         <TabsTrigger value='orders'>Orders</TabsTrigger>
         <TabsTrigger value='alerts'>Alerts</TabsTrigger>
         <TabsTrigger value='liquidity'>Liquidity</TabsTrigger>
+        {/* <TabsTrigger value='createTradeCopier'>Create Trade Copier</TabsTrigger> */}
       </TabsList>
       <TabsContent value='create'>
         <CreateTrade
@@ -54,6 +56,9 @@ function Dashboard() {
       <TabsContent value='liquidity'>
         <Liquidity />
       </TabsContent>
+      {/* <TabsContent value='createTradeCopier'>
+        <TradeCopier />
+      </TabsContent> */}
     </Tabs>
   );
 }
