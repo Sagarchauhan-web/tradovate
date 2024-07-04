@@ -98,7 +98,7 @@ export default function Landing() {
               </div>
               <div
                 className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
-                onClick={() => navigate('/documentation')}
+                onClick={() => navigate('/documentation?page=alert')}
               >
                 Documentation
               </div>

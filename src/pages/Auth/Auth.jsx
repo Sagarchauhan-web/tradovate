@@ -217,128 +217,145 @@ export function Auth() {
   }
 
   return (
-    <div className='flex min-h-screen w-full flex-col justify-center items-center'>
-      <Dialog open={dialogBox} onOpenChange={setDialogBox}>
-        <DialogContent className='sm:max-w-[425px]'>
-          <DialogHeader>
-            <CardTitle className='text-3xl'>Reset Password</CardTitle>
-            <CardDescription className='pb-8'>
-              Enter your email and we will send you a link to reset your
-              password
-            </CardDescription>
-
-            <div className='flex flex-col space-y-1.5 gap-1 pb-8'>
-              <Label htmlFor='name'>Email*</Label>
-              <Input
-                ref={resetEmailRef}
-                className='rounded-full'
-                id='name'
-                placeholder={`Enter Email`}
-              />
+    <>
+      <header className='px-6 py-10 lg:px-8 h-28 md:h-14 flex items-center border-b-2'>
+        <div
+          className='flex items-start justify-between w-full
+           flex-col space-y-3 sm:flex-row sm:items-center'
+          href='#'
+        >
+          <div className='flex items-center justify-center gap-5'>
+            <div className='flex justify-center items-center'>
+              <img src='/logo.png' alt='logo' className='w-10 h-8' />
+              <p className='text-gray-800 font-bold'>PickMyTrade</p>
             </div>
-            <Button
-              onClick={resetPasswordRequestAction}
-              className='w-full rounded-full'
-            >
-              Reset Password
-            </Button>
-          </DialogHeader>
-        </DialogContent>
-      </Dialog>
-      <div className='flex-1 flex justify-center items-center'>
-        <Card className=' space-between rounded-none mx-10 md:m-0'>
-          <div className='w-full md:w-3/4 m-auto'>
-            <CardHeader className='mb-6'>
-              <CardTitle className='text-3xl mt-14'>
-                {isRegisterPage ? 'Register' : 'Login'}
-              </CardTitle>
-              <CardDescription>
-                Unlock the power of markets and start your trading adventure!
+            <nav className='ml-auto flex gap-4 sm:gap-6'></nav>
+          </div>
+          <div className='flex gap-5'></div>
+        </div>
+      </header>
+      <div className='flex min-h-screen w-full flex-col justify-center items-center'>
+        <Dialog open={dialogBox} onOpenChange={setDialogBox}>
+          <DialogContent className='sm:max-w-[425px]'>
+            <DialogHeader>
+              <CardTitle className='text-3xl'>Reset Password</CardTitle>
+              <CardDescription className='pb-8'>
+                Enter your email and we will send you a link to reset your
+                password
               </CardDescription>
-            </CardHeader>
-            <form onSubmit={onSubmit}>
-              <CardContent className='pb-0'>
-                <div className='grid w-full items-center gap-4'>
-                  <div className='flex flex-col space-y-1.5'>
-                    <Label htmlFor='name'>Email*</Label>
-                    <Input
-                      ref={nameRef}
-                      className='rounded-full'
-                      id='name'
-                      placeholder={`Enter${
-                        isRegisterPage ? ' Email' : ' Email'
-                      }`}
-                    />
-                  </div>
-                  <div className='flex flex-col space-y-1.5'>
-                    <Label htmlFor='framework'>Password*</Label>
-                    <Input
-                      ref={passwordRef}
-                      type='password'
-                      className='rounded-full'
-                      id='name'
-                      placeholder='Enter Password'
-                    />
-                  </div>
-                  {isRegisterPage && (
+              <div className='flex flex-col space-y-1.5 gap-1 pb-8'>
+                <Label htmlFor='name'>Email*</Label>
+                <Input
+                  ref={resetEmailRef}
+                  className='rounded-full'
+                  id='name'
+                  placeholder={`Enter Email`}
+                />
+              </div>
+              <Button
+                onClick={resetPasswordRequestAction}
+                className='w-full rounded-full'
+              >
+                Reset Password
+              </Button>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+        <div className='flex-1 flex justify-center items-center'>
+          <Card className=' space-between rounded-none mx-10 md:m-0'>
+            <div className='w-full md:w-3/4 m-auto'>
+              <CardHeader className='mb-6'>
+                <CardTitle className='text-3xl mt-14'>
+                  {isRegisterPage ? 'Register' : 'Login'}
+                </CardTitle>
+                <CardDescription>
+                  Unlock the power of markets and start your trading adventure!
+                </CardDescription>
+              </CardHeader>
+              <form onSubmit={onSubmit}>
+                <CardContent className='pb-0'>
+                  <div className='grid w-full items-center gap-4'>
                     <div className='flex flex-col space-y-1.5'>
-                      <Label htmlFor='framework'>Confirm Password*</Label>
+                      <Label htmlFor='name'>Email*</Label>
                       <Input
-                        ref={confirmPasswordRef}
+                        ref={nameRef}
+                        className='rounded-full'
+                        id='name'
+                        placeholder={`Enter${
+                          isRegisterPage ? ' Email' : ' Email'
+                        }`}
+                      />
+                    </div>
+                    <div className='flex flex-col space-y-1.5'>
+                      <Label htmlFor='framework'>Password*</Label>
+                      <Input
+                        ref={passwordRef}
                         type='password'
                         className='rounded-full'
                         id='name'
-                        placeholder='Enter Password Again'
+                        placeholder='Enter Password'
                       />
                     </div>
-                  )}
-                </div>
-              </CardContent>
-              <CardFooter className='w-full mt-5 flex flex-col space-between'>
-                <div className='mb-12 w-full flex justify-center items-center'>
-                  <div className='flex w-full space-x-2'>
-                    <Checkbox id='terms' />
-                    <label
-                      htmlFor='terms'
-                      className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
-                    >
-                      Remember me
-                    </label>
+                    {isRegisterPage && (
+                      <div className='flex flex-col space-y-1.5'>
+                        <Label htmlFor='framework'>Confirm Password*</Label>
+                        <Input
+                          ref={confirmPasswordRef}
+                          type='password'
+                          className='rounded-full'
+                          id='name'
+                          placeholder='Enter Password Again'
+                        />
+                      </div>
+                    )}
                   </div>
-                  <div>
-                    <p
-                      onClick={() => setDialogBox(true)}
-                      className='text-sm w-max text-primary cursor-pointer'
-                    >
-                      Forgot Password?
-                    </p>
+                </CardContent>
+                <CardFooter className='w-full mt-5 flex flex-col space-between'>
+                  <div className='mb-12 w-full flex justify-center items-center'>
+                    <div className='flex w-full space-x-2'>
+                      <Checkbox id='terms' />
+                      <label
+                        htmlFor='terms'
+                        className='text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'
+                      >
+                        Remember me
+                      </label>
+                    </div>
+                    <div>
+                      <p
+                        onClick={() => setDialogBox(true)}
+                        className='text-sm w-max text-primary cursor-pointer'
+                      >
+                        Forgot Password?
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <Button type='submit' className='w-full rounded-full'>
-                  {isRegisterPage ? 'Register' : 'Login'}
-                </Button>
-                <p className='text-sm w-full mt-5'>
-                  {isRegisterPage
-                    ? 'Already registered?'
-                    : 'Not registered yet?'}{' '}
-                  <span
-                    className='text-primary cursor-pointer'
-                    onClick={() => {
-                      setIsRegisterPage(!isRegisterPage);
-                      nameRef.current.value = '';
-                      passwordRef.current.value = '';
-                      confirmPasswordRef.current.value = '';
-                    }}
-                  >
-                    {isRegisterPage ? 'Sign in' : 'Create an Account?'}{' '}
-                  </span>
-                </p>
-              </CardFooter>
-            </form>
-          </div>
-        </Card>
+                  <Button type='submit' className='w-full rounded-full'>
+                    {isRegisterPage ? 'Register' : 'Login'}
+                  </Button>
+                  <p className='text-sm w-full mt-5'>
+                    {isRegisterPage
+                      ? 'Already registered?'
+                      : 'Not registered yet?'}{' '}
+                    <span
+                      className='text-primary cursor-pointer'
+                      onClick={() => {
+                        setIsRegisterPage(!isRegisterPage);
+                        nameRef.current.value = '';
+                        passwordRef.current.value = '';
+                        confirmPasswordRef.current.value = '';
+                      }}
+                    >
+                      {isRegisterPage ? 'Sign in' : 'Create an Account?'}{' '}
+                    </span>
+                  </p>
+                </CardFooter>
+              </form>
+            </div>
+          </Card>
+        </div>
+        <Footer />
       </div>
-      <Footer />
-    </div>
+    </>
   );
 }

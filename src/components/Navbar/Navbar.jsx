@@ -115,7 +115,7 @@ function Navbar() {
       trail: 0,
       update_tp: false,
       update_sl: false,
-      duplicate_position_allow: false,
+      duplicate_position_allow: true,
       reverse_order_close: true,
       token: token,
       account_id: '',
@@ -158,8 +158,6 @@ function Navbar() {
     }
   };
 
-  console.log(userData, 'userData');
-
   return (
     <>
       <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
@@ -181,16 +179,16 @@ function Navbar() {
           >
             Home
           </li>
-          {/* <li
-            onClick={() => navigate('/dashboard/documentation')}
+          <li
+            onClick={() => navigate('/documentation?page=alert')}
             className={`${
-              location.pathname === '/dashboard/documentation'
+              location.pathname === '/documentation'
                 ? 'bg-primary text-white'
                 : 'text-black'
             } px-4 py-1 rounded-sm cursor-pointer`}
           >
             Documentation
-          </li> */}
+          </li>
           <li
             onClick={() => navigate('/dashboard/payment')}
             className={`${
