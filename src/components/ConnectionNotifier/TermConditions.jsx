@@ -1,5 +1,3 @@
-import React from 'react';
-
 function TermConditions() {
   return (
     <div className='relative py-8 bg-white overflow-hidden'>
