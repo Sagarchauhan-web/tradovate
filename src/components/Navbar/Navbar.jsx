@@ -199,6 +199,17 @@ function Navbar() {
           >
             Payment
           </li>
+          <li
+            className={`${
+              location.pathname === '/dashboard/blog'
+                ? 'bg-primary text-white'
+                : 'text-black'
+            } px-4 py-1 rounded-sm cursor-pointer`}
+          >
+            <a href='https://blog.pickmytrade.trade/' target='_blank'>
+              Blog
+            </a>
+          </li>
         </div>
         <div className='flex gap-2 flex-wrap'>
           <li>

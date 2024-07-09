@@ -102,6 +102,13 @@ export default function Landing() {
               >
                 Documentation
               </div>
+              <a
+                className='text-sm font-bold hover:underline underline-offset-4 text-primary cursor-pointer'
+                href='https://blog.pickmytrade.trade/'
+                target='_blank'
+              >
+                Blog
+              </a>
             </nav>
           </div>
           <div className='flex gap-5'>
@@ -332,13 +339,17 @@ export default function Landing() {
                             src={MetaSpider}
                           />
                         </div>
-                        <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
+                        <a
+                          href='https://github.com/bhavishyagoyal12/pickmyttrade'
+                          target='_blank'
+                          className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'
+                        >
                           <img
                             alt='Custom Code'
                             className='object-contain h-10'
                             src={CustomCode}
                           />
-                        </div>
+                        </a>
                         <div className='border border-gray-200 bg-gray-50 rounded-xl px-5 py-4 flex justify-center items-center hover:border-gray-400 transition-colors ease-in-out duration-150'>
                           <img
                             alt='Zapier'

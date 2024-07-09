@@ -6,6 +6,7 @@ import { OrderTable } from '../OrdersTable/OrdersTable';
 import { DataTable } from '../TradeTable/TradeTable';
 import { useNavigate } from 'react-router-dom';
 import Liquidity from '../Liquidity/Liquidity';
+import TradeCopier from '../TradeCopier/TradeCopier';
 // import TradeCopier from '../TradeCopier/TradeCopier';
 
 function Dashboard() {
@@ -30,7 +31,7 @@ function Dashboard() {
         <TabsTrigger value='orders'>Orders</TabsTrigger>
         <TabsTrigger value='alerts'>Alerts</TabsTrigger>
         <TabsTrigger value='liquidity'>Liquidity</TabsTrigger>
-        {/* <TabsTrigger value='createTradeCopier'>Create Trade Copier</TabsTrigger> */}
+        <TabsTrigger value='createTradeCopier'>Create Trade Copier</TabsTrigger>
       </TabsList>
       <TabsContent value='create'>
         <CreateTrade
@@ -56,9 +57,9 @@ function Dashboard() {
       <TabsContent value='liquidity'>
         <Liquidity />
       </TabsContent>
-      {/* <TabsContent value='createTradeCopier'>
+      <TabsContent value='createTradeCopier'>
         <TradeCopier />
-      </TabsContent> */}
+      </TabsContent>
     </Tabs>
   );
 }
