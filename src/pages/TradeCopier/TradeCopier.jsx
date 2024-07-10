@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
+import { MoreHorizontal } from 'lucide-react';
 import {
   Table,
   TableBody,
@@ -20,7 +21,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -28,8 +29,22 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/components/ui/dialog';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
+import {
+  deleteAccountTradeCopierData,
+  getAccountTradeCopierData,
+  saveAccountTradeCopier,
+} from '@/services/TradeCopier/TradeCopier';
+import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { cn } from '@/lib/utils';
+import { toast } from '@/components/ui/use-toast';
 
 const DIRECTIONTYPE = {
   BUY: 'BUY',
@@ -39,7 +54,7 @@ const DIRECTIONTYPE = {
 
 const RISKORQUANTITY = {
   RISKPERCENTAGE: 'RISKPERCENTAGE',
-  QUANTITY: 'QUANTITY',
+  QUANTITYMULTIPLIER: 'QUANTITYMULTIPLIER',
 };
 
 const TradeCopier = () => {
@@ -54,9 +69,114 @@ const TradeCopier = () => {
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const [isRisk, setIsRisk] = useState(false);
+  const [isRisk, setIsRisk] = useState(true);
+  const [token, setToken] = useState('');
+  const [account, setAccount] = useState('');
+  const [riskPercentage, setRiskPercentage] = useState('');
+  const [quantity, setQuantity] = useState('');
+  const [optionValue, setOptionValue] = useState('RISKPERCENTAGE');
 
-  const onSubmit = () => {};
+  const [inEditingMode, setInEditingMode] = useState(false);
+  const [idForUpdate, setIdForUpdate] = useState('');
+
+  const onSaveAcount = async (d) => {
+    setIsLoading(true);
+    const obj = {
+      id: 0,
+      token: d.token,
+      account_id: d.accoungId,
+      risk_percentage: d.riskPercentage ? Number(d.riskPercentage) : 0,
+      quantity_multiplier: d.quantity ? Number(d.quantity) : 0,
+    };
+
+    const response = await saveAccountTradeCopier(obj);
+    if (!response.error) {
+      getInitialData();
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Edited Successfully',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+    }
+
+    setIsLoading(false);
+  };
+  const onEditAcount = async () => {
+    setIsLoading(true);
+    const obj = {
+      id: idForUpdate,
+      token: token,
+      account_id: account,
+      risk_percentage: riskPercentage ? Number(riskPercentage) : 0,
+      quantity_multiplier: quantity ? Number(quantity) : 0,
+    };
+
+    const response = await saveAccountTradeCopier(obj);
+    if (!response.error) {
+      setInEditingMode(false);
+      setIdForUpdate('');
+      setIsDialogOpen(false);
+      setToken('');
+      setAccount('');
+      setRiskPercentage('');
+      setQuantity('');
+
+      getInitialData();
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Edited Successfully',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+    }
+
+    setIsLoading(false);
+  };
+
+  const deleteTradeCopier = async (id) => {
+    setIsLoading(true);
+    const response = await deleteAccountTradeCopierData(id);
+    setIsLoading(false);
+    if (!response.error) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Deleted Successfully',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+      getInitialData();
+    }
+  };
+
+  const getInitialData = async () => {
+    setIsLoading(true);
+    const response = await getAccountTradeCopierData({});
+    setIsLoading(false);
+    if (!response.error) {
+      setData(
+        response.data.map((d) => ({
+          id: d.id,
+          token: d.token,
+          accoungId: d.account_id,
+          riskPercentage: d.risk_percentage,
+          quantity: d.quantity_multiplier,
+        })),
+      );
+    }
+  };
+  useEffect(() => {
+    getInitialData();
+  }, []);
 
   const columns = [
     {
@@ -77,64 +197,71 @@ const TradeCopier = () => {
       accessorKey: 'riskPercentage',
       header: 'Risk Percentage',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('riskPercentage')}</div>
+        <div className='capitalize'>
+          {row.getValue('riskPercentage')
+            ? row.getValue('riskPercentage')
+            : '-'}
+        </div>
       ),
     },
     {
       accessorKey: 'quantity',
-      header: 'Quantity',
+      header: 'Quantity Multiplier',
       cell: ({ row }) => (
-        <div className='capitalize'>{row.getValue('Quantity')}</div>
+        <div className='capitalize'>
+          {row.getValue('quantity') ? row.getValue('quantity') : '-'}
+        </div>
       ),
     },
-    // {
-    //   id: 'actions',
-    //   enableHiding: false,
-    //   cell: (values) => {
-    //     return (
-    //       <DropdownMenu>
-    //         <DropdownMenuTrigger asChild>
-    //           <Button variant='ghost' className='h-8 w-8 p-0'>
-    //             <span className='sr-only'>Open menu</span>
-    //             <MoreHorizontal className='h-4 w-4' />
-    //           </Button>
-    //         </DropdownMenuTrigger>
-    //         <DropdownMenuContent align='end'>
-    //           <DropdownMenuLabel>Actions</DropdownMenuLabel>
-    //           <DropdownMenuItem
-    //             onClick={() => {
-    //               navigate('/dashboard/tradedetails', {
-    //                 state: {
-    //                   data: data[values.row.index],
-    //                   isAlert: false,
-    //                   isOrder: false,
-    //                   isSetting: true,
-    //                 },
-    //               });
-    //             }}
-    //           >
-    //             View Details
-    //           </DropdownMenuItem>
-    //           <DropdownMenuItem
-    //             onClick={async () => {
-    //               await deleteTrade({ symbol: values.row.getValue('Symbol') });
-    //               getAllTrades();
-    //             }}
-    //           >
-    //             Delete
-    //           </DropdownMenuItem>
-    //           <DropdownMenuItem
-    //             onClick={async () => {
-    //               changeToEditMode(data[values.row.index]);
-    //             }}
-    //           >
-    //             Edit
-    //           </DropdownMenuItem>
-    //         </DropdownMenuContent>
-    //       </DropdownMenu>
-    //     );
-    //   },
-    // },
+    {
+      id: 'actions',
+      enableHiding: false,
+      cell: (values) => {
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='ghost' className='h-8 w-8 p-0'>
+                <span className='sr-only'>Open menu</span>
+                <MoreHorizontal className='h-4 w-4' />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              <DropdownMenuItem
+                onClick={async () => {
+                  console.log(values.row.original, 'values');
+                  deleteTradeCopier(values.row.original.id);
+                }}
+              >
+                Delete
+              </DropdownMenuItem>
+              <DropdownMenuItem
+                onClick={async () => {
+                  setInEditingMode(true);
+                  setToken(values.row.original.token);
+                  setAccount(values.row.original.accoungId);
+                  setRiskPercentage(values.row.original.riskPercentage);
+                  setQuantity(values.row.original.quantity);
+                  setIdForUpdate(values.row.original.id);
+                  setIsDialogOpen(true);
+                  setIsRisk(
+                    values.row.original.riskPercentage > 0 ? true : false,
+                  );
+
+                  setOptionValue(
+                    values.row.original.riskPercentage > 0
+                      ? 'RISKPERCENTAGE'
+                      : 'QUANTITYMULTIPLIER',
+                  );
+                  console.log(values.row.original, 'values.row.original');
+                }}
+              >
+                Edit
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        );
+      },
+    },
   ];
 
   const table = useReactTable({
@@ -154,10 +281,29 @@ const TradeCopier = () => {
     },
   });
 
+  const addDataInTable = () => {
+    const obj = {
+      idForDeletion: data.length + 1,
+      token,
+      accoungId: account,
+      riskPercentage,
+      quantity,
+    };
+
+    setToken('');
+    setAccount('');
+    setRiskPercentage('');
+    setQuantity('');
+
+    setData([...data, obj]);
+    setIsDialogOpen(false);
+    onSaveAcount(obj);
+  };
+
   return (
     <div className='px-1'>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-        <DialogContent className='sm:max-w-[425px]'>
+        <DialogContent className='sm:max-w-[525px]'>
           <DialogHeader>
             <DialogTitle>Add User</DialogTitle>
             <DialogDescription>
@@ -171,6 +317,8 @@ const TradeCopier = () => {
               </Label>
               <Input
                 id='token'
+                onChange={(e) => setToken(e.target.value)}
+                value={token}
                 // defaultValue='Pedro Duarte'
                 className='col-span-3'
               />
@@ -181,19 +329,28 @@ const TradeCopier = () => {
               </Label>
               <Input
                 id='accountId'
+                onChange={(e) => setAccount(e.target.value)}
+                value={account}
                 // defaultValue='@peduarte'
                 className='col-span-3'
               />
             </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
+            <div className='grid grid-cols-4 items-center'>
               <Label htmlFor='direction'>Option</Label>
               <SelectComponent
-                className='col-span-3 w-7'
-                value={isRisk}
+                className='col-span-5 w-20'
                 Label='Order Type'
+                value={optionValue}
                 placeholder={`Enter Direction`}
                 onChange={(value) => {
-                  setIsRisk(value);
+                  setOptionValue(value);
+                  setRiskPercentage(0);
+                  setQuantity(0);
+                  if (value === 'RISKPERCENTAGE') {
+                    setIsRisk(true);
+                  } else {
+                    setIsRisk(false);
+                  }
                 }}
                 data={Object.entries(RISKORQUANTITY).map(([key, value]) => ({
                   value,
@@ -201,14 +358,44 @@ const TradeCopier = () => {
                 }))}
               />
             </div>
+            {isRisk ? (
+              <div className='grid grid-cols-4 items-center gap-4'>
+                <Label htmlFor='accountId' className='text-right'>
+                  Risk Percentage
+                </Label>
+                <Input
+                  id='riskPercentage'
+                  value={riskPercentage}
+                  onChange={(e) => setRiskPercentage(e.target.value)}
+                  className='col-span-3'
+                />
+              </div>
+            ) : (
+              <div className='grid grid-cols-4 items-center gap-4'>
+                <Label htmlFor='accountId' className='text-right'>
+                  Quantity Multiplier
+                </Label>
+                <Input
+                  id='riskPercentage'
+                  value={quantity}
+                  onChange={(e) => setQuantity(e.target.value)}
+                  className='col-span-3'
+                />
+              </div>
+            )}
           </div>
           <DialogFooter>
-            <Button type='submit'>Save changes</Button>
+            <Button
+              type='submit'
+              onClick={inEditingMode ? onEditAcount : addDataInTable}
+            >
+              {inEditingMode ? 'Edit' : 'Save'} changes
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
 
-      <form onSubmit={onSubmit}>
+      <form>
         <div className='flex justify-between items-center'>
           <h2 className='scroll-m-20 w-max text-2xl py-4  font-semibold tracking-tight first:mt-0'>
             Create Trade Copier
