@@ -38,6 +38,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
+  addAccountTradeCopierData,
   deleteAccountTradeCopierData,
   getAccountTradeCopierData,
   saveAccountTradeCopier,
@@ -58,8 +59,22 @@ const RISKORQUANTITY = {
 };
 
 const TradeCopier = () => {
+  const user = JSON.parse(localStorage.getItem('user'));
   // Form
   const [directionValue, setDirectionValue] = useState('');
+  const [symbol, setSymbol] = useState('');
+  const [qty, setQty] = useState('');
+  const [riskPerc, setRiskPerc] = useState('');
+  const [price, setPrice] = useState('');
+  const [tp, setTp] = useState('');
+  const [sl, setSl] = useState('');
+  const [trail, setTrail] = useState('');
+  const [trailStop, setTrailStop] = useState('');
+  const [trailTrigger, setTrailTrigger] = useState('');
+  const [trailFreq, setTrailFreq] = useState('');
+  const [mainToken, setMainToken] = useState(user?.user_key);
+  const [updateSl, setUpdateSl] = useState('');
+  const [updateTp, setUpdateTp] = useState('');
 
   // Table
   const [isLoading, setIsLoading] = useState(false);
@@ -78,6 +93,59 @@ const TradeCopier = () => {
 
   const [inEditingMode, setInEditingMode] = useState(false);
   const [idForUpdate, setIdForUpdate] = useState('');
+
+  const onSubmit = async () => {
+    const obj = {
+      symbol: symbol,
+      data: directionValue,
+      quantity: Number(qty),
+      price: Number(price),
+      tp: Number(tp),
+      sl: Number(sl),
+      trail: Number(trail),
+      trail_stop: trailStop ? Number(trailStop) : 0,
+      trail_trigger: trailTrigger ? Number(trailTrigger) : 0,
+      trail_freq: trailFreq ? Number(trailFreq) : 0,
+      update_tp: Boolean(updateTp),
+      update_sl: Boolean(updateSl),
+      risk_percentage: !Number(qty) ? Number(riskPerc) : 0,
+      token: mainToken,
+      duplicate_position_allow: true,
+      reverse_order_close: true,
+      account_id: '',
+      multiple_accounts: data.map((d) => ({
+        token: d.token,
+        account_id: d.accoungId,
+        risk_percentage: d.riskPercentage ? Number(d.riskPercentage) : 0,
+        quantity_multiplier: d.quantity ? Number(d.quantity) : 0,
+      })),
+    };
+    const response = await addAccountTradeCopierData(obj);
+
+    if (!response.error) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Added Successfully',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+
+      setSymbol('');
+      setMainToken('');
+      setRiskPerc('');
+      setQty('');
+      setPrice('');
+      setTp('');
+      setSl('');
+      setTrail('');
+      setTrailFreq('');
+      setTrailStop('');
+      setTrailTrigger('');
+    }
+  };
 
   const onSaveAcount = async (d) => {
     setIsLoading(true);
@@ -401,7 +469,7 @@ const TradeCopier = () => {
             Create Trade Copier
           </h2>
           <div className='space-x-2'>
-            <Button>Submit</Button>
+            <Button onClick={() => onSubmit()}>Submit</Button>
           </div>
         </div>
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4 text-sm'>
@@ -410,8 +478,21 @@ const TradeCopier = () => {
             <Input
               // onBlur={symbolOnBlur}
               // ref={symbolRef}
+              value={symbol}
+              onChange={(e) => setSymbol(e.target.value)}
               id='name'
               placeholder={`Enter Symbol`}
+            />
+          </div>
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='token'>Token</Label>
+            <Input
+              // onBlur={symbolOnBlur}
+              // ref={symbolRef}
+              value={mainToken}
+              onChange={(e) => setMainToken(e.target.value)}
+              id='token'
+              placeholder={`Enter Token`}
             />
           </div>
           <div className='flex flex-col space-y-1.5'>
@@ -433,6 +514,9 @@ const TradeCopier = () => {
             <Label htmlFor='quantity'>Quantity</Label>
             <Input
               //  ref={quantityRef}
+              disabled={riskPerc}
+              onChange={(e) => setQty(e.target.value)}
+              value={qty}
               id='quantity'
               placeholder={`Enter Quantity`}
             />
@@ -440,7 +524,10 @@ const TradeCopier = () => {
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='riskPercentage'>Risk Percentage</Label>
             <Input
+              disabled={qty}
               //  ref={quantityRef}
+              onChange={(e) => setRiskPerc(e.target.value)}
+              value={riskPerc}
               id='riskPercentage'
               placeholder={`Enter Risk Percentage`}
             />
@@ -450,6 +537,8 @@ const TradeCopier = () => {
             <Label htmlFor='price'>Price</Label>
             <Input
               // ref={MinTickRef}
+              onChange={(e) => setPrice(e.target.value)}
+              value={price}
               id='price'
               placeholder={`Enter Price`}
             />
@@ -458,6 +547,8 @@ const TradeCopier = () => {
             <Label htmlFor='tp'>TP</Label>
             <Input
               // ref={LotRef}
+              onChange={(e) => setTp(e.target.value)}
+              value={tp}
               id='tp'
               placeholder={`TP`}
             />
@@ -466,19 +557,87 @@ const TradeCopier = () => {
             <Label htmlFor='sl'>SL</Label>
             <Input
               // ref={tradovateSymbolRef}
+              onChange={(e) => setSl(e.target.value)}
+              value={sl}
               id='sl'
               placeholder={`SL`}
             />
           </div>
 
           <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='updateTP'>Update TP</Label>
+            <SelectComponent
+              value={updateTp}
+              placeholder={`Select`}
+              onChange={(value) => {
+                setUpdateTp(value);
+              }}
+              data={[true, false].map((value) => ({
+                value: String(value),
+                title: String(value),
+              }))}
+            />
+          </div>
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='updateSl'>Update SL</Label>
+            <SelectComponent
+              value={updateSl}
+              placeholder={`Select`}
+              onChange={(value) => {
+                setUpdateSl(value);
+              }}
+              data={[true, false].map((value) => ({
+                value: String(value),
+                title: String(value),
+              }))}
+            />
+          </div>
+          <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='trail'>Trail</Label>
             <Input
               // ref={stopLossRef}
+              onChange={(e) => setTrail(e.target.value)}
+              value={trail}
               id='trail'
               placeholder={`Enter Trail`}
             />
           </div>
+          {Number(trail) === 1 ? (
+            <>
+              <div className='flex flex-col space-y-1.5'>
+                <Label htmlFor='trailstop'>Trail Stop</Label>
+                <Input
+                  // ref={stopLossRef}
+                  onChange={(e) => setTrailStop(e.target.value)}
+                  value={trailStop}
+                  id='trailstop'
+                  placeholder={`Enter Trail Stop`}
+                />
+              </div>
+              <div className='flex flex-col space-y-1.5'>
+                <Label htmlFor='trailfrequence'>Trail Frequence</Label>
+                <Input
+                  // ref={stopLossRef}
+                  onChange={(e) => setTrailFreq(e.target.value)}
+                  value={trailFreq}
+                  id='trailfrequence'
+                  placeholder={`Enter Trail Frequency`}
+                />
+              </div>
+              <div className='flex flex-col space-y-1.5'>
+                <Label htmlFor='trailTrigger'>Trail Trigger</Label>
+                <Input
+                  // ref={stopLossRef}
+                  onChange={(e) => setTrailTrigger(e.target.value)}
+                  value={trailTrigger}
+                  id='trailTrigger'
+                  placeholder={`Enter Trail Trigger`}
+                />
+              </div>
+            </>
+          ) : (
+            ''
+          )}
         </div>
       </form>
       <div className='flex justify-between items-center mt-8'>

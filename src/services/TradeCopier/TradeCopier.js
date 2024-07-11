@@ -16,6 +16,14 @@ export const getAccountTradeCopierData = async (requestData) => {
     return error;
   }
 };
+export const addAccountTradeCopierData = async (requestData) => {
+  try {
+    const response = await apiClient.post('/add-trade-data', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
 export const deleteAccountTradeCopierData = async (id) => {
   try {
     const response = await apiClient.post('/DeleteMultiAccount', { id });
