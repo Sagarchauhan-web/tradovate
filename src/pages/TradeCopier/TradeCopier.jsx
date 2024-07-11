@@ -34,7 +34,6 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {
@@ -75,6 +74,8 @@ const TradeCopier = () => {
   const [mainToken, setMainToken] = useState(user?.user_key);
   const [updateSl, setUpdateSl] = useState('');
   const [updateTp, setUpdateTp] = useState('');
+  const [duplicatePositionAllow, setDuplicatePositionAllow] = useState('');
+  const [reverseOrderClose, setReverseOrderClose] = useState('');
 
   // Table
   const [isLoading, setIsLoading] = useState(false);
@@ -106,12 +107,13 @@ const TradeCopier = () => {
       trail_stop: trailStop ? Number(trailStop) : 0,
       trail_trigger: trailTrigger ? Number(trailTrigger) : 0,
       trail_freq: trailFreq ? Number(trailFreq) : 0,
-      update_tp: Boolean(updateTp),
-      update_sl: Boolean(updateSl),
+      update_tp: updateTp === 'true' ? true : false,
+      update_sl: updateSl === 'true' ? true : false,
       risk_percentage: !Number(qty) ? Number(riskPerc) : 0,
       token: mainToken,
-      duplicate_position_allow: true,
-      reverse_order_close: true,
+      duplicate_position_allow:
+        duplicatePositionAllow === 'true' ? true : false,
+      reverse_order_close: reverseOrderClose === 'true' ? true : false,
       account_id: '',
       multiple_accounts: data.map((d) => ({
         token: d.token,
@@ -120,6 +122,7 @@ const TradeCopier = () => {
         quantity_multiplier: d.quantity ? Number(d.quantity) : 0,
       })),
     };
+
     const response = await addAccountTradeCopierData(obj);
 
     if (!response.error) {
@@ -134,7 +137,6 @@ const TradeCopier = () => {
       });
 
       setSymbol('');
-      setMainToken('');
       setRiskPerc('');
       setQty('');
       setPrice('');
@@ -148,6 +150,48 @@ const TradeCopier = () => {
   };
 
   const onSaveAcount = async (d) => {
+    console.log(d, 'd');
+    if (!d.token) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Please select token',
+        action: <IoIosCheckmarkCircle className='text-4xl text-red-500' />,
+      });
+      return;
+    }
+    if (optionValue === 'QUANTITYMULTIPLIER') {
+      if (!Number(d.quantity)) {
+        toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 1000,
+          position: 'top-center',
+          title: 'Please enter quantity multiplier',
+          action: <IoIosCheckmarkCircle className='text-4xl text-red-500' />,
+        });
+        return;
+      }
+    }
+    if (optionValue === 'RISKPERCENTAGE') {
+      if (!Number(d.riskPercentage)) {
+        toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 1000,
+          position: 'top-center',
+          title: 'Please enter risk percentage',
+          action: <IoIosCheckmarkCircle className='text-4xl text-red-500' />,
+        });
+        return;
+      }
+    }
+
     setIsLoading(true);
     const obj = {
       id: 0,
@@ -159,6 +203,13 @@ const TradeCopier = () => {
 
     const response = await saveAccountTradeCopier(obj);
     if (!response.error) {
+      setToken('');
+      setAccount('');
+      setRiskPercentage('');
+      setQuantity('');
+
+      setData([...data, d]);
+      setIsDialogOpen(false);
       getInitialData();
       toast({
         className: cn(
@@ -358,13 +409,6 @@ const TradeCopier = () => {
       quantity,
     };
 
-    setToken('');
-    setAccount('');
-    setRiskPercentage('');
-    setQuantity('');
-
-    setData([...data, obj]);
-    setIsDialogOpen(false);
     onSaveAcount(obj);
   };
 
@@ -514,7 +558,7 @@ const TradeCopier = () => {
             <Label htmlFor='quantity'>Quantity</Label>
             <Input
               //  ref={quantityRef}
-              disabled={riskPerc}
+              disabled={Number(riskPerc)}
               onChange={(e) => setQty(e.target.value)}
               value={qty}
               id='quantity'
@@ -524,7 +568,7 @@ const TradeCopier = () => {
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='riskPercentage'>Risk Percentage</Label>
             <Input
-              disabled={qty}
+              disabled={Number(qty)}
               //  ref={quantityRef}
               onChange={(e) => setRiskPerc(e.target.value)}
               value={riskPerc}
@@ -638,6 +682,34 @@ const TradeCopier = () => {
           ) : (
             ''
           )}
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='duplicationpos'>Duplicate Position Allow</Label>
+            <SelectComponent
+              value={duplicatePositionAllow}
+              placeholder={`Select`}
+              onChange={(value) => {
+                setDuplicatePositionAllow(value);
+              }}
+              data={[true, false].map((value) => ({
+                value: String(value),
+                title: String(value),
+              }))}
+            />
+          </div>
+          <div className='flex flex-col space-y-1.5'>
+            <Label htmlFor='reverseOrder'>Reverse Order Close</Label>
+            <SelectComponent
+              value={reverseOrderClose}
+              placeholder={`Select`}
+              onChange={(value) => {
+                setReverseOrderClose(value);
+              }}
+              data={[true, false].map((value) => ({
+                value: String(value),
+                title: String(value),
+              }))}
+            />
+          </div>
         </div>
       </form>
       <div className='flex justify-between items-center mt-8'>
