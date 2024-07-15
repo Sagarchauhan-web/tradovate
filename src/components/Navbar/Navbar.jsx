@@ -273,13 +273,13 @@ function Navbar() {
             />
           </li>
           <li>
+            <LogoutButton />
+          </li>
+          <li>
             <PauseAndResume
               isPaused={userData?.pause}
               onChange={changeAccountSettings}
             />
-          </li>
-          <li>
-            <LogoutButton />
           </li>
         </div>
       </ul>

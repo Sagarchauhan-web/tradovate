@@ -36,6 +36,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { MdDelete, MdEdit } from 'react-icons/md';
 import {
   addAccountTradeCopierData,
   deleteAccountTradeCopierData,
@@ -45,6 +46,7 @@ import {
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { cn } from '@/lib/utils';
 import { toast } from '@/components/ui/use-toast';
+import { CiEdit } from 'react-icons/ci';
 
 const DIRECTIONTYPE = {
   BUY: 'BUY',
@@ -67,15 +69,15 @@ const TradeCopier = () => {
   const [price, setPrice] = useState('');
   const [tp, setTp] = useState('');
   const [sl, setSl] = useState('');
-  const [trail, setTrail] = useState('');
-  const [trailStop, setTrailStop] = useState('');
-  const [trailTrigger, setTrailTrigger] = useState('');
-  const [trailFreq, setTrailFreq] = useState('');
+  // const [trail, setTrail] = useState('');
+  // const [trailStop, setTrailStop] = useState('');
+  // const [trailTrigger, setTrailTrigger] = useState('');
+  // const [trailFreq, setTrailFreq] = useState('');
   const [mainToken, setMainToken] = useState(user?.user_key);
-  const [updateSl, setUpdateSl] = useState('');
-  const [updateTp, setUpdateTp] = useState('');
-  const [duplicatePositionAllow, setDuplicatePositionAllow] = useState('');
-  const [reverseOrderClose, setReverseOrderClose] = useState('');
+  // const [updateSl, setUpdateSl] = useState('');
+  // const [updateTp, setUpdateTp] = useState('');
+  // const [duplicatePositionAllow, setDuplicatePositionAllow] = useState('');
+  // const [reverseOrderClose, setReverseOrderClose] = useState('');
 
   // Table
   const [isLoading, setIsLoading] = useState(false);
@@ -103,18 +105,18 @@ const TradeCopier = () => {
       price: Number(price),
       tp: Number(tp),
       sl: Number(sl),
-      trail: Number(trail),
-      trail_stop: trailStop ? Number(trailStop) : 0,
-      trail_trigger: trailTrigger ? Number(trailTrigger) : 0,
-      trail_freq: trailFreq ? Number(trailFreq) : 0,
-      update_tp: updateTp === 'true' ? true : false,
-      update_sl: updateSl === 'true' ? true : false,
+      // trail: Number(trail),
+      // trail_stop: trailStop ? Number(trailStop) : 0,
+      // trail_trigger: trailTrigger ? Number(trailTrigger) : 0,
+      // trail_freq: trailFreq ? Number(trailFreq) : 0,
+      // update_tp: updateTp === 'true' ? true : false,
+      // update_sl: updateSl === 'true' ? true : false,
       risk_percentage: !Number(qty) ? Number(riskPerc) : 0,
       token: mainToken,
-      duplicate_position_allow:
-        duplicatePositionAllow === 'true' ? true : false,
-      reverse_order_close: reverseOrderClose === 'true' ? true : false,
-      account_id: '',
+      // duplicate_position_allow:
+      //   duplicatePositionAllow === 'true' ? true : false,
+      // reverse_order_close: reverseOrderClose === 'true' ? true : false,
+      // account_id: '',
       multiple_accounts: data.map((d) => ({
         token: d.token,
         account_id: d.accoungId,
@@ -142,10 +144,10 @@ const TradeCopier = () => {
       setPrice('');
       setTp('');
       setSl('');
-      setTrail('');
-      setTrailFreq('');
-      setTrailStop('');
-      setTrailTrigger('');
+      // setTrail('');
+      // setTrailFreq('');
+      // setTrailStop('');
+      // setTrailTrigger('');
     }
   };
 
@@ -337,47 +339,81 @@ const TradeCopier = () => {
       enableHiding: false,
       cell: (values) => {
         return (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant='ghost' className='h-8 w-8 p-0'>
-                <span className='sr-only'>Open menu</span>
-                <MoreHorizontal className='h-4 w-4' />
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align='end'>
-              <DropdownMenuItem
-                onClick={async () => {
-                  console.log(values.row.original, 'values');
-                  deleteTradeCopier(values.row.original.id);
-                }}
-              >
-                Delete
-              </DropdownMenuItem>
-              <DropdownMenuItem
-                onClick={async () => {
-                  setInEditingMode(true);
-                  setToken(values.row.original.token);
-                  setAccount(values.row.original.accoungId);
-                  setRiskPercentage(values.row.original.riskPercentage);
-                  setQuantity(values.row.original.quantity);
-                  setIdForUpdate(values.row.original.id);
-                  setIsDialogOpen(true);
-                  setIsRisk(
-                    values.row.original.riskPercentage > 0 ? true : false,
-                  );
+          <>
+            <button
+              className='mr-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+              onClick={async () => {
+                deleteTradeCopier(values.row.original.id);
+              }}
+            >
+              <MdDelete />
+            </button>
+            <button
+              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+              onClick={async () => {
+                setInEditingMode(true);
+                setToken(values.row.original.token);
+                setAccount(values.row.original.accoungId);
+                setRiskPercentage(values.row.original.riskPercentage);
+                setQuantity(values.row.original.quantity);
+                setIdForUpdate(values.row.original.id);
+                setIsDialogOpen(true);
+                setIsRisk(
+                  values.row.original.riskPercentage > 0 ? true : false,
+                );
 
-                  setOptionValue(
-                    values.row.original.riskPercentage > 0
-                      ? 'RISKPERCENTAGE'
-                      : 'QUANTITYMULTIPLIER',
-                  );
-                  console.log(values.row.original, 'values.row.original');
-                }}
-              >
-                Edit
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+                setOptionValue(
+                  values.row.original.riskPercentage > 0
+                    ? 'RISKPERCENTAGE'
+                    : 'QUANTITYMULTIPLIER',
+                );
+              }}
+            >
+              <MdEdit />
+            </button>
+          </>
+
+          // <DropdownMenu>
+          //   <DropdownMenuTrigger asChild>
+          //     <Button variant='ghost' className='h-8 w-8 p-0'>
+          //       <span className='sr-only'>Open menu</span>
+          //       <MoreHorizontal className='h-4 w-4' />
+          //     </Button>
+          //   </DropdownMenuTrigger>
+          //   <DropdownMenuContent align='end'>
+          //     <DropdownMenuItem
+          //       onClick={async () => {
+          //         console.log(values.row.original, 'values');
+          //         deleteTradeCopier(values.row.original.id);
+          //       }}
+          //     >
+          //       Delete
+          //     </DropdownMenuItem>
+          //     <DropdownMenuItem
+          //       onClick={async () => {
+          //         setInEditingMode(true);
+          //         setToken(values.row.original.token);
+          //         setAccount(values.row.original.accoungId);
+          //         setRiskPercentage(values.row.original.riskPercentage);
+          //         setQuantity(values.row.original.quantity);
+          //         setIdForUpdate(values.row.original.id);
+          //         setIsDialogOpen(true);
+          //         setIsRisk(
+          //           values.row.original.riskPercentage > 0 ? true : false,
+          //         );
+
+          //         setOptionValue(
+          //           values.row.original.riskPercentage > 0
+          //             ? 'RISKPERCENTAGE'
+          //             : 'QUANTITYMULTIPLIER',
+          //         );
+          //         console.log(values.row.original, 'values.row.original');
+          //       }}
+          //     >
+          //       Edit
+          //     </DropdownMenuItem>
+          //   </DropdownMenuContent>
+          // </DropdownMenu>
         );
       },
     },
@@ -417,7 +453,7 @@ const TradeCopier = () => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className='sm:max-w-[525px]'>
           <DialogHeader>
-            <DialogTitle>Add User</DialogTitle>
+            <DialogTitle>Add User Settings</DialogTitle>
             <DialogDescription>
               Make changes to your User here. Click save when you&apos;re done.
             </DialogDescription>
@@ -447,10 +483,12 @@ const TradeCopier = () => {
                 className='col-span-3'
               />
             </div>
-            <div className='grid grid-cols-4 items-center'>
-              <Label htmlFor='direction'>Option</Label>
+            <div className='ml-12  flex items-center'>
+              <Label htmlFor='direction' className='mr-7'>
+                Option
+              </Label>
               <SelectComponent
-                className='col-span-5 w-20'
+                className='col-span-8 w-20'
                 Label='Order Type'
                 value={optionValue}
                 placeholder={`Enter Direction`}
@@ -578,7 +616,7 @@ const TradeCopier = () => {
           </div>
 
           <div className='flex flex-col space-y-1.5'>
-            <Label htmlFor='price'>Price</Label>
+            <Label htmlFor='price'>Entry Price</Label>
             <Input
               // ref={MinTickRef}
               onChange={(e) => setPrice(e.target.value)}
@@ -588,27 +626,27 @@ const TradeCopier = () => {
             />
           </div>
           <div className='flex flex-col space-y-1.5'>
-            <Label htmlFor='tp'>TP</Label>
+            <Label htmlFor='tp'>Take Profit</Label>
             <Input
               // ref={LotRef}
               onChange={(e) => setTp(e.target.value)}
               value={tp}
               id='tp'
-              placeholder={`TP`}
+              placeholder={`Take Profit`}
             />
           </div>
           <div className='flex flex-col space-y-1.5'>
-            <Label htmlFor='sl'>SL</Label>
+            <Label htmlFor='sl'>Stop Loss</Label>
             <Input
               // ref={tradovateSymbolRef}
               onChange={(e) => setSl(e.target.value)}
               value={sl}
               id='sl'
-              placeholder={`SL`}
+              placeholder={`Stop Loss`}
             />
           </div>
 
-          <div className='flex flex-col space-y-1.5'>
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='updateTP'>Update TP</Label>
             <SelectComponent
               value={updateTp}
@@ -635,8 +673,9 @@ const TradeCopier = () => {
                 title: String(value),
               }))}
             />
-          </div>
-          <div className='flex flex-col space-y-1.5'>
+          </div> */}
+
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='trail'>Trail</Label>
             <Input
               // ref={stopLossRef}
@@ -645,8 +684,8 @@ const TradeCopier = () => {
               id='trail'
               placeholder={`Enter Trail`}
             />
-          </div>
-          {Number(trail) === 1 ? (
+          </div> */}
+          {/* {Number(trail) === 1 ? (
             <>
               <div className='flex flex-col space-y-1.5'>
                 <Label htmlFor='trailstop'>Trail Stop</Label>
@@ -681,8 +720,8 @@ const TradeCopier = () => {
             </>
           ) : (
             ''
-          )}
-          <div className='flex flex-col space-y-1.5'>
+          )} */}
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='duplicationpos'>Duplicate Position Allow</Label>
             <SelectComponent
               value={duplicatePositionAllow}
@@ -709,7 +748,7 @@ const TradeCopier = () => {
                 title: String(value),
               }))}
             />
-          </div>
+          </div> */}
         </div>
       </form>
       <div className='flex justify-between items-center mt-8'>
