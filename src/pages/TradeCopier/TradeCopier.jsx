@@ -105,6 +105,12 @@ const TradeCopier = () => {
       price: Number(price),
       tp: Number(tp),
       sl: Number(sl),
+      trail: 0,
+      trail_stop: 0.1,
+      trail_trigger: 0.1,
+      trail_freq: 0.1,
+      update_tp: false,
+      update_sl: false,
       // trail: Number(trail),
       // trail_stop: trailStop ? Number(trailStop) : 0,
       // trail_trigger: trailTrigger ? Number(trailTrigger) : 0,
@@ -117,6 +123,9 @@ const TradeCopier = () => {
       //   duplicatePositionAllow === 'true' ? true : false,
       // reverse_order_close: reverseOrderClose === 'true' ? true : false,
       // account_id: '',
+      duplicate_position_allow: true,
+      reverse_order_close: true,
+      account_id: '',
       multiple_accounts: data.map((d) => ({
         token: d.token,
         account_id: d.accoungId,
@@ -309,7 +318,7 @@ const TradeCopier = () => {
     },
     {
       accessorKey: 'accoungId',
-      header: 'Account Id',
+      header: 'Account Name',
       cell: ({ row }) => (
         <div className='capitalize'>{row.getValue('accoungId')}</div>
       ),
@@ -473,7 +482,7 @@ const TradeCopier = () => {
             </div>
             <div className='grid grid-cols-4 items-center gap-4'>
               <Label htmlFor='accountId' className='text-right'>
-                account Id
+                account Name
               </Label>
               <Input
                 id='accountId'
