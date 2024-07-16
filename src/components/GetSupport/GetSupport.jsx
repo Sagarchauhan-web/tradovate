@@ -44,31 +44,65 @@ const GetSupport = () => {
 
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className='sm:max-w-[425px]'>
-          <DialogHeader>
+          <DialogHeader className={'mb-2'}>
             <DialogTitle className='text-center'>Get Support</DialogTitle>
             <DialogDescription className='text-center'>
               For immediate assistance, please contact our support team
             </DialogDescription>
           </DialogHeader>
-          <div className='flex flex-col items-center justify-center gap-4 py-8'>
-            <PhoneIcon className='size-12 text-green-500' />
-            <p className='text-lg font-medium'>+91 78388 73492</p>
-            <p className='text-muted-foreground'>
-              Click to open WhatsApp and chat with us.
-            </p>
-          </div>
-          <DialogFooter>
-            <div className='w-full'>
-              <a
-                className='w-full h-full'
-                href='whatsapp://send?phone=917838873492'
-              >
-                <Button type='button' className='w-full '>
-                  Click to chat on WhatsApp
-                </Button>
-              </a>
+
+          <div className='space-y-4'>
+            <div className='flex items-center gap-3 justify-between'>
+              <div className='flex items-center gap-3'>
+                <PhoneIcon className='h-8 w-8 text-green-500' />
+                <div>
+                  <p className='text-sm font-medium'>WhatsApp</p>
+                  <a
+                    href='#'
+                    className='text-sm text-muted-foreground hover:underline'
+                  >
+                    +91 78388 73492
+                  </a>
+                </div>
+              </div>
+              <div>
+                <a
+                  className='w-full h-full'
+                  href='whatsapp://send?phone=917838873492'
+                >
+                  <Button type='button' variant='outline'>
+                    Connect
+                  </Button>
+                </a>
+              </div>
             </div>
-          </DialogFooter>
+
+            <div className='flex items-center gap-3 justify-between'>
+              <div className='flex items-center gap-3'>
+                <MailOpenIcon className='h-8 w-8 text-primary' />
+                <div>
+                  <p className='text-sm font-medium'>Email</p>
+                  <a
+                    href='#'
+                    className='text-sm text-muted-foreground hover:underline'
+                  >
+                    support@pickmytrade.com
+                  </a>
+                </div>
+              </div>
+              <div>
+                <a
+                  className='w-full h-full'
+                  href='mailto:support@pickmytrade.com'
+                >
+                  <Button type='button' variant='outline'>
+                    Connect
+                  </Button>
+                </a>
+              </div>
+            </div>
+          </div>
+          <DialogFooter></DialogFooter>
         </DialogContent>
       </Dialog>
     </div>
@@ -76,6 +110,26 @@ const GetSupport = () => {
 };
 
 export default GetSupport;
+
+function MailOpenIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
+      <path d='M21.2 8.4c.5.38.8.97.8 1.6v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V10a2 2 0 0 1 .8-1.6l8-6a2 2 0 0 1 2.4 0l8 6Z' />
+      <path d='m22 10-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 10' />
+    </svg>
+  );
+}
 
 function CircleHelpIcon(props) {
   return (
