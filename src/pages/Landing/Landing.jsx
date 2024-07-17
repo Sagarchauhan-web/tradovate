@@ -449,6 +449,7 @@ export default function Landing() {
                       <div className='flex flex-wrap lg:gap-5 sm:gap-3 gap-5 xl:justify-center lg:justify-between justify-center'>
                         <div className='hover:scale-110 transition-all ease-in-out duration-300  rounded-full lg:w-24 lg:h-24 w-20 h-20 shrink-0 flex justify-center items-center'>
                           <img
+                            onClick={() => navigate('/tradovateautomation')}
                             alt='Alpaca'
                             className=' rounded-full object-contain w-full h-full'
                             src={Tradovate}

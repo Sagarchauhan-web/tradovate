@@ -18,6 +18,7 @@ import PaymentSuccess from './pages/Payment/PaymentSuccess';
 import PaymentFailed from './pages/Payment/PaymentFailed';
 import { useEffect } from 'react';
 import MailVerification from './pages/Auth/MailVerification';
+import TradovateAutomation from './pages/TradovateAutomation/TradovateAutomation';
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -56,6 +57,11 @@ function App() {
     <HashRouter>
       <Routes>
         <Route exact path='/' element={<Landing />} />
+        <Route
+          exact
+          path='/tradovateautomation'
+          element={<TradovateAutomation />}
+        />
         <Route exact path='/auth' element={<Auth />} />
         <Route exact path='/documentation' element={<Documentation />} />
         <Route
