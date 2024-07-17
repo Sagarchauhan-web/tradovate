@@ -106,9 +106,9 @@ const TradeCopier = () => {
       tp: Number(tp),
       sl: Number(sl),
       trail: 0,
-      trail_stop: 0.1,
-      trail_trigger: 0.1,
-      trail_freq: 0.1,
+      trail_stop: 0,
+      trail_trigger: 0,
+      trail_freq: 0,
       update_tp: false,
       update_sl: false,
       // trail: Number(trail),
@@ -350,15 +350,7 @@ const TradeCopier = () => {
         return (
           <>
             <button
-              className='mr-4 bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
-              onClick={async () => {
-                deleteTradeCopier(values.row.original.id);
-              }}
-            >
-              <MdDelete />
-            </button>
-            <button
-              className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+              className='bg-blue-500 mr-4 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
               onClick={async () => {
                 setInEditingMode(true);
                 setToken(values.row.original.token);
@@ -379,6 +371,14 @@ const TradeCopier = () => {
               }}
             >
               <MdEdit />
+            </button>
+            <button
+              className='bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded'
+              onClick={async () => {
+                deleteTradeCopier(values.row.original.id);
+              }}
+            >
+              <MdDelete />
             </button>
           </>
 
@@ -559,9 +559,6 @@ const TradeCopier = () => {
           <h2 className='scroll-m-20 w-max text-2xl py-4  font-semibold tracking-tight first:mt-0'>
             Create Trade Copier
           </h2>
-          <div className='space-x-2'>
-            <Button onClick={() => onSubmit()}>Submit</Button>
-          </div>
         </div>
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4 text-sm'>
           <div className='flex flex-col space-y-1.5'>
@@ -765,7 +762,7 @@ const TradeCopier = () => {
           Add Accounts
         </h2>
         <div className='space-x-2'>
-          <Button onClick={() => setIsDialogOpen(true)}>Add</Button>
+          <Button onClick={() => onSubmit()}>Submit</Button>
         </div>
       </div>
       <div className='rounded-md border'>
@@ -822,6 +819,11 @@ const TradeCopier = () => {
             <ScrollBar orientation='horizontal' />
           </ScrollArea>
         </OverlapLoader>
+      </div>
+      <div className='flex justify-end items-end mt-8'>
+        <div className='space-x-2'>
+          <Button onClick={() => setIsDialogOpen(true)}>Add</Button>
+        </div>
       </div>
     </div>
   );

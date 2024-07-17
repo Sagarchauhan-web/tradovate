@@ -11,7 +11,7 @@ function LogoutButton() {
     navigate('/auth');
   };
   return (
-    <Button variant='outline' size='sm' onClick={logOut}>
+    <Button variant='outline' size='sm' className='w-full' onClick={logOut}>
       Logout
     </Button>
   );

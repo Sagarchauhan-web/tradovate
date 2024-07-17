@@ -12,11 +12,18 @@ import { useEffect, useState } from 'react';
 import { Button } from '../ui/button';
 import { toast } from '../ui/use-toast';
 import { cn } from '@/lib/utils';
-import { FaClipboard } from 'react-icons/fa';
+import { FaClipboard, FaUserCircle } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { differenceInDays } from 'date-fns';
 import PauseAndResume from '../PauseAndResume/PauseAndResume';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '../ui/dropdown-menu';
 
 function Navbar() {
   const [userData, setUserData] = useState();
@@ -273,23 +280,44 @@ function Navbar() {
             />
           </li>
           <li>
-            <LogoutButton />
-          </li>
-          <li>
-            <PauseAndResume
-              isPaused={userData?.pause}
-              onChange={changeAccountSettings}
-            />
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant='outline' className='h-8 w-8 p-0'>
+                  {userData?.username ? (
+                    userData?.username.charAt(0).toUpperCase()
+                  ) : (
+                    <FaUserCircle className='w-8 h-8 text-primary rounded-full' />
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align='end'>
+                {trialDays > 10 && (
+                  <div className='flex justify-end items-center'>
+                    <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
+                      <p>Account Validity {trialDays} Days</p>
+                    </div>
+                  </div>
+                )}
+                <DropdownMenuLabel>Username</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <p className='p-2 text-sm'>{userData?.username}</p>
+                <DropdownMenuLabel>Status</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <div className='p-2' onClick={async () => {}}>
+                  <PauseAndResume
+                    isPaused={userData?.pause}
+                    onChange={changeAccountSettings}
+                  />
+                </div>
+                <div className='p-2'>
+                  <LogoutButton />
+                </div>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </li>
         </div>
       </ul>
-      {trialDays > 10 && (
-        <div className='flex justify-end items-center'>
-          <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
-            <p>Account Validity {trialDays} Days</p>
-          </div>
-        </div>
-      )}
+
       {trialDays < 10 && trialDays > 0 && (
         <div className='flex justify-end items-center'>
           <div className='max-w-[300px] w-full bg-red-500 py-3 shadow-lg text-center text-white font-medium'>
