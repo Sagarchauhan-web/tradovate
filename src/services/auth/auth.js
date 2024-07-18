@@ -125,3 +125,31 @@ export const getAcountEmailVerified = async (requestData) => {
     return error;
   }
 };
+
+export const savePauseNewsTrade = async (requestData) => {
+  try {
+    const response = await apiClient.post('/PauseNewsTrade', requestData);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getPauseNewsTrade = async () => {
+  try {
+    const response = await apiClient.get('/GetPauseNewsTrade');
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};
+export const deletePauseNewsTrade = async () => {
+  try {
+    const response = await apiClient.get('/DelPauseNewsTrade');
+    return response.data;
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+};

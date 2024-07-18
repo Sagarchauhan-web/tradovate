@@ -7,7 +7,6 @@ import { DataTable } from '../TradeTable/TradeTable';
 import { useNavigate } from 'react-router-dom';
 import Liquidity from '../Liquidity/Liquidity';
 import TradeCopier from '../TradeCopier/TradeCopier';
-// import TradeCopier from '../TradeCopier/TradeCopier';
 
 function Dashboard() {
   const [tabsValue, setTabsValue] = useState('create');

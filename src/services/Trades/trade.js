@@ -18,6 +18,15 @@ export const getTrades = async () => {
   }
 };
 
+export const getSymbols = async () => {
+  try {
+    const response = await apiClient.get('/GetNewsSymbolMapping');
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const deleteTrade = async (requestData) => {
   try {
     const response = await apiClient.post('/DeleteSettingData', requestData);

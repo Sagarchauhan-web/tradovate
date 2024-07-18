@@ -5,7 +5,11 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
-import { createTrade, getMinTickAndLot } from '@/services/Trades/trade';
+import {
+  createTrade,
+  getMinTickAndLot,
+  getSymbols,
+} from '@/services/Trades/trade';
 import { useEffect, useRef, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import { IoIosCheckmarkCircle } from 'react-icons/io';

@@ -1,35 +1,76 @@
-import { useNavigate } from 'react-router-dom';
-import ConnectionNotifier from '../ConnectionNotifier/ConnectionNotifier';
-import LogoutButton from '../LogoutButton/LogoutButton';
-import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
+import { cn } from '@/lib/utils';
 import {
   SetAccountSettings,
   SetAccountType,
+  deletePauseNewsTrade,
+  getPauseNewsTrade,
   getTokenUrl,
   me,
+  savePauseNewsTrade,
 } from '@/services/Auth/auth';
-import { useEffect, useState } from 'react';
-import { Button } from '../ui/button';
-import { toast } from '../ui/use-toast';
-import { cn } from '@/lib/utils';
-import { FaClipboard, FaUserCircle } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom';
 import { differenceInDays } from 'date-fns';
-import PauseAndResume from '../PauseAndResume/PauseAndResume';
+import { useEffect, useState } from 'react';
+import { FaClipboard, FaUserCircle } from 'react-icons/fa';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
+import { useLocation, useNavigate } from 'react-router-dom';
+import ConnectionNotifier from '../ConnectionNotifier/ConnectionNotifier';
+import LiveOrDemo from '../LiveOrDemo/LiveOrDemo';
+import LogoutButton from '../LogoutButton/LogoutButton';
+import PauseAndResume from '../PauseAndResume/PauseAndResume';
+import { Button } from '../ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import { toast } from '../ui/use-toast';
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table';
+import { Settings } from 'lucide-react';
+import { MdDelete } from 'react-icons/md';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from '../ui/dialog';
+import { Input } from '../ui/input';
+import { Label } from '../ui/label';
+import { getSymbols } from '@/services/Trades/trade';
 
 function Navbar() {
   const [userData, setUserData] = useState();
   const navigate = useNavigate();
   const location = useLocation();
   const [trialDays, setTrialDays] = useState();
+
+  // News Pause Trade
+  const [dialogBox, setDialogBox] = useState(false);
+  const [symbolsDataDialog, setSymbolsDataDialog] = useState(false);
+  const [symbolsData, setSymbolsData] = useState([]);
+  const [newsPauseTradeData, setNewsPauseTradeData] = useState([]);
+  const [stopBeforeInMin, setStopBeforeInMin] = useState(0);
+  const [startAfterInMin, setStartAfterInMin] = useState(0);
+  const [closePositionOpenOrder, setClosePositionOpenOrder] = useState('Yes');
 
   const getUser = async () => {
     const response = await me();
@@ -38,6 +79,20 @@ function Navbar() {
     setTrialDays(differenceInDays(response.data.demo_Expiry, new Date()));
     setUserData(response.data);
   };
+
+  const getSymbolsAction = async () => {
+    const response = await getSymbols();
+
+    console.log(response, 'getSymbols');
+    if (!response.error) {
+      setSymbolsData(response.data);
+    }
+  };
+
+  useEffect(() => {
+    getSymbolsAction();
+  }, []);
+
   const changeAccountSettings = async () => {
     const body = {
       pause: userData?.pause ? false : true,
@@ -57,6 +112,65 @@ function Navbar() {
         title: 'Success',
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
+    }
+  };
+
+  const getPauseNewsTradeAction = async () => {
+    const response = await getPauseNewsTrade();
+
+    if (!response.error) {
+      setNewsPauseTradeData(response.data);
+      if (response.data.length > 0) {
+        setStopBeforeInMin(response.data[0].stop_before_in_minute);
+        setStartAfterInMin(response.data[0].start_after_in_minute);
+        setClosePositionOpenOrder(
+          response.data[0].closed_position_open_order ? 'Yes' : 'No',
+        );
+      }
+    }
+  };
+
+  const savePauseNewsTradeAction = async () => {
+    const obj = {
+      stop_before_in_minute: stopBeforeInMin,
+      start_after_in_minute: startAfterInMin,
+      closed_position_open_order: closePositionOpenOrder === 'Yes',
+    };
+    const response = await savePauseNewsTrade(obj);
+
+    if (!response.error) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Success',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+      getPauseNewsTradeAction();
+    }
+  };
+
+  const deletePauseNewsTradeAction = async () => {
+    const response = await deletePauseNewsTrade();
+
+    if (!response.error) {
+      setNewsPauseTradeData([]);
+      setClosePositionOpenOrder('Yes');
+      setStartAfterInMin(0);
+      setStopBeforeInMin(0);
+
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Success',
+        action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
+      });
+      getPauseNewsTradeAction();
     }
   };
 
@@ -82,6 +196,7 @@ function Navbar() {
   useEffect(() => {
     let interval;
     getUser();
+    getPauseNewsTradeAction();
 
     interval = setInterval(() => {
       getUser();
@@ -167,6 +282,154 @@ function Navbar() {
 
   return (
     <>
+      <Dialog open={symbolsDataDialog} onOpenChange={setSymbolsDataDialog}>
+        <DialogContent className='sm:max-w-[625px]'>
+          <DialogHeader>
+            <DialogTitle>Symbols</DialogTitle>
+            <DialogDescription>
+              This data specifies a currency code and a trading symbol for a
+              financial instrument.
+            </DialogDescription>
+            <Table className='my-4'>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Country</TableHead>
+                  <TableHead>Symbol</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {symbolsData.map((item, i) => (
+                  <TableRow key={i}>
+                    <TableCell className='font-medium'>
+                      {item.country}
+                    </TableCell>
+                    <TableCell>{item.tradovate_root_symbol}</TableCell>
+                  </TableRow>
+                ))}
+                {newsPauseTradeData.length === 0 && (
+                  <TableRow>
+                    <TableCell colSpan={12} className='h-24 text-center'>
+                      No Data
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+          </DialogHeader>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={dialogBox} onOpenChange={setDialogBox}>
+        <DialogContent className='sm:max-w-[625px]'>
+          <DialogHeader>
+            <DialogTitle>Settings</DialogTitle>
+            <DialogDescription>
+              Make changes to your settings here. Click save when you&apos;re
+              done.{' '}
+              <span
+                onClick={() => setSymbolsDataDialog(true)}
+                className='cursor-pointer text-blue-500 font-bold'
+              >
+                Click here
+              </span>{' '}
+              to check symbols list.
+            </DialogDescription>
+          </DialogHeader>
+          <div className='grid gap-4 py-4'>
+            <div className=''>
+              <Label htmlFor='stopBefore' className='text-right'>
+                Stop Trading Before in Minute
+              </Label>
+              <Input
+                id='stopBefore'
+                value={stopBeforeInMin}
+                onChange={(e) => setStopBeforeInMin(e.target.value)}
+                className='col-span-3'
+              />
+            </div>
+            <div className=''>
+              <Label htmlFor='startAfter' className='text-right'>
+                Start Trading After in Minute
+              </Label>
+              <Input
+                id='startAfter'
+                value={startAfterInMin}
+                onChange={(e) => setStartAfterInMin(e.target.value)}
+                className='col-span-3'
+              />
+            </div>
+            <div className=''>
+              <Label htmlFor='closePositionOpenOrder' className='text-right'>
+                Closed Position and Open Order
+              </Label>
+
+              <Select
+                value={closePositionOpenOrder}
+                onValueChange={(value) => {
+                  console.log(value, 'value');
+                  if (value === 'Yes') {
+                    setClosePositionOpenOrder('Yes');
+                  } else {
+                    setClosePositionOpenOrder('No');
+                  }
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectItem value='Yes'>Yes</SelectItem>
+                    <SelectItem value='No'>No</SelectItem>
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            </div>
+            <Button className='m-8' onClick={savePauseNewsTradeAction}>
+              Save changes
+            </Button>
+          </div>
+
+          <Table>
+            <TableHeader>
+              <TableRow>
+                <TableHead>Closed Position Open Order</TableHead>
+                <TableHead>Start After In Minute</TableHead>
+                <TableHead>Stop Before In Minute</TableHead>
+                <TableHead className='text-right'>Action</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {newsPauseTradeData.map((item, i) => (
+                <TableRow key={i}>
+                  <TableCell className='font-medium'>
+                    {item.closed_position_open_order ? 'Yes' : 'No'}
+                  </TableCell>
+                  <TableCell>{item.start_after_in_minute}</TableCell>
+                  <TableCell>{item.stop_before_in_minute}</TableCell>
+                  <TableCell className='text-right'>
+                    <Button
+                      variant='outline'
+                      className='text-red-500 hover:text-red-600'
+                      onClick={async () => {
+                        deletePauseNewsTradeAction();
+                      }}
+                    >
+                      <MdDelete />
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+              {newsPauseTradeData.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={12} className='h-24 text-center'>
+                    No Data
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </DialogContent>
+      </Dialog>
       <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
         <div className='flex gap-6 text-white mb-2 xl:mb-0'>
           <li
@@ -292,15 +555,27 @@ function Navbar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent align='end'>
                 {trialDays > 10 && (
-                  <div className='flex justify-end items-center'>
-                    <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
-                      <p>Account Validity {trialDays} Days</p>
+                  <>
+                    <div className='flex justify-end items-center'>
+                      <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
+                        <p>Account Validity {trialDays} Days</p>
+                      </div>
                     </div>
-                  </div>
+                    <DropdownMenuSeparator />
+                  </>
                 )}
-                <DropdownMenuLabel>Username</DropdownMenuLabel>
+                {/* <DropdownMenuLabel>Username</DropdownMenuLabel> */}
+                <p className='p-2 text-sm text-center'>{userData?.username}</p>
                 <DropdownMenuSeparator />
-                <p className='p-2 text-sm'>{userData?.username}</p>
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                <DropdownMenuItem
+                  onClick={() => {
+                    setDialogBox(true);
+                  }}
+                >
+                  <Settings className='mr-2 h-4 w-4' />
+                  Settings
+                </DropdownMenuItem>
                 <DropdownMenuLabel>Status</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <div className='p-2' onClick={async () => {}}>
