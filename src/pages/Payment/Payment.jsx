@@ -188,9 +188,9 @@ function Payment() {
               <div className='h-full px-10 py-8'>
                 <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
                   <div className='flex flex-row h-full w-full items-center space-x-5'>
-                    <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
+                    <div className='flex sm:flex-row flex-col h-full w-full items-center justify-between space-x-5'>
                       <div className='flex flex-row h-full  items-center  space-x-5'>
-                        <h2 className='text-center w-full text-2xl font-semibold tracking-tight first:mt-0'>
+                        <h2 className='text-center w-full mb-4 sm:mb-0 text-2xl font-semibold tracking-tight first:mt-0'>
                           Active Plan
                         </h2>
                       </div>
@@ -364,9 +364,9 @@ function Payment() {
         </TabsContent>
         <TabsContent value='all'>
           <MaxWidthWrapper>
-            <div className='h-full px-10 py-8'>
-              <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
-                <div className='flex flex-row h-full  items-center  space-x-5'>
+            <div className='h-full sm:px-10 sm:py-8'>
+              <div className='flex flex-col sm:flex-row h-full w-full items-center justify-between space-x-5'>
+                <div className='flex flex-row h-full items-center space-x-5 mb-4 sm:mb-0'>
                   {/* <Button
                     variant='outline'
                     className='mt-1.5'
@@ -378,10 +378,10 @@ function Payment() {
                     Prices
                   </h2>
                 </div>
-                <div className='flex flex-row h-full items-center space-x-5'>
-                  <div className='border border-gray-200 p-2'>
+                <div className='flex sm:flex-row flex-col h-full items-center sm:space-x-5'>
+                  <div className='border border-gray-200 p-2 mb-4 sm:mb-0'>
                     <p
-                      className='min-w-48 cursor-pointer text-primary'
+                      className='min-w-48 cursor-pointer text-primary '
                       onClick={() => setDialogBox(true)}
                     >
                       Payment issue? click here
@@ -390,7 +390,7 @@ function Payment() {
                   {!token ? (
                     <>
                       <Input
-                        className='min-w-44'
+                        className='min-w-44 mb-2 sm:mb-0'
                         placeholder='Enter the coupon code'
                         onChange={(e) => {
                           setTokenInput(e.target.value);

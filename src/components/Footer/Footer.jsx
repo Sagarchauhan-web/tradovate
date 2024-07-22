@@ -26,8 +26,8 @@ function Footer() {
           </DialogContent>
         )}
       </Dialog>
-      <ul className='flex flex-wrap justify-between bg-primary items-center min-h-[50px] px-10 border-t'>
-        <div className='flex gap-6 text-white'>
+      <ul className='flex flex-wrap justify-between bg-primary items-center min-h-[50px] py-2 px-2 sm:px-10 border-t'>
+        <div className='flex gap-6 text-white mb-2 sm:mb-0'>
           <li className='text-white'>
             Copyright © 2024 PickMyTrade. All Rights Reserved.
           </li>

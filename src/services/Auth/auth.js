@@ -59,9 +59,9 @@ export const logout = async () => {
 
 export const refreshOauthUrl = async (code) => {
   try {
-    const response = await apiClient.get(
-      `/oauth/tradovate/callback?code=${code}`,
-    );
+    const response = await apiClient.post(`/oauth/tradovate/callback`, {
+      code,
+    });
     return response.data;
   } catch (error) {
     console.log(error);
@@ -150,6 +150,15 @@ export const deletePauseNewsTrade = async () => {
     return response.data;
   } catch (error) {
     console.log(error);
+    return error;
+  }
+};
+
+export const getTokenCallbackVerified = async (requestData) => {
+  try {
+    const response = await apiClient.post('/SaveUserToken', requestData);
+    return response.data;
+  } catch (error) {
     return error;
   }
 };

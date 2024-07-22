@@ -182,10 +182,10 @@ function CreateTrade({
   };
 
   return (
-    <div className='px-1'>
+    <div className='px-1 mb-20'>
       <form onSubmit={onSubmit}>
         <div className='flex justify-between items-center'>
-          <h2 className='scroll-m-20 w-max text-2xl py-4  font-semibold tracking-tight first:mt-0'>
+          <h2 className='scroll-m-20 w-max text-2xl py-4 font-semibold tracking-tight first:mt-0'>
             Create Settings
           </h2>
           <div className='space-x-2'>

@@ -37,7 +37,7 @@ export default function PaymentCards({
 
   return (
     <OverlapLoader loader={loader}>
-      <div className='flex items-center justify-center p-4'>
+      <div className='flex items-center justify-center sm:p-4'>
         <div className='grid w-full max-w-2xl grid-cols-1 gap-6 md:grid-cols-2'>
           <Card className='bg-white h-max self-end shadow-lg'>
             <CardHeader className='bg-[#F8F8FC] m-5 rounded-sm'>

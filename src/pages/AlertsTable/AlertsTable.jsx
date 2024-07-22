@@ -146,7 +146,7 @@ export function AlertsTable() {
   });
 
   return (
-    <div className='w-full'>
+    <div className='w-full mb-20'>
       <div className='flex items-center justify-between pt-4'>
         <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
           Alerts

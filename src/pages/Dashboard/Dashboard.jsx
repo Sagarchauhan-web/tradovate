@@ -22,7 +22,7 @@ function Dashboard() {
 
   return (
     <Tabs value={tabsValue} onValueChange={(value) => setTabsValue(value)}>
-      <TabsList className='grid grid-cols-6 min-h-[64px] sm:min-h-[40px]'>
+      <TabsList className='grid grid-cols-2 px-2 sm:grid-cols-6 min-h-[154px] sm:min-h-[40px]'>
         <TabsTrigger value='create'>
           Create <br className='block sm:hidden' /> Settings
         </TabsTrigger>

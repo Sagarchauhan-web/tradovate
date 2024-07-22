@@ -26,10 +26,8 @@ function NotFoundPage() {
 
   useEffect(() => {
     if (path.pathname.includes('/paymentsuccess')) {
-      console.log('success');
       navigate('/dashboard/paymentsuccess');
     } else {
-      console.log('failed');
       navigate('/dashboard/paymentfailed');
     }
   }, []);

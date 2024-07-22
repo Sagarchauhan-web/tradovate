@@ -66,7 +66,7 @@ export default function Landing() {
            flex-col space-y-3 sm:flex-row sm:items-center'
           href='#'
         >
-          <div className='flex items-center justify-center gap-5'>
+          <div className='flex items-center justify-between sm:justify-center sm:w-auto gap-5 w-full'>
             <div className='flex justify-center items-center'>
               <img src='/logo.png' alt='logo' className='w-10 h-8' />
               <p className='text-gray-800 font-bold'>PickMyTrade</p>
@@ -111,10 +111,10 @@ export default function Landing() {
               </a>
             </nav>
           </div>
-          <div className='flex gap-5'>
+          <div className='flex gap-5 w-full sm:w-auto'>
             <div
               onClick={() => navigate('/auth', { state: { toRegister: true } })}
-              className='w-48 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-sm 
+              className='w-full sm:w-32 lg:w-48 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-xs lg:text-sm
                     font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
                      focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
               href='#'
@@ -125,8 +125,8 @@ export default function Landing() {
               onClick={() =>
                 navigate('/auth', { state: { toRegister: false } })
               }
-              className='w-48 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
-                     bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-1
+              className='w-full sm:w-32 lg:w-48 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
+                     bg-white px-4 py-2 text-xs lg:text-sm font-medium shadow-sm transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-1
                       focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50'
               href='#'
             >
@@ -136,9 +136,9 @@ export default function Landing() {
         </div>
       </header>
       <main className='flex-1'>
-        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18'>
+        <section className='w-full  py-4 md:py-16 lg:py-18 xl:py-18'>
           <div className='container'>
-            <div className='grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16'>
+            <div className='grid max-w-[1300px] mx-auto gap-4 px-0 md:px-10 lg:grid-cols-2 md:gap-16'>
               <div className=' flex justify-center flex-col'>
                 <h1
                   className='lg:leading-tighter text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl 
@@ -146,26 +146,20 @@ export default function Landing() {
                 >
                   Automated Trading
                 </h1>
-                <p className='mx-auto max-w-[700px]  md:text-xl'>
+                <p className='max-w-[700px] md:text-xl lg:mx-auto'>
                   PickMyTrade specializes in automating trading bots, enabling
                   seamless strategy execution for futures from platforms like
                   TradingView, across well-known brokers such as Tradovate.
                 </p>
                 <div className='mt-8'>
-                  <div className='mx-auto w-full space-y-4'>
+                  <div className='sm:mx-auto w-full space-y-4'>
                     <form className='flex space-x-2'>
-                      {/* <Input
-                        className='max-w-lg flex-1'
-                        placeholder='Enter your email'
-                        type='email'
-                      /> */}
-
-                      <div className='flex space-x-8 items-center justify-center'>
+                      <div className='flex flex-col w-full sm:w-auto sm:flex-row sm:space-x-8 sm:items-center sm:justify-center'>
                         <div
                           onClick={() =>
                             navigate('/auth', { state: { toRegister: true } })
                           }
-                          className='w-48 inline-flex h-18 items-center justify-center rounded-md bg-blue-700 px-4 py-4 text-sm 
+                          className='w-full my-4 sm:my-0 sm:w-48 h-18 inline-flex items-center justify-center rounded-md bg-blue-700 px-4 py-4 text-sm 
                                             font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
                                              focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
                           href='#'

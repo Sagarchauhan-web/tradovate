@@ -19,7 +19,7 @@ import { Link } from 'react-router-dom';
 const GetSupport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div className='fixed bottom-16 left-4 z-10'>
+    <div className='fixed bottom-28 sm:bottom-16 left-4 z-10'>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>

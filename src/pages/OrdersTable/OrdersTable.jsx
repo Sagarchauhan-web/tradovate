@@ -202,7 +202,7 @@ export function OrderTable() {
 
   return (
     <>
-      <div className='flex items-center justify-between pt-4 mb-4'>
+      <div className='flex items-center justify-between pt-4 mb-20'>
         <h2 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
           Orders
         </h2>

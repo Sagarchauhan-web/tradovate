@@ -83,7 +83,6 @@ function Navbar() {
   const getSymbolsAction = async () => {
     const response = await getSymbols();
 
-    console.log(response, 'getSymbols');
     if (!response.error) {
       setSymbolsData(response.data);
     }
@@ -430,8 +429,8 @@ function Navbar() {
           </Table>
         </DialogContent>
       </Dialog>
-      <ul className='flex flex-wrap justify-between items-center  px-10 py-[8px] border-b'>
-        <div className='flex gap-6 text-white mb-2 xl:mb-0'>
+      <ul className='flex flex-wrap justify-between items-center px-2 sm:px-10 py-[8px] border-b'>
+        <div className='flex flex-wrap gap-2 sm:gap-6 text-white mb-2'>
           <li
             className='flex justify-center items-center'
             onClick={() => navigate('/dashboard/home')}
@@ -444,36 +443,36 @@ function Navbar() {
             className={`${
               location.pathname === '/dashboard/home'
                 ? 'bg-primary text-white'
-                : 'text-black'
+                : 'text-black bg-gray-100'
             } px-4 py-1 rounded-sm cursor-pointer`}
           >
             Home
-          </li>
-          <li
-            onClick={() => navigate('/documentation?page=alert')}
-            className={`${
-              location.pathname === '/documentation'
-                ? 'bg-primary text-white'
-                : 'text-black'
-            } px-4 py-1 rounded-sm cursor-pointer`}
-          >
-            Documentation
           </li>
           <li
             onClick={() => navigate('/dashboard/payment')}
             className={`${
               location.pathname === '/dashboard/payment'
                 ? 'bg-primary text-white'
-                : 'text-black'
+                : 'text-black bg-gray-100'
             } px-4 py-1 rounded-sm cursor-pointer`}
           >
             Payment
           </li>
           <li
+            onClick={() => navigate('/documentation?page=alert')}
+            className={`${
+              location.pathname === '/documentation'
+                ? 'bg-primary text-white'
+                : 'text-black bg-gray-100'
+            } px-4 py-1 rounded-sm cursor-pointer`}
+          >
+            Documentation
+          </li>
+          <li
             className={`${
               location.pathname === '/dashboard/blog'
                 ? 'bg-primary text-white'
-                : 'text-black'
+                : 'text-black bg-gray-100'
             } px-4 py-1 rounded-sm cursor-pointer`}
           >
             <a href='https://blog.pickmytrade.trade/' target='_blank'>

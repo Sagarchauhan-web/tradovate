@@ -458,7 +458,7 @@ const TradeCopier = () => {
   };
 
   return (
-    <div className='px-1'>
+    <div className='px-1 mb-20'>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className='sm:max-w-[525px]'>
           <DialogHeader>
