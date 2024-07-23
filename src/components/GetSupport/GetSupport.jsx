@@ -19,14 +19,14 @@ import { Link } from 'react-router-dom';
 const GetSupport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
-    <div className='fixed bottom-28 sm:bottom-16 left-4 z-10'>
+    <div className='fixed bottom-16 sm:bottom-16 left-4 z-10'>
       <TooltipProvider>
         <Tooltip>
           <TooltipTrigger asChild>
             <Link
               onClick={() => setIsModalOpen(true)}
-              className='inline-flex h-14 items-center 
-              justify-center rounded-full bg-primary px-8 
+              className='inline-flex h-12 items-center 
+              justify-center rounded-full bg-primary px-5 
               text-m font-medium text-primary-foreground 
               shadow transition-colors hover:bg-primary/90
                focus-visible:outline-none focus-visible:ring-1 

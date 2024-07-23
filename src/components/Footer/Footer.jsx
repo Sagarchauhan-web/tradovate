@@ -8,7 +8,7 @@ function Footer() {
   const [dialogBox, setDialogBox] = useState(false);
   const [policy, setPolicy] = useState('');
   return (
-    <div className='w-full'>
+    <div className='w-full text-xs sm:text-sm'>
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         {(policy === 'terms' || policy === 'privacy') && (
           <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
@@ -28,7 +28,7 @@ function Footer() {
       </Dialog>
       <ul className='flex flex-wrap justify-between bg-primary items-center min-h-[50px] py-2 px-2 sm:px-10 border-t'>
         <div className='flex gap-6 text-white mb-2 sm:mb-0'>
-          <li className='text-white'>
+          <li className='text-white '>
             Copyright © 2024 PickMyTrade. All Rights Reserved.
           </li>
         </div>

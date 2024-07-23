@@ -56,6 +56,28 @@ import {
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { getSymbols } from '@/services/Trades/trade';
+import { Sidebar } from './Sidebar';
+
+function MenuIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
+      <line x1='4' x2='20' y1='12' y2='12' />
+      <line x1='4' x2='20' y1='6' y2='6' />
+      <line x1='4' x2='20' y1='18' y2='18' />
+    </svg>
+  );
+}
 
 function Navbar() {
   const [userData, setUserData] = useState();
@@ -71,6 +93,8 @@ function Navbar() {
   const [stopBeforeInMin, setStopBeforeInMin] = useState(0);
   const [startAfterInMin, setStartAfterInMin] = useState(0);
   const [closePositionOpenOrder, setClosePositionOpenOrder] = useState('Yes');
+
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const getUser = async () => {
     const response = await me();
@@ -279,6 +303,121 @@ function Navbar() {
     }
   };
 
+  const ClipboardAndDropDown = () => {
+    return (
+      <div className='hidden sm:flex gap-2 flex-wrap'>
+        <li>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => copyTextToClipboardWebhook()}
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Webhook
+          </Button>
+        </li>
+        <li>
+          <Button
+            disabled={!userData?.user_key}
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboardForBuyAndSell('buy', userData?.user_key)
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Buy Alert
+          </Button>
+        </li>
+        <li>
+          <Button
+            disabled={!userData?.user_key}
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboardForBuyAndSell('sell', userData?.user_key)
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Sell Alert
+          </Button>
+        </li>
+        <li>
+          <Button
+            disabled={!userData?.user_key}
+            variant='outline'
+            size='sm'
+            onClick={() => copyTextToClipboard(userData?.user_key)}
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Token: {userData?.user_key}
+          </Button>
+        </li>
+        <li>
+          <LiveOrDemo
+            isDemo={userData?.demo}
+            changeAccountType={changeAccountType}
+            isPaid={userData?.paid}
+          />
+        </li>
+        <li>
+          <ConnectionNotifier
+            isConnected={userData?.is_tradovate_connected}
+            onTradovateDisconnectedClick={onTradovateDisconnectedClick}
+          />
+        </li>
+        <li>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant='outline' className='h-8 w-8 p-0'>
+                {userData?.username ? (
+                  userData?.username.charAt(0).toUpperCase()
+                ) : (
+                  <FaUserCircle className='w-8 h-8 text-primary rounded-full' />
+                )}
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align='end'>
+              {trialDays > 10 && (
+                <>
+                  <div className='flex justify-end items-center'>
+                    <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
+                      <p>Account Validity {trialDays} Days</p>
+                    </div>
+                  </div>
+                  <DropdownMenuSeparator />
+                </>
+              )}
+              {/* <DropdownMenuLabel>Username</DropdownMenuLabel> */}
+              <p className='p-2 text-sm text-center'>{userData?.username}</p>
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <DropdownMenuItem
+                onClick={() => {
+                  setDialogBox(true);
+                }}
+              >
+                <Settings className='mr-2 h-4 w-4' />
+                Settings
+              </DropdownMenuItem>
+              <DropdownMenuLabel>Status</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <div className='p-2' onClick={async () => {}}>
+                <PauseAndResume
+                  isPaused={userData?.pause}
+                  onChange={changeAccountSettings}
+                />
+              </div>
+              <div className='p-2'>
+                <LogoutButton />
+              </div>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </li>
+      </div>
+    );
+  };
+
   return (
     <>
       <Dialog open={symbolsDataDialog} onOpenChange={setSymbolsDataDialog}>
@@ -305,7 +444,7 @@ function Navbar() {
                     <TableCell>{item.tradovate_root_symbol}</TableCell>
                   </TableRow>
                 ))}
-                {newsPauseTradeData.length === 0 && (
+                {symbolsData.length <= 0 && (
                   <TableRow>
                     <TableCell colSpan={12} className='h-24 text-center'>
                       No Data
@@ -430,6 +569,20 @@ function Navbar() {
         </DialogContent>
       </Dialog>
       <ul className='flex flex-wrap justify-between items-center px-2 sm:px-10 py-[8px] border-b'>
+        <Sidebar
+          sidebarOpen={sidebarOpen}
+          setSidebarOpen={setSidebarOpen}
+          ClipboardAndDropDown={ClipboardAndDropDown}
+          copyTextToClipboardWebhook={copyTextToClipboardWebhook}
+          userData={userData}
+          copyTextToClipboardForBuyAndSell={copyTextToClipboardForBuyAndSell}
+          copyTextToClipboard={copyTextToClipboard}
+          changeAccountType={changeAccountType}
+          onTradovateDisconnectedClick={onTradovateDisconnectedClick}
+          trialDays={trialDays}
+          setDialogBox={setDialogBox}
+          changeAccountSettings={changeAccountSettings}
+        />
         <div className='flex flex-wrap gap-2 sm:gap-6 text-white mb-2'>
           <li
             className='flex justify-center items-center'
@@ -444,7 +597,7 @@ function Navbar() {
               location.pathname === '/dashboard/home'
                 ? 'bg-primary text-white'
                 : 'text-black bg-gray-100'
-            } px-4 py-1 rounded-sm cursor-pointer`}
+            } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             Home
           </li>
@@ -454,7 +607,7 @@ function Navbar() {
               location.pathname === '/dashboard/payment'
                 ? 'bg-primary text-white'
                 : 'text-black bg-gray-100'
-            } px-4 py-1 rounded-sm cursor-pointer`}
+            } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             Payment
           </li>
@@ -464,7 +617,7 @@ function Navbar() {
               location.pathname === '/documentation'
                 ? 'bg-primary text-white'
                 : 'text-black bg-gray-100'
-            } px-4 py-1 rounded-sm cursor-pointer`}
+            } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             Documentation
           </li>
@@ -473,123 +626,23 @@ function Navbar() {
               location.pathname === '/dashboard/blog'
                 ? 'bg-primary text-white'
                 : 'text-black bg-gray-100'
-            } px-4 py-1 rounded-sm cursor-pointer`}
+            } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             <a href='https://blog.pickmytrade.trade/' target='_blank'>
               Blog
             </a>
           </li>
         </div>
-        <div className='flex gap-2 flex-wrap'>
-          <li>
-            <Button
-              variant='outline'
-              size='sm'
-              onClick={() => copyTextToClipboardWebhook()}
-              className='flex flex-row justify-center items-center gap-2 text-gray-600'
-            >
-              Webhook
-            </Button>
-          </li>
-          <li>
-            <Button
-              disabled={!userData?.user_key}
-              variant='outline'
-              size='sm'
-              onClick={() =>
-                copyTextToClipboardForBuyAndSell('buy', userData?.user_key)
-              }
-              className='flex flex-row justify-center items-center gap-2 text-gray-600'
-            >
-              Buy Alert
-            </Button>
-          </li>
-          <li>
-            <Button
-              disabled={!userData?.user_key}
-              variant='outline'
-              size='sm'
-              onClick={() =>
-                copyTextToClipboardForBuyAndSell('sell', userData?.user_key)
-              }
-              className='flex flex-row justify-center items-center gap-2 text-gray-600'
-            >
-              Sell Alert
-            </Button>
-          </li>
-          <li>
-            <Button
-              disabled={!userData?.user_key}
-              variant='outline'
-              size='sm'
-              onClick={() => copyTextToClipboard(userData?.user_key)}
-              className='flex flex-row justify-center items-center gap-2 text-gray-600'
-            >
-              Token: {userData?.user_key}
-            </Button>
-          </li>
-          <li>
-            <LiveOrDemo
-              isDemo={userData?.demo}
-              changeAccountType={changeAccountType}
-              isPaid={userData?.paid}
-            />
-          </li>
-          <li>
-            <ConnectionNotifier
-              isConnected={userData?.is_tradovate_connected}
-              onTradovateDisconnectedClick={onTradovateDisconnectedClick}
-            />
-          </li>
-          <li>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant='outline' className='h-8 w-8 p-0'>
-                  {userData?.username ? (
-                    userData?.username.charAt(0).toUpperCase()
-                  ) : (
-                    <FaUserCircle className='w-8 h-8 text-primary rounded-full' />
-                  )}
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align='end'>
-                {trialDays > 10 && (
-                  <>
-                    <div className='flex justify-end items-center'>
-                      <div className='max-w-[300px] w-full bg-green-500 py-3 shadow-lg text-center text-white font-medium'>
-                        <p>Account Validity {trialDays} Days</p>
-                      </div>
-                    </div>
-                    <DropdownMenuSeparator />
-                  </>
-                )}
-                {/* <DropdownMenuLabel>Username</DropdownMenuLabel> */}
-                <p className='p-2 text-sm text-center'>{userData?.username}</p>
-                <DropdownMenuSeparator />
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                <DropdownMenuItem
-                  onClick={() => {
-                    setDialogBox(true);
-                  }}
-                >
-                  <Settings className='mr-2 h-4 w-4' />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuLabel>Status</DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <div className='p-2' onClick={async () => {}}>
-                  <PauseAndResume
-                    isPaused={userData?.pause}
-                    onChange={changeAccountSettings}
-                  />
-                </div>
-                <div className='p-2'>
-                  <LogoutButton />
-                </div>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </li>
-        </div>
+        <ClipboardAndDropDown />
+        <Button
+          onClick={() => setSidebarOpen(true)}
+          variant='outline'
+          size='icon'
+          className='absolute right-4 top-2 z-50 rounded-full sm:hidden'
+        >
+          <MenuIcon className='h-6 w-6' />
+          <span className='sr-only'>Toggle Menu</span>
+        </Button>
       </ul>
 
       {trialDays < 10 && trialDays > 0 && (

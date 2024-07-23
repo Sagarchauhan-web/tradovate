@@ -20,7 +20,7 @@ export function ConfirmationDialog({
   };
   return (
     <Dialog open={confirmation} onOpenChange={setConfirmation}>
-      <DialogContent className='sm:max-w-[825px]'>
+      <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
         <DialogHeader>
           <DialogTitle>Connect</DialogTitle>
         </DialogHeader>
@@ -67,7 +67,7 @@ export function ConfirmationDialog({
           </span>{' '}
           , which includes additional disclaimers and restrictions.
         </div>
-        <DialogFooter>
+        <DialogFooter className={'flex flex-wrap gap-2'}>
           <Button
             type='submit'
             className='bg-green-600 w-[10rem] hover:bg-green-700'
