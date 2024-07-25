@@ -8,11 +8,12 @@ import { cn } from '@/lib/utils';
 import {
   createTrade,
   getMinTickAndLot,
-  getSymbols,
+  getTrades,
 } from '@/services/Trades/trade';
 import { useEffect, useRef, useState } from 'react';
 import { MdErrorOutline } from 'react-icons/md';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
+import AutocompleteInput from '@/components/Autocomplete/Autocomplete';
 
 const SECURITYTYPE = {
   FUT: 'FUT',
@@ -35,7 +36,7 @@ function CreateTrade({
   goToSettings,
   setInitialDataForSettings,
 }) {
-  const symbolRef = useRef();
+  const [symbol, setSymbol] = useState('');
   const [orderType, setOrderType] = useState('');
   // const [securityType, setSecurityType] = useState('');
   const quantityRef = useRef();
@@ -50,9 +51,10 @@ function CreateTrade({
   const entryOffsetRef = useRef();
   const [entryOffsetInPercentage, setEntryOffsetInPercentage] = useState(false);
 
+  const [suggestions, setSuggestions] = useState([]);
+
   const onSubmit = async (e) => {
     e.preventDefault();
-    const symbol = symbolRef.current.value;
     const quantity = quantityRef.current.value;
     const tradovateSymbol = tradovateSymbolRef.current.value;
     const stopLoss = stopLossRef.current.value;
@@ -78,9 +80,6 @@ function CreateTrade({
       MinTick: minTick,
     };
 
-    // console.log(body, 'body');
-    // return;
-
     const response = await createTrade(body);
     if (response.error) {
       toast({
@@ -105,7 +104,7 @@ function CreateTrade({
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
       // reset form
-      symbolRef.current.value = '';
+      setSymbol('');
       quantityRef.current.value = '';
       tradovateSymbolRef.current.value = '';
       stopLossRef.current.value = 0;
@@ -127,9 +126,24 @@ function CreateTrade({
     }
   };
 
+  const getUniqueSymbols = (data) => {
+    const symbols = data.map((item) => item.Symbol);
+    return [...new Set(symbols)];
+  };
+
+  const getAllTrades = async () => {
+    const response = await getTrades();
+    if (!response.error) {
+      setSuggestions(getUniqueSymbols(response.data));
+    }
+  };
+  useEffect(() => {
+    getAllTrades();
+  }, []);
+
   useEffect(() => {
     if (Object.values(initialDataForSettings).length > 0) {
-      symbolRef.current.value = initialDataForSettings.Symbol;
+      setSymbol(initialDataForSettings.Symbol);
       quantityRef.current.value = initialDataForSettings.Quantity;
       tradovateSymbolRef.current.value = initialDataForSettings.LocalSymbol;
       stopLossRef.current.value = initialDataForSettings.StopLoss;
@@ -148,7 +162,7 @@ function CreateTrade({
       );
     } else {
       // reset form
-      symbolRef.current.value = '';
+      setSymbol('');
       quantityRef.current.value = '';
       tradovateSymbolRef.current.value = '';
       stopLossRef.current.value = 0;
@@ -166,9 +180,10 @@ function CreateTrade({
     }
   }, [initialDataForSettings]);
 
-  const symbolOnBlur = async () => {
+  const symbolOnBlur = async (symbol) => {
+    if (!symbol) return;
     const body = {
-      symbol: symbolRef.current.value,
+      symbol: symbol,
     };
 
     if (!body.symbol) return null;
@@ -194,11 +209,13 @@ function CreateTrade({
         </div>
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4 text-sm'>
           <div className='flex flex-col space-y-1.5'>
+            {/* <AutocompleteInput /> */}
             <Label htmlFor='name'>Symbol</Label>
-            <Input
+            <AutocompleteInput
+              data={suggestions}
+              inputValue={symbol}
+              setInputValue={setSymbol}
               onBlur={symbolOnBlur}
-              ref={symbolRef}
-              id='name'
               placeholder={`Enter Symbol`}
             />
           </div>

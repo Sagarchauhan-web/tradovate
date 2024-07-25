@@ -1,4 +1,4 @@
-export default function SomethingWentWrong({ goHome }) {
+export default function SomethingWentWrong({ goHome, errormsg }) {
   return (
     <main className='flex w-full items-center justify-center  px-4 dark:bg-gray-900'>
       <div className='mx-auto flex max-w-md flex-col items-center justify-center space-y-6 text-center'>
@@ -7,10 +7,7 @@ export default function SomethingWentWrong({ goHome }) {
           <h1 className='text-3xl font-bold tracking-tighter text-gray-900 dark:text-gray-50'>
             Something Went Wrong
           </h1>
-          <p className='text-gray-500 dark:text-gray-400'>
-            Oops, We are sorry, but an unexpected error has occurred. Please try
-            again later..
-          </p>
+          <p className='text-gray-500 dark:text-gray-400'>{errormsg}</p>
         </div>
         <div
           onClick={goHome}

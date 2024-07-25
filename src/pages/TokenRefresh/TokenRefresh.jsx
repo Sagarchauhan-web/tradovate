@@ -16,6 +16,7 @@ function TokenRefresh() {
   const [loader, setLoader] = useState(true);
   const [searchParams] = useSearchParams();
   const [error, setError] = useState(false);
+  const [errormsg, setErrormsg] = useState('');
   const [code] = useState(searchParams.get('code'));
 
   useEffect(() => {
@@ -27,11 +28,15 @@ function TokenRefresh() {
         setError(response.error);
 
         if (response.error || response instanceof AxiosError) {
+          setTimeout(function () {
+            setError(true);
+            setErrormsg(response.data);
+          }, 300000);
           return toast({
             className: cn(
               'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
             ),
-            duration: 3000,
+            duration: 300000,
             position: 'top-center',
             title: 'Something went wrong',
             description: response.data,
@@ -66,16 +71,26 @@ function TokenRefresh() {
         </div>
       </div>
       <div className='flex justify-center items-center h-full'>
-        <TokenRefresBody loader={loader} error={error} navigate={navigate} />
+        <TokenRefresBody
+          errormsg={errormsg}
+          loader={loader}
+          error={error}
+          navigate={navigate}
+        />
       </div>
     </div>
   );
 }
 
-function TokenRefresBody({ loader, error, navigate }) {
+function TokenRefresBody({ loader, error, navigate, errormsg }) {
   if (loader) return <Loader />;
   if (error)
-    return <SomethingWentWrong goHome={() => navigate('/dashboard/home')} />;
+    return (
+      <SomethingWentWrong
+        errormsg={errormsg}
+        goHome={() => navigate('/dashboard/home')}
+      />
+    );
 
   return <Success goHome={() => navigate('/dashboard/home')} />;
 }

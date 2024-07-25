@@ -139,6 +139,7 @@ function Payment() {
 
   return (
     <div className='flex h-full flex-col'>
+      {activeSubscription.length <= 0 && <BottomPopup />}
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         <DialogContent className='sm:max-w-[525px] p-5'>
           <DialogHeader>
@@ -185,7 +186,7 @@ function Payment() {
         <TabsContent value='active'>
           <OverlapLoader loader={activePlanLoader}>
             <MaxWidthWrapper>
-              <div className='h-full px-10 py-8'>
+              <div className='h-full sm:px-10 py-8'>
                 <div className='flex flex-row h-full w-full items-center justify-between space-x-5'>
                   <div className='flex flex-row h-full w-full items-center space-x-5'>
                     <div className='flex sm:flex-row flex-col h-full w-full items-center justify-between space-x-5'>
@@ -432,3 +433,170 @@ function Payment() {
 }
 
 export default Payment;
+
+function BottomPopup() {
+  const [showPopup, setShowPopup] = useState(false);
+  const [userName, setUserName] = useState('sagar');
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowPopup(true);
+      setUserName(getRandomUserName());
+      setTimeout(() => {
+        setShowPopup(false);
+      }, 30000);
+    }, 500000);
+    return () => clearInterval(interval);
+  }, []);
+
+  function getRandomUserName() {
+    const names = [
+      'John Doe',
+      'Jane Smith',
+      'Michael Johnson',
+      'Emily Davis',
+      'David Lee',
+      'Sarah Brown',
+      'James Wilson',
+      'Linda Martinez',
+      'Robert Anderson',
+      'Patricia Taylor',
+      'Charles Thomas',
+      'Barbara Jackson',
+      'Christopher White',
+      'Susan Harris',
+      'Daniel Martin',
+      'Jessica Thompson',
+      'Matthew Garcia',
+      'Karen Martinez',
+      'Anthony Robinson',
+      'Nancy Clark',
+      'Mark Rodriguez',
+      'Lisa Lewis',
+      'Paul Walker',
+      'Betty Hall',
+      'Steven Allen',
+      'Sandra Young',
+      'Andrew King',
+      'Donna Wright',
+      'Joshua Scott',
+      'Carol Green',
+      'Kevin Adams',
+      'Michelle Baker',
+      'Brian Gonzalez',
+      'Dorothy Nelson',
+      'George Carter',
+      'Amanda Mitchell',
+      'Edward Perez',
+      'Helen Roberts',
+      'Ronald Turner',
+      'Kimberly Phillips',
+      'Timothy Campbell',
+      'Deborah Parker',
+      'Jason Evans',
+      'Stephanie Edwards',
+      'Jeffrey Collins',
+      'Rebecca Stewart',
+      'Ryan Sanchez',
+      'Laura Morris',
+      'Jacob Rogers',
+      'Cynthia Reed',
+      'Gary Cook',
+      'Kathleen Morgan',
+      'Nicholas Bell',
+      'Amy Murphy',
+      'Eric Bailey',
+      'Shirley Rivera',
+      'Jonathan Cooper',
+      'Angela Richardson',
+      'Larry Cox',
+      'Melissa Howard',
+      'Scott Ward',
+      'Brenda Torres',
+      'Frank Peterson',
+      'Pamela Gray',
+      'Justin Ramirez',
+      'Virginia James',
+      'Brandon Watson',
+      'Katherine Brooks',
+      'Raymond Kelly',
+      'Ruth Sanders',
+      'Gregory Price',
+      'Maria Bennett',
+      'Benjamin Wood',
+      'Frances Barnes',
+      'Samuel Ross',
+      'Evelyn Henderson',
+      'Patrick Coleman',
+      'Martha Jenkins',
+      'Alexander Perry',
+      'Diane Powell',
+      'Jack Long',
+      'Alice Patterson',
+      'Dennis Hughes',
+      'Julie Flores',
+      'Jerry Washington',
+      'Megan Butler',
+      'Tyler Simmons',
+      'Gloria Foster',
+      'Aaron Gonzales',
+      'Teresa Bryant',
+      'Henry Alexander',
+      'Sara Russell',
+      'Douglas Griffin',
+      'Janet Diaz',
+      'Adam Hayes',
+      'Carolyn Myers',
+      'Nathan Ford',
+      'Rachel Hamilton',
+      'Zachary Graham',
+      'Marilyn Fisher',
+    ];
+    return names[Math.floor(Math.random() * names.length)];
+  }
+
+  if (!showPopup) {
+    return null;
+  }
+
+  return (
+    <div
+      className={`fixed bottom-32 sm:bottom-16 right-2 z-50  sm:w-96 sm:animate-bounce`}
+    >
+      <div className='shadow-lg rounded-xl p-4'>
+        <div className='flex items-center'>
+          <div className='bg-primary rounded-full w-8 h-8 flex items-center justify-center text-primary-foreground mr-3'>
+            <ShoppingCartIcon className='h-5 w-5' />
+          </div>
+          <div>
+            <p className='text-sm font-medium'>
+              {userName} purchased a montly plan.
+            </p>
+            <p className='text-xs text-muted-foreground'>Just now!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function ShoppingCartIcon(props) {
+  return (
+    <svg
+      {...props}
+      xmlns='http://www.w3.org/2000/svg'
+      width='24'
+      height='24'
+      viewBox='0 0 24 24'
+      fill='none'
+      stroke='currentColor'
+      strokeWidth='2'
+      strokeLinecap='round'
+      strokeLinejoin='round'
+    >
+      <circle cx='8' cy='21' r='1' />
+      <circle cx='19' cy='21' r='1' />
+      <path d='M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12' />
+    </svg>
+  );
+}
