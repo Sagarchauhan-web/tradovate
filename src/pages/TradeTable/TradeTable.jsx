@@ -223,9 +223,9 @@ export function DataTable({ changeToEditMode }) {
 
   return (
     <div className='w-full mb-20'>
-      <h2 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
+      <h1 className='scroll-m-20 w-max text-2xl pt-4  font-semibold tracking-tight first:mt-0'>
         Settings
-      </h2>
+      </h1>
       <div className='flex items-center py-4 justify-end'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>

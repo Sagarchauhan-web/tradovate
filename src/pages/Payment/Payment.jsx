@@ -23,6 +23,8 @@ import { Dialog, DialogContent, DialogHeader } from '@/components/ui/dialog';
 import OverlapLoader from '@/components/Loader/OverlapLoader';
 import { FaInfoCircle } from 'react-icons/fa';
 import { TooltipComp } from '@/components/ToolTip/ToolTip';
+import { Helmet } from 'react-helmet';
+
 function Payment() {
   const [subscriptions, setSubscriptions] = useState({});
   const [activeSubscription, setActiveSubscription] = useState([]);
@@ -139,6 +141,32 @@ function Payment() {
 
   return (
     <div className='flex h-full flex-col'>
+      <Helmet>
+        <title>PickMyTrade - Secure Payment</title>
+        <meta
+          name='description'
+          content='Complete your payment securely on PickMyTrade. Manage your subscriptions and transactions with ease and confidence.'
+        />
+        <meta
+          name='keywords'
+          content='PickMyTrade, payment, secure payment, subscriptions, transactions, stock trading, futures trading, Tradovate'
+        />
+        <meta name='author' content='PickMyTrade' />
+        <meta property='og:title' content='PickMyTrade - Secure Payment' />
+        <meta
+          property='og:description'
+          content='Complete your payment securely on PickMyTrade. Manage your subscriptions and transactions with ease and confidence.'
+        />
+        <meta property='og:image' content='URL_TO_YOUR_IMAGE' />
+        <meta property='og:url' content='https://www.pickmytrade.com/payment' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='PickMyTrade - Secure Payment' />
+        <meta
+          name='twitter:description'
+          content='Complete your payment securely on PickMyTrade. Manage your subscriptions and transactions with ease and confidence.'
+        />
+        <meta name='twitter:image' content='URL_TO_YOUR_IMAGE' />
+      </Helmet>
       {activeSubscription.length <= 0 && <BottomPopup />}
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         <DialogContent className='sm:max-w-[525px] p-5'>

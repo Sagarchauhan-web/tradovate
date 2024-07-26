@@ -18,6 +18,7 @@ import Tradovate from '../../assets/Tradovate.png';
 import TrendSpider from '../../assets/TrendSpider.webp';
 import Zapier from '../../assets/Zapier.webp';
 import Home from '../../assets/homepage.png';
+import { Helmet } from 'react-helmet';
 
 export default function Landing() {
   const featuresRef = useRef(null);
@@ -33,7 +34,6 @@ export default function Landing() {
     const getSubscriptionsData = async () => {
       const response = await getSubscriptions();
 
-      console.log(response, 'response');
       if (!response.error) {
         setSubscriptions(response.data);
       }
@@ -43,6 +43,38 @@ export default function Landing() {
 
   return (
     <div className='flex flex-col min-h-[100dvh]'>
+      <Helmet>
+        <title>PickMyTrade - Trade Stocks and Futures with Tradovate</title>
+        <meta
+          name='description'
+          content='PickMyTrade enables users to make trades in stocks and futures using the Tradovate broker. Join us to start trading today!'
+        />
+        <meta
+          name='keywords'
+          content='PickMyTrade, stock trading, futures trading, Tradovate, online trading, trading platform'
+        />
+        <meta name='author' content='PickMyTrade' />
+        <meta
+          property='og:title'
+          content='PickMyTrade - Trade Stocks and Futures with Tradovate'
+        />
+        <meta
+          property='og:description'
+          content='PickMyTrade enables users to make trades in stocks and futures using the Tradovate broker. Join us to start trading today!'
+        />
+        <meta property='og:image' content='URL_TO_YOUR_IMAGE' />
+        <meta property='og:url' content='https://www.pickmytrade.com' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta
+          name='twitter:title'
+          content='PickMyTrade - Trade Stocks and Futures with Tradovate'
+        />
+        <meta
+          name='twitter:description'
+          content='PickMyTrade enables users to make trades in stocks and futures using the Tradovate broker. Join us to start trading today!'
+        />
+        <meta name='twitter:image' content='URL_TO_YOUR_IMAGE' />
+      </Helmet>
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         {(policy === 'terms' || policy === 'privacy') && (
           <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>

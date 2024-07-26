@@ -9,6 +9,7 @@ import { FaCreditCard } from 'react-icons/fa';
 import { IoMdInfinite } from 'react-icons/io';
 import { useNavigate } from 'react-router-dom';
 import HomePageBanner from '../../assets/HomePageBanner.png';
+import { Helmet } from 'react-helmet';
 
 export default function TradovateAutomation() {
   const contactRef = useRef(null);
@@ -23,6 +24,38 @@ export default function TradovateAutomation() {
 
   return (
     <div className='flex flex-col min-h-[100dvh]'>
+      <Helmet>
+        <title>PickMyTrade - Advanced Trading Features with Tradovate</title>
+        <meta
+          name='description'
+          content='Discover advanced trading features with Tradovate on PickMyTrade. Trade futures with speed, ease, and reliability using our modern trading platform.'
+        />
+        <meta
+          name='keywords'
+          content='PickMyTrade, Tradovate, futures trading, trading platform, advanced trading tools, online trading, trading features'
+        />
+        <meta name='author' content='PickMyTrade' />
+        <meta
+          property='og:title'
+          content='PickMyTrade - Advanced Trading Features with Tradovate'
+        />
+        <meta
+          property='og:description'
+          content='Discover advanced trading features with Tradovate on PickMyTrade. Trade futures with speed, ease, and reliability using our modern trading platform.'
+        />
+        <meta property='og:image' content='URL_TO_YOUR_IMAGE' />
+        <meta property='og:url' content='https://www.pickmytrade.com/product' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta
+          name='twitter:title'
+          content='PickMyTrade - Advanced Trading Features with Tradovate'
+        />
+        <meta
+          name='twitter:description'
+          content='Discover advanced trading features with Tradovate on PickMyTrade. Trade futures with speed, ease, and reliability using our modern trading platform.'
+        />
+        <meta name='twitter:image' content='URL_TO_YOUR_IMAGE' />
+      </Helmet>
       <Dialog open={dialogBox} onOpenChange={setDialogBox}>
         {(policy === 'terms' || policy === 'privacy') && (
           <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>

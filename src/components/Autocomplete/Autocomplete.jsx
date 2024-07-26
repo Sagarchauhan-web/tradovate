@@ -56,7 +56,7 @@ const Autocomplete = ({
     if (showSuggestions && inputValue) {
       if (suggestions.length) {
         return (
-          <ul className='fixed bg-white border border-gray-50 shadow-md h-56 overflow-y-scroll'>
+          <ul className='fixed bg-white border border-gray-50 shadow-md max-h-56 overflow-y-scroll'>
             {suggestions.map((suggestion, index) => {
               let className;
               if (index === activeSuggestion) {

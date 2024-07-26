@@ -556,9 +556,9 @@ const TradeCopier = () => {
 
       <form>
         <div className='flex justify-between items-center'>
-          <h2 className='scroll-m-20 w-max text-2xl py-4  font-semibold tracking-tight first:mt-0'>
+          <h1 className='scroll-m-20 w-max text-2xl py-4  font-semibold tracking-tight first:mt-0'>
             Create Trade Copier
-          </h2>
+          </h1>
         </div>
         <div className='mt-6 grid grid-cols-1 sm:grid-cols-3 xl:grid-cols-4 gap-x-8 gap-y-4 text-sm'>
           <div className='flex flex-col space-y-1.5'>

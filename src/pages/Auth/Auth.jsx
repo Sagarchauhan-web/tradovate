@@ -27,6 +27,7 @@ import { CiWarning } from 'react-icons/ci';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdErrorOutline } from 'react-icons/md';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Helmet } from 'react-helmet';
 
 export function Auth() {
   const location = useLocation();
@@ -218,6 +219,32 @@ export function Auth() {
 
   return (
     <>
+      <Helmet>
+        <title>PickMyTrade - Secure Login</title>
+        <meta
+          name='description'
+          content='Securely log in to PickMyTrade to manage your stock and futures trades with Tradovate. Access your account and start trading today!'
+        />
+        <meta
+          name='keywords'
+          content='PickMyTrade, login, secure login, stock trading, futures trading, Tradovate, trading platform'
+        />
+        <meta name='author' content='PickMyTrade' />
+        <meta property='og:title' content='PickMyTrade - Secure Login' />
+        <meta
+          property='og:description'
+          content='Securely log in to PickMyTrade to manage your stock and futures trades with Tradovate. Access your account and start trading today!'
+        />
+        <meta property='og:image' content='URL_TO_YOUR_IMAGE' />
+        <meta property='og:url' content='https://www.pickmytrade.com/login' />
+        <meta name='twitter:card' content='summary_large_image' />
+        <meta name='twitter:title' content='PickMyTrade - Secure Login' />
+        <meta
+          name='twitter:description'
+          content='Securely log in to PickMyTrade to manage your stock and futures trades with Tradovate. Access your account and start trading today!'
+        />
+        <meta name='twitter:image' content='URL_TO_YOUR_IMAGE' />
+      </Helmet>
       <header className='px-6 py-10 lg:px-8 h-28 md:h-14 flex items-center border-b-2'>
         <div
           className='flex items-start justify-between w-full
