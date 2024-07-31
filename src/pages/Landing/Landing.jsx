@@ -308,6 +308,7 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
         <section
           ref={featuresRef}
           className='w-full py-12 md:py-24 lg:py-32 bg-gray-100 dark:bg-gray-800'
@@ -513,6 +514,7 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
         <section
           ref={pricingRef}
           className='w-full py-12 md:py-24 lg:py-28 bg-gray-100 dark:bg-gray-800'
@@ -543,6 +545,7 @@ export default function Landing() {
             ''
           )}
         </section>
+
         <section ref={contactRef} className='w-full bg-primary'>
           <div className='bg-primary border-t border-b'>
             <div className='lg:pt-20 lg:pb-20 sm:pt-16 sm:pb-8 pt-14 pb-4'>
@@ -584,6 +587,7 @@ export default function Landing() {
             </div>
           </div>
         </section>
+
         <section
           ref={contactRef}
           className='w-full py-12 md:py-14 lg:py-18 bg-gray-100 dark:bg-gray-800'
