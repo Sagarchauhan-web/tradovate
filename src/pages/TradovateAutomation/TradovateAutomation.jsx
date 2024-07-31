@@ -109,7 +109,7 @@ export default function TradovateAutomation() {
           </div>
           <div className='flex gap-5'>
             <div
-              onClick={() => navigate('/auth', { state: { toRegister: true } })}
+              onClick={() => navigate('/', { state: { toRegister: true } })}
               className='w-48 inline-flex h-9 items-center justify-center rounded-md bg-blue-700 px-4 py-2 text-sm 
                     font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1
                      focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50  cursor-pointer'
@@ -118,9 +118,7 @@ export default function TradovateAutomation() {
               Sign Up for Free
             </div>
             <div
-              onClick={() =>
-                navigate('/auth', { state: { toRegister: false } })
-              }
+              onClick={() => navigate('/', { state: { toRegister: false } })}
               className='w-48 inline-flex h-9 items-center justify-center rounded-md border border-primary cursor-pointer
                      bg-white px-4 py-2 text-sm font-medium shadow-sm transition-colors hover:bg-blue-700 hover:text-white focus-visible:outline-none focus-visible:ring-1
                       focus-visible:ring-primary disabled:pointer-events-none disabled:opacity-50'
@@ -155,7 +153,7 @@ export default function TradovateAutomation() {
                       <div className='flex space-x-8 items-center justify-center'>
                         <div
                           onClick={() =>
-                            navigate('/auth', { state: { toRegister: true } })
+                            navigate('/', { state: { toRegister: true } })
                           }
                           className='w-48 inline-flex h-18 items-center justify-center rounded-md bg-blue-700 px-4 py-4 text-sm 
                                             font-medium text-gray-50 shadow transition-colors hover:bg-blue-700/90 focus-visible:outline-none focus-visible:ring-1

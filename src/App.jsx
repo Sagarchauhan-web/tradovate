@@ -54,13 +54,13 @@ function App() {
   return (
     <HashRouter>
       <Routes>
-        <Route exact path='/' element={<Landing />} />
+        {/* <Route exact path='/' element={<Landing />} /> */}
+        <Route index exact path='/' element={<Auth />} />
         <Route
           exact
           path='/tradovateautomation'
           element={<TradovateAutomation />}
         />
-        <Route exact path='/auth' element={<Auth />} />
         <Route exact path='/documentation' element={<Documentation />} />
         <Route
           exact

@@ -4,7 +4,7 @@ const { SitemapStream, streamToPromise } = require('sitemap');
 
 const routes = [
   { path: '/' },
-  { path: '/auth' },
+  // { path: '/auth' },
   { path: '/documentation' },
   { path: '/oauth/tradovate/callback' },
   { path: '/reset/password' },

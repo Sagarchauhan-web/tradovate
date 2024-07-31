@@ -72,7 +72,7 @@ function ResetPassword() {
         title: 'Success',
         action: <IoIosCheckmarkCircle className='text-4xl text-green-500' />,
       });
-      navigate('/auth');
+      navigate('/');
     }
   };
 

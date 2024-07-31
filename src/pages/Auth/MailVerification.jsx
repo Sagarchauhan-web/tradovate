@@ -75,7 +75,7 @@ export default function MailVerification() {
                 <Button
                   variant='outline'
                   onClick={() =>
-                    navigate('/auth', { state: { toRegister: false } })
+                    navigate('/', { state: { toRegister: false } })
                   }
                 >
                   Go to login page
@@ -95,9 +95,7 @@ export default function MailVerification() {
                 </p>
                 <Button
                   variant='outline'
-                  onClick={() =>
-                    navigate('/auth', { state: { toRegister: true } })
-                  }
+                  onClick={() => navigate('/', { state: { toRegister: true } })}
                 >
                   Go to sign up page
                 </Button>

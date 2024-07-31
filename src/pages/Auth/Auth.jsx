@@ -252,10 +252,12 @@ export function Auth() {
           href='#'
         >
           <div className='flex items-center justify-center gap-5'>
-            <div className='flex justify-center items-center'>
-              <img src='/logo.png' alt='logo' className='w-10 h-8' />
-              <p className='text-gray-800 font-bold'>PickMyTrade</p>
-            </div>
+            <a href='https://pickmytrade.trade/'>
+              <div className='flex justify-center items-center'>
+                <img src='/logo.png' alt='logo' className='w-10 h-8' />
+                <p className='text-gray-800 font-bold'>PickMyTrade</p>
+              </div>
+            </a>
             <nav className='ml-auto flex gap-4 sm:gap-6'></nav>
           </div>
           <div className='flex gap-5'></div>

@@ -286,7 +286,7 @@ function Navbar() {
   const copyTextToClipboardWebhook = async () => {
     try {
       await navigator.clipboard.writeText(
-        'https://pickmytrade.trade/api/add-trade-data',
+        'https://api.pickmytrade.trade/api/add-trade-data',
       );
       toast({
         className: cn(
