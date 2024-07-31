@@ -20,11 +20,11 @@ export function ConfirmationDialog({
   };
   return (
     <Dialog open={confirmation} onOpenChange={setConfirmation}>
-      <DialogContent className='max-w-full h-[95%] w-[95%] overflow-y-scroll rounded-xl'>
+      <DialogContent className='max-h-[95%] max-w-[95%] overflow-y-scroll rounded-xl'>
         <DialogHeader>
           <DialogTitle>Connect</DialogTitle>
         </DialogHeader>
-        <div>
+        <div className='m-0 p-0'>
           PickMyTrade offers the powerful ability to fully automate the
           execution of trades through webhooks connecting your broker and
           exchange accounts. It&aposs important to keep in mind that doing so
