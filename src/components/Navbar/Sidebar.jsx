@@ -35,7 +35,7 @@ export function Sidebar({
     <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
       <SheetContent
         side='left'
-        className='flex h-full w-full max-w-xs flex-col bg-background sm:hidden'
+        className='flex h-full w-full max-w-xs flex-col bg-background sm:hidden overflow-y-scroll'
       >
         <div className='flex h-14 items-center justify-between border-b px-4'>
           <div className='flex items-center gap-2 font-semibold'>
