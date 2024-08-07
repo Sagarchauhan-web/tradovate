@@ -820,8 +820,8 @@ function Alerts() {
                 ${data.map(
                   (item) =>
                     `{
-                  token: ${item.token},
-                  account_id: ${item.accoungId},
+                  token: ${item.token ? item.token : ''},
+                  account_id: ${item.accoungId ? item.accoungId : ''},
                   risk_percentage: ${
                     item.riskPercentage ? item.riskPercentage : 0
                   },
