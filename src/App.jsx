@@ -19,6 +19,7 @@ import PaymentFailed from './pages/Payment/PaymentFailed';
 import { useEffect } from 'react';
 import MailVerification from './pages/Auth/MailVerification';
 import TradovateAutomation from './pages/TradovateAutomation/TradovateAutomation';
+import Alerts from './pages/GenerateAlerts/Alerts';
 
 function NotFoundPage() {
   const navigate = useNavigate();
@@ -71,6 +72,7 @@ function App() {
         <Route exact path='/mail_verified' element={<MailVerification />} />
         <Route exact path='/dashboard' element={<DashboardLayout />}>
           <Route exact path='/dashboard/home' element={<Dashboard />} />
+          <Route exact path='/dashboard/alerts' element={<Alerts />} />
           <Route
             exact
             path='/dashboard/tradedetails'

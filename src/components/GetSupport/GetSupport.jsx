@@ -18,6 +18,7 @@ import { Link } from 'react-router-dom';
 
 const GetSupport = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const email = 'aS1L5@example.com';
   return (
     <div className='fixed bottom-16 sm:bottom-16 left-4 z-10'>
       <TooltipProvider>
@@ -52,6 +53,31 @@ const GetSupport = () => {
           </DialogHeader>
 
           <div className='space-y-4'>
+            <div className='flex items-center gap-3 justify-between'>
+              <div className='flex items-center gap-3'>
+                <PhoneIcon className='h-8 w-8 text-green-500' />
+                <div>
+                  <p className='text-sm font-medium'>WhatsApp</p>
+                  <a
+                    href='#'
+                    className='text-sm text-muted-foreground hover:underline'
+                  >
+                    +1 (234) 385-9955
+                  </a>
+                </div>
+              </div>
+              <div>
+                <a
+                  className='w-full h-full'
+                  href='whatsapp://send?phone=1(234)385-9955?text=Your%20message%20here'
+                >
+                  <Button type='button' variant='outline'>
+                    Connect
+                  </Button>
+                </a>
+              </div>
+            </div>
+
             <div className='flex items-center gap-3 justify-between'>
               <div className='flex items-center gap-3'>
                 <PhoneIcon className='h-8 w-8 text-green-500' />

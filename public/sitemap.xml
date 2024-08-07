@@ -5,11 +5,6 @@
 <priority>0.7</priority>
 </url>
 <url>
-<loc>https://app.pickmytrade.trade/auth</loc>
-<changefreq>daily</changefreq>
-<priority>0.7</priority>
-</url>
-<url>
 <loc>https://app.pickmytrade.trade/documentation</loc>
 <changefreq>daily</changefreq>
 <priority>0.7</priority>

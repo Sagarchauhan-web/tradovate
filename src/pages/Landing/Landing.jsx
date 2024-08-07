@@ -166,7 +166,7 @@ export default function Landing() {
         </div>
       </header>
       <main className='flex-1'>
-        <section className='w-full  py-4 md:py-16 lg:py-18 xl:py-18'>
+        <section className='w-full py-4 md:py-16 lg:py-18 xl:py-18'>
           <div className='container'>
             <div className='grid max-w-[1300px] mx-auto gap-4 px-0 md:px-10 lg:grid-cols-2 md:gap-16'>
               <div className=' flex justify-center flex-col'>

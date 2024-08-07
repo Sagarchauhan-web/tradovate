@@ -316,7 +316,8 @@ function Navbar() {
             Webhook
           </Button>
         </li>
-        <li>
+
+        {/* <li>
           <Button
             disabled={!userData?.user_key}
             variant='outline'
@@ -341,7 +342,7 @@ function Navbar() {
           >
             Sell Alert
           </Button>
-        </li>
+        </li> */}
         <li>
           <Button
             disabled={!userData?.user_key}
@@ -631,6 +632,16 @@ function Navbar() {
             <a href='https://blog.pickmytrade.trade/' target='_blank'>
               Blog
             </a>
+          </li>
+          <li
+            onClick={() => navigate('/dashboard/alerts')}
+            className={`${
+              location.pathname === '/dashboard/alerts'
+                ? 'bg-primary text-white'
+                : 'text-black bg-gray-100'
+            } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
+          >
+            Generate Alert
           </li>
         </div>
         <ClipboardAndDropDown />

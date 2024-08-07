@@ -572,7 +572,7 @@ const TradeCopier = () => {
               placeholder={`Enter Symbol`}
             />
           </div>
-          <div className='flex flex-col space-y-1.5'>
+          {/* <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='token'>Token</Label>
             <Input
               // onBlur={symbolOnBlur}
@@ -582,7 +582,7 @@ const TradeCopier = () => {
               id='token'
               placeholder={`Enter Token`}
             />
-          </div>
+          </div> */}
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='direction'>Direction</Label>
             <SelectComponent
@@ -590,6 +590,13 @@ const TradeCopier = () => {
               Label='Order Type'
               placeholder={`Enter Direction`}
               onChange={(value) => {
+                if (value === 'CLOSE') {
+                  setRiskPerc('');
+                  setQty('');
+                  setPrice('');
+                  setTp('');
+                  setSl('');
+                }
                 setDirectionValue(value);
               }}
               data={Object.entries(DIRECTIONTYPE).map(([key, value]) => ({
@@ -602,7 +609,7 @@ const TradeCopier = () => {
             <Label htmlFor='quantity'>Quantity</Label>
             <Input
               //  ref={quantityRef}
-              disabled={Number(riskPerc)}
+              disabled={Number(riskPerc) || directionValue === 'CLOSE'}
               onChange={(e) => setQty(e.target.value)}
               value={qty}
               id='quantity'
@@ -612,7 +619,7 @@ const TradeCopier = () => {
           <div className='flex flex-col space-y-1.5'>
             <Label htmlFor='riskPercentage'>Risk Percentage</Label>
             <Input
-              disabled={Number(qty)}
+              disabled={Number(qty) || directionValue === 'CLOSE'}
               //  ref={quantityRef}
               onChange={(e) => setRiskPerc(e.target.value)}
               value={riskPerc}
@@ -629,6 +636,7 @@ const TradeCopier = () => {
               value={price}
               id='price'
               placeholder={`Enter Price`}
+              disabled={directionValue === 'CLOSE'}
             />
           </div>
           <div className='flex flex-col space-y-1.5'>
@@ -639,6 +647,7 @@ const TradeCopier = () => {
               value={tp}
               id='tp'
               placeholder={`Take Profit`}
+              disabled={directionValue === 'CLOSE'}
             />
           </div>
           <div className='flex flex-col space-y-1.5'>
@@ -649,6 +658,7 @@ const TradeCopier = () => {
               value={sl}
               id='sl'
               placeholder={`Stop Loss`}
+              disabled={directionValue === 'CLOSE'}
             />
           </div>
 

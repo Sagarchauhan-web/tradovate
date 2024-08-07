@@ -55,7 +55,7 @@ export default function PaymentCards({
                 <div className='bg-[#f8f8fc] p-1.5 rounded-full'>
                   <CheckIcon className='h-5 w-5 text-primary ' />
                 </div>{' '}
-                <span>Unlimited Settings</span>
+                <span>Unlimited Strategies</span>
               </div>
               <div className='flex items-center gap-3'>
                 <div className='bg-[#f8f8fc] p-1.5 rounded-full'>
@@ -99,7 +99,7 @@ export default function PaymentCards({
                 <div className='bg-[#f8f8fc] p-1.5 rounded-full'>
                   <CheckIcon className='h-5 w-5 text-primary ' />
                 </div>
-                <span>Unlimited Settings</span>
+                <span>Unlimited Strategies</span>
               </div>
               <div className='flex items-center gap-3'>
                 <div className='bg-[#f8f8fc] p-1.5 rounded-full'>

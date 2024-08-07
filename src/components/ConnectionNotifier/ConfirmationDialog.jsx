@@ -18,6 +18,7 @@ export function ConfirmationDialog({
     setPolicy(policy);
     setDialogBox(true);
   };
+
   return (
     <Dialog open={confirmation} onOpenChange={setConfirmation}>
       <DialogContent className='max-h-[95%] max-w-[95%] overflow-y-scroll rounded-xl'>
