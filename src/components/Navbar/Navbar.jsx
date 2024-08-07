@@ -633,7 +633,7 @@ function Navbar() {
               Blog
             </a>
           </li>
-          <li
+          {/* <li
             onClick={() => navigate('/dashboard/alerts')}
             className={`${
               location.pathname === '/dashboard/alerts'
@@ -642,7 +642,7 @@ function Navbar() {
             } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             Generate Alert
-          </li>
+          </li> */}
         </div>
         <ClipboardAndDropDown />
         <Button
