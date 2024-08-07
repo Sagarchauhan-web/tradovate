@@ -703,32 +703,32 @@ function Alerts() {
                 <CodeClipboard
                   codeString={`
           {
-            symbol: '{{ticker}}',
-            date: '{{timenow}}',
-            data: '{{strategy.order.action}}',
-            quantity: '{{strategy.order.contracts}}',
-            risk_percentage: 0,
-            price: '{{close}}',
-            tp: 0,
-            sl: 0,
-            trail: 0,
-            update_tp: false,
-            update_sl: false,
-            token: ${user?.user_key},
-            duplicate_position_allow: true,
-            reverse_order_close: true,
-            multiple_accounts: ${
+            'symbol': '{{ticker}}',
+            'date': '{{timenow}}',
+            'data': '{{strategy.order.action}}',
+            'quantity': '{{strategy.order.contracts}}',
+            'risk_percentage': 0,
+            'price': '{{close}}',
+            'tp': 0,
+            'sl': 0,
+            'trail': 0,
+            'update_tp': false,
+            'update_sl': false,
+            'token': ${user?.user_key},
+            'duplicate_position_allow': true,
+            'reverse_order_close': true,
+            'multiple_accounts': ${
               data.length > 0
                 ? `[
                 ${data.map(
                   (item) =>
                     `{
-                  token: ${item.token ? item.token : ''},
-                  account_id: ${item.accoungId ? item.accoungId : ''},
-                  risk_percentage: ${
+                  'token': ${item.token ? item.token : ''},
+                  'account_id': ${item.accoungId ? item.accoungId : ''},
+                  'risk_percentage': ${
                     item.riskPercentage ? item.riskPercentage : 0
                   },
-                  quantity_multiplier: ${item.quantity ? item.quantity : 0},
+                  'quantity_multiplier': ${item.quantity ? item.quantity : 0},
                 }`,
                 )}
             ]`
@@ -747,38 +747,40 @@ function Alerts() {
             <CodeClipboard
               codeString={`
      {
-      symbol: '{{ticker}}',
-      date: '{{timenow}}',
-      data: ${
+      'symbol': '{{ticker}}',
+      'date': '{{timenow}}',
+      'data': ${
         alertType === 'BUY' ? 'buy' : alertType === 'SELL' ? 'sell' : 'close'
       },
-      quantity: ${QuantityOrRiskPercentage === 'QUANTITY' ? quantity || 0 : 0},
-      risk_percentage: ${
+      'quantity': ${
+        QuantityOrRiskPercentage === 'QUANTITY' ? quantity || 0 : 0
+      },
+      'risk_percentage': ${
         QuantityOrRiskPercentage === 'RISK_PERCENTAGE' ? risk || 0 : 0
       },
-      price: '{{close}}',
-      tp: ${
+      'price': '{{close}}',
+      'tp': ${
         wantTakeProfit === 'YES'
           ? takeProfitType === 'PRICE'
             ? takeProfit || 0
             : 0
           : 0
       },
-      percentage_tp: ${
+      'percentage_tp': ${
         wantTakeProfit === 'YES'
           ? takeProfitType === 'PERCENTAGE'
             ? takeProfit || 0
             : 0
           : 0
       },
-      dollar_tp: ${
+      'dollar_tp': ${
         wantTakeProfit === 'YES'
           ? takeProfitType === 'DOLLAR'
             ? takeProfit || 0
             : 0
           : 0
       },
-      sl: ${
+      'sl': ${
         stopLossOrTrailStop === 'STOP_LOSS' ||
         stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
           ? stopLossType === 'PRICE'
@@ -786,7 +788,7 @@ function Alerts() {
             : 0
           : 0
       },
-      dollar_sl: ${
+      'dollar_sl': ${
         stopLossOrTrailStop === 'STOP_LOSS' ||
         stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
           ? stopLossType === 'DOLLAR'
@@ -794,7 +796,7 @@ function Alerts() {
             : 0
           : 0
       },
-      percentage_sl: ${
+      'percentage_sl': ${
         stopLossOrTrailStop === 'STOP_LOSS' ||
         stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
           ? stopLossType === 'PERCENTAGE'
@@ -802,30 +804,32 @@ function Alerts() {
             : 0
           : 0
       },
-      trail: ${stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailStop || 0 : 0},
-      trail_trigger: ${
+      'trail': ${
+        stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailStop || 0 : 0
+      },
+      'trail_trigger': ${
         stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailTrigger || 0 : 0
       },
-      trail_freq: ${
+      'trail_freq': ${
         stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailFreq || 0 : 0
       },
-      update_tp: false,
-      update_sl: false,
-      token: ${user?.user_key},
-      duplicate_position_allow: true,
-      reverse_order_close: true,
-      multiple_accounts: ${
+      'update_tp': false,
+      'update_sl': false,
+      'token': ${user?.user_key},
+      'duplicate_position_allow': true,
+      'reverse_order_close': true,
+      'multiple_accounts': ${
         data.length > 0
           ? `[
                 ${data.map(
                   (item) =>
                     `{
-                  token: ${item.token ? item.token : ''},
-                  account_id: ${item.accoungId ? item.accoungId : ''},
-                  risk_percentage: ${
+                  'token': ${item.token ? item.token : ''},
+                  'account_id': ${item.accoungId ? item.accoungId : ''},
+                  'risk_percentage': ${
                     item.riskPercentage ? item.riskPercentage : 0
                   },
-                  quantity_multiplier: ${item.quantity ? item.quantity : 0},
+                  'quantity_multiplier': ${item.quantity ? item.quantity : 0},
                 }`,
                 )}
             ]`
