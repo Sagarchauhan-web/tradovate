@@ -317,7 +317,7 @@ function Navbar() {
           </Button>
         </li>
 
-        {/* <li>
+        <li>
           <Button
             disabled={!userData?.user_key}
             variant='outline'
@@ -342,7 +342,7 @@ function Navbar() {
           >
             Sell Alert
           </Button>
-        </li> */}
+        </li>
         <li>
           <Button
             disabled={!userData?.user_key}

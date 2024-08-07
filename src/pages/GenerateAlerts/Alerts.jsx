@@ -717,6 +717,7 @@ function Alerts() {
             "token": ${`"${user?.user_key}"`},
             "duplicate_position_allow": true,
             "reverse_order_close": true,
+            
             "multiple_accounts": ${
               data.length > 0
                 ? `[
