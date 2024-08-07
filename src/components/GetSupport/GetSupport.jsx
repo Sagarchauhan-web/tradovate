@@ -94,7 +94,7 @@ const GetSupport = () => {
               <div>
                 <a
                   className='w-full h-full'
-                  href='whatsapp://send?phone=917838873492'
+                  href='whatsapp://send?phone=917838873492?text=Your%20message%20here'
                 >
                   <Button type='button' variant='outline'>
                     Connect

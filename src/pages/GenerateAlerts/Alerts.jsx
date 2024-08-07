@@ -1,17 +1,15 @@
+import { PlanTooltip } from '@/components/ToolTip/ToolTip';
 import { Button } from '@/components/ui/button';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { CodeClipboard } from '@/pages/Documentation/CodeRenderer';
-import { useEffect, useState } from 'react';
-import { SelectComponent } from '../../components/Select';
-import {
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import {
   Table,
@@ -21,20 +19,22 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog';
 import { toast } from '@/components/ui/use-toast';
 import { cn } from '@/lib/utils';
+import { CodeClipboard } from '@/pages/Documentation/CodeRenderer';
+import {
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  getSortedRowModel,
+  useReactTable,
+} from '@tanstack/react-table';
+import { useEffect, useState } from 'react';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
-import { FaRegQuestionCircle } from 'react-icons/fa';
-import { PlanTooltip } from '@/components/ToolTip/ToolTip';
+import { SelectComponent } from '../../components/Select';
 
 const ALERTTYPE = {
   INDICATOR: 'INDICATOR',
@@ -75,6 +75,8 @@ const TRAILORSTOPTYPE = {
 };
 
 function Alerts() {
+  const user = JSON.parse(localStorage.getItem('user'));
+
   const [alertName, setAlertName] = useState();
   const [alertType, setAlertType] = useState();
 
@@ -703,8 +705,8 @@ function Alerts() {
           {
             symbol: '{{ticker}}',
             date: '{{timenow}}',
-            data: 'buy',
-            quantity: 3,
+            data: '{{strategy.order.action}}',
+            quantity: '{{strategy.order.contracts}}',
             risk_percentage: 0,
             price: '{{close}}',
             tp: 0,
@@ -712,21 +714,21 @@ function Alerts() {
             trail: 0,
             update_tp: false,
             update_sl: false,
-            token: 'Ct8tPtDt32EtYtCtVtVtUtL',
+            token: ${user?.user_key},
             duplicate_position_allow: true,
             reverse_order_close: true,
-            mutiple_accounts: ${
+            multiple_accounts: ${
               data.length > 0
                 ? `[
                 ${data.map(
                   (item) =>
                     `{
-                  token: ${item.token},
-                  accoungId: ${item.accoungId},
-                  riskPercentage: ${
+                  token: ${item.token ? item.token : ''},
+                  account_id: ${item.accoungId ? item.accoungId : ''},
+                  risk_percentage: ${
                     item.riskPercentage ? item.riskPercentage : 0
                   },
-                  quantity: ${item.quantity ? item.quantity : 0},
+                  quantity_multiplier: ${item.quantity ? item.quantity : 0},
                 }`,
                 )}
             ]`
@@ -809,21 +811,21 @@ function Alerts() {
       },
       update_tp: false,
       update_sl: false,
-      token: 'Ct8tPtDt32EtYtCtVtVtUtL',
+      token: ${user?.user_key},
       duplicate_position_allow: true,
       reverse_order_close: true,
-      mutiple_accounts: ${
+      multiple_accounts: ${
         data.length > 0
           ? `[
                 ${data.map(
                   (item) =>
                     `{
                   token: ${item.token},
-                  accoungId: ${item.accoungId},
-                  riskPercentage: ${
+                  account_id: ${item.accoungId},
+                  risk_percentage: ${
                     item.riskPercentage ? item.riskPercentage : 0
                   },
-                  quantity: ${item.quantity ? item.quantity : 0},
+                  quantity_multiplier: ${item.quantity ? item.quantity : 0},
                 }`,
                 )}
             ]`
