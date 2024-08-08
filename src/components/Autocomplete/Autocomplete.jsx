@@ -90,7 +90,7 @@ const Autocomplete = ({
   };
 
   return (
-    <div className='autocomplete w-full'>
+    <div className='autocomplete w-full col-span-3'>
       <input
         type='text'
         onChange={handleChange}

@@ -36,6 +36,8 @@ import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { SelectComponent } from '../../components/Select';
 import { CiWarning } from 'react-icons/ci';
+import AutocompleteInput from '@/components/Autocomplete/Autocomplete';
+import { getAccountList } from '@/services/Liquidity/liquidity';
 
 const ALERTTYPE = {
   INDICATOR: 'INDICATOR',
@@ -966,6 +968,7 @@ const AlertsTable = ({ data, setData }) => {
   const [optionValue, setOptionValue] = useState('RISKPERCENTAGE');
 
   const [inEditingMode, setInEditingMode] = useState(false);
+  const [suggestions, setSuggestions] = useState();
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('user'))?.user_key) {
@@ -1156,6 +1159,17 @@ const AlertsTable = ({ data, setData }) => {
 
   const onEditAcount = async () => {};
 
+  useEffect(() => {
+    const getAllOrdersAccountList = async () => {
+      const response = await getAccountList();
+
+      if (!response.error) {
+        setSuggestions(response.data.map((item) => item.name));
+      }
+    };
+    getAllOrdersAccountList();
+  }, []);
+
   return (
     <div>
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
@@ -1168,9 +1182,17 @@ const AlertsTable = ({ data, setData }) => {
           </DialogHeader>
           <div className='grid gap-4 py-4'>
             <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='token' className='text-right'>
-                Token
-              </Label>
+              <div className='flex justify-end items-center'>
+                <Label htmlFor='token' className='text-right'>
+                  Token
+                </Label>
+                <PlanTooltip
+                  button={
+                    <FaRegQuestionCircle className='inline-block ml-2 ' />
+                  }
+                  tooltip={`The unique token identifying the user's account. (e.g., your client's token or the token for an account you manage)`}
+                />
+              </div>
               <Input
                 id='token'
                 onChange={(e) => setToken(e.target.value)}
@@ -1180,21 +1202,42 @@ const AlertsTable = ({ data, setData }) => {
               />
             </div>
             <div className='grid grid-cols-4 items-center gap-4'>
-              <Label htmlFor='accountId' className='text-right'>
-                account Name
-              </Label>
-              <Input
-                id='accountId'
-                onChange={(e) => setAccount(e.target.value)}
-                value={account}
-                // defaultValue='@peduarte'
-                className='col-span-3'
-              />
+              <div className='flex justify-center items-center'>
+                <Label htmlFor='accountId' className='text-right'>
+                  Account Name
+                </Label>
+                <PlanTooltip
+                  button={
+                    <FaRegQuestionCircle className='inline-block ml-2 ' />
+                  }
+                  tooltip={`The specific Tradovate account ID where the trade should be placed for that user.`}
+                />
+              </div>
+              {JSON.parse(localStorage.getItem('user'))?.user_key === token ? (
+                <AutocompleteInput
+                  data={suggestions}
+                  inputValue={account}
+                  setInputValue={setAccount}
+                  onBlur={() => {}}
+                />
+              ) : (
+                <Input
+                  id='accountId'
+                  onChange={(e) => setAccount(e.target.value)}
+                  value={account}
+                  // defaultValue='@peduarte'
+                  className='col-span-3'
+                />
+              )}
             </div>
             <div className='ml-12  flex items-center'>
-              <Label htmlFor='direction' className='mr-7'>
-                Option
-              </Label>
+              <div className='flex justify-center items-center mr-2'>
+                <Label htmlFor='direction'>Option</Label>
+                <PlanTooltip
+                  button={<FaRegQuestionCircle className='inline-block ml-2' />}
+                  tooltip={`Options: RISKPERCENTAGE / QUANTITY`}
+                />
+              </div>
               <SelectComponent
                 className='col-span-8 w-20'
                 Label='Order Type'
@@ -1218,9 +1261,25 @@ const AlertsTable = ({ data, setData }) => {
             </div>
             {isRisk ? (
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='accountId' className='text-right'>
-                  Risk Percentage
-                </Label>
+                <div className='flex justify-center items-center mr-2 '>
+                  <Label htmlFor='accountId' className='text-center'>
+                    Risk Percentage
+                  </Label>
+                  <PlanTooltip
+                    button={
+                      <FaRegQuestionCircle className='inline-block ml-2' />
+                    }
+                    tooltip={
+                      <div>
+                        Control trade quantity based on account value and stop
+                        loss. If used, set quantity to 0. <br /> The calculation
+                        for quantity is: quantity = ((account_value_in_tradovate
+                        * risk_percentage) / 100) / abs(sl_price - entry_price)
+                        / lot_size
+                      </div>
+                    }
+                  />
+                </div>
                 <Input
                   id='riskPercentage'
                   value={riskPercentage}
@@ -1230,9 +1289,23 @@ const AlertsTable = ({ data, setData }) => {
               </div>
             ) : (
               <div className='grid grid-cols-4 items-center gap-4'>
-                <Label htmlFor='accountId' className='text-right'>
-                  Quantity Multiplier
-                </Label>
+                <div className='flex justify-center items-center'>
+                  <Label htmlFor='accountId' className='text-right'>
+                    Quantity Multiplier
+                  </Label>
+                  <PlanTooltip
+                    button={
+                      <FaRegQuestionCircle className='inline-block ml-2' />
+                    }
+                    tooltip={
+                      <div>
+                        Adjust the quantity for individual accounts. If the main
+                        quantity is 3 and you want 50% for this account, set it
+                        to 0.5.
+                      </div>
+                    }
+                  />
+                </div>
                 <Input
                   id='riskPercentage'
                   value={quantity}
