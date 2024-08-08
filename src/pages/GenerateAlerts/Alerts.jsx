@@ -370,9 +370,6 @@ function Alerts() {
                       setTrailFreq('');
                       setTrailStop('');
                       setTrailTrigger('');
-                      setMutipleAccountForIndication('');
-                      setMultipleAccountForStratergy('');
-                      setData([]);
                     }
                   }}
                   data={Object.entries(IndicatorType).map(([key, value]) => ({
@@ -521,7 +518,7 @@ function Alerts() {
                       htmlFor='trailStopvalue'
                       className='flex  items-center'
                     >
-                      Trail Stop Value
+                      Trail Stop Value In USD
                       <PlanTooltip
                         button={
                           <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -545,7 +542,7 @@ function Alerts() {
                       htmlFor='trailTrigger'
                       className='flex  items-center'
                     >
-                      Trail Trigger Value
+                      Trail Trigger Value In USD
                       <PlanTooltip
                         button={
                           <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -566,7 +563,7 @@ function Alerts() {
                   </div>
                   <div className='mt-4'>
                     <Label htmlFor='trailFreq' className='flex  items-center'>
-                      Trail Freq Value
+                      Trail Freq Value In USD
                       <PlanTooltip
                         button={
                           <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -652,7 +649,12 @@ function Alerts() {
               {stopLossType && (
                 <div className='mt-4'>
                   <Label htmlFor='stopLossvalue' className='flex  items-center'>
-                    Enter Stop Loss
+                    Enter Stop Loss in{' '}
+                    {stopLossType === 'DOLLAR'
+                      ? 'USD'
+                      : stopLossType === 'PERCENTAGE'
+                      ? '%'
+                      : 'Price(Trading View Variable)'}
                     <PlanTooltip
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -771,7 +773,12 @@ function Alerts() {
                     htmlFor='takeProfitvalue'
                     className='flex  items-center'
                   >
-                    Enter Take Profit
+                    Enter Take Profit In{' '}
+                    {takeProfitType === 'DOLLAR'
+                      ? 'USD'
+                      : takeProfitType === 'PERCENTAGE'
+                      ? '%'
+                      : 'Price(Trading View Variable)'}
                     <PlanTooltip
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -825,7 +832,6 @@ function Alerts() {
                 </Label>
 
                 <SelectComponent
-                  disabled={alertType === 'CLOSE'}
                   Label='Do you want to add multiple account?'
                   placeholder={`Do you want to add multiple account?`}
                   value={mutipleAccountForIndication}
@@ -1025,6 +1031,14 @@ function Alerts() {
                       : 0
                   },
                   "trail": ${
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS' &&
+                    trailStop &&
+                    trailTrigger &&
+                    trailFreq
+                      ? 1
+                      : 0
+                  },
+                  "trail_stop": ${
                     stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
                       ? trailStop || 0
                       : 0
@@ -1092,7 +1106,7 @@ const AlertsTable = ({ data, setData }) => {
   const [optionValue, setOptionValue] = useState('RISKPERCENTAGE');
 
   const [inEditingMode, setInEditingMode] = useState(false);
-  const [suggestions, setSuggestions] = useState();
+  const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('user'))?.user_key) {
@@ -1287,9 +1301,8 @@ const AlertsTable = ({ data, setData }) => {
     const getAllOrdersAccountList = async () => {
       const response = await getAccountList();
 
-      if (!response.error) {
-        setSuggestions(response.data.map((item) => item.name));
-      }
+      if (item[0] === '' || item[1] === 0) return;
+      setSuggestions(response.data.map((item) => item.name));
     };
     getAllOrdersAccountList();
   }, []);
