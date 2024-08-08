@@ -24,7 +24,7 @@ export function SelectComponent({
       className={className}
       disabled={disabled}
     >
-      <SelectTrigger className='w-full'>
+      <SelectTrigger className={`w-full ${className}`}>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
       <SelectContent>

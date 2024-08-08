@@ -575,6 +575,9 @@ function Alerts() {
                         );
                         setPriceAlertModel(true);
                       }
+                      if (wantTakeProfit === 'YES') {
+                        setTakeProfitType(value);
+                      }
                       setStopLossType(value);
                     }}
                     data={Object.entries(STOPLOSSTYPE).map(([key, value]) => ({
@@ -628,6 +631,10 @@ function Alerts() {
                     placeholder={`Do You Want Take Profit As well?`}
                     value={wantTakeProfit}
                     onChange={(value) => {
+                      if (value === 'NO') {
+                        setTakeProfitType('');
+                        setTakeProfit('');
+                      }
                       setWantTakeProfit(value);
                     }}
                     data={Object.entries(YesOrNo).map(([key, value]) => ({
@@ -678,6 +685,12 @@ function Alerts() {
                           'The take profit price will be determined by TradingView Indicator. Please ensure you enter the plot variable name that contains your take profit price.',
                         );
                         setPriceAlertModel(true);
+                      }
+                      if (
+                        stopLossOrTrailStop === 'STOP_LOSS' ||
+                        stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ) {
+                        setStopLossType(value);
                       }
                       setTakeProfitType(value);
                     }}
@@ -849,7 +862,7 @@ function Alerts() {
                 "update_sl": false,
                 "token": ${`"${user?.user_key}"`},
                 "duplicate_position_allow": true,
-                "reverse_order_close": true${data.length > 0 ? `,` : ''}
+                "reverse_order_close": false${data.length > 0 ? `,` : ''}
                 ${
                   data.length > 0
                     ? `"multiple_accounts": ${`[
@@ -1254,7 +1267,7 @@ const AlertsTable = ({ data, setData }) => {
             <div className='grid grid-cols-4 items-center gap-4'>
               <div className='flex justify-center items-center'>
                 <Label htmlFor='accountId' className='text-right'>
-                  Account Name
+                  Acc. Name
                 </Label>
                 <PlanTooltip
                   button={
@@ -1280,16 +1293,18 @@ const AlertsTable = ({ data, setData }) => {
                 />
               )}
             </div>
-            <div className='ml-12  flex items-center'>
-              <div className='flex justify-center items-center mr-2'>
-                <Label htmlFor='direction'>Option</Label>
+            <div className='grid grid-cols-4 items-center gap-4'>
+              <div className='flex justify-end items-center'>
+                <Label htmlFor='direction' className='text-right'>
+                  Option
+                </Label>
                 <PlanTooltip
                   button={<FaRegQuestionCircle className='inline-block ml-2' />}
                   tooltip={`Options: RISKPERCENTAGE / QUANTITY`}
                 />
               </div>
               <SelectComponent
-                className='col-span-8 w-20'
+                className='col-span-3'
                 Label='Order Type'
                 value={optionValue}
                 placeholder={`Enter Direction`}
@@ -1311,9 +1326,9 @@ const AlertsTable = ({ data, setData }) => {
             </div>
             {isRisk ? (
               <div className='grid grid-cols-4 items-center gap-4'>
-                <div className='flex justify-center items-center mr-2 '>
-                  <Label htmlFor='accountId' className='text-center'>
-                    Risk Percentage
+                <div className='flex justify-end items-center'>
+                  <Label htmlFor='accountId' className='text-right'>
+                    Risk %
                   </Label>
                   <PlanTooltip
                     button={
@@ -1339,9 +1354,9 @@ const AlertsTable = ({ data, setData }) => {
               </div>
             ) : (
               <div className='grid grid-cols-4 items-center gap-4'>
-                <div className='flex justify-center items-center'>
+                <div className='flex justify-end items-center'>
                   <Label htmlFor='accountId' className='text-right'>
-                    Quantity Multiplier
+                    Qty Multiplier
                   </Label>
                   <PlanTooltip
                     button={
