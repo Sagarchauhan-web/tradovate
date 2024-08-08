@@ -97,7 +97,7 @@ function Alerts() {
   const [takeProfitType, setTakeProfitType] = useState();
   const [takeProfit, setTakeProfit] = useState();
 
-  const [QuantityOrRiskPercentage, setQuantityOrRiskPercentage] = useState();
+  const [QuantityOrRiskPercentage, setQuantityOrRiskPercentage] = useState('');
   const [quantity, setQuantity] = useState();
   const [risk, setRisk] = useState();
   const [mutipleAccountForIndication, setMutipleAccountForIndication] =
@@ -115,7 +115,86 @@ function Alerts() {
   const [modalMessage, setModalMessage] = useState('');
 
   const checkValidation = () => {
+    const validPattern = /^{{.*}}$/;
     if (alertName === 'INDICATOR') {
+      if (stopLossType === 'PRICE') {
+        if (!validPattern.test(stopLoss)) {
+          setGeneratedObject(false);
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description: 'Not a trading View variable for Stop Loss price',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
+      if (takeProfitType === 'PRICE') {
+        if (!validPattern.test(takeProfit)) {
+          setGeneratedObject(false);
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description: 'Not a trading View variable for Take Profit Price',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
+      if (!QuantityOrRiskPercentage) {
+        return toast({
+          className: cn(
+            'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+          ),
+          duration: 5000,
+          title: 'Warning',
+          description: 'Quantity or Risk Percentage is required',
+          action: <CiWarning className='text-4xl font-bold text-yellow-500' />,
+        });
+      }
+
+      if (QuantityOrRiskPercentage === 'QUANTITY') {
+        if (!quantity) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description: 'Quantity is required',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
+      if (QuantityOrRiskPercentage === 'RISK_PERCENTAGE') {
+        if (!risk) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description: 'Risk Percentage is required',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
       if (QuantityOrRiskPercentage === 'RISK_PERCENTAGE') {
         // if RISK_PERCENTAGE Either Trail stop or Stop loss is required
         if (stopLossOrTrailStop === 'TRAIL_STOP_LOSS') {
@@ -633,9 +712,15 @@ function Alerts() {
                         );
                         setPriceAlertModel(true);
                       }
-                      if (wantTakeProfit === 'YES') {
+                      console.log(takeProfit, value, 'jher');
+                      if (
+                        wantTakeProfit === 'YES' &&
+                        takeProfitType !== value
+                      ) {
+                        setTakeProfit('');
                         setTakeProfitType(value);
                       }
+                      setStopLoss('');
                       setStopLossType(value);
                     }}
                     data={Object.entries(STOPLOSSTYPE).map(([key, value]) => ({
@@ -750,11 +835,14 @@ function Alerts() {
                         setPriceAlertModel(true);
                       }
                       if (
-                        stopLossOrTrailStop === 'STOP_LOSS' ||
-                        stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                        (stopLossOrTrailStop === 'STOP_LOSS' ||
+                          stopLossOrTrailStop === 'TRAIL_STOP_LOSS') &&
+                        stopLossType !== value
                       ) {
+                        setStopLoss('');
                         setStopLossType(value);
                       }
+                      setTakeProfit('');
                       setTakeProfitType(value);
                     }}
                     data={Object.entries(TAKEPROFITTYPE).map(
@@ -988,7 +1076,13 @@ function Alerts() {
                   "tp": ${
                     wantTakeProfit === 'YES'
                       ? takeProfitType === 'PRICE'
-                        ? takeProfit || 0
+                        ? takeProfit
+                          ? takeProfit
+                            ? !Number(takeProfit)
+                              ? `"${takeProfit}"`
+                              : takeProfit
+                            : 0
+                          : 0
                         : 0
                       : 0
                   },
@@ -1010,7 +1104,11 @@ function Alerts() {
                     stopLossOrTrailStop === 'STOP_LOSS' ||
                     stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
                       ? stopLossType === 'PRICE'
-                        ? stopLoss || 0
+                        ? stopLoss
+                          ? !Number(stopLoss)
+                            ? `"${stopLoss}"`
+                            : stopLoss
+                          : 0
                         : 0
                       : 0
                   },
@@ -1025,7 +1123,7 @@ function Alerts() {
                   "percentage_sl": ${
                     stopLossOrTrailStop === 'STOP_LOSS' ||
                     stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
-                      ? stopLossType === 'PERCENTA"E'
+                      ? stopLossType === 'PERCENTAGE'
                         ? stopLoss || 0
                         : 0
                       : 0
@@ -1215,7 +1313,7 @@ const AlertsTable = ({ data, setData }) => {
   });
 
   const onSaveAcount = async (d) => {
-    console.log(d, 'd');
+    d.accoungId = account;
     if (!d.token) {
       toast({
         className: cn(
@@ -1224,6 +1322,18 @@ const AlertsTable = ({ data, setData }) => {
         duration: 1000,
         position: 'top-center',
         title: 'Please select token',
+        action: <IoIosCheckmarkCircle className='text-4xl text-red-500' />,
+      });
+      return;
+    }
+    if (!d.accoungId) {
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+        ),
+        duration: 1000,
+        position: 'top-center',
+        title: 'Please add account name',
         action: <IoIosCheckmarkCircle className='text-4xl text-red-500' />,
       });
       return;
