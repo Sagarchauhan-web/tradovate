@@ -117,6 +117,10 @@ function Alerts() {
   const checkValidation = () => {
     const validPattern = /^{{.*}}$/;
     if (alertName === 'INDICATOR') {
+      if (alertType === 'CLOSE') {
+        return setGeneratedObject(true);
+      }
+
       if (stopLossType === 'PRICE') {
         if (!validPattern.test(stopLoss)) {
           setGeneratedObject(false);
@@ -712,7 +716,6 @@ function Alerts() {
                         );
                         setPriceAlertModel(true);
                       }
-                      console.log(takeProfit, value, 'jher');
                       if (
                         wantTakeProfit === 'YES' &&
                         takeProfitType !== value
@@ -739,7 +742,7 @@ function Alerts() {
                       ? 'USD'
                       : stopLossType === 'PERCENTAGE'
                       ? '%'
-                      : 'Price(Trading View Variable)'}
+                      : 'Price(Trading View Variable) Like {{plot_}},{{plot_1}} etc.'}
                     <PlanTooltip
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -753,6 +756,7 @@ function Alerts() {
                     onChange={(e) => {
                       setStopLoss(e.target.value);
                     }}
+                    type={stopLossType === 'PRICE' ? 'text' : 'number'}
                     id='alertType'
                     placeholder={`Enter Stop Loss`}
                     className='col-span-3'
@@ -866,7 +870,7 @@ function Alerts() {
                       ? 'USD'
                       : takeProfitType === 'PERCENTAGE'
                       ? '%'
-                      : 'Price(Trading View Variable)'}
+                      : 'Price(Trading View Variable) Like {{plot_}},{{plot_1}} etc.'}
                     <PlanTooltip
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
@@ -880,6 +884,7 @@ function Alerts() {
                     onChange={(e) => {
                       setTakeProfit(e.target.value);
                     }}
+                    type={takeProfitType === 'PRICE' ? 'text' : 'number'}
                     id='takeProfit'
                     placeholder={`Enter Take Profit`}
                     className='col-span-3'
