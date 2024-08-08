@@ -213,6 +213,8 @@ function Alerts() {
     }
   };
 
+  console.log(alertType, 'alertType');
+
   return (
     <div className='container mb-20'>
       <Dialog open={priceAlertModel} onOpenChange={setPriceAlertModel}>
@@ -296,6 +298,21 @@ function Alerts() {
                   value={alertType}
                   onChange={(value) => {
                     setAlertType(value);
+
+                    if (value === 'CLOSE') {
+                      setStopLossOrTrailStop('');
+                      setStopLossType('');
+                      setTakeProfitType('');
+                      setWantTakeProfit('');
+                      setQuantityOrRiskPercentage('');
+                      setStopLoss('');
+                      setTrailFreq('');
+                      setTrailStop('');
+                      setTrailTrigger('');
+                      setMutipleAccountForIndication('');
+                      setMultipleAccountForStratergy('');
+                      setData([]);
+                    }
                   }}
                   data={Object.entries(IndicatorType).map(([key, value]) => ({
                     value,
@@ -331,6 +348,7 @@ function Alerts() {
                     />
                   </Label>
                   <SelectComponent
+                    disabled={alertType === 'CLOSE'}
                     Label='Quantity Type'
                     placeholder={`Quantity Type`}
                     value={QuantityOrRiskPercentage}
@@ -362,6 +380,7 @@ function Alerts() {
                     />
                   </Label>
                   <Input
+                    disabled={alertType === 'CLOSE'}
                     value={risk}
                     onChange={(e) => {
                       setRisk(e.target.value);
@@ -385,6 +404,7 @@ function Alerts() {
                     />
                   </Label>
                   <Input
+                    disabled={alertType === 'CLOSE'}
                     value={quantity}
                     onChange={(e) => {
                       setQuantity(e.target.value);
@@ -416,6 +436,7 @@ function Alerts() {
                     />
                   </Label>
                   <SelectComponent
+                    disabled={alertType === 'CLOSE'}
                     Label='Stop Loss Type'
                     placeholder={`Stop Loss Type`}
                     value={stopLossOrTrailStop}
@@ -448,6 +469,7 @@ function Alerts() {
                       />
                     </Label>
                     <Input
+                      disabled={alertType === 'CLOSE'}
                       value={trailStop}
                       onChange={(e) => {
                         setTrailStop(e.target.value);
@@ -471,6 +493,7 @@ function Alerts() {
                       />
                     </Label>
                     <Input
+                      disabled={alertType === 'CLOSE'}
                       value={trailTrigger}
                       onChange={(e) => {
                         setTrailTrigger(e.target.value);
@@ -500,6 +523,7 @@ function Alerts() {
                       />
                     </Label>
                     <Input
+                      disabled={alertType === 'CLOSE'}
                       value={trailFreq}
                       onChange={(e) => {
                         setTrailFreq(e.target.value);
@@ -540,6 +564,7 @@ function Alerts() {
                     />
                   </Label>
                   <SelectComponent
+                    disabled={alertType === 'CLOSE'}
                     Label='Stop Loss Type'
                     placeholder={`Stop Loss Type`}
                     value={stopLossType}
@@ -572,6 +597,7 @@ function Alerts() {
                     />
                   </Label>
                   <Input
+                    disabled={alertType === 'CLOSE'}
                     value={stopLoss}
                     onChange={(e) => {
                       setStopLoss(e.target.value);
@@ -597,6 +623,7 @@ function Alerts() {
                   </Label>
 
                   <SelectComponent
+                    disabled={alertType === 'CLOSE'}
                     Label='Do You Want Take Profit As well?'
                     placeholder={`Do You Want Take Profit As well?`}
                     value={wantTakeProfit}
@@ -641,6 +668,7 @@ function Alerts() {
                     />
                   </Label>
                   <SelectComponent
+                    disabled={alertType === 'CLOSE'}
                     Label='Take Profit Type'
                     placeholder={`Take Profit Type`}
                     value={takeProfitType}
@@ -678,6 +706,7 @@ function Alerts() {
                     />
                   </Label>
                   <Input
+                    disabled={alertType === 'CLOSE'}
                     value={takeProfit}
                     onChange={(e) => {
                       setTakeProfit(e.target.value);
@@ -722,6 +751,7 @@ function Alerts() {
                 </Label>
 
                 <SelectComponent
+                  disabled={alertType === 'CLOSE'}
                   Label='Do you want to add multiple account?'
                   placeholder={`Do you want to add multiple account?`}
                   value={mutipleAccountForIndication}
@@ -795,155 +825,175 @@ function Alerts() {
             {multipleAccountForStratergy === 'YES' && (
               <AlertsTable data={data} setData={setData} />
             )}
-
+            <div className='w-full flex justify-end mt-4'>
+              <Button type='submit' onClick={() => checkValidation()}>
+                Generate Alert
+              </Button>
+            </div>
             {generatedObject && (
-              <div className='mt-4'>
-                <CodeClipboard
-                  codeString={`
-          {
-              "symbol": "{{ticker}}",
-              "date": "{{timenow}}",
-              "data": "{{strategy.order.action}}",
-              "quantity": "{{strategy.order.contracts}}",
-              "risk_percentage": 0,
-              "price": "{{close}}",
-              "tp": 0,
-              "sl": 0,
-              "trail": 0,
-              "update_tp": false,
-              "update_sl": false,
-              "token": ${`"${user?.user_key}"`},
-              "duplicate_position_allow": true,
-              "reverse_order_close": true,
-              ${
-                data.length > 0
-                  ? `"multiple_accounts": ${`[
-            ${data.map(
-              (item) =>
-                // prettier-ignore
-                `     {
-                  "token": ${item.token ? `"${item.token}"` : `""`},
-                  "account_id": ${item.accoungId ? `"${item.accoungId}"` : `""`},
-                  "risk_percentage": ${
-                    item.riskPercentage ? item.riskPercentage : 0
-                  },
-                  "quantity_multiplier": ${item.quantity ? item.quantity : 0},
-                }`,
-            )}
-              ]`},`
-                  : ''
-              }
-          }
-                    `}
-                />
-              </div>
+              <>
+                <div className='mt-4'>
+                  <CodeClipboard
+                    codeString={`
+                          {
+                "symbol": "{{ticker}}",
+                "date": "{{timenow}}",
+                "data": "{{strategy.order.action}}",
+                "quantity": "{{strategy.order.contracts}}",
+                "risk_percentage": 0,
+                "price": "{{close}}",
+                "tp": 0,
+                "sl": 0,
+                "trail": 0,
+                "update_tp": false,
+                "update_sl": false,
+                "token": ${`"${user?.user_key}"`},
+                "duplicate_position_allow": true,
+                "reverse_order_close": true${data.length > 0 ? `,` : ''}
+                ${
+                  data.length > 0
+                    ? `"multiple_accounts": ${`[
+                            ${data.map(
+                              (item) =>
+                                // prettier-ignore
+                                `     {
+                    "token": ${item.token ? `"${item.token}"` : `""`},
+                    "account_id": ${item.accoungId ? `"${item.accoungId}"` : `""`},
+                    "risk_percentage": ${
+                      item.riskPercentage ? item.riskPercentage : 0
+                    },
+                    "quantity_multiplier": ${item.quantity ? item.quantity : 0}
+                  }`,
+                            )}
+                ]`}`
+                    : ''
+                }
+                          }
+                      `}
+                  />
+                </div>
+              </>
             )}
           </>
         )}
 
-        {generatedObject && alertName === 'INDICATOR' && (
-          <div className='mt-4'>
-            <CodeClipboard
-              codeString={`
-     {
-      "symbol": "{{ticker}}",
-      "date": "{{timenow}}",
-      "data": ${
-        // prettier-ignore
-        alertType === "BUY" ? `"buy"` : alertType === "SELL" ? `"sell"` : `"close"`
-      },
-      "quantity": ${
-        QuantityOrRiskPercentage === 'QUANTITY' ? quantity || 0 : 0
-      },
-      "risk_percentage": ${
-        QuantityOrRiskPercentage === 'RISK_PERCENTAGE' ? risk || 0 : 0
-      },
-      "price": "{{close}}",
-      "tp": ${
-        wantTakeProfit === 'YES'
-          ? takeProfitType === 'PRICE'
-            ? takeProfit || 0
-            : 0
-          : 0
-      },
-      "percentage_tp": ${
-        wantTakeProfit === 'YES'
-          ? takeProfitType === 'PERCENTAGE'
-            ? takeProfit || 0
-            : 0
-          : 0
-      },
-      "dollar_tp": ${
-        wantTakeProfit === 'YES'
-          ? takeProfitType === 'DOLLAR'
-            ? takeProfit || 0
-            : 0
-          : 0
-      },
-      "sl": ${
-        stopLossOrTrailStop === 'STOP_LOSS' ||
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
-          ? stopLossType === 'PRICE'
-            ? stopLoss || 0
-            : 0
-          : 0
-      },
-      "dollar_sl": ${
-        stopLossOrTrailStop === 'STOP_LOSS' ||
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
-          ? stopLossType === 'DOLLAR'
-            ? stopLoss || 0
-            : 0
-          : 0
-      },
-      "percentage_sl": ${
-        stopLossOrTrailStop === 'STOP_LOSS' ||
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
-          ? stopLossType === 'PERCENTA"E'
-            ? stopLoss || 0
-            : 0
-          : 0
-      },
-      "trail": ${
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailStop || 0 : 0
-      },
-      "trail_trigger": ${
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailTrigger || 0 : 0
-      },
-      "trail_freq": ${
-        stopLossOrTrailStop === 'TRAIL_STOP_LOSS' ? trailFreq || 0 : 0
-      },
-      "update_tp": false,
-      "update_sl": false,
-      "token": ${`"${user?.user_key}"`},
-      "duplicate_position_allow": true,
-      "reverse_order_close": true,
-      ${
-        data.length > 0
-          ? `"multiple_accounts": ${`[
-                ${data.map(
-                  (item) =>
-                    // prettier-ignore
-                    `{
-                  "token": ${item.token ? `"${item.token}"` : `""`},
-                  "account_id": ${item.accoungId ? `"${item.accoungId}"` : `""`},
-                  "risk_percentage": ${
-                    item.riskPercentage ? item.riskPercentage : 0
-                  },
-                  "quantity_multiplier": ${item.quantity ? item.quantity : 0},
-                }`,
-                )}
-            ]`},`
-          : ''
-      }
-    }`}
-            />
+        {alertName === 'INDICATOR' && (
+          <div className='w-full flex justify-end mt-4'>
+            <Button type='submit' onClick={() => checkValidation()}>
+              Generate Alert
+            </Button>
           </div>
         )}
+        {generatedObject && alertName === 'INDICATOR' && (
+          <>
+            <div className='mt-4'>
+              <CodeClipboard
+                codeString={`
+                 {
+                  "symbol": "{{ticker}}",
+                  "date": "{{timenow}}",
+                  "data": ${
+                    // prettier-ignore
+                    alertType === "BUY" ? `"buy"` : alertType === "SELL" ? `"sell"` : `"close"`
+                  },
+                  "quantity": ${
+                    QuantityOrRiskPercentage === 'QUANTITY' ? quantity || 0 : 0
+                  },
+                  "risk_percentage": ${
+                    QuantityOrRiskPercentage === 'RISK_PERCENTAGE'
+                      ? risk || 0
+                      : 0
+                  },
+                  "price": "{{close}}",
+                  "tp": ${
+                    wantTakeProfit === 'YES'
+                      ? takeProfitType === 'PRICE'
+                        ? takeProfit || 0
+                        : 0
+                      : 0
+                  },
+                  "percentage_tp": ${
+                    wantTakeProfit === 'YES'
+                      ? takeProfitType === 'PERCENTAGE'
+                        ? takeProfit || 0
+                        : 0
+                      : 0
+                  },
+                  "dollar_tp": ${
+                    wantTakeProfit === 'YES'
+                      ? takeProfitType === 'DOLLAR'
+                        ? takeProfit || 0
+                        : 0
+                      : 0
+                  },
+                  "sl": ${
+                    stopLossOrTrailStop === 'STOP_LOSS' ||
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? stopLossType === 'PRICE'
+                        ? stopLoss || 0
+                        : 0
+                      : 0
+                  },
+                  "dollar_sl": ${
+                    stopLossOrTrailStop === 'STOP_LOSS' ||
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? stopLossType === 'DOLLAR'
+                        ? stopLoss || 0
+                        : 0
+                      : 0
+                  },
+                  "percentage_sl": ${
+                    stopLossOrTrailStop === 'STOP_LOSS' ||
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? stopLossType === 'PERCENTA"E'
+                        ? stopLoss || 0
+                        : 0
+                      : 0
+                  },
+                  "trail": ${
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? trailStop || 0
+                      : 0
+                  },
+                  "trail_trigger": ${
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? trailTrigger || 0
+                      : 0
+                  },
+                  "trail_freq": ${
+                    stopLossOrTrailStop === 'TRAIL_STOP_LOSS'
+                      ? trailFreq || 0
+                      : 0
+                  },
+                  "update_tp": false,
+                  "update_sl": false,
+                  "token": ${`"${user?.user_key}"`},
+                  "duplicate_position_allow": true,
+                  "reverse_order_close": true${data.length > 0 ? `,` : ''}
+                  ${
+                    data.length > 0
+                      ? `"multiple_accounts": ${`[
+                  ${data.map(
+                    (item) =>
+                      // prettier-ignore
+                      `{
+                    "token": ${item.token ? `"${item.token}"` : `""`},
+                    "account_id": ${item.accoungId ? `"${item.accoungId}"` : `""`},
+                    "risk_percentage": ${
+                      item.riskPercentage ? item.riskPercentage : 0
+                    },
+                    "quantity_multiplier": ${item.quantity ? item.quantity : 0}
+                  }`,
+                  )}
+                ]`}`
+                      : ''
+                  }
+            }`}
+              />
+            </div>
+          </>
+        )}
       </div>
-      <Button type='submit' onClick={() => checkValidation()}>
-        Generate Alert
-      </Button>
     </div>
   );
 }

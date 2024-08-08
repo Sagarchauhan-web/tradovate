@@ -15,9 +15,15 @@ export function SelectComponent({
   onChange,
   value,
   className,
+  disabled = false,
 }) {
   return (
-    <Select onValueChange={onChange} value={value} className={className}>
+    <Select
+      onValueChange={onChange}
+      value={value}
+      className={className}
+      disabled={disabled}
+    >
       <SelectTrigger className='w-full'>
         <SelectValue placeholder={placeholder} />
       </SelectTrigger>
