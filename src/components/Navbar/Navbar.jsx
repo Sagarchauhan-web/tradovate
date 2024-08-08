@@ -622,7 +622,7 @@ function Navbar() {
           >
             Documentation
           </li>
-          <li
+          {/* <li
             className={`${
               location.pathname === '/dashboard/blog'
                 ? 'bg-primary text-white'
@@ -632,8 +632,8 @@ function Navbar() {
             <a href='https://blog.pickmytrade.trade/' target='_blank'>
               Blog
             </a>
-          </li>
-          {/* <li
+          </li> */}
+          <li
             onClick={() => navigate('/dashboard/alerts')}
             className={`${
               location.pathname === '/dashboard/alerts'
@@ -642,7 +642,7 @@ function Navbar() {
             } px-4 py-1 rounded-sm cursor-pointer hidden sm:flex`}
           >
             Generate Alert
-          </li> */}
+          </li>
         </div>
         <ClipboardAndDropDown />
         <Button

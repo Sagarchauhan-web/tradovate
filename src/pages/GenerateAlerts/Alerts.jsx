@@ -35,6 +35,7 @@ import { FaRegQuestionCircle } from 'react-icons/fa';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { SelectComponent } from '../../components/Select';
+import { CiWarning } from 'react-icons/ci';
 
 const ALERTTYPE = {
   INDICATOR: 'INDICATOR',
@@ -111,21 +112,104 @@ function Alerts() {
   const [priceAlertModel, setPriceAlertModel] = useState(false);
   const [modalMessage, setModalMessage] = useState('');
 
-  useEffect(() => {
-    if (takeProfitType === 'PRICE') {
-      setModalMessage(
-        'The take profit price will be determined by TradingView Indicator. Please ensure you enter the plot variable name that contains your take profit price.',
-      );
-      setPriceAlertModel(true);
+  const checkValidation = () => {
+    if (alertName === 'INDICATOR') {
+      if (QuantityOrRiskPercentage === 'RISK_PERCENTAGE') {
+        // if RISK_PERCENTAGE Either Trail stop or Stop loss is required
+        if (stopLossOrTrailStop === 'TRAIL_STOP_LOSS') {
+          if (!trailStop || !trailTrigger || !trailFreq || !stopLoss) {
+            return toast({
+              className: cn(
+                'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+              ),
+              duration: 5000,
+              title: 'Warning',
+              description:
+                'Quantity is RISK_PERCENTAGE: The Stop Loss value, Trail Stop value, Trail Trigger and Trail Frequency are required',
+              action: (
+                <CiWarning className='text-4xl font-bold text-yellow-500' />
+              ),
+            });
+          }
+        }
+
+        if (stopLossOrTrailStop === 'STOP_LOSS') {
+          if (!stopLoss) {
+            return toast({
+              className: cn(
+                'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+              ),
+              duration: 5000,
+              title: 'Warning',
+              description:
+                'Quantity is RISK_PERCENTAGE: the Stop Loss is required',
+              action: (
+                <CiWarning className='text-4xl font-bold text-yellow-500' />
+              ),
+            });
+          }
+        }
+      }
+
+      if (
+        (stopLossOrTrailStop === 'STOP_LOSS' ||
+          stopLossOrTrailStop === 'TRAIL_STOP_LOSS') &&
+        wantTakeProfit === 'YES'
+      ) {
+        if (stopLossType === 'DOLLAR') {
+          if (takeProfitType !== 'DOLLAR') {
+            return toast({
+              className: cn(
+                'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+              ),
+              duration: 5000,
+              title: 'Warning',
+              description: 'Stop Loss is DOLLAR: Take Profit must be DOLLAR',
+              action: (
+                <CiWarning className='text-4xl font-bold text-yellow-500' />
+              ),
+            });
+          }
+        }
+
+        if (takeProfitType === 'DOLLAR') {
+          if (stopLossType !== 'DOLLAR') {
+            return toast({
+              className: cn(
+                'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+              ),
+              duration: 5000,
+              title: 'Warning',
+              description: 'Take Profit is DOLLAR: Stop Loss must be DOLLAR',
+              action: (
+                <CiWarning className='text-4xl font-bold text-yellow-500' />
+              ),
+            });
+          }
+        }
+
+        if (!stopLoss || !takeProfit) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description: 'Enter Stop Loss and Take Profit',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
+      setGeneratedObject(true);
     }
 
-    if (stopLossType === 'PRICE') {
-      setModalMessage(
-        'The Stop Loss price will be determined by TradingView Indicator. Please ensure you enter the plot variable name that contains your take stop loss price.',
-      );
-      setPriceAlertModel(true);
+    if (alertName === 'STRATEGY') {
+      setGeneratedObject(true);
     }
-  }, [takeProfitType, stopLossType]);
+  };
 
   return (
     <div className='container mb-20'>
@@ -458,6 +542,12 @@ function Alerts() {
                     placeholder={`Stop Loss Type`}
                     value={stopLossType}
                     onChange={(value) => {
+                      if (value === 'PRICE') {
+                        setModalMessage(
+                          'The Stop Loss price will be determined by TradingView Indicator. Please ensure you enter the plot variable name that contains your take stop loss price.',
+                        );
+                        setPriceAlertModel(true);
+                      }
                       setStopLossType(value);
                     }}
                     data={Object.entries(STOPLOSSTYPE).map(([key, value]) => ({
@@ -500,22 +590,7 @@ function Alerts() {
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
                       }
-                      tooltip={
-                        <div>
-                          <h1 className='mb-1'>
-                            You can select one of three types:
-                          </h1>
-                          <p>
-                            Dollar Value: Enter a dollar amount to be added or
-                            deducted from the entry price based on Buy or Sell
-                            trade. <br /> Percentage Value: Enter a percentage
-                            to be added or deducted from the entry price based
-                            on Buy or Sell trade. <br /> Price: Provide the
-                            variable name from TradingView that holds the stop
-                            loss value.
-                          </p>
-                        </div>
-                      }
+                      tooltip='Take Profit'
                     />
                   </Label>
 
@@ -545,7 +620,22 @@ function Alerts() {
                       button={
                         <FaRegQuestionCircle className='inline-block ml-2 ' />
                       }
-                      tooltip='Take Profit'
+                      tooltip={
+                        <div>
+                          <h1 className='mb-1'>
+                            You can select one of three types:
+                          </h1>
+                          <p>
+                            Dollar Value: Enter a dollar amount to be added or
+                            deducted from the entry price based on Buy or Sell
+                            trade. <br /> Percentage Value: Enter a percentage
+                            to be added or deducted from the entry price based
+                            on Buy or Sell trade. <br /> Price: Provide the
+                            variable name from TradingView that holds the stop
+                            loss value.
+                          </p>
+                        </div>
+                      }
                     />
                   </Label>
                   <SelectComponent
@@ -553,6 +643,12 @@ function Alerts() {
                     placeholder={`Take Profit Type`}
                     value={takeProfitType}
                     onChange={(value) => {
+                      if (value === 'PRICE') {
+                        setModalMessage(
+                          'The take profit price will be determined by TradingView Indicator. Please ensure you enter the plot variable name that contains your take profit price.',
+                        );
+                        setPriceAlertModel(true);
+                      }
                       setTakeProfitType(value);
                     }}
                     data={Object.entries(TAKEPROFITTYPE).map(
@@ -703,29 +799,27 @@ function Alerts() {
                 <CodeClipboard
                   codeString={`
           {
-            "symbol": "{{ticker}}",
-            "date": "{{timenow}}",
-            "data": "{{strategy.order.action}}",
-            "quantity": "{{strategy.order.contracts}}",
-            "risk_percentage": 0,
-            "price": "{{close}}",
-            "tp": 0,
-            "sl": 0,
-            "trail": 0,
-            "update_tp": false,
-            "update_sl": false,
-            "token": ${`"${user?.user_key}"`},
-            "duplicate_position_allow": true,
-            "reverse_order_close": true,
-            
-            "multiple_accounts": ${
-              data.length > 0
-                ? `[
-                ${data.map(
-                  (item) =>
-                    // prettier-ignore
-                    `{
-                  
+              "symbol": "{{ticker}}",
+              "date": "{{timenow}}",
+              "data": "{{strategy.order.action}}",
+              "quantity": "{{strategy.order.contracts}}",
+              "risk_percentage": 0,
+              "price": "{{close}}",
+              "tp": 0,
+              "sl": 0,
+              "trail": 0,
+              "update_tp": false,
+              "update_sl": false,
+              "token": ${`"${user?.user_key}"`},
+              "duplicate_position_allow": true,
+              "reverse_order_close": true,
+              ${
+                data.length > 0
+                  ? `"multiple_accounts": ${`[
+            ${data.map(
+              (item) =>
+                // prettier-ignore
+                `     {
                   "token": ${item.token ? `"${item.token}"` : `""`},
                   "account_id": ${item.accoungId ? `"${item.accoungId}"` : `""`},
                   "risk_percentage": ${
@@ -733,10 +827,10 @@ function Alerts() {
                   },
                   "quantity_multiplier": ${item.quantity ? item.quantity : 0},
                 }`,
-                )}
-            ]`
-                : '[]'
-            },
+            )}
+              ]`},`
+                  : ''
+              }
           }
                     `}
                 />
@@ -822,9 +916,9 @@ function Alerts() {
       "token": ${`"${user?.user_key}"`},
       "duplicate_position_allow": true,
       "reverse_order_close": true,
-      "multiple_accounts": ${
+      ${
         data.length > 0
-          ? `[
+          ? `"multiple_accounts": ${`[
                 ${data.map(
                   (item) =>
                     // prettier-ignore
@@ -837,15 +931,15 @@ function Alerts() {
                   "quantity_multiplier": ${item.quantity ? item.quantity : 0},
                 }`,
                 )}
-            ]`
-          : '[]'
-      },
+            ]`},`
+          : ''
+      }
     }`}
             />
           </div>
         )}
       </div>
-      <Button type='submit' onClick={() => setGeneratedObject(true)}>
+      <Button type='submit' onClick={() => checkValidation()}>
         Generate Alert
       </Button>
     </div>
@@ -948,7 +1042,8 @@ const AlertsTable = ({ data, setData }) => {
               onClick={async () => {
                 setData(
                   data.filter(
-                    (d) => d.idForDeletion !== values.row.original.id,
+                    (d) =>
+                      d.idForDeletion !== values.row.original.idForDeletion,
                   ),
                 );
               }}

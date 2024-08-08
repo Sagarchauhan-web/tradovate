@@ -16,6 +16,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu';
+import { CiCircleAlert } from 'react-icons/ci';
 
 export function Sidebar({
   sidebarOpen,
@@ -102,6 +103,16 @@ export function Sidebar({
               <PackageIcon className='h-4 w-4' />
               Documentation
             </li>
+            <li
+              onClick={() => {
+                navigate('/dashboard/alerts');
+                setSidebarOpen(false);
+              }}
+              className='flex items-center gap-3 rounded-md px-3 py-2 text-muted-foreground transition-all hover:text-primary'
+            >
+              <CiCircleAlert className='h-4 w-4' />
+              Generate Alert
+            </li>
             <a
               onClick={() => {
                 setSidebarOpen(false);
@@ -113,6 +124,7 @@ export function Sidebar({
               <MountainIcon className='h-4 w-4' />
               Blog
             </a>
+
             <div
               onClick={() => {
                 setDialogBox(true);

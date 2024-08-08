@@ -66,7 +66,7 @@ function Dashboard() {
           <TabsTrigger value='trades'>Settings</TabsTrigger>
           <TabsTrigger value='orders'>Orders</TabsTrigger>
           <TabsTrigger value='alerts'>Alerts</TabsTrigger>
-          <TabsTrigger value='liquidity'>Liquidity</TabsTrigger>
+          <TabsTrigger value='liquidity'>Risk Settings</TabsTrigger>
           <TabsTrigger value='createTradeCopier'>Trade Copier</TabsTrigger>
         </TabsList>
         <TabsContent value='create'>
