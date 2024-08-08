@@ -835,7 +835,7 @@ function Alerts() {
                 <div className='mt-4'>
                   <CodeClipboard
                     codeString={`
-                          {
+              {
                 "symbol": "{{ticker}}",
                 "date": "{{timenow}}",
                 "data": "{{strategy.order.action}}",
@@ -868,7 +868,7 @@ function Alerts() {
                 ]`}`
                     : ''
                 }
-                          }
+              }
                       `}
                   />
                 </div>
