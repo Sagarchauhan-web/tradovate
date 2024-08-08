@@ -31,7 +31,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import { useEffect, useState } from 'react';
-import { FaRegQuestionCircle } from 'react-icons/fa';
+import { FaClipboard, FaRegQuestionCircle } from 'react-icons/fa';
 import { IoIosCheckmarkCircle } from 'react-icons/io';
 import { MdDelete } from 'react-icons/md';
 import { SelectComponent } from '../../components/Select';
@@ -213,7 +213,45 @@ function Alerts() {
     }
   };
 
-  console.log(alertType, 'alertType');
+  const copyTextToClipboardWebhook = async () => {
+    try {
+      await navigator.clipboard.writeText(
+        'https://api.pickmytrade.trade/api/add-trade-data',
+      );
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
+        ),
+
+        duration: 1000,
+        position: 'top-center',
+        title: 'Copied!',
+        action: <FaClipboard className='text-2xl' />,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
+
+  const copyTextToClipboard = async (textToCopy) => {
+    if (!textToCopy) return;
+
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      toast({
+        className: cn(
+          'top-0 right-0 flex fixed max-w-[220px] max-h-[60px] md:top-4 md:right-4',
+        ),
+
+        duration: 1000,
+        position: 'top-center',
+        title: 'Copied!',
+        action: <FaClipboard className='text-2xl' />,
+      });
+    } catch (err) {
+      console.error('Failed to copy: ', err);
+    }
+  };
 
   return (
     <div className='container mb-20'>
@@ -229,6 +267,29 @@ function Alerts() {
         <h1 className='scroll-m-20 w-max text-2xl font-semibold tracking-tight first:mt-0'>
           Alerts Creation
         </h1>
+        <div className='flex gap-2'>
+          <Button
+            disabled={!JSON.parse(localStorage.getItem('user'))?.user_key}
+            variant='outline'
+            size='sm'
+            onClick={() =>
+              copyTextToClipboard(
+                JSON.parse(localStorage.getItem('user'))?.user_key,
+              )
+            }
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Token: {JSON.parse(localStorage.getItem('user'))?.user_key}
+          </Button>
+          <Button
+            variant='outline'
+            size='sm'
+            onClick={() => copyTextToClipboardWebhook()}
+            className='flex flex-row justify-center items-center gap-2 text-gray-600'
+          >
+            Webhook
+          </Button>
+        </div>
       </div>
       <div className='gap-4 py-4 '>
         <div>
@@ -1238,7 +1299,7 @@ const AlertsTable = ({ data, setData }) => {
       <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
         <DialogContent className='sm:max-w-[525px]'>
           <DialogHeader>
-            <DialogTitle>Add User Settings</DialogTitle>
+            <DialogTitle>Add User Settings</DialogTitle>{' '}
             <DialogDescription>
               Make changes to your User here. Click save when you&apos;re done.
             </DialogDescription>
