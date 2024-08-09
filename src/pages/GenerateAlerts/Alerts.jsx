@@ -117,6 +117,39 @@ function Alerts() {
   const checkValidation = () => {
     const validPattern = /^{{.*}}$/;
     if (alertName === 'INDICATOR') {
+      if (stopLossOrTrailStop === 'TRAIL_STOP_LOSS') {
+        if (!trailStop || !trailTrigger || !trailFreq || !stopLoss) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description:
+              'Quantity is RISK_PERCENTAGE: The Stop Loss value, Trail Stop value, Trail Trigger and Trail Frequency are required',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+      if (stopLossOrTrailStop === 'STOP_LOSS') {
+        if (!stopLoss) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description:
+              'Quantity is RISK_PERCENTAGE: The Stop Loss value is required',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
+      }
+
       if (alertType === 'CLOSE') {
         return setGeneratedObject(true);
       }
@@ -941,7 +974,11 @@ function Alerts() {
             )}
 
             {mutipleAccountForIndication === 'YES' && (
-              <AlertsTable data={data} setData={setData} />
+              <AlertsTable
+                data={data}
+                setData={setData}
+                fromStratergy={false}
+              />
             )}
           </>
         )}
@@ -996,7 +1033,7 @@ function Alerts() {
             </div>
 
             {multipleAccountForStratergy === 'YES' && (
-              <AlertsTable data={data} setData={setData} />
+              <AlertsTable data={data} setData={setData} fromStratergy={true} />
             )}
             <div className='w-full flex justify-end mt-4'>
               <Button type='submit' onClick={() => checkValidation()}>
@@ -1070,7 +1107,11 @@ function Alerts() {
                     alertType === "BUY" ? `"buy"` : alertType === "SELL" ? `"sell"` : `"close"`
                   },
                   "quantity": ${
-                    QuantityOrRiskPercentage === 'QUANTITY' ? quantity || 0 : 0
+                    alertType === 'CLOSE'
+                      ? 1
+                      : QuantityOrRiskPercentage === 'QUANTITY'
+                      ? quantity || 0
+                      : 0
                   },
                   "risk_percentage": ${
                     QuantityOrRiskPercentage === 'RISK_PERCENTAGE'
@@ -1194,7 +1235,7 @@ const RISKORQUANTITY = {
   QUANTITYMULTIPLIER: 'QUANTITYMULTIPLIER',
 };
 
-const AlertsTable = ({ data, setData }) => {
+const AlertsTable = ({ data, setData, fromStratergy }) => {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
@@ -1210,6 +1251,12 @@ const AlertsTable = ({ data, setData }) => {
 
   const [inEditingMode, setInEditingMode] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (fromStratergy) {
+      setIsRisk(false);
+    }
+  }, [fromStratergy]);
 
   useEffect(() => {
     if (JSON.parse(localStorage.getItem('user'))?.user_key) {
@@ -1496,6 +1543,7 @@ const AlertsTable = ({ data, setData }) => {
                 className='col-span-3'
                 Label='Order Type'
                 value={optionValue}
+                disabled={fromStratergy}
                 placeholder={`Enter Direction`}
                 onChange={(value) => {
                   setOptionValue(value);
