@@ -267,6 +267,21 @@ function Alerts() {
             });
           }
         }
+
+        if (!stopLossOrTrailStop) {
+          return toast({
+            className: cn(
+              'top-0 right-0 flex fixed md:max-w-[420px] md:top-4 md:right-4',
+            ),
+            duration: 5000,
+            title: 'Warning',
+            description:
+              'Quantity is RISK_PERCENTAGE: the Stop Loss or Trail Stop is required',
+            action: (
+              <CiWarning className='text-4xl font-bold text-yellow-500' />
+            ),
+          });
+        }
       }
 
       if (
